@@ -8,7 +8,7 @@ Unform is a performance focused library that helps you creating beautifull forms
 
 ## Main advantages
 
-- Beautifull syntax;
+- Beautiful syntax;
 - Performance focused;
 - Use of uncontrolled components;
 - Integration with pickers, dropdowns and other libraries;
