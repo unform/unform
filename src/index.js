@@ -1,22 +1,7 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import Form from './Form'
+import Field from './Field'
+import Scope from './Scope'
+import withFieldData from './withFieldData'
 
-import styles from './styles.css'
-
-export default class ExampleComponent extends Component {
-  static propTypes = {
-    text: PropTypes.string
-  }
-
-  render() {
-    const {
-      text
-    } = this.props
-
-    return (
-      <div className={styles.test}>
-        Example Component: {text}
-      </div>
-    )
-  }
-}
+export { Field, Scope, withFieldData }
+export default Form

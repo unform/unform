@@ -1,13 +1,29 @@
-import React, { Component } from 'react'
-
-import ExampleComponent from 'unform'
+import React, { Component } from "react";
+import Form, { Field, Scope } from "unform";
 
 export default class App extends Component {
-  render () {
+  state = {
+    data: {
+      address: {
+        street: "Rua Teste"
+      }
+    }
+  };
+
+  render() {
     return (
       <div>
-        <ExampleComponent text='Modern React component module' />
+        <Form onSubmit={console.log} initialValues={this.state.data}>
+          <Field label="Name" name="name" />
+
+          <Scope path="address">
+            <Field label="Street" name="street" />
+            <Field type="number" label="Number" name="number" />
+          </Scope>
+
+          <button type="submit">Save</button>
+        </Form>
       </div>
-    )
+    );
   }
 }

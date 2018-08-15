@@ -1,13 +1,19 @@
 {
   "name": "unform",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "ReactJS form library to create uncontrolled form structures with nested fields, validations and much more!",
   "author": "Rocketseat",
   "license": "MIT",
   "repository": "Rocketseat/unform",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
+  "keywords": [
+    "form",
+    "react",
+    "nested",
+    "uncontrolled"
+  ],
   "engines": {
     "node": ">=8",
     "npm": ">=5"
@@ -30,6 +36,8 @@
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.5",
     "babel-plugin-external-helpers": "^6.22.0",
+    "babel-plugin-transform-regenerator": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
@@ -52,9 +60,13 @@
     "rollup-plugin-node-resolve": "^3.3.0",
     "rollup-plugin-peer-deps-external": "^2.2.0",
     "rollup-plugin-postcss": "^1.6.2",
-    "rollup-plugin-url": "^1.4.0"
+    "rollup-plugin-url": "^1.4.0",
+    "rollup-regenerator-runtime": "^6.23.1"
   },
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {
+    "dot-object": "^1.7.0"
+  }
 }
