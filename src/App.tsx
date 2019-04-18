@@ -15,7 +15,9 @@ const initialData = {
 const schema = Yup.object().shape({
   name: Yup.string().required(),
   profile: Yup.string().required(),
-  tech: Yup.array(),
+  tech: Yup.array(Yup.string())
+    .min(2)
+    .required(),
   billingAddress: Yup.object().shape({
     street: Yup.string().required(),
     number: Yup.string().required()

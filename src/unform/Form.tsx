@@ -62,6 +62,7 @@ export default function Form({
         context
       });
 
+      setErrors({});
       onSubmit(finalData);
     } catch (err) {
       const validationErrors: Errors = {};
