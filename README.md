@@ -4,7 +4,7 @@
 
 ## Overview
 
-Unform is a performance focused library that helps you creating beautifull forms in React with the power of uncontrolled components performance.
+Unform is a performance focused library that helps you creating beautiful forms in React with the power of uncontrolled components performance and React Hooks.
 
 ## Main advantages
 
@@ -24,12 +24,11 @@ Formik/Redux Form has a really great syntax while it has a really poor support t
 
 - Native checkbox/radio support;
 - Unit tests;
-- Typescript support;
 - Add more examples;
 - Styled components support;
-- Error handling support;
 - Validation;
-- React Native support;
+- React Native support (do we?);
+- Better docs;
 
 ## Installation
 
@@ -51,11 +50,11 @@ yarn add unform
 ### Basics
 
 ```js
-import React, { Component } from "react";
-import Form, { Field } from "unform";
+import React from "react";
+import { Form, Field } from "unform";
 
-export default class App extends Component {
-  handleSubmit = data => {
+function App() {
+  function handleSubmit(data) {
     console.log(data);
 
     /**
@@ -66,27 +65,25 @@ export default class App extends Component {
      */
   };
 
-  render() {
-    return (
-      <Form onSubmit={this.handleSubmit}>
-        <Field name="email" />
-        <Field name="password" type="password" />
+  return (
+    <Form onSubmit={handleSubmit}>
+      <Field name="email" />
+      <Field name="password" type="password" />
 
-        <button type="submit">Sign in</button>
-      </Form>
-    );
-  }
+      <button type="submit">Sign in</button>
+    </Form>
+  );
 }
 ```
 
 ### Nested fields
 
 ```js
-import React, { Component } from "react";
-import Form, { Field } from "unform";
+import React from "react";
+import { Form, Field } from "unform";
 
-export default class App extends Component {
-  handleSubmit = data => {
+function App() {
+  function handleSubmit(data) {
     console.log(data);
 
     /**
@@ -97,52 +94,49 @@ export default class App extends Component {
      */
   };
 
-  render() {
-    return (
-      <Form onSubmit={this.handleSubmit}>
-        <Field name="name" />
+  return (
+    <Form onSubmit={this.handleSubmit}>
+      <Field name="name" />
 
-        <Scope path="address">
-          <Field name="street" />
-          <Field name="number" />
-        </Scope>
+      <Scope path="address">
+        <Field name="street" />
+        <Field name="number" />
+      </Scope>
 
-        <button type="submit">Save</button>
-      </Form>
-    );
-  }
+      <button type="submit">Save</button>
+    </Form>
+  );
 }
 ```
 
 ### Initial data
 
 ```js
-import React, { Component } from "react";
-import Form, { Field } from "unform";
+import React from "react";
+import { Form, Field } from "unform";
 
-export default class App extends Component {
-  state = {
-    data: {
-      address: { street: "Example street" }
-    }
-  };
-
-  handleSubmit = () => {};
-
-  render() {
-    return (
-      <Form onSubmit={this.handleSubmit} initialValues={this.state.data}>
-        <Field name="name" />
-
-        <Scope path="address">
-          <Field name="street" />
-          <Field name="number" />
-        </Scope>
-
-        <button type="submit">Save</button>
-      </Form>
-    );
+function App() {
+  const initialData = {
+    name: 'John Doe',
+    address: {
+      street: 'Sample Avenue',
+    },
   }
+
+  function handleSubmit(data) {};
+
+  return (
+    <Form onSubmit={this.handleSubmit}>
+      <Field name="name" />
+
+      <Scope path="address">
+        <Field name="street" />
+        <Field name="number" />
+      </Scope>
+
+      <button type="submit">Save</button>
+    </Form>
+  );
 }
 ```
 
