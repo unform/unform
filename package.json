@@ -4,8 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "webpack-dev-server --env.mode=dev",
-    "build": "webpack-cli --env.mode=production"
+    "dev": "rocket-scripts start",
+    "build": "rocket-scripts build"
   },
   "husky": {
     "hooks": {
@@ -51,6 +51,7 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
+    "@rocketseat/rocket-scripts": "^0.0.2",
     "dot-object": "^1.7.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { hot } from "react-hot-loader/root";
 import * as Yup from "yup";
 
-import { Form, Field, Scope } from "./unform";
+import { Form, Input, Scope } from "./unform";
 
 const initialData = {
   name: "Diego",
@@ -41,14 +41,14 @@ function App() {
       schema={schema}
       onSubmit={handleSubmit}
     >
-      <Field name="name" label="Nome" />
-      <Field type="date" name="sobrenome" label="Sobrenome" />
+      <Input name="name" label="Nome" />
+      <Input type="date" name="sobrenome" label="Sobrenome" />
 
       <h2>Endereço</h2>
 
       <Scope path="billingAddress">
-        <Field name="street" />
-        <Field name="number" />
+        <Input name="street" />
+        <Input name="number" />
       </Scope>
 
       <input
@@ -59,8 +59,8 @@ function App() {
       />
 
       <Scope path="shippingAddress">
-        <Field name="street" />
-        <Field name="number" />
+        <Input name="street" />
+        <Input name="number" />
       </Scope>
 
       <button type="submit">Enviar</button>
