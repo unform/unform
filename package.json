@@ -15,8 +15,7 @@
   "lint-staged": {
     "src/*.{js,ts,tsx,jsx}": [
       "eslint --fix",
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ]
   },
   "devDependencies": {

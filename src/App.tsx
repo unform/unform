@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { hot } from "react-hot-loader/root";
 import * as Yup from "yup";
 
@@ -13,17 +13,49 @@ const initialData = {
 
 const validation = Yup.object().shape({
   name: Yup.string().required(),
-  address: Yup.object().shape({
+  billingAddress: Yup.object().shape({
+    street: Yup.string().required(),
     number: Yup.string().required()
+  }),
+  shippingAddress: Yup.object().when("$useShippingAsBilling", {
+    is: false,
+    then: Yup.object()
+      .shape({
+        street: Yup.string().required(),
+        number: Yup.string().required()
+      })
+      .required()
   })
 });
 
+const groups = [1, 2, 3, 4, 5];
+
 function App() {
+  const [useShippingAsBilling, setUseShippingAsBilling] = useState(true);
+
   return (
-    <Form initialData={initialData} validationSchema={validation}>
+    <Form
+      initialData={initialData}
+      context={{ useShippingAsBilling }}
+      validationSchema={validation}
+    >
       <Field name="name" label="Nome" />
 
-      <Scope path="address">
+      <h2>Endereço</h2>
+
+      <Scope path="billingAddress">
+        <Field name="street" />
+        <Field name="number" />
+      </Scope>
+
+      <input
+        type="checkbox"
+        name="useShippingAsBilling"
+        checked={useShippingAsBilling}
+        onChange={e => setUseShippingAsBilling(e.target.checked)}
+      />
+
+      <Scope path="shippingAddress">
         <Field name="street" />
         <Field name="number" />
       </Scope>

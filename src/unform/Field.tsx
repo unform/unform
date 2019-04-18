@@ -1,5 +1,5 @@
 import { pick } from "dot-object";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 import FormContext from "./Context";
 
@@ -10,13 +10,21 @@ interface Props {
 
 export default function Field(props: Props) {
   const { name, label } = props;
-  const { initialData, errors, scopePath, registerField } = useContext(
-    FormContext
-  );
+  const {
+    initialData,
+    errors,
+    scopePath,
+    unregisterField,
+    registerField
+  } = useContext(FormContext);
 
   const fieldName = scopePath ? `${scopePath}.${name}` : name;
   const defaultValue = pick(fieldName, initialData);
   const error = errors[fieldName];
+
+  useEffect(() => {
+    return () => unregisterField(fieldName);
+  }, []);
 
   function register(ref: HTMLInputElement) {
     registerField({ name: fieldName, ref, path: "value" });

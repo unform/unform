@@ -5,16 +5,22 @@ import { ObjectSchema, ValidationError } from "yup";
 import FormContext from "./Context";
 import { Field, Errors } from "./types";
 
+interface Context {
+  [key: string]: any;
+}
+
 interface Props {
   initialData: object;
   children: React.ReactNode;
-  validationSchema?: ObjectSchema<any>;
+  context: Context;
+  validationSchema?: ObjectSchema<object>;
 }
 
 export default function Form({
   initialData,
   children,
-  validationSchema
+  validationSchema,
+  context
 }: Props) {
   const [errors, setErrors] = useState<Errors>({});
 
@@ -36,9 +42,12 @@ export default function Form({
     const data = parseFormData();
 
     try {
+      console.log(refs);
+
       if (validationSchema) {
         await validationSchema.validate(data, {
-          abortEarly: false
+          abortEarly: false,
+          context
         });
       }
 
@@ -46,7 +55,7 @@ export default function Form({
     } catch (err) {
       const validationErrors: Errors = {};
 
-      err.inner.map((error: ValidationError) => {
+      err.inner.forEach((error: ValidationError) => {
         validationErrors[error.path] = error.message;
       });
 
