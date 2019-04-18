@@ -1,7 +1,7 @@
 export interface Field {
   name: string;
-  ref: HTMLInputElement | Function | null;
-  path: string;
+  ref: HTMLElement | Function | null;
+  path?: string;
 }
 
 export interface Errors {

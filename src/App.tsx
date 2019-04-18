@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { hot } from "react-hot-loader/root";
 import * as Yup from "yup";
 
-import { Form, Input, Scope } from "./unform";
+import { Form, Input, Textarea, Select, Scope } from "./unform";
 
 const initialData = {
   name: "Diego",
+  profile: "CTO na Rocketseat",
   billingAddress: {
     number: 833
   }
@@ -13,6 +14,8 @@ const initialData = {
 
 const schema = Yup.object().shape({
   name: Yup.string().required(),
+  profile: Yup.string().required(),
+  tech: Yup.array(),
   billingAddress: Yup.object().shape({
     street: Yup.string().required(),
     number: Yup.string().required()
@@ -42,7 +45,17 @@ function App() {
       onSubmit={handleSubmit}
     >
       <Input name="name" label="Nome" />
-      <Input type="date" name="sobrenome" label="Sobrenome" />
+      <Textarea name="profile" label="Perfil" />
+
+      <Select
+        name="tech"
+        multiple
+        options={[
+          { id: "react", title: "ReactJS" },
+          { id: "node", title: "NodeJS" },
+          { id: "rn", title: "React Native" }
+        ]}
+      />
 
       <h2>Endereço</h2>
 

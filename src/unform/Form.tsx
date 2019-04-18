@@ -33,7 +33,9 @@ export default function Form({
     const data = {};
 
     refs.forEach(({ name, ref, path }) => {
-      data[name] = dot.pick(path, typeof ref === "function" ? ref() : ref);
+      const value = typeof ref === "function" ? ref() : ref;
+
+      data[name] = path ? dot.pick(path, value) : value;
     });
 
     dot.object(data);

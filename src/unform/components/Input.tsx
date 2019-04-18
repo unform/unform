@@ -6,7 +6,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
 }
 
-export default function Field({ name, label, ...rest }: Props) {
+export default function Input({ name, label, ...rest }: Props) {
   const { fieldName, registerField, defaultValue, error } = useField(name);
 
   function register(ref: HTMLInputElement) {
