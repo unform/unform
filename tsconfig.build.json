@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    
+    "outDir": "./dist"
+  },
+  "include": ["src/unform"],
+  "exclude": ["**/*.spec.*", "dist"]
+}
