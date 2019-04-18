@@ -1,5 +1,5 @@
 import dot from "dot-object";
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useState, FormHTMLAttributes } from "react";
 import { ObjectSchema, ValidationError } from "yup";
 
 import FormContext from "./Context";
@@ -9,18 +9,21 @@ interface Context {
   [key: string]: any;
 }
 
-interface Props {
+interface Props extends FormHTMLAttributes<HTMLFormElement> {
   initialData: object;
   children: React.ReactNode;
   context: Context;
-  validationSchema?: ObjectSchema<object>;
+  schema?: ObjectSchema<object>;
+  onSubmit: (data: object) => void;
 }
 
 export default function Form({
   initialData,
   children,
-  validationSchema,
-  context
+  schema,
+  context,
+  onSubmit,
+  ...rest
 }: Props) {
   const [errors, setErrors] = useState<Errors>({});
 
@@ -33,7 +36,9 @@ export default function Form({
       data[name] = dot.pick(path, typeof ref === "function" ? ref() : ref);
     });
 
-    return dot.object(data);
+    dot.object(data);
+
+    return data;
   }
 
   async function handleSubmit(e: FormEvent) {
@@ -42,16 +47,20 @@ export default function Form({
     const data = parseFormData();
 
     try {
-      console.log(refs);
-
-      if (validationSchema) {
-        await validationSchema.validate(data, {
+      if (schema) {
+        await schema.validate(data, {
           abortEarly: false,
+          stripUnknown: true,
           context
         });
       }
 
-      console.log("ok");
+      const finalData = schema.cast(data, {
+        stripUnknown: true,
+        context
+      });
+
+      onSubmit(finalData);
     } catch (err) {
       const validationErrors: Errors = {};
 
@@ -81,7 +90,9 @@ export default function Form({
         unregisterField
       }}
     >
-      <form onSubmit={handleSubmit}>{children}</form>
+      <form {...rest} onSubmit={handleSubmit}>
+        {children}
+      </form>
     </FormContext.Provider>
   );
 }

@@ -1,15 +1,15 @@
 import { pick } from "dot-object";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, InputHTMLAttributes } from "react";
 
 import FormContext from "./Context";
 
-interface Props {
-  name: string;
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
 }
 
 export default function Field(props: Props) {
-  const { name, label } = props;
+  const { name, label, ...rest } = props;
+
   const {
     initialData,
     errors,
@@ -35,6 +35,7 @@ export default function Field(props: Props) {
       {label && <label htmlFor={fieldName}>{label}</label>}
 
       <input
+        {...rest}
         ref={register}
         id={fieldName}
         name={fieldName}

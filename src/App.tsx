@@ -6,12 +6,12 @@ import { Form, Field, Scope } from "./unform";
 
 const initialData = {
   name: "Diego",
-  address: {
+  billingAddress: {
     number: 833
   }
 };
 
-const validation = Yup.object().shape({
+const schema = Yup.object().shape({
   name: Yup.string().required(),
   billingAddress: Yup.object().shape({
     street: Yup.string().required(),
@@ -19,27 +19,30 @@ const validation = Yup.object().shape({
   }),
   shippingAddress: Yup.object().when("$useShippingAsBilling", {
     is: false,
-    then: Yup.object()
-      .shape({
-        street: Yup.string().required(),
-        number: Yup.string().required()
-      })
-      .required()
+    then: Yup.object().shape({
+      street: Yup.string().required(),
+      number: Yup.string().required()
+    }),
+    otherwise: Yup.object().strip(true)
   })
 });
 
-const groups = [1, 2, 3, 4, 5];
-
 function App() {
   const [useShippingAsBilling, setUseShippingAsBilling] = useState(true);
+
+  function handleSubmit(data) {
+    console.log(data);
+  }
 
   return (
     <Form
       initialData={initialData}
       context={{ useShippingAsBilling }}
-      validationSchema={validation}
+      schema={schema}
+      onSubmit={handleSubmit}
     >
       <Field name="name" label="Nome" />
+      <Field type="date" name="sobrenome" label="Sobrenome" />
 
       <h2>Endereço</h2>
 
