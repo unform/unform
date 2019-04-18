@@ -5,7 +5,7 @@ export interface Field {
 }
 
 export interface Errors {
-  [key: string]: string,
+  [key: string]: string;
 }
 
 export interface Context {
