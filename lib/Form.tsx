@@ -10,19 +10,19 @@ interface Context {
 }
 
 interface Props extends FormHTMLAttributes<HTMLFormElement> {
-  initialData: object;
-  children: React.ReactNode;
-  context: Context;
+  initialData?: object;
+  children?: React.ReactNode;
+  context?: Context;
   schema?: ObjectSchema<object>;
-  onSubmit: (data: object) => void;
+  onSubmit?: (data: object) => void;
 }
 
 export default function Form({
-  initialData,
-  children,
+  initialData = {},
+  children = null,
   schema,
-  context,
-  onSubmit,
+  context = {},
+  onSubmit = () => {},
   ...rest
 }: Props) {
   const [errors, setErrors] = useState<Errors>({});
