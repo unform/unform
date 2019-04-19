@@ -1,0 +1,22 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "rocket-scripts start",
+    "build": "rocket-scripts build"
+  },
+  "dependencies": {
+    "@rocketseat/rocket-scripts": "^0.0.2",
+    "formik": "^1.5.2",
+    "react": "link:../node_modules/react",
+    "react-dom": "link:../node_modules/react-dom",
+    "react-hot-loader": "^4.8.4",
+    "unform": "link:..",
+    "yup": "^0.27.0"
+  },
+  "devDependencies": {
+    "rollup-plugin-terser": "^4.0.4"
+  }
+}

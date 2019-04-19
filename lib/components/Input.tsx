@@ -1,15 +1,16 @@
-import React, { TextareaHTMLAttributes } from "react";
+import React, { InputHTMLAttributes } from "react";
 
 import useField from "../useField";
 
-interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
+  name: string;
   label?: string;
 }
 
-export default function Textarea({ name, label, ...rest }: Props) {
+export default function Input({ name, label, ...rest }: Props) {
   const { fieldName, registerField, defaultValue, error } = useField(name);
 
-  function register(ref: HTMLTextAreaElement) {
+  function register(ref: HTMLInputElement) {
     registerField({ name: fieldName, ref, path: "value" });
   }
 
@@ -17,7 +18,7 @@ export default function Textarea({ name, label, ...rest }: Props) {
     <>
       {label && <label htmlFor={fieldName}>{label}</label>}
 
-      <textarea
+      <input
         {...rest}
         ref={register}
         id={fieldName}

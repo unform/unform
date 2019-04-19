@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { hot } from "react-hot-loader/root";
 import * as Yup from "yup";
 
-import { Form, Input, Textarea, Select, Scope } from "./unform";
+import { Form, Input, Textarea, Select, Scope } from "../../dist";
 
 const initialData = {
   name: "Diego",

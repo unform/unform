@@ -1,4 +1,4 @@
-import React, { SelectHTMLAttributes, useState, useEffect } from "react";
+import React, { SelectHTMLAttributes, useState } from "react";
 
 import useField from "../useField";
 
@@ -8,6 +8,7 @@ interface Option {
 }
 
 interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
+  name: string;
   label?: string;
   options: Option[];
 }
@@ -28,7 +29,7 @@ export default function Select({
 
   function handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
     if (multiple) {
-      const selectValue = [...e.target.options]
+      const selectValue = Array.from(e.target.options)
         .filter(o => o.selected)
         .map(o => o.value);
 

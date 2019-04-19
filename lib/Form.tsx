@@ -46,7 +46,7 @@ export default function Form({
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
-    const data = parseFormData();
+    let data = parseFormData();
 
     try {
       if (schema) {
@@ -55,15 +55,15 @@ export default function Form({
           stripUnknown: true,
           context
         });
+
+        data = schema.cast(data, {
+          stripUnknown: true,
+          context
+        });
       }
 
-      const finalData = schema.cast(data, {
-        stripUnknown: true,
-        context
-      });
-
       setErrors({});
-      onSubmit(finalData);
+      onSubmit(data);
     } catch (err) {
       const validationErrors: Errors = {};
 
