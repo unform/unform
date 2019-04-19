@@ -53,6 +53,7 @@ module.exports = {
     'jsx-a11y/label-has-for': 'off',
     'import/prefer-default-export': 'off',
     'react-hooks/rules-of-hooks': 'error',
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
   },
   settings: {
     'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],

@@ -20,7 +20,7 @@
     }
   },
   "lint-staged": {
-    "src/*.{js,ts,tsx,jsx}": [
+    "lib/*.{js,ts,tsx,jsx}": [
       "eslint --fix",
       "prettier --write"
     ]
@@ -58,10 +58,15 @@
     "rollup-plugin-terser": "^4.0.4",
     "rollup-plugin-typescript2": "^0.20.1",
     "rollup-plugin-url": "^2.2.1",
-    "typescript": "^3.4.3"
+    "typescript": "^3.4.3",
+    "yup": "^0.27.0"
   },
   "dependencies": {
     "dot-object": "^1.7.1"
   },
-  "peerDependencies": {}
+  "peerDependencies": {
+    "react": ">= 16.8.0",
+    "react-dom": ">= 16.8.0",
+    "yup": ">= 0.27.0"
+  }
 }
