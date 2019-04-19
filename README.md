@@ -26,8 +26,7 @@ Formik/Redux Form has a really great syntax while it has a really poor support t
 - Unit tests;
 - Add more examples;
 - Styled components support;
-- Validation;
-- React Native support (do we?);
+- React Native support (should we?);
 - Better docs;
 
 ## Installation
