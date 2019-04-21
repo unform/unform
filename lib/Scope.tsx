@@ -8,11 +8,14 @@ interface Props {
 }
 
 export default function Scope({ path, children }: Props) {
-  const form = useContext(FormContext);
+  const { scopePath, ...form } = useContext(FormContext);
 
   return (
     <FormContext.Provider
-      value={{ ...form, scopePath: form.scopePath.concat(path) }}
+      value={{
+        ...form,
+        scopePath: scopePath.concat(scopePath ? `.${path}` : path)
+      }}
     >
       {children}
     </FormContext.Provider>
