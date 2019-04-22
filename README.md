@@ -1,6 +1,6 @@
 ![](assets/logo.png)
 
-[![NPM](https://img.shields.io/npm/v/unform.svg)](https://www.npmjs.com/package/unform) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/unform.svg)](https://www.npmjs.com/package/unform)
 
 ## Overview
 
@@ -29,6 +29,8 @@ Formik/Redux Form has a really great syntax while it has a really poor support t
 - Styled components support;
 - React Native support (should we?);
 - Better docs;
+- Storybook?
+- Good messages by default;
 
 ## Installation
 
