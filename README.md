@@ -16,7 +16,7 @@ Unform is a performance focused library that helps you creating beautiful forms 
 
 ## Why not Formik, Redux Form or another library?
 
-Formik/Redux Form has a really great syntax while it has a really poor support to uncontrolled components and deep nested data structures. With unform it's easy to create forms with complex relationships without loosing performance.
+Formik/Redux Form has a really great syntax while it has a really poor support to uncontrolled components and deep nested data structures. With unform it's easy to create forms with complex relationships without losing performance.
 
 <!-- ADD GIF EXAMPLE -->
 
