@@ -53,7 +53,7 @@ yarn add unform
 
 ```js
 import React from "react";
-import { Form, Field } from "unform";
+import { Form, Input } from "unform";
 
 function App() {
   function handleSubmit(data) {
@@ -69,8 +69,8 @@ function App() {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Field name="email" />
-      <Field name="password" type="password" />
+      <Input name="email" />
+      <Input name="password" type="password" />
 
       <button type="submit">Sign in</button>
     </Form>
@@ -82,7 +82,7 @@ function App() {
 
 ```js
 import React from "react";
-import { Form, Field } from "unform";
+import { Form, Input } from "unform";
 
 function App() {
   function handleSubmit(data) {
@@ -98,11 +98,11 @@ function App() {
 
   return (
     <Form onSubmit={this.handleSubmit}>
-      <Field name="name" />
+      <Input name="name" />
 
       <Scope path="address">
-        <Field name="street" />
-        <Field name="number" />
+        <Input name="street" />
+        <Input name="number" />
       </Scope>
 
       <button type="submit">Save</button>
@@ -115,7 +115,7 @@ function App() {
 
 ```js
 import React from "react";
-import { Form, Field } from "unform";
+import { Form, Input } from "unform";
 
 function App() {
   const initialData = {
@@ -129,11 +129,11 @@ function App() {
 
   return (
     <Form onSubmit={this.handleSubmit}>
-      <Field name="name" />
+      <Input name="name" />
 
       <Scope path="address">
-        <Field name="street" />
-        <Field name="number" />
+        <Input name="street" />
+        <Input name="number" />
       </Scope>
 
       <button type="submit">Save</button>
