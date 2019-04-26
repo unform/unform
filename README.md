@@ -128,7 +128,7 @@ function App() {
   function handleSubmit(data) {};
 
   return (
-    <Form onSubmit={this.handleSubmit}>
+    <Form onSubmit={this.handleSubmit} initialData={initialData}>
       <Input name="name" />
 
       <Scope path="address">
