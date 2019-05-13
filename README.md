@@ -147,7 +147,7 @@ import * as Yup from 'yup';
 
 const schema = Yup.object().shape({
   email: Yup.string()
-    .email('Custom failed email message')
+    .email('Custom invalid email message')
     .required('Custom required message'),
   password: Yup.string().min(4).required(),
 })
