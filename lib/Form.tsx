@@ -11,18 +11,18 @@ interface Context {
 
 interface Props extends FormHTMLAttributes<HTMLFormElement> {
   initialData?: object;
-  children?: React.ReactNode;
+  children: React.ReactNode;
   context?: Context;
   schema?: ObjectSchema<object>;
-  onSubmit?: (data: object) => void;
+  onSubmit: (data: object) => void;
 }
 
 export default function Form({
   initialData = {},
-  children = null,
+  children,
   schema,
   context = {},
-  onSubmit = () => {},
+  onSubmit,
   ...rest
 }: Props) {
   const [errors, setErrors] = useState<Errors>({});
@@ -93,7 +93,7 @@ export default function Form({
         unregisterField
       }}
     >
-      <form {...rest} onSubmit={handleSubmit}>
+      <form data-testid="form" {...rest} onSubmit={handleSubmit}>
         {children}
       </form>
     </FormContext.Provider>

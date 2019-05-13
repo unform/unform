@@ -54,6 +54,7 @@ export default function Select({
         defaultValue={defaultValue}
         onChange={handleChange}
         multiple={multiple}
+        aria-label={fieldName}
         ref={register}
       >
         {!multiple && <option value="">Selecione...</option>}

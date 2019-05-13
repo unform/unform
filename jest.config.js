@@ -6,8 +6,9 @@ const { resolve } = require("path");
 module.exports = {
   bail: true,
   clearMocks: true,
-  coverageDirectory: "coverage",
-  coverageReporters: ["text", "clover"],
+  collectCoverage: true,
+  coverageDirectory: "__tests__/coverage",
+  coverageReporters: ["json", "lcov"],
   coverageThreshold: {
     global: {
       branches: 80,
@@ -16,11 +17,9 @@ module.exports = {
       statements: 80
     }
   },
-  testMatch: ["**/__tests__/*.spec.+(ts|tsx|js)"],
+  testMatch: ["**/__tests__/**/*.spec.+(ts|tsx|js)"],
   transform: {
     "^.+\\.(ts|tsx)$": "ts-jest"
   },
-  moduleFileExtensions: ["ts", "tsx", "js", "jsx"],
-  setupFilesAfterEnv: [resolve(__dirname, "__tests__", "setup.ts")],
-  snapshotSerializers: ["enzyme-to-json/serializer"]
+  moduleFileExtensions: ["ts", "tsx", "js", "jsx"]
 };

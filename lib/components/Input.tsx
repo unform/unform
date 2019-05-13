@@ -23,6 +23,7 @@ export default function Input({ name, label, ...rest }: Props) {
         ref={register}
         id={fieldName}
         name={fieldName}
+        aria-label={fieldName}
         defaultValue={defaultValue}
       />
 
