@@ -258,7 +258,7 @@ function ReactSelect({ name }) {
           { value: "rn", label: "React Native" }
         ]}
         value={value}
-        onChange={(data) => setValue(data)}
+        onChange={setValue}
         ref={() => registerField({ name: fieldName, ref: getValue })}
       />
 
