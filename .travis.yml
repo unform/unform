@@ -13,6 +13,7 @@ install:
 
 test:
 - yarn test
+- yarn coveralls
 
 deploy:
   provider: npm

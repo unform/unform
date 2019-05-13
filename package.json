@@ -14,7 +14,8 @@
     "dev:start": "rollup -c -w",
     "prebuild": "rimraf dist",
     "build": "rollup -c",
-    "test": "jest"
+    "test": "jest",
+    "coveralls": "jest --coverage && cat ./__tests__/coverage/lcov.info | coveralls"
   },
   "husky": {
     "hooks": {
@@ -40,6 +41,7 @@
     "@types/yup": "^0.26.12",
     "@typescript-eslint/eslint-plugin": "^1.6.0",
     "@typescript-eslint/parser": "^1.6.0",
+    "coveralls": "^3.0.3",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
     "enzyme-to-json": "^3.3.5",

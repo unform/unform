@@ -1,6 +1,6 @@
 ![](assets/logo.png)
 
-[![NPM](https://img.shields.io/npm/v/unform.svg)](https://www.npmjs.com/package/unform)
+[![NPM](https://img.shields.io/npm/v/@rocketseat/unform.svg)](https://www.npmjs.com/package/@rocketseat/unform)
 
 ## Overview
 
