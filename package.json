@@ -18,7 +18,7 @@
     "prebuild": "rimraf dist",
     "build": "rollup -c",
     "test": "jest",
-    "coveralls": "jest --coverage && cat ./__tests__/coverage/lcov.info | coveralls"
+    "coveralls": "jest && cat ./__tests__/coverage/lcov.info | coveralls"
   },
   "husky": {
     "hooks": {
