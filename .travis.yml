@@ -1,8 +1,7 @@
 language: node_js
 
-branches:
-  only:
-  - master
+node_js:
+  - "10"
 
 cache:
   directories:
@@ -17,9 +16,9 @@ test:
 
 deploy:
   provider: npm
-  email: $EMAIL
+  email: "$EMAIL"
   api_key:
-    secure: $API_KEY
+    secure: "$API_KEY"
   on:
     tags: true
     repo: rocketseat/unform
