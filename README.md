@@ -1,6 +1,7 @@
 ![](assets/logo.png)
 
 [![NPM](https://img.shields.io/npm/v/@rocketseat/unform.svg)](https://www.npmjs.com/package/@rocketseat/unform)
+[![Build Status](https://travis-ci.org/Rocketseat/unform.svg?branch=master)](https://travis-ci.org/Rocketseat/unform)
 
 ## Overview
 
