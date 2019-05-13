@@ -18,6 +18,7 @@ before_deploy:
   - yarn build
 
 deploy:
+  skip_cleanup: true
   provider: npm
   email: $EMAIL
   api_key:
