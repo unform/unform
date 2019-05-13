@@ -1,0 +1,6 @@
+node_modules
+yarn-error.log
+dist
+example
+__tests__
+.github
