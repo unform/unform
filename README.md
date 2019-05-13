@@ -32,7 +32,7 @@ Formik/Redux Form has a really great syntax while it has a really poor support t
 Just add unform to your project:
 
 ```
-yarn add unform
+yarn add @rocketseat/unform
 ```
 
 ## Table of contents
