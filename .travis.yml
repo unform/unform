@@ -4,14 +4,15 @@ node_js:
   - "10"
 
 cache:
+  yarn: true
   directories:
-  - node_modules
+    - node_modules
 
 install:
-- yarn
+  - yarn
 
-test:
-- yarn coveralls
+script:
+  - yarn coveralls
 
 deploy:
   provider: npm
