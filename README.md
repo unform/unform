@@ -41,6 +41,7 @@ yarn add @rocketseat/unform
   - [Basics](#basics)
   - [Nested fields](#nested-fields)
   - [Initial data](#initial-data)
+  - [Validation](#validation)
 
 ## Guides
 
@@ -48,7 +49,7 @@ yarn add @rocketseat/unform
 
 ```js
 import React from "react";
-import { Form, Input } from "unform";
+import { Form, Input } from "@rocketseat/unform";
 
 function App() {
   function handleSubmit(data) {
@@ -77,7 +78,7 @@ function App() {
 
 ```js
 import React from "react";
-import { Form, Input } from "unform";
+import { Form, Input, Scope } from "@rocketseat/unform";
 
 function App() {
   function handleSubmit(data) {
@@ -92,7 +93,7 @@ function App() {
   };
 
   return (
-    <Form onSubmit={this.handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <Input name="name" />
 
       <Scope path="address">
@@ -110,7 +111,7 @@ function App() {
 
 ```js
 import React from "react";
-import { Form, Input } from "unform";
+import { Form, Input, Scope } from "@rocketseat/unform";
 
 function App() {
   const initialData = {
@@ -123,13 +124,41 @@ function App() {
   function handleSubmit(data) {};
 
   return (
-    <Form onSubmit={this.handleSubmit} initialData={initialData}>
+    <Form onSubmit={handleSubmit} initialData={initialData}>
       <Input name="name" />
 
       <Scope path="address">
         <Input name="street" />
         <Input name="number" />
       </Scope>
+
+      <button type="submit">Save</button>
+    </Form>
+  );
+}
+```
+
+### Validation
+
+```js
+import React from "react";
+import { Form, Input } from "@rocketseat/unform";
+import * as Yup from 'yup';
+
+const schema = Yup.object().shape({
+  email: Yup.string()
+    .email('Custom failed email message')
+    .required('Custom required message'),
+  password: Yup.string().min(4).required(),
+})
+
+function App() {
+  function handleSubmit(data) {};
+
+  return (
+    <Form onSubmit={handleSubmit}>
+      <Input name="email" />
+      <Input name="password" type="password" />
 
       <button type="submit">Save</button>
     </Form>
