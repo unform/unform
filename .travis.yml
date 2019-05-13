@@ -21,4 +21,4 @@ deploy:
     secure: "$API_KEY"
   on:
     tags: true
-    repo: rocketseat/unform
+    repo: Rocketseat/unform
