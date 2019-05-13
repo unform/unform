@@ -1,0 +1,24 @@
+language: node_js
+
+branches:
+  only:
+  - master
+
+cache:
+  directories:
+  - node_modules
+
+install:
+- yarn
+
+test:
+- yarn test
+
+deploy:
+  provider: npm
+  email: $EMAIL
+  api_key:
+    secure: $API_KEY
+  on:
+    tags: true
+    repo: rocketseat/unform
