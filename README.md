@@ -227,6 +227,8 @@ function App() {
 
 Sometimes we need to use third-party component in our forms. But don't you worry, Unform has your back! You can do that via `useField` which provides all the resources you need to use your component with Unform.
 
+Below are some examples with [react-select](https://github.com/JedWatson/react-select) and [react-datepicker](https://github.com/Hacker0x01/react-datepicker/).
+
 ### React select
 
 ```js
@@ -236,11 +238,15 @@ import Select from 'react-select';
 
 /* You can't use your component directly, you have to wrap it
 around another component, or you won't be able to use useField properly */
-function ReactSelect({ name }) {
+function ReactSelect({ name, options, multiple }) {
   const { fieldName, registerField, defaultValue, error } = useField(name);
   const [value, setValue] = useState(defaultValue);
 
   function getValue() {
+    if (!multiple) {
+      return value;
+    }
+
     return value.reduce((res, item) => {
       res.push(item.value);
       return res;
@@ -251,12 +257,8 @@ function ReactSelect({ name }) {
     <>
       <Select
         name="techs"
-        isMulti
-        options={[
-          { value: "react", label: "ReactJS" },
-          { value: "node", label: "NodeJS" },
-          { value: "rn", label: "React Native" }
-        ]}
+        options={options}
+        isMulti={multiple}
         value={value}
         onChange={setValue}
         ref={() => registerField({ name: fieldName, ref: getValue })}
@@ -268,7 +270,20 @@ function ReactSelect({ name }) {
 }
 
 function App() {
+  const techs = [
+    { value: "react", label: "ReactJS" },
+    { value: "node", label: "NodeJS" },
+    { value: "rn", label: "React Native" }
+  ];
+
+  const colors = [
+    { value: "red", label: "Red" },
+    { value: "green", label: "Green" },
+    { value: "blue", label: "Blue" }
+  ]
+
   const initialData = {
+    color: { value: 'green', label: 'Green' },
     techs: [
       {
         value: 'react', label: 'ReactJS'
@@ -280,7 +295,11 @@ function App() {
 
   return (
     <Form initialData={initialData} onSubmit={handleSubmit}>
-      <ReactSelect name="techs" />
+      <ReactSelect options={colors} name="color" />
+
+      <br />
+
+      <ReactSelect options={techs} name="techs" multiple />
 
       <button type="submit">Save</button>
     </Form>
