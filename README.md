@@ -43,6 +43,10 @@ yarn add @rocketseat/unform
   - [Nested fields](#nested-fields)
   - [Initial data](#initial-data)
   - [Validation](#validation)
+  - [Manipulate data](#manipulate-data)
+  - [Custom Elements](#custom-elements)
+    - [React Select](#react-select)
+    - [React Datepicker](#react-datepicker)
 
 ## Guides
 
@@ -160,6 +164,167 @@ function App() {
     <Form schema={schema} onSubmit={handleSubmit}>
       <Input name="email" />
       <Input name="password" type="password" />
+
+      <button type="submit">Save</button>
+    </Form>
+  );
+}
+```
+
+### Manipulate data
+
+```js
+import React, { useState } from "react";
+import { Form, Input } from "@rocketseat/unform";
+import * as Yup from 'yup';
+
+const schema = Yup.object().shape({
+  name: Yup.string().required(),
+  email: Yup.string().email().required(),
+  password: Yup.string().when('$updatePassword', {
+    is: true,
+    then: Yup.string().min(4).required(),
+    otherwise: Yup.string().strip(true)
+  }),
+})
+
+function App() {
+  const [updatePassword, setUpdatePassword] = useState(false);
+
+  const initialData = {
+    name: 'John Doe',
+    email: 'johndoe@example.com',
+  }
+
+  function handleSubmit(data) {};
+
+  return (
+    <Form
+      schema={schema}
+      initialData={initialData}
+      context={{ updatePassword }}
+      onSubmit={handleSubmit}
+    >
+      <Input name="name" />
+      <Input name="email" />
+
+      <input
+        type="checkbox"
+        name="Update Password"
+        checked={updatePassword}
+        onChange={e => setUpdatePassword(e.target.checked)}
+      />
+
+      <Input name="password" type="password" />
+
+      <button type="submit">Save</button>
+    </Form>
+  );
+}
+```
+
+## Custom elements
+
+Sometimes we need to use third-party component in our forms. But don't you worry, Unform has your back! You can do that via `useField` which provides all the resources you need to use your component with Unform.
+
+### React select
+
+```js
+import React, { useState } from "react";
+import { Form, useField } from "@rocketseat/unform";
+import Select from 'react-select';
+
+/* You can't use your component directly, you have to wrap it
+around another component, or you won't be able to use useField properly */
+function ReactSelect({ name }) {
+  const { fieldName, registerField, defaultValue, error } = useField(name);
+  const [value, setValue] = useState(defaultValue);
+
+  function getValue() {
+    return value.reduce((res, item) => {
+      res.push(item.value);
+      return res;
+    }, []);
+  }
+
+  return (
+    <>
+      <Select
+        name="techs"
+        isMulti
+        options={[
+          { value: "react", label: "ReactJS" },
+          { value: "node", label: "NodeJS" },
+          { value: "rn", label: "React Native" }
+        ]}
+        value={value}
+        onChange={(data) => setValue(data)}
+        ref={() => registerField({ name: fieldName, ref: getValue })}
+      />
+
+      {error && <span>{error}</span>}
+    </>
+  )
+}
+
+function App() {
+  const initialData = {
+    techs: [
+      {
+        value: 'react', label: 'ReactJS'
+      },
+    ],
+  }
+
+  function handleSubmit(data) {};
+
+  return (
+    <Form initialData={initialData} onSubmit={handleSubmit}>
+      <ReactSelect name="techs" />
+
+      <button type="submit">Save</button>
+    </Form>
+  );
+}
+```
+
+### React datepicker
+
+```js
+import React, { useState } from "react";
+import { Form, useField } from "@rocketseat/unform";
+import DatePicker from 'react-datepicker';
+
+import 'react-datepicker/dist/react-datepicker.css';
+
+/* You can't use your component directly, you have to wrap it
+around another component, or you won't be able to use useField properly */
+function ReactDate({ name }) {
+  const { fieldName, registerField, defaultValue, error } = useField(name);
+  const [value, setValue] = useState(defaultValue);
+
+  function getValue() {
+    return value;
+  }
+
+  return (
+    <>
+      <DatePicker
+        selected={value}
+        onChange={setValue}
+        ref={() => registerField({ name: fieldName, ref: getValue })}
+      />
+      {error && <span>{error}</span>}
+    </>
+  )
+}
+
+function App() {
+  function handleSubmit(data) {};
+
+  return (
+    <Form onSubmit={handleSubmit}>
+      <ReactDate name="birthday" />
 
       <button type="submit">Save</button>
     </Form>
