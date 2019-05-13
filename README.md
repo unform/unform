@@ -156,7 +156,7 @@ function App() {
   function handleSubmit(data) {};
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form schema={schema} onSubmit={handleSubmit}>
       <Input name="email" />
       <Input name="password" type="password" />
 
