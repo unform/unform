@@ -67,6 +67,10 @@ export default function Form({
     } catch (err) {
       const validationErrors: Errors = {};
 
+      if (!err.inner) {
+        throw err;
+      }
+
       err.inner.forEach((error: ValidationError) => {
         validationErrors[error.path] = error.message;
       });
