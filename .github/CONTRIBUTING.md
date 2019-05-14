@@ -36,7 +36,7 @@ Try to encourage newcomers to express their opinions, and make them comfortable 
 
 ### Code of Conduct
 
-We expect that project participants to adhere to our Code of Conduct. You can check the the [full text]](CODE_OF_CONDUCT.md) so that you may understand the kind of conduct we are expecting and what actions will and will not be tolerated.
+We expect that project participants to adhere to our Code of Conduct. You can check the the [full text](CODE_OF_CONDUCT.md) so that you may understand the kind of conduct we are expecting and what actions will and will not be tolerated.
 
 By participating in this project, you agree to abide by its terms.
 
