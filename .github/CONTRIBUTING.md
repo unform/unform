@@ -48,7 +48,7 @@ Here are some ways you can help along with some guidelines.
 
 As a user of `unform`, you're the perfect candidate to help us improve our documentation!
 
-Typos, errors, lack of examples and/or explanation, etc. This are some examples of for things that could be fixed and/or improved.
+Typos, errors, lack of examples and/or explanation and so on, are just some examples of things that could be fixed and/or improved.
 
 You could even make improvements to this guide! :)
 
@@ -68,13 +68,13 @@ You can make them easier to understand and resolve.
 - Use a clear and descriptive title;
 - Include as much information as possible by filling out the provided issue
   template;
-- A lot of times, the best way to report an issue is a failing test proving it.
+- Most of the time, the best way to report an issue is a failing test proving it.
 
 ### Feedback
 
 The more feedback the better! We're always looking for more suggestions and opinions on discussions. That's a good opportunity to influence the future direction of this tool.
 
-This include submitting an enhancement suggestion, including completely new features and minor improvements to existing functionality.
+This includes submitting an enhancement suggestion, including completely new features and minor improvements to existing functionality.
 
 The
 [`question` label](https://github.com/Rocketseat/unform/labels/question)
