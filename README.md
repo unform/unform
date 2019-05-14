@@ -1,13 +1,40 @@
+<h1 align="center">
+
 ![](assets/logo.png)
 
-[![NPM](https://img.shields.io/npm/v/@rocketseat/unform.svg)](https://www.npmjs.com/package/@rocketseat/unform)
-[![Build Status](https://travis-ci.org/Rocketseat/unform.svg?branch=master)](https://travis-ci.org/Rocketseat/unform)
+</h1>
+
+<h3 align="center">
+Create ReactJS uncontrolled form structures with nested fields, validations and much more! 🚀
+</h3>
+
+<p align="center">
+
+<img alt="npm" src="https://img.shields.io/npm/v/@rocketseat/unform.svg">
+
+<img alt="dependencies" src="https://david-dm.org/@rocketseat/unform.svg">
+
+<img alt="dependencies" src="https://travis-ci.org/Rocketseat/unform.svg?branch=master">
+
+</p>
+
+<p align="center">
+	<strong>
+		<a href="#key-features">Key features</a>
+		•
+		<a href="#installation">Installation</a>
+		•
+		<a href="#table-of-contents">Guides</a>
+		•
+		<a href="#contribute">Contribute</a>
+	</strong>
+</p>
 
 ## Overview
 
 Unform is a performance focused library that helps you creating beautiful forms in React with the power of uncontrolled components performance and React Hooks.
 
-## Main advantages
+## Key features
 
 - Beautiful syntax;
 - React Hooks 😍;
@@ -48,7 +75,9 @@ yarn add @rocketseat/unform
     - [React Select](#react-select)
     - [React Datepicker](#react-datepicker)
 - [Contributing](#contributing)
-- [License](#license)
+  - [Contributing Guidelines](#contributing-guide)
+  - [Code of Conduct](#code-of-conduct)
+  - [License](#license)
 
 ## Guides
 
@@ -355,8 +384,16 @@ function App() {
 
 ## Contributing
 
-Before submitting a pull request, please read our [Contributing Guide](.github/CONTRIBUTING.md). It contains a set of instructions and guidelines that aim to make the contribution process easy and frictionless.
+Thanks for being interested on making this package better. We encourage everyone to help improving this project with some new features, bug fixes and performance issues. Please take a little bit of your time to read our guides, so this process can be faster and easier.
 
-## License
+### Contributing Guide
+
+Take a moment to read about our [contributing guidelines](/.github/CONTRIBUTING.md) so you can understand how to submit an issue, commiting and pull requests.
+
+### Code of Conduct
+
+We expect you to follow or [Code of Conduct](/.github/CODE_OF_CONDUCT.md). Here you can read it and understand what kind of behaviour will not be tolerated.
+
+### License
 
 MIT © [Rocketseat](https://github.com/Rocketseat)
