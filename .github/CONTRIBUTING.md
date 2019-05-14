@@ -1,4 +1,4 @@
-﻿# Contributing guidelines
+# Contributing guidelines
 
 ## Table of Contents
 
@@ -30,7 +30,7 @@ Please, while contributing or interacting in any way in this project, refrain fr
 
 #### For native English speakers
 
-Try to use simple words and sentences. Don't make fun of non-native English speakers if you find something wrong about the way they express themselves
+Try to use simple words and sentences. Don't make fun of non-native English speakers if you find something wrong about the way they express themselves.
 
 Try to encourage newcomers to express their opinions, and make them comfortable enough to do so.
 
