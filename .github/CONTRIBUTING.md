@@ -76,9 +76,10 @@ The more feedback the better! We're always looking for more suggestions and opin
 
 This includes submitting an enhancement suggestion, including completely new features and minor improvements to existing functionality.
 
-The
-[`question` label](https://github.com/Rocketseat/unform/labels/question)
-is a good place to find ongoing discussions.
+The [`question`](https://github.com/Rocketseat/unform/labels/question)
+and
+[`rfc`](https://github.com/Rocketseat/unform/labels/rfc)
+labels are a good place to find ongoing discussions.
 
 ### Code
 
