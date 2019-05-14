@@ -1,4 +1,4 @@
-# Contributing guidelines
+﻿# Contributing guidelines
 
 ## Table of Contents
 
@@ -109,7 +109,7 @@ A summary of the scripts:
 - The `yarn dev:start` command will build the lib and watch files in bundle and rebuild on changes;
 - Running `yarn dev` will run both `dev:example` and `dev:start`;
 - Use `yarn test` to run the test suite (powered by [Jest](https://facebook.github.io/jest/));
-- Run `yarn coveralls` to provide test coverage statistics;
+- `yarn coveralls` can't be used locally, this is only used to provide test coverage statistics to [Coveralls](https://coveralls.io);
 - `yarn build` will build the lib using [Rollup](https://rollupjs.org/guide/en);
 
 This project uses [Prettier](http://prettier.io/) for code formatting. Consider installing an [editor plugin](https://prettier.io/docs/en/editors.html) for the best experience, but code will also be formatted with a precommit script (using [lint-staged](https://github.com/okonet/lint-staged)).
