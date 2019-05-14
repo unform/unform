@@ -47,6 +47,8 @@ yarn add @rocketseat/unform
   - [Custom Elements](#custom-elements)
     - [React Select](#react-select)
     - [React Datepicker](#react-datepicker)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Guides
 
@@ -351,13 +353,9 @@ function App() {
 }
 ```
 
-## Contribute
+## Contributing
 
-1. Fork it
-2. Create your feature branch (git checkout -b my-new-feature)
-3. Commit your changes (git commit -am 'Add some feature')
-4. Push to the branch (git push origin my-new-feature)
-5. Create new Pull Request
+Before submitting a pull request, please read our [Contributing Guide](.github/CONTRIBUTING.md). It contains a set of instructions and guidelines that aim to make the contribution process easy and frictionless.
 
 ## License
 
