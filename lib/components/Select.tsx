@@ -26,9 +26,7 @@ export default function Select({
   useEffect(() => {
     if (defaultValue) {
       if (multiple) {
-        const selectValue = Array.from(defaultValue).map((o: string) => {
-          return o;
-        });
+        const selectValue = Array.from(defaultValue).map((o: string) => o);
 
         setValue(selectValue);
       } else {
