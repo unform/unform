@@ -1,4 +1,4 @@
-﻿# Contributing guidelines
+# Contributing guidelines
 
 ## Table of Contents
 
@@ -107,6 +107,7 @@ A summary of the scripts:
 
 - To run the example use `yarn dev:example`;
 - The `yarn dev:start` command will build the lib and watch files in bundle and rebuild on changes;
+- Running `yarn dev` will run both `dev:example` and `dev:start`;
 - Use `yarn test` to run the test suite (powered by [Jest](https://facebook.github.io/jest/));
 - Run `yarn coveralls` to provide test coverage statistics;
 - `yarn build` will build the lib using [Rollup](https://rollupjs.org/guide/en);
