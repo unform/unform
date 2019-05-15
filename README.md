@@ -12,8 +12,6 @@ Create ReactJS uncontrolled form structures with nested fields, validations and 
 
 <img alt="npm" src="https://img.shields.io/npm/v/@rocketseat/unform.svg">
 
-<img alt="dependencies" src="https://david-dm.org/@rocketseat/unform.svg">
-
 <img alt="dependencies" src="https://travis-ci.org/Rocketseat/unform.svg?branch=master">
 
 </p>
@@ -392,7 +390,7 @@ Take a moment to read about our [Contribution Guidelines](/.github/CONTRIBUTING.
 
 ### Code of Conduct
 
-We expect you to follow our [Code of Conduct](/.github/CODE_OF_CONDUCT.md). You can read it and understand what kind of behaviour will and will not be tolerated.
+We expect you to follow our [Code of Conduct](/.github/CODE_OF_CONDUCT.md). You can read it to understand what kind of behaviour will and will not be tolerated.
 
 ## License
 
