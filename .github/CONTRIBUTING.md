@@ -1,4 +1,4 @@
-# Contributing guidelines
+# Contribution guidelines
 
 ## Table of Contents
 
