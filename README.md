@@ -386,7 +386,7 @@ Thanks for being interested on making this package better. We encourage everyone
 
 ### Contribution Guidelines
 
-Take a moment to read about our [Contribution Guidelines](/.github/CONTRIBUTING.md) so you can understand how to submit an issue, commit and pull requests.
+Take a moment to read about our [Contribution Guidelines](/.github/CONTRIBUTING.md) so you can understand how to submit an issue, commit and create pull requests.
 
 ### Code of Conduct
 
