@@ -1,4 +1,4 @@
-import React, { SelectHTMLAttributes, useState, useEffect } from "react";
+import React, { SelectHTMLAttributes, useState } from "react";
 
 import useField from "../useField";
 
@@ -21,19 +21,9 @@ export default function Select({
   ...rest
 }: Props) {
   const { fieldName, registerField, defaultValue, error } = useField(name);
-  const [value, setValue] = useState<string | string[]>();
-
-  useEffect(() => {
-    if (defaultValue) {
-      if (multiple) {
-        const selectValue = Array.from(defaultValue).map((o: string) => o);
-
-        setValue(selectValue);
-      } else {
-        setValue(defaultValue);
-      }
-    }
-  }, [defaultValue]);
+  const [value, setValue] = useState<string | string[]>(
+    defaultValue || (multiple ? [] : "")
+  );
 
   function getValue() {
     return value;
