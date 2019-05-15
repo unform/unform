@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { hot } from "react-hot-loader/root";
 import * as Yup from "yup";
 
-import { Form, Input, Textarea, Select, Scope } from "../../dist";
+import { Form, Input, Textarea, Select, Scope, Choice } from "../../dist";
 
 const schema = Yup.object().shape({
   name: Yup.string().required(),
@@ -11,6 +11,9 @@ const schema = Yup.object().shape({
   tech: Yup.array(Yup.string())
     .min(2)
     .required(),
+  choice1: Yup.array(Yup.string()).required(),
+  choice2: Yup.string().required(),
+  choice3: Yup.string().required(),
   billingAddress: Yup.object().shape({
     street: Yup.string().required(),
     number: Yup.string().required()
@@ -118,6 +121,32 @@ function App() {
           { id: "react", title: "ReactJS" },
           { id: "node", title: "NodeJS" },
           { id: "rn", title: "React Native" }
+        ]}
+      />
+
+      <br />
+      <Choice
+        name="choice1"
+        multiple
+        options={[
+          { id: "react", label: "ReactJS" },
+          { id: "node", label: "NodeJS" },
+          { id: "rn", label: "React Native" }
+        ]}
+      />
+      <br />
+      <Choice
+        name="choice2"
+        options={[{ id: "yes", label: "Accept Terms?" }]}
+      />
+
+      <br />
+      <Choice
+        name="choice3"
+        options={[
+          { id: "react", label: "ReactJS" },
+          { id: "node", label: "NodeJS" },
+          { id: "rn", label: "React Native" }
         ]}
       />
 
