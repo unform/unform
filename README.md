@@ -262,7 +262,7 @@ function ReactSelect({ name, options, multiple }) {
         options={options}
         isMulti={multiple}
         value={value}
-        onChange={setValue}
+        onChange={data => setValue(data)}
         ref={() => registerField({ name: fieldName, ref: getValue })}
       />
 
@@ -332,7 +332,7 @@ function ReactDate({ name }) {
     <>
       <DatePicker
         selected={value}
-        onChange={setValue}
+        onChange={data => setValue(data)}
         ref={() => registerField({ name: fieldName, ref: getValue })}
       />
       {error && <span>{error}</span>}
