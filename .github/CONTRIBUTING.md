@@ -6,14 +6,14 @@
   - [Language](#language)
     - [For native English speakers](#for-native-english-speakers)
   - [Code of Conduct](#code-of-conduct)
-- [How can I contribute?](#how-can-i-contribute)
+- [How can I help?](#how-can-i-help)
   - [Documentation](#documentation)
   - [Issues](#issues)
     - [Submitting an issue](#submitting-an-issue)
   - [Feedback](#feedback)
-  - [Code](#Code)
+  - [Code](#code)
     - [Dev environment](#dev-environment)
-- [Commiting](#Commiting)
+- [Commiting](#commiting)
 - [Submitting a pull request](#submitting-a-pull-request)
 
 ## Getting started
@@ -36,7 +36,7 @@ Try to encourage newcomers to express their opinions, and make them comfortable 
 
 ### Code of Conduct
 
-We expect that project participants to adhere to our Code of Conduct. You can check the the [full text](CODE_OF_CONDUCT.md) so that you may understand the kind of conduct we are expecting and what actions will and will not be tolerated.
+We expect that project participants to adhere to our Code of Conduct. You can check the [full text](CODE_OF_CONDUCT.md) so that you may understand the kind of conduct we are expecting and what actions will and will not be tolerated.
 
 By participating in this project, you agree to abide by its terms.
 
@@ -64,7 +64,7 @@ You can make them easier to understand and resolve.
 #### Submitting an issue
 
 - Please search for similar issues before opening a new one;
-- Use one of the corresponding issue template;
+- Use one of the corresponding issue templates;
 - Use a clear and descriptive title;
 - Include as much information as possible by filling out the provided issue
   template;
@@ -88,7 +88,7 @@ You can use issue labels to discover issues you could help out with:
 - [`bug` issues](https://github.com/Rocketseat/unform/labels/bug)
   are known bugs we'd like to fix;
 - [`enhancement` issues](https://github.com/Rocketseat/unform/labels/enhancement)
-  are features we're open to including.
+  are features we're open to include.
 
 The
 [`help wanted`](https://github.com/Rocketseat/unform/labels/help%20wanted)
@@ -96,7 +96,7 @@ and
 [`good first issue`](https://github.com/Rocketseat/unform/labels/good%20first%20issue)
 labels are especially useful.
 
-You may find an issue is assigned. Please double-check before starting on this issue because somebody else is likely already working on it.
+You may find an issue that is assigned. Please double-check before starting on this issue because somebody else is likely already working on it.
 
 #### Dev environment
 
