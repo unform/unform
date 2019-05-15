@@ -1,4 +1,10 @@
-import React, { SelectHTMLAttributes, useState } from "react";
+import React, {
+  SelectHTMLAttributes,
+  useState,
+  useEffect,
+  useRef,
+  useImperativeHandle
+} from "react";
 
 import useField from "../useField";
 
@@ -20,12 +26,23 @@ export default function Select({
   multiple,
   ...rest
 }: Props) {
+  const ref = useRef<HTMLSelectElement>(null);
   const { fieldName, registerField, defaultValue, error } = useField(name);
   const [value, setValue] = useState<string | string[]>();
 
   function getValue() {
     return value;
   }
+
+  useEffect(() => {
+    console.log(value);
+  }, [value]);
+
+  useEffect(() => {
+    if (ref.current) {
+      registerField({ name: fieldName, getValue, ref: ref.current });
+    }
+  }, [ref]);
 
   function handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
     if (multiple) {
@@ -37,10 +54,6 @@ export default function Select({
     } else {
       setValue(e.target.value);
     }
-  }
-
-  function register() {
-    registerField({ name: fieldName, ref: getValue });
   }
 
   return (
@@ -55,7 +68,7 @@ export default function Select({
         onChange={handleChange}
         multiple={multiple}
         aria-label={fieldName}
-        ref={register}
+        ref={ref}
       >
         {!multiple && <option value="">Selecione...</option>}
         {options.map(({ id, title }: Option) => (

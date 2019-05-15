@@ -20,18 +20,6 @@
     "test": "jest",
     "coveralls": "jest && cat ./__tests__/coverage/lcov.info | coveralls"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "lib/**/*.{ts,tsx}": [
-      "eslint --fix",
-      "prettier --write",
-      "jest --bail --findRelatedTests"
-    ]
-  },
   "devDependencies": {
     "@babel/core": "^7.4.3",
     "@types/dot-object": "^1.7.0",

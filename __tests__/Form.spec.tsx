@@ -55,12 +55,17 @@ describe("Form", () => {
 
     fireEvent.submit(getByTestId("form"));
 
-    expect(submitMock).toHaveBeenCalledWith({
-      name: "Diego",
-      address: {
-        street: "John Doe Avenue"
+    expect(submitMock).toHaveBeenCalledWith(
+      {
+        name: "Diego",
+        address: {
+          street: "John Doe Avenue"
+        }
+      },
+      {
+        resetForm: expect.any(Function)
       }
-    });
+    );
   });
 
   it("should remove unmounted elements from refs", () => {
@@ -80,9 +85,14 @@ describe("Form", () => {
 
     fireEvent.submit(getByTestId("form"));
 
-    expect(submitMock).toHaveBeenCalledWith({
-      another: "Diego"
-    });
+    expect(submitMock).toHaveBeenCalledWith(
+      {
+        another: "Diego"
+      },
+      {
+        resetForm: expect.any(Function)
+      }
+    );
   });
 
   it("should update data to match schema", async () => {
@@ -95,7 +105,7 @@ describe("Form", () => {
       <Form
         schema={schema}
         onSubmit={submitMock}
-        initialData={{ bio: "Testing" }}
+        initialData={{ name: "Diego", bio: "Testing" }}
       >
         <Input name="name" />
         <Input name="bio" />
@@ -107,7 +117,29 @@ describe("Form", () => {
     });
 
     await wait(() => {
-      expect(submitMock).toHaveBeenCalledWith({ bio: "Testing" });
+      expect(submitMock).toHaveBeenCalledWith(
+        { bio: "Testing" },
+        {
+          resetForm: expect.any(Function)
+        }
+      );
     });
+  });
+
+  it("should reset form data when resetForm helper is dispatched", async () => {
+    const { getByTestId, getByLabelText } = render(
+      <Form onSubmit={(_, { resetForm }) => resetForm()}>
+        <Input name="name" />
+        <Select name="tech" options={[{ id: "node", title: "NodeJS" }]} />
+      </Form>
+    );
+
+    getByLabelText("name").setAttribute("value", "Diego");
+    getByLabelText("tech").setAttribute("value", "node");
+
+    fireEvent.submit(getByTestId("form"));
+
+    expect(getByLabelText("name")).toHaveAttribute("value", "");
+    expect(getByLabelText("tech")).toHaveAttribute("value", "");
   });
 });

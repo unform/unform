@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { hot } from "react-hot-loader/root";
 import * as Yup from "yup";
 
-import { Form, Input, Textarea, Select, Scope } from "../../dist";
+import { Form, Input, Textarea, Select, Scope } from "../../lib";
 
 const schema = Yup.object().shape({
   name: Yup.string().required(),
@@ -97,8 +97,10 @@ function App() {
 
   function down() {}
 
-  function handleSubmit(data) {
+  function handleSubmit(data, { resetForm }) {
     console.log(data);
+
+    resetForm();
   }
 
   return (

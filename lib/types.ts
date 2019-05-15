@@ -1,6 +1,8 @@
 export interface Field {
   name: string;
-  ref: HTMLElement | Function | null;
+  ref?: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
+  getValue?: () => any;
+  setValue?: (value: any) => any;
   path?: string;
 }
 
