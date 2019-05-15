@@ -96,7 +96,7 @@ and
 [`good first issue`](https://github.com/Rocketseat/unform/labels/good%20first%20issue)
 labels are especially useful.
 
-You may find an issue that is assigned. Please double-check before starting on this issue because somebody else is likely already working on it.
+When you see an issue that is already assigned, please check to see if there isn't someone working on it already (maybe try asking in the issue). This is to prevent unnecessary work for everyone involved.
 
 #### Dev environment
 
