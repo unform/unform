@@ -8,25 +8,13 @@
 Create ReactJS uncontrolled form structures with nested fields, validations and much more! 🚀
 </h3>
 
-<p align="center">
+<div align="center">
 
-<img alt="npm" src="https://img.shields.io/npm/v/@rocketseat/unform.svg">
+<img alt="npm" src="https://img.shields.io/npm/v/@rocketseat/unform.svg" /><space><space>
+<img alt="dependencies" src="https://travis-ci.org/Rocketseat/unform.svg?branch=master" /><space><space>
+[![Coverage Status](https://coveralls.io/repos/github/Rocketseat/unform/badge.svg?branch=master)](https://coveralls.io/github/Rocketseat/unform?branch=master)
 
-<img alt="dependencies" src="https://travis-ci.org/Rocketseat/unform.svg?branch=master">
-
-</p>
-
-<p align="center">
-	<strong>
-		<a href="#key-features">Key features</a>
-		•
-		<a href="#installation">Installation</a>
-		•
-		<a href="#table-of-contents">Guides</a>
-		•
-		<a href="#contributing">Contribute</a>
-	</strong>
-</p>
+</div>
 
 ## Overview
 
