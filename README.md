@@ -24,7 +24,7 @@ Create ReactJS uncontrolled form structures with nested fields, validations and 
 		•
 		<a href="#table-of-contents">Guides</a>
 		•
-		<a href="#contribute">Contribute</a>
+		<a href="#contributing">Contribute</a>
 	</strong>
 </p>
 
