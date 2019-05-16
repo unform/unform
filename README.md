@@ -277,7 +277,7 @@ Below are some examples with [react-select](https://github.com/JedWatson/react-s
 import React, { useRef, useEffect } from "react";
 import Select from "react-select";
 
-import { useField } from "../../../lib";
+import { useField } from "@rocketseat/unform";
 
 export default function ReactSelect({
   name,
@@ -347,7 +347,7 @@ export default function ReactSelect({
 import React, { useRef, useEffect, useState } from "react";
 import ReactDatePicker from "react-datepicker";
 
-import { useField } from "../../../lib";
+import { useField } from "@rocketseat/unform";
 
 import "react-datepicker/dist/react-datepicker.css";
 
