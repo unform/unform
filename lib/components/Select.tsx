@@ -21,7 +21,9 @@ export default function Select({
   ...rest
 }: Props) {
   const { fieldName, registerField, defaultValue, error } = useField(name);
-  const [value, setValue] = useState<string | string[]>();
+  const [value, setValue] = useState<string | string[]>(
+    defaultValue || (multiple ? [] : "")
+  );
 
   function getValue() {
     return value;
