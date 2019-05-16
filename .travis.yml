@@ -1,25 +1,38 @@
 language: node_js
 
-branches:
-  only:
-  - master
+node_js:
+  - "10"
 
 cache:
+  yarn: true
   directories:
-  - node_modules
+    - node_modules
+
+before_install:
+- |
+    if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
+      TRAVIS_COMMIT_RANGE="FETCH_HEAD...$TRAVIS_BRANCH"
+    fi
+    git diff --name-only $TRAVIS_COMMIT_RANGE | grep -qvE '(\.md$)|(^(docs|example))/' || {
+      echo "Only docs were updated, stopping build process."
+      exit
+    }
 
 install:
-- yarn
+  - yarn
 
-test:
-- yarn test
-- yarn coveralls
+script:
+  - yarn coveralls
+  
+before_deploy:
+  - yarn build
 
 deploy:
+  skip_cleanup: true
   provider: npm
   email: $EMAIL
   api_key:
     secure: $API_KEY
   on:
     tags: true
-    repo: rocketseat/unform
+    repo: Rocketseat/unform
