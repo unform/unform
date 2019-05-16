@@ -1,19 +1,22 @@
 language: node_js
 
 node_js:
-  - "10"
+  - '10'
 
 cache:
   yarn: true
   directories:
     - node_modules
 
+before_install:
+  - commitlint-travis
+
 install:
   - yarn
 
 script:
   - yarn coveralls
-  
+
 before_deploy:
   - yarn build
 
