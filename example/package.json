@@ -4,20 +4,24 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "rocket-scripts start",
+    "start": "rocket-scripts start --typescript",
     "build": "rocket-scripts build"
   },
   "dependencies": {
-    "@rocketseat/rocket-scripts": "0.0.5",
+    "@rocketseat/rocket-scripts": "^0.0.17",
     "formik": "^1.5.2",
     "immutability-helper": "^3.0.0",
     "react": "link:../node_modules/react",
+    "react-datepicker": "^2.5.0",
     "react-dom": "link:../node_modules/react-dom",
     "react-hot-loader": "^4.8.4",
+    "react-select": "^2.4.3",
     "unform": "link:..",
     "yup": "^0.27.0"
   },
   "devDependencies": {
+    "@types/react-datepicker": "^2.3.0",
+    "@types/react-select": "^2.0.17",
     "rollup-plugin-terser": "^4.0.4"
   }
 }

@@ -1,5 +1,5 @@
 import dot from "dot-object";
-import React, { FormEvent, useState, useEffect } from "react";
+import React, { FormEvent, useState } from "react";
 import { ObjectSchema, ValidationError } from "yup";
 
 import FormContext from "./Context";
@@ -34,10 +34,10 @@ export default function Form({
   function parseFormData() {
     const data = {};
 
-    fields.forEach(({ name, ref, getValue, path }) => {
-      const value = getValue ? getValue() : ref;
+    fields.forEach(({ name, ref, path, parseValue }) => {
+      const value = dot.pick(path, ref);
 
-      data[name] = path ? dot.pick(path, value) : value;
+      data[name] = parseValue ? parseValue(value) : value;
     });
 
     dot.object(data);
@@ -46,12 +46,12 @@ export default function Form({
   }
 
   function resetForm() {
-    fields.forEach(({ ref, setValue }) => {
-      if (ref) {
-        ref.value = "";
-      } else if (setValue) {
-        setValue("");
+    fields.forEach(({ ref, path, clearValue }) => {
+      if (clearValue) {
+        return clearValue(ref);
       }
+
+      return dot.set(path, "", ref as object);
     });
   }
 

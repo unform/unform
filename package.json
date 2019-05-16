@@ -11,6 +11,18 @@
     "access": "public"
   },
   "license": "MIT",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "lib/**/*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write",
+      "jest --bail --findRelatedTests"
+    ]
+  },
   "scripts": {
     "dev": "npm-run-all -p dev:*",
     "dev:example": "cd example && yarn start",
@@ -33,9 +45,6 @@
     "@typescript-eslint/eslint-plugin": "^1.6.0",
     "@typescript-eslint/parser": "^1.6.0",
     "coveralls": "^3.0.3",
-    "enzyme": "^3.9.0",
-    "enzyme-adapter-react-16": "^1.12.1",
-    "enzyme-to-json": "^3.3.5",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^4.1.0",
