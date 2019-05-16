@@ -1,7 +1,9 @@
 export interface Field {
   name: string;
-  ref: HTMLElement | Function | null;
-  path?: string;
+  ref?: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
+  path: string;
+  parseValue?: Function;
+  clearValue?: Function;
 }
 
 export interface Errors {

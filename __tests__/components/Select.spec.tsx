@@ -65,9 +65,14 @@ describe("Form", () => {
 
     fireEvent.submit(getByTestId("form"));
 
-    expect(submitMock).toHaveBeenCalledWith({
-      tech: "react"
-    });
+    expect(submitMock).toHaveBeenCalledWith(
+      {
+        tech: "react"
+      },
+      {
+        resetForm: expect.any(Function)
+      }
+    );
   });
 
   // it("should be able to return multiple values", () => {

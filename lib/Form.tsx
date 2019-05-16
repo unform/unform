@@ -1,5 +1,5 @@
 import dot from "dot-object";
-import React, { FormEvent, useState, FormHTMLAttributes } from "react";
+import React, { FormEvent, useState } from "react";
 import { ObjectSchema, ValidationError } from "yup";
 
 import FormContext from "./Context";
@@ -9,12 +9,16 @@ interface Context {
   [key: string]: any;
 }
 
-interface Props extends FormHTMLAttributes<HTMLFormElement> {
+interface Helpers {
+  resetForm: () => void;
+}
+
+interface Props {
   initialData?: object;
   children: React.ReactNode;
   context?: Context;
   schema?: ObjectSchema<object>;
-  onSubmit: (data: object) => void;
+  onSubmit: (data: object, helpers: Helpers) => void;
 }
 
 export default function Form({
@@ -22,25 +26,33 @@ export default function Form({
   children,
   schema,
   context = {},
-  onSubmit,
-  ...rest
+  onSubmit
 }: Props) {
   const [errors, setErrors] = useState<Errors>({});
-
-  let refs: Field[] = [];
+  const [fields, setFields] = useState<Field[]>([]);
 
   function parseFormData() {
     const data = {};
 
-    refs.forEach(({ name, ref, path }) => {
-      const value = typeof ref === "function" ? ref() : ref;
+    fields.forEach(({ name, ref, path, parseValue }) => {
+      const value = dot.pick(path, ref);
 
-      data[name] = path ? dot.pick(path, value) : value;
+      data[name] = parseValue ? parseValue(value) : value;
     });
 
     dot.object(data);
 
     return data;
+  }
+
+  function resetForm() {
+    fields.forEach(({ ref, path, clearValue }) => {
+      if (clearValue) {
+        return clearValue(ref);
+      }
+
+      return dot.set(path, "", ref as object);
+    });
   }
 
   async function handleSubmit(e: FormEvent) {
@@ -63,10 +75,11 @@ export default function Form({
       }
 
       setErrors({});
-      onSubmit(data);
+      onSubmit(data, { resetForm });
     } catch (err) {
       const validationErrors: Errors = {};
 
+      /* istanbul ignore next  */
       if (!err.inner) {
         throw err;
       }
@@ -80,11 +93,11 @@ export default function Form({
   }
 
   function registerField(field: Field) {
-    refs.push(field);
+    setFields(state => [...state, field]);
   }
 
   function unregisterField(name: string) {
-    refs = refs.filter(ref => ref.name !== name);
+    setFields(fields.filter(field => field.name !== name));
   }
 
   return (
@@ -97,7 +110,7 @@ export default function Form({
         unregisterField
       }}
     >
-      <form data-testid="form" {...rest} onSubmit={handleSubmit}>
+      <form data-testid="form" onSubmit={handleSubmit}>
         {children}
       </form>
     </FormContext.Provider>

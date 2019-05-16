@@ -37,7 +37,7 @@ module.exports = {
       {
         extensions: ['.jsx', '.tsx'],
       },
-    ], 
+    ],
     'import-helpers/order-imports': [
       'warn',
       {
@@ -49,6 +49,7 @@ module.exports = {
         alphabetize: { order: 'asc', ignoreCase: true },
       },
     ],
+    'no-param-reassign': 'off',
     'react/prop-types': 'off',
     'jsx-a11y/label-has-for': 'off',
     'import/prefer-default-export': 'off',
