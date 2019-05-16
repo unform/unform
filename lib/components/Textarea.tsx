@@ -15,7 +15,7 @@ export default function Textarea({ name, label, ...rest }: Props) {
     if (ref.current) {
       registerField({ name: fieldName, ref: ref.current, path: "value" });
     }
-  }, [ref]);
+  }, [ref.current, fieldName]);
 
   return (
     <>

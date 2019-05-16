@@ -21,7 +21,7 @@ export default function Select({ name, label, options, ...rest }: Props) {
     if (ref.current) {
       registerField({ name: fieldName, ref: ref.current, path: "value" });
     }
-  }, [ref]);
+  }, [ref.current, fieldName]);
 
   return (
     <>

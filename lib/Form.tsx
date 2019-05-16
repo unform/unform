@@ -79,6 +79,7 @@ export default function Form({
     } catch (err) {
       const validationErrors: Errors = {};
 
+      /* istanbul ignore next  */
       if (!err.inner) {
         throw err;
       }

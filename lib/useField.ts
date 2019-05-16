@@ -16,7 +16,7 @@ export default function useField(name: string) {
 
   useEffect(() => {
     return () => unregisterField(fieldName);
-  }, []);
+  }, [fieldName]);
 
   const defaultValue = dot.pick(fieldName, initialData);
   const error = errors[fieldName];

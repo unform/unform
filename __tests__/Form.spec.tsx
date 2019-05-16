@@ -5,6 +5,8 @@ import { act, render, fireEvent, wait } from "react-testing-library";
 import * as Yup from "yup";
 
 import { Form, Input, Textarea, Select, Scope } from "../lib";
+import CustomInputClear from "./utils/CustomInputClear";
+import CustomInputParse from "./utils/CustomInputParse";
 
 describe("Form", () => {
   it("should render form elements", () => {
@@ -98,12 +100,17 @@ describe("Form", () => {
   it("should update data to match schema", async () => {
     const submitMock = jest.fn();
     const schema = Yup.object().shape({
-      bio: Yup.string()
+      name: Yup.string(),
+      bio: Yup.string().when("$stripBio", {
+        is: true,
+        then: Yup.string().strip(true)
+      })
     });
 
     const { getByTestId } = render(
       <Form
         schema={schema}
+        context={{ stripBio: true }}
         onSubmit={submitMock}
         initialData={{ name: "Diego", bio: "Testing" }}
       >
@@ -118,7 +125,7 @@ describe("Form", () => {
 
     await wait(() => {
       expect(submitMock).toHaveBeenCalledWith(
-        { bio: "Testing" },
+        { name: "Diego" },
         {
           resetForm: expect.any(Function)
         }
@@ -126,7 +133,7 @@ describe("Form", () => {
     });
   });
 
-  it("should reset form data when resetForm helper is dispatched", async () => {
+  it("should reset form data when resetForm helper is dispatched", () => {
     const { getByTestId, getByLabelText } = render(
       <Form onSubmit={(_, { resetForm }) => resetForm()}>
         <Input name="name" />
@@ -135,11 +142,48 @@ describe("Form", () => {
     );
 
     getByLabelText("name").setAttribute("value", "Diego");
-    getByLabelText("tech").setAttribute("value", "node");
+
+    fireEvent.change(getByLabelText("tech"), { target: { value: "node" } });
 
     fireEvent.submit(getByTestId("form"));
 
-    expect(getByLabelText("name")).toHaveAttribute("value", "");
-    expect(getByLabelText("tech")).toHaveAttribute("value", "");
+    expect((getByLabelText("name") as HTMLInputElement).value).toBe("");
+    expect((getByLabelText("tech") as HTMLSelectElement).value).toBe("");
+  });
+
+  it("should be able to have custom value parser", () => {
+    const submitMock = jest.fn();
+
+    const { getByTestId } = render(
+      <Form onSubmit={submitMock} initialData={{ name: "Diego" }}>
+        <CustomInputParse name="name" />
+      </Form>
+    );
+
+    fireEvent.submit(getByTestId("form"));
+
+    expect(submitMock).toHaveBeenCalledWith(
+      {
+        name: "Diego-test"
+      },
+      {
+        resetForm: expect.any(Function)
+      }
+    );
+  });
+
+  it("should be able to have custom value clearer", () => {
+    const { getByTestId, getByLabelText } = render(
+      <Form
+        onSubmit={(_, { resetForm }) => resetForm()}
+        initialData={{ name: "Diego" }}
+      >
+        <CustomInputClear name="name" />
+      </Form>
+    );
+
+    fireEvent.submit(getByTestId("form"));
+
+    expect((getByLabelText("name") as HTMLInputElement).value).toBe("test");
   });
 });
