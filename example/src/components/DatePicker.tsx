@@ -19,7 +19,7 @@ export default function ReactDatePicker({ name }) {
         pickerRef.clear();
       }
     });
-  }, [ref]);
+  }, [ref.current, fieldName]);
 
   return (
     <>

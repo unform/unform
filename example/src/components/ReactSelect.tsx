@@ -43,7 +43,7 @@ export default function ReactSelect({
         selectRef.select.clearValue();
       }
     });
-  }, [ref]);
+  }, [ref.current, fieldName]);
 
   function getDefaultValue() {
     if (!defaultValue) return null;
