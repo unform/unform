@@ -13,7 +13,8 @@
   "license": "MIT",
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
   "lint-staged": {
@@ -34,6 +35,9 @@
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
+    "@commitlint/cli": "^7.6.1",
+    "@commitlint/config-conventional": "^7.6.0",
+    "@commitlint/travis-cli": "^7.6.1",
     "@types/dot-object": "^1.7.0",
     "@types/jest": "^24.0.11",
     "@types/react": "^16.8.13",
@@ -42,6 +46,7 @@
     "@types/yup": "^0.26.12",
     "@typescript-eslint/eslint-plugin": "^1.6.0",
     "@typescript-eslint/parser": "^1.6.0",
+    "commitlint-config-rocketseat": "^0.0.1",
     "coveralls": "^3.0.3",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",
