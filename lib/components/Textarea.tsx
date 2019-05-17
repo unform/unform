@@ -5,11 +5,23 @@ import useField from "../useField";
 interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   name: string;
   label?: string;
+  validateOnBlur?: boolean;
 }
 
-export default function Textarea({ name, label, ...rest }: Props) {
+export default function Textarea({
+  name,
+  label,
+  validateOnBlur,
+  ...rest
+}: Props) {
   const ref = useRef<HTMLTextAreaElement>(null);
-  const { fieldName, registerField, defaultValue, error } = useField(name);
+  const {
+    fieldName,
+    registerField,
+    defaultValue,
+    error,
+    onBlurValidation
+  } = useField(name);
 
   useEffect(() => {
     if (ref.current) {
@@ -26,6 +38,7 @@ export default function Textarea({ name, label, ...rest }: Props) {
         ref={ref}
         id={fieldName}
         name={fieldName}
+        onBlur={validateOnBlur ? onBlurValidation : undefined}
         aria-label={fieldName}
         defaultValue={defaultValue}
       />

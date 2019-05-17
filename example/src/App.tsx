@@ -68,7 +68,7 @@ function App() {
       schema={schema}
       onSubmit={handleSubmit}
     >
-      <Input name="name" label="Nome" />
+      <Input name="name" label="Nome" validateOnBlur />
       <Textarea name="profile" label="Perfil" />
 
       <ReactSelect

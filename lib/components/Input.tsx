@@ -5,11 +5,18 @@ import useField from "../useField";
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   label?: string;
+  validateOnBlur?: boolean;
 }
 
-export default function Input({ name, label, ...rest }: Props) {
+export default function Input({ name, label, validateOnBlur, ...rest }: Props) {
   const ref = useRef<HTMLInputElement>(null);
-  const { fieldName, registerField, defaultValue, error } = useField(name);
+  const {
+    fieldName,
+    registerField,
+    defaultValue,
+    error,
+    onBlurValidation
+  } = useField(name);
 
   useEffect(() => {
     if (ref.current) {
@@ -24,6 +31,7 @@ export default function Input({ name, label, ...rest }: Props) {
       <input
         {...rest}
         ref={ref}
+        onBlur={validateOnBlur ? onBlurValidation : undefined}
         id={fieldName}
         name={fieldName}
         aria-label={fieldName}

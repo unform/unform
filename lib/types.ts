@@ -1,3 +1,5 @@
+import { FormEvent } from "react";
+
 export interface Field {
   name: string;
   ref?: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
@@ -7,7 +9,7 @@ export interface Field {
 }
 
 export interface Errors {
-  [key: string]: string;
+  [key: string]: string | undefined;
 }
 
 export interface Context {
@@ -16,4 +18,5 @@ export interface Context {
   scopePath: string;
   registerField: (field: Field) => void;
   unregisterField: (name: string) => void;
+  onBlurValidation: (event: FormEvent) => void;
 }

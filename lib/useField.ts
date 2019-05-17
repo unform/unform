@@ -9,7 +9,8 @@ export default function useField(name: string) {
     errors,
     scopePath,
     unregisterField,
-    registerField
+    registerField,
+    onBlurValidation
   } = useContext(FormContext);
 
   const fieldName = scopePath ? `${scopePath}.${name}` : name;
@@ -25,6 +26,7 @@ export default function useField(name: string) {
     fieldName,
     registerField,
     defaultValue,
-    error
+    error,
+    onBlurValidation
   };
 }

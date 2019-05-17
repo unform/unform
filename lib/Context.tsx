@@ -9,5 +9,6 @@ export default createContext<Context>({
   errors: {},
   scopePath: "",
   registerField: () => {},
-  unregisterField: () => {}
+  unregisterField: () => {},
+  onBlurValidation: () => {}
 });

@@ -1,6 +1,6 @@
 import dot from "dot-object";
 import React, { FormEvent, useState } from "react";
-import { ObjectSchema, ValidationError } from "yup";
+import * as Yup from "yup";
 
 import FormContext from "./Context";
 import { Field, Errors } from "./types";
@@ -17,7 +17,7 @@ interface Props {
   initialData?: object;
   children: React.ReactNode;
   context?: Context;
-  schema?: ObjectSchema<object>;
+  schema?: Yup.ObjectSchema<object>;
   onSubmit: (data: object, helpers: Helpers) => void;
 }
 
@@ -84,11 +84,27 @@ export default function Form({
         throw err;
       }
 
-      err.inner.forEach((error: ValidationError) => {
+      err.inner.forEach((error: Yup.ValidationError) => {
         validationErrors[error.path] = error.message;
       });
 
       setErrors(validationErrors);
+    }
+  }
+
+  async function onBlurValidation(
+    e: FormEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) {
+    const { name, value } = e.currentTarget;
+
+    try {
+      if (schema) {
+        await Yup.reach(schema, name).validate(value);
+      }
+
+      setErrors({ ...errors, [name]: undefined });
+    } catch (err) {
+      setErrors({ ...errors, [name]: err.message });
     }
   }
 
@@ -107,7 +123,8 @@ export default function Form({
         errors,
         scopePath: "",
         registerField,
-        unregisterField
+        unregisterField,
+        onBlurValidation
       }}
     >
       <form data-testid="form" onSubmit={handleSubmit}>

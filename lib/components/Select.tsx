@@ -11,11 +11,24 @@ interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
   name: string;
   label?: string;
   options: Option[];
+  validateOnBlur?: boolean;
 }
 
-export default function Select({ name, label, options, ...rest }: Props) {
+export default function Select({
+  name,
+  label,
+  options,
+  validateOnBlur,
+  ...rest
+}: Props) {
   const ref = useRef<HTMLSelectElement>(null);
-  const { fieldName, registerField, defaultValue, error } = useField(name);
+  const {
+    fieldName,
+    registerField,
+    defaultValue,
+    error,
+    onBlurValidation
+  } = useField(name);
 
   useEffect(() => {
     if (ref.current) {
@@ -31,6 +44,7 @@ export default function Select({ name, label, options, ...rest }: Props) {
         {...rest}
         multiple={false}
         id={fieldName}
+        onBlur={validateOnBlur ? onBlurValidation : undefined}
         name={fieldName}
         defaultValue={defaultValue}
         aria-label={fieldName}
