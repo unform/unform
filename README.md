@@ -10,9 +10,9 @@ Create ReactJS uncontrolled form structures with nested fields, validations and 
 
 <div align="center">
 
-![npm](https://img.shields.io/npm/v/@rocketseat/unform.svg?color=%237159c1)<space><space>
-![Travis (.org)](https://img.shields.io/travis/rocketseat/unform.svg?color=%237159c1)<space><space>
-![Coveralls github](https://img.shields.io/coveralls/github/Rocketseat/unform.svg?color=%237159c1)
+[![npm](https://img.shields.io/npm/v/@rocketseat/unform.svg?color=%237159c1)](https://www.npmjs.com/package/@rocketseat/unform)<space><space>
+[![Travis (.org)](https://img.shields.io/travis/rocketseat/unform.svg?color=%237159c1)](https://travis-ci.org/Rocketseat/unform)<space><space>
+[![Coverage Status](https://img.shields.io/coveralls/github/Rocketseat/unform.svg?color=%237159c1)](https://coveralls.io/github/Rocketseat/unform?branch=master)
 
 </div>
 
