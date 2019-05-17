@@ -37,7 +37,6 @@ Formik/Redux Form has a really great syntax while it has a really poor support t
 ## Roadmap
 
 - Native checkbox/radio support;
-- Styled components support;
 - React Native support (should we?);
 - Better docs;
 
@@ -51,6 +50,12 @@ yarn add @rocketseat/unform
 
 ## Table of contents
 
+- [Overview](#overview)
+- [Key features](#key-features)
+- [Why not Formik, Redux Form or another library?](#why-not-formik-redux-form-or-another-library)
+- [Roadmap](#roadmap)
+- [Installation](#installation)
+- [Table of contents](#table-of-contents)
 - [Guides](#guides)
   - [Basics](#basics)
   - [Elements](#elements)
@@ -60,12 +65,13 @@ yarn add @rocketseat/unform
   - [Nested fields](#nested-fields)
   - [Initial data](#initial-data)
   - [Validation](#validation)
+  - [Styling](#styling)
   - [Manipulate data](#manipulate-data)
-  - [Custom Elements](#custom-elements)
-    - [React Select](#react-select)
-    - [React Datepicker](#react-datepicker)
+- [Custom elements](#custom-elements)
+  - [React select](#react-select)
+  - [React datepicker](#react-datepicker)
 - [Contributing](#contributing)
-  - [Contribution Guidelines](#contributing-guide)
+  - [Contribution Guidelines](#contribution-guidelines)
   - [Code of Conduct](#code-of-conduct)
 - [License](#license)
 
@@ -267,6 +273,19 @@ function App() {
     </Form>
   );
 }
+```
+
+### Styling
+
+The `Form` component exposes two props for that: `style` and `className`. You can use any `CSS-in-JS` library to style your form or just pass the class name string, or even the `style` object directly! For example:
+
+```js
+import styled from 'styled-components' // or emotion, for example
+
+// weird choice for a background color, huh?
+export default styled(MyForm)`
+  background: red;
+`
 ```
 
 ### Manipulate data

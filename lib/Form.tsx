@@ -1,5 +1,5 @@
 import dot from "dot-object";
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useState, CSSProperties } from "react";
 import { ObjectSchema, ValidationError } from "yup";
 
 import FormContext from "./Context";
@@ -13,10 +13,12 @@ interface Helpers {
   resetForm: () => void;
 }
 
-interface Props {
+export interface FormProps {
   initialData?: object;
   children: React.ReactNode;
   context?: Context;
+  className?: string;
+  style?: CSSProperties;
   schema?: ObjectSchema<object>;
   onSubmit: (data: object, helpers: Helpers) => void;
 }
@@ -24,10 +26,12 @@ interface Props {
 export default function Form({
   initialData = {},
   children,
+  style,
+  className,
   schema,
   context = {},
   onSubmit
-}: Props) {
+}: FormProps) {
   const [errors, setErrors] = useState<Errors>({});
   const [fields, setFields] = useState<Field[]>([]);
 
@@ -110,7 +114,12 @@ export default function Form({
         unregisterField
       }}
     >
-      <form data-testid="form" onSubmit={handleSubmit}>
+      <form
+        data-testid="form"
+        style={style}
+        className={className}
+        onSubmit={handleSubmit}
+      >
         {children}
       </form>
     </FormContext.Provider>
