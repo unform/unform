@@ -131,12 +131,13 @@ A commit message can consists of a **header**, **body** and **footer**. The head
 
 To ensure that a commit is valid, easy to read, and changelog-ready, we have a hook that lints the commit message before allowing a commit to pass. This linter verifies the following:
 
-- The header (first line) is the only mandatory part of the commit message.
+- The header (first line) is the only mandatory part of the commit message;
+- The body and footer are both optional but its use is highly encouraged;
 - The header should contains:
   - A type:
     - Must be lowercase;
     - Must be one of:
-      - **chore**: A change that neither fix a bug or adds a feature;
+      - **chore**: A change that neither fix a bug nor adds a feature;
       - **ci**: A CI change;
       - **docs**: A documentation change or fix;
       - **feat**: A new feature;
@@ -145,10 +146,14 @@ To ensure that a commit is valid, easy to read, and changelog-ready, we have a h
   - A subject:
     - Must be capitalized;
     - Must be limited to 50 characters or less;
-    - Must omit any trailing punctuation;
-- Header, body and footer must be separated by a blank line;
-- The following lines should have 72 characters or less;
-- Reference to issues and pull requests must be made in the last line.
+    - Must omit any trailing punctuation.
+- The body:
+  - Must have a leading blank line;
+  - Each line must be limited to 72 characters or less.
+- The footer:
+  - Must have a leading blank line;
+  - Each line must be limited to 72 characters or less;
+  - If needed, reference to issues and pull requests must be made here in the last line.
 
 You also should follow these general guidelines when committing:
 
@@ -186,9 +191,9 @@ text editors are capable of automating this.
 Issues and pull request can be referenced on the footer: #3 #12
 ```
 
-### Why all this rules?
+### Why all these rules?
 
-We try to enforce that rules for the following reasons:
+We try to enforce these rules for the following reasons:
 
 - Automatically generating changelog;
 - Communicating in a better way the nature of changes;
