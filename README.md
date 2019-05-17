@@ -5,7 +5,7 @@
 </h1>
 
 <h3 align="center">
-Create ReactJS uncontrolled form structures with nested fields, validations and much more! 🚀
+  Create ReactJS uncontrolled form structures with nested fields, validations and much more! 🚀
 </h3>
 
 <p align="center">
@@ -17,15 +17,15 @@ Create ReactJS uncontrolled form structures with nested fields, validations and 
 </p>
 
 <p align="center">
-	<strong>
-		<a href="#key-features">Key features</a>
-		•
-		<a href="#installation">Installation</a>
-		•
-		<a href="#table-of-contents">Guides</a>
-		•
-		<a href="#contributing">Contribute</a>
-	</strong>
+  <strong>
+    <a href="#key-features">Key features</a>
+    •
+    <a href="#installation">Installation</a>
+    •
+    <a href="#table-of-contents">Guides</a>
+    •
+    <a href="#contributing">Contribute</a>
+  </strong>
 </p>
 
 ## Overview
@@ -199,6 +199,8 @@ function App() {
 
 ### Validation
 
+By default form is validated on submit. You can enable on blur validation by passing `validateOnBlur` prop
+
 ```js
 import React from "react";
 import { Form, Input } from "@rocketseat/unform";
@@ -216,8 +218,8 @@ function App() {
 
   return (
     <Form schema={schema} onSubmit={handleSubmit}>
-      <Input name="email" />
-      <Input name="password" type="password" />
+      <Input name="email" validateOnBlur={true} />
+      <Input name="password" type="password" validateOnBlur={true} />
 
       <button type="submit">Save</button>
     </Form>
@@ -296,10 +298,11 @@ export default function ReactSelect({
   label,
   options,
   multiple,
+  validateOnBlur
   ...rest
 }) {
   const ref = useRef(null);
-  const { fieldName, registerField, defaultValue, error } = useField(name);
+  const { fieldName, registerField, defaultValue, error, onBlurValidation } = useField(name);
 
   function parseSelectValue(selectValue) {
     if (!multiple) {
@@ -339,6 +342,7 @@ export default function ReactSelect({
         name={fieldName}
         aria-label={fieldName}
         options={options}
+        onBlur={validateOnBlur ? onBlurValidation : undefined}
         isMulti={multiple}
         defaultValue={getDefaultValue()}
         ref={ref}
@@ -363,9 +367,15 @@ import { useField } from "../../../lib";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-export default function DatePicker({ name }) {
+export default function DatePicker({ name, validateOnBlur }) {
   const ref = useRef(null);
-  const { fieldName, registerField, defaultValue, error } = useField(name);
+  const {
+    fieldName,
+    registerField,
+    defaultValue,
+    error,
+    onBlurValidation
+  } = useField(name);
   const [selected, setSelected] = useState(defaultValue);
 
   useEffect(() => {
@@ -384,6 +394,7 @@ export default function DatePicker({ name }) {
       <ReactDatePicker
         name={fieldName}
         selected={selected}
+        onBlur={validateOnBlur ? onBlurValidation : undefined}
         onChange={date => setSelected(date)}
         ref={ref}
       />
@@ -391,7 +402,6 @@ export default function DatePicker({ name }) {
     </>
   );
 }
-
 ```
 
 ## Contributing
