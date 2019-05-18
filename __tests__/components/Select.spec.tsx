@@ -21,14 +21,34 @@ describe("Form", () => {
     expect(!!getByText("Tech")).toBe(true);
   });
 
+  it("should display placeholder", () => {
+    const { getByText } = render(
+      <Form onSubmit={jest.fn()}>
+        <Select
+          placeholder="Select..."
+          options={[{ id: "node", title: "NodeJS" }]}
+          name="tech"
+          label="Tech"
+        />
+      </Form>
+    );
+
+    expect(!!getByText("Select...")).toBe(true);
+  });
+
   it("should display error", async () => {
     const schema = Yup.object().shape({
       tech: Yup.string().required("Tech is required")
     });
 
+    const initialData = {
+      tech: ""
+    };
+
     const { getByText, getByTestId } = render(
-      <Form schema={schema} onSubmit={jest.fn()}>
+      <Form schema={schema} initialData={initialData} onSubmit={jest.fn()}>
         <Select
+          placeholder="Select..."
           options={[{ id: "node", title: "NodeJS" }]}
           name="tech"
           label="Tech"

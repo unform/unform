@@ -10,10 +10,17 @@ interface Option {
 interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
   name: string;
   label?: string;
+  placeholder?: string;
   options: Option[];
 }
 
-export default function Select({ name, label, options, ...rest }: Props) {
+export default function Select({
+  name,
+  label,
+  placeholder,
+  options,
+  ...rest
+}: Props) {
   const ref = useRef<HTMLSelectElement>(null);
   const { fieldName, registerField, defaultValue, error } = useField(name);
 
@@ -36,7 +43,11 @@ export default function Select({ name, label, options, ...rest }: Props) {
         aria-label={fieldName}
         ref={ref}
       >
-        <option value="">Selecione...</option>
+        {placeholder && (
+          <option value="" disabled hidden>
+            {placeholder}
+          </option>
+        )}
         {options.map(({ id, title }: Option) => (
           <option key={id} value={id}>
             {title}

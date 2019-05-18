@@ -137,7 +137,11 @@ describe("Form", () => {
     const { getByTestId, getByLabelText } = render(
       <Form onSubmit={(_, { resetForm }) => resetForm()}>
         <Input name="name" />
-        <Select name="tech" options={[{ id: "node", title: "NodeJS" }]} />
+        <Select
+          name="tech"
+          placeholder="Select..."
+          options={[{ id: "node", title: "NodeJS" }]}
+        />
       </Form>
     );
 

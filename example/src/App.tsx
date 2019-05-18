@@ -9,6 +9,7 @@ import ReactSelect from "./components/ReactSelect";
 const schema = Yup.object().shape({
   name: Yup.string().required(),
   profile: Yup.string().required(),
+  theme: Yup.string().required(),
   tech: Yup.string().required(),
   date: Yup.date().required(),
   people: Yup.array(Yup.string())
@@ -31,6 +32,7 @@ const schema = Yup.object().shape({
 interface Data {
   name: string;
   profile: string;
+  theme: string;
   tech: string;
   people: string[];
   date: Date;
@@ -47,6 +49,7 @@ function App() {
   const [formData] = useState<Data>({
     name: "Diego",
     profile: "CTO na Rocketseat",
+    theme: "",
     tech: "node",
     people: ["1", "3"],
     date: new Date(),
@@ -70,6 +73,16 @@ function App() {
     >
       <Input name="name" label="Nome" />
       <Textarea name="profile" label="Perfil" />
+
+      <Select
+        name="theme"
+        placeholder="Selecione..."
+        options={[
+          { id: "dracula", title: "Dracula" },
+          { id: "material", title: "Material" },
+          { id: "shades-of-purple", title: "Shades of Purple" }
+        ]}
+      />
 
       <ReactSelect
         name="tech"
