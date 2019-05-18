@@ -1,14 +1,17 @@
-### Changes Proposed in this Pull Request:
-*
-*
+<!-- If this is your first time, please read our contribution guidelines: (https://github.com/Rocketseat/unform/blob/master/.github/CONTRIBUTING.md) -->
 
-### Fix Issue (Optional):
-*
+<!-- Verify first that your pull request is not already proposed -->
 
-### Additional Information (Optional)
-*
+<!-- Refrain from using any language other than English -->
 
-IMPORTANT NOTES: (You can remove this section)
-- Please do not remove the 3 headings above (Changes Proposed, Fix Issue, Additional Info). Just fill in what is needed.
-- Please write only in English
-- Make sure you are following our [commit message guidelines](https://github.com/moiseshilario/unform/blob/master/.github/CONTRIBUTING.md#commiting)
+<!-- Ensure you have added or ran the appropriate tests for your PR -->
+
+<!-- If possible complete *all* sections as described. Don't remove any section. -->
+
+**Changes proposed**
+<!--- Describe the change below, including rationale and design decisions -->
+
+<!--- Include "Fixes #[issue_number]" if you are fixing an existing issue -->
+
+**Additional context**
+<!-- Add any other context or screenshots about the feature request here. -->
