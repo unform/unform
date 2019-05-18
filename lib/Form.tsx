@@ -9,12 +9,16 @@ interface Context {
   [key: string]: any;
 }
 
-interface FormContent {
-  [key: string]: string;
-}
-
 interface Helpers {
   resetForm: () => void;
+}
+
+interface FormContent {
+  [key: string]: any;
+}
+
+export interface SubmitHandler<T = FormContent> {
+  (data: T, helpers: Helpers): void;
 }
 
 interface Props {
@@ -22,7 +26,7 @@ interface Props {
   children: React.ReactNode;
   context?: Context;
   schema?: ObjectSchema<object>;
-  onSubmit: (data: FormContent, helpers: Helpers) => void;
+  onSubmit: SubmitHandler;
 }
 
 export default function Form({
