@@ -1,0 +1,54 @@
+Form{
+    width: 100%;
+    margin: auto;
+}
+
+Input{
+    width: 90%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+    border:1px solid #ccc;
+    box-shadow: 2px 2px 2px rgb(0, 0, 0, .2);
+}
+
+Input:focus{
+    box-shadow: 2px 2px 2px rgb(0, 0, 0, .3);
+}
+
+label{
+    color: #666;
+}
+
+Textarea{
+    width: 90%;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border:1px solid #ccc;
+    box-shadow: 2px 2px 2px rgb(0, 0, 0, .2);
+}
+
+Textarea:focus{
+    box-shadow: 2px 2px 2px rgb(0, 0, 0, .3);
+    height: 200px;
+}
+
+
+button{
+    padding: 10px;
+    background: #f2f2f2;
+    border: 1px solid #f2f2f2;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button:hover{
+    background: #999;
+    border: 1px solid #999;
+    color: white;
+}
