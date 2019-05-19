@@ -3,7 +3,7 @@ import React, { FormEvent, useState, CSSProperties } from "react";
 import { ObjectSchema, ValidationError } from "yup";
 
 import FormContext from "./Context";
-import { Field, Errors } from "./types";
+import { UnformErrors, UnformField } from "./types";
 
 interface Context {
   [key: string]: any;
@@ -32,8 +32,8 @@ export default function Form({
   context = {},
   onSubmit
 }: FormProps) {
-  const [errors, setErrors] = useState<Errors>({});
-  const [fields, setFields] = useState<Field[]>([]);
+  const [errors, setErrors] = useState<UnformErrors>({});
+  const [fields, setFields] = useState<UnformField[]>([]);
 
   function parseFormData() {
     const data = {};
@@ -81,7 +81,7 @@ export default function Form({
       setErrors({});
       onSubmit(data, { resetForm });
     } catch (err) {
-      const validationErrors: Errors = {};
+      const validationErrors: UnformErrors = {};
 
       /* istanbul ignore next  */
       if (!err.inner) {
@@ -96,7 +96,7 @@ export default function Form({
     }
   }
 
-  function registerField(field: Field) {
+  function registerField(field: UnformField) {
     setFields(state => [...state, field]);
   }
 

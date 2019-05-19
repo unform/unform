@@ -2,12 +2,12 @@ import React, { useContext, ReactNode } from "react";
 
 import FormContext from "./Context";
 
-interface Props {
+export interface ScopeProps {
   path: string;
   children: ReactNode;
 }
 
-export default function Scope({ path, children }: Props) {
+export default function Scope({ path, children }: ScopeProps) {
   const { scopePath, ...form } = useContext(FormContext);
 
   return (
