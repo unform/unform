@@ -269,7 +269,7 @@ function App() {
 
 Sometimes we need to use third-party component in our forms. But don't you worry, Unform has your back! You can do that via `useField` which provides all the resources you need to use your component with Unform.
 
-Below are some examples with [react-select](https://github.com/JedWatson/react-select) and [react-datepicker](https://github.com/Hacker0x01/react-datepicker/).
+Below are some examples with [react-select](https://github.com/JedWatson/react-select), [react-datepicker](https://github.com/Hacker0x01/react-datepicker/) and [react-tag-input](https://github.com/prakhar1989/react-tags).
 
 ### React select
 
@@ -373,6 +373,68 @@ export default function DatePicker({ name }) {
         name={fieldName}
         selected={selected}
         onChange={date => setSelected(date)}
+        ref={ref}
+      />
+      {error && <span>{error}</span>}
+    </>
+  );
+}
+
+```
+
+### React Tags
+
+```js
+import React, { useState, useEffect, useRef } from "react";
+import { WithContext as ReactTagInput } from "react-tag-input";
+import { useField } from "@rocketseat/unform";
+
+const KeyCodes = {
+  COMMA: 188,
+  ENTER: 13,
+  SPACE: 32,
+  TAB: 9
+};
+
+const delimiters = [
+  KeyCodes.COMMA,
+  KeyCodes.ENTER,
+  KeyCodes.SPACE,
+  KeyCodes.TAB
+];
+
+export default function TagInput({ name }) {
+  const ref = useRef(null);
+  const { fieldName, registerField, error } = useField(name);
+  const [tags, setTags] = useState([]);
+
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: ref.current,
+      path: "tags",
+      parseValue: () => tags.map(item => item.text)
+    });
+  }, [fieldName, tags]);
+
+  function handleDelete(i) {
+    setTags([...tags.filter((_, index) => index !== i)]);
+  }
+
+  function handleAddition(tag) {
+    setTags([...tags, tag]);
+  }
+
+  return (
+    <>
+      <ReactTagInput
+        tags={tags}
+        name={name}
+        handleDelete={handleDelete}
+        handleAddition={handleAddition}
+        delimiters={delimiters}
+        allowDragDrop={false}
+        allowDeleteFromEmptyInput={false}
         ref={ref}
       />
       {error && <span>{error}</span>}

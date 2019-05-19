@@ -13,15 +13,19 @@
     "immutability-helper": "^3.0.0",
     "react": "link:../node_modules/react",
     "react-datepicker": "^2.5.0",
+    "react-dnd": "^7.4.5",
+    "react-dnd-html5-backend": "^7.4.4",
     "react-dom": "link:../node_modules/react-dom",
     "react-hot-loader": "^4.8.4",
     "react-select": "^2.4.3",
+    "react-tag-input": "^6.4.0",
     "unform": "link:..",
     "yup": "^0.27.0"
   },
   "devDependencies": {
     "@types/react-datepicker": "^2.3.0",
     "@types/react-select": "^2.0.17",
+    "@types/react-tag-input": "^6.1.0",
     "rollup-plugin-terser": "^4.0.4"
   }
 }

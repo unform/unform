@@ -5,12 +5,14 @@ import * as Yup from "yup";
 import { Form, Input, Textarea, Select, Scope } from "../../lib";
 import DatePicker from "./components/DatePicker";
 import ReactSelect from "./components/ReactSelect";
+import TagsInput from "./components/TagsInput";
 
 const schema = Yup.object().shape({
   name: Yup.string().required(),
   profile: Yup.string().required(),
   tech: Yup.string().required(),
   date: Yup.date().required(),
+  technologies: Yup.array().required(),
   people: Yup.array(Yup.string())
     .min(2)
     .required(),
@@ -34,6 +36,7 @@ interface Data {
   tech: string;
   people: string[];
   date: Date;
+  technologies: any[],
   billingAddress: {
     number: number;
   };
@@ -50,6 +53,10 @@ function App() {
     tech: "node",
     people: ["1", "3"],
     date: new Date(),
+    technologies: [
+      { id: "ReactJs", text: "ReactJs" },
+      { id: "Nodejs", text: "Nodejs" }
+    ],
     billingAddress: {
       number: 833
     }
@@ -91,6 +98,10 @@ function App() {
       />
 
       <DatePicker name="date" />
+
+      <h2>Tecnologias</h2>
+
+      <TagsInput name="technologies" placeholder="Inclua as tecnologias" />
 
       <h2>Endereço</h2>
 
