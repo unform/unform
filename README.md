@@ -8,25 +8,13 @@
 Create ReactJS uncontrolled form structures with nested fields, validations and much more! 🚀
 </h3>
 
-<p align="center">
+<div align="center">
 
-<img alt="npm" src="https://img.shields.io/npm/v/@rocketseat/unform.svg">
+[![npm](https://img.shields.io/npm/v/@rocketseat/unform.svg?color=%237159c1)](https://www.npmjs.com/package/@rocketseat/unform)<space><space>
+[![Travis (.org)](https://img.shields.io/travis/rocketseat/unform.svg?color=%237159c1)](https://travis-ci.org/Rocketseat/unform)<space><space>
+[![Coverage Status](https://img.shields.io/coveralls/github/Rocketseat/unform.svg?color=%237159c1)](https://coveralls.io/github/Rocketseat/unform?branch=master)
 
-<img alt="dependencies" src="https://travis-ci.org/Rocketseat/unform.svg?branch=master">
-
-</p>
-
-<p align="center">
-	<strong>
-		<a href="#key-features">Key features</a>
-		•
-		<a href="#installation">Installation</a>
-		•
-		<a href="#table-of-contents">Guides</a>
-		•
-		<a href="#contribute">Contribute</a>
-	</strong>
-</p>
+</div>
 
 ## Overview
 
@@ -65,6 +53,7 @@ yarn add @rocketseat/unform
 
 - [Guides](#guides)
   - [Basics](#basics)
+  - [Reset Form](#reset-form)
   - [Nested fields](#nested-fields)
   - [Initial data](#initial-data)
   - [Validation](#validation)
@@ -81,6 +70,8 @@ yarn add @rocketseat/unform
 
 ### Basics
 
+Unform exposes three default form elements: `<Input />`, `<Select />` and `<Textarea />`. Currently, `<Select />` element does not support multiple values, you can use [React Select](#react-select) example to achieve that.
+
 ```js
 import React from "react";
 import { Form, Input } from "@rocketseat/unform";
@@ -95,6 +86,28 @@ function App() {
      *   password: "123456"
      * }
      */
+  };
+
+  return (
+    <Form onSubmit={handleSubmit}>
+      <Input name="email" />
+      <Input name="password" type="password" />
+
+      <button type="submit">Sign in</button>
+    </Form>
+  );
+}
+```
+
+### Reset form
+
+```js
+import React from "react";
+import { Form, Input } from "@rocketseat/unform";
+
+function App() {
+  function handleSubmit(data, { resetForm }) {
+    resetForm();
   };
 
   return (
@@ -261,77 +274,69 @@ Below are some examples with [react-select](https://github.com/JedWatson/react-s
 ### React select
 
 ```js
-import React, { useState } from "react";
-import { Form, useField } from "@rocketseat/unform";
-import Select from 'react-select';
+import React, { useRef, useEffect } from "react";
+import Select from "react-select";
 
-/* You can't use your component directly, you have to wrap it
-around another component, or you won't be able to use useField properly */
-function ReactSelect({ name, options, multiple }) {
+import { useField } from "@rocketseat/unform";
+
+export default function ReactSelect({
+  name,
+  label,
+  options,
+  multiple,
+  ...rest
+}) {
+  const ref = useRef(null);
   const { fieldName, registerField, defaultValue, error } = useField(name);
-  const [value, setValue] = useState(defaultValue);
 
-  function getValue() {
+  function parseSelectValue(selectValue) {
     if (!multiple) {
-      return value;
+      return selectValue ? selectValue.id : "";
     }
 
-    return value.reduce((res, item) => {
-      res.push(item.value);
-      return res;
-    }, []);
+    return selectValue ? selectValue.map(option => option.id) : [];
+  }
+
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: ref.current,
+      path: "state.value",
+      parseValue: parseSelectValue,
+      clearValue: selectRef => {
+        selectRef.select.clearValue();
+      }
+    });
+  }, [ref.current, fieldName]);
+
+  function getDefaultValue() {
+    if (!defaultValue) return null;
+
+    if (!multiple) {
+      return options.find(option => option.id === defaultValue);
+    }
+
+    return options.filter(option => defaultValue.includes(option.id));
   }
 
   return (
     <>
+      {label && <label htmlFor={fieldName}>{label}</label>}
+
       <Select
-        name="techs"
+        name={fieldName}
+        aria-label={fieldName}
         options={options}
         isMulti={multiple}
-        value={value}
-        onChange={data => setValue(data)}
-        ref={() => registerField({ name: fieldName, ref: getValue })}
+        defaultValue={getDefaultValue()}
+        ref={ref}
+        getOptionValue={option => option.id}
+        getOptionLabel={option => option.title}
+        {...rest}
       />
 
       {error && <span>{error}</span>}
     </>
-  )
-}
-
-function App() {
-  const techs = [
-    { value: "react", label: "ReactJS" },
-    { value: "node", label: "NodeJS" },
-    { value: "rn", label: "React Native" }
-  ];
-
-  const colors = [
-    { value: "red", label: "Red" },
-    { value: "green", label: "Green" },
-    { value: "blue", label: "Blue" }
-  ]
-
-  const initialData = {
-    color: { value: 'green', label: 'Green' },
-    techs: [
-      {
-        value: 'react', label: 'ReactJS'
-      },
-    ],
-  }
-
-  function handleSubmit(data) {};
-
-  return (
-    <Form initialData={initialData} onSubmit={handleSubmit}>
-      <ReactSelect options={colors} name="color" />
-
-      <br />
-
-      <ReactSelect options={techs} name="techs" multiple />
-
-      <button type="submit">Save</button>
-    </Form>
   );
 }
 ```
@@ -339,45 +344,42 @@ function App() {
 ### React datepicker
 
 ```js
-import React, { useState } from "react";
-import { Form, useField } from "@rocketseat/unform";
-import DatePicker from 'react-datepicker';
+import React, { useRef, useEffect, useState } from "react";
+import ReactDatePicker from "react-datepicker";
 
-import 'react-datepicker/dist/react-datepicker.css';
+import { useField } from "@rocketseat/unform";
 
-/* You can't use your component directly, you have to wrap it
-around another component, or you won't be able to use useField properly */
-function ReactDate({ name }) {
+import "react-datepicker/dist/react-datepicker.css";
+
+export default function DatePicker({ name }) {
+  const ref = useRef(null);
   const { fieldName, registerField, defaultValue, error } = useField(name);
-  const [value, setValue] = useState(defaultValue);
+  const [selected, setSelected] = useState(defaultValue);
 
-  function getValue() {
-    return value;
-  }
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: ref.current,
+      path: "props.selected",
+      clearValue: pickerRef => {
+        pickerRef.clear();
+      }
+    });
+  }, [ref.current, fieldName]);
 
   return (
     <>
-      <DatePicker
-        selected={value}
-        onChange={data => setValue(data)}
-        ref={() => registerField({ name: fieldName, ref: getValue })}
+      <ReactDatePicker
+        name={fieldName}
+        selected={selected}
+        onChange={date => setSelected(date)}
+        ref={ref}
       />
       {error && <span>{error}</span>}
     </>
-  )
-}
-
-function App() {
-  function handleSubmit(data) {};
-
-  return (
-    <Form onSubmit={handleSubmit}>
-      <ReactDate name="birthday" />
-
-      <button type="submit">Save</button>
-    </Form>
   );
 }
+
 ```
 
 ## Contributing

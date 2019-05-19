@@ -1,4 +1,4 @@
-import React, { TextareaHTMLAttributes } from "react";
+import React, { TextareaHTMLAttributes, useEffect, useRef } from "react";
 
 import useField from "../useField";
 
@@ -8,11 +8,14 @@ interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 }
 
 export default function Textarea({ name, label, ...rest }: Props) {
+  const ref = useRef<HTMLTextAreaElement>(null);
   const { fieldName, registerField, defaultValue, error } = useField(name);
 
-  function register(ref: HTMLTextAreaElement) {
-    registerField({ name: fieldName, ref, path: "value" });
-  }
+  useEffect(() => {
+    if (ref.current) {
+      registerField({ name: fieldName, ref: ref.current, path: "value" });
+    }
+  }, [ref.current, fieldName]);
 
   return (
     <>
@@ -20,7 +23,7 @@ export default function Textarea({ name, label, ...rest }: Props) {
 
       <textarea
         {...rest}
-        ref={register}
+        ref={ref}
         id={fieldName}
         name={fieldName}
         aria-label={fieldName}
