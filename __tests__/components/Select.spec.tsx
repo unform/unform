@@ -1,79 +1,82 @@
-import React from "react";
-import "react-testing-library/cleanup-after-each";
-import "jest-dom/extend-expect";
-import { act, render, fireEvent, wait } from "react-testing-library";
-import * as Yup from "yup";
+import React from 'react'
+import 'react-testing-library/cleanup-after-each'
+import 'jest-dom/extend-expect'
+import {act, render, fireEvent, wait} from 'react-testing-library'
+import * as Yup from 'yup'
 
-import { Form, Select } from "../../lib";
+import {Form, Select} from '../../lib'
 
-describe("Form", () => {
-  it("should display label", () => {
-    const { getByText } = render(
+describe('Form', () => {
+  it('should display label', () => {
+    const {getByText} = render(
       <Form onSubmit={jest.fn()}>
-        <Select
-          options={[{ id: "node", title: "NodeJS" }]}
-          name="tech"
-          label="Tech"
-        />
-      </Form>
-    );
+        <Select options={[{id: 'node', title: 'NodeJS'}]} name="tech" label="Tech" />
+      </Form>,
+    )
 
-    expect(!!getByText("Tech")).toBe(true);
-  });
+    expect(!!getByText('Tech')).toBe(true)
+  })
 
-  it("should display error", async () => {
+  it('should display error on submit', async () => {
     const schema = Yup.object().shape({
-      tech: Yup.string().required("Tech is required")
-    });
+      tech: Yup.string().required('Tech is required'),
+    })
 
-    const { getByText, getByTestId } = render(
+    const {getByText, getByTestId} = render(
       <Form schema={schema} onSubmit={jest.fn()}>
-        <Select
-          options={[{ id: "node", title: "NodeJS" }]}
-          name="tech"
-          label="Tech"
-        />
-      </Form>
-    );
+        <Select options={[{id: 'node', title: 'NodeJS'}]} name="tech" label="Tech" />
+      </Form>,
+    )
 
     act(() => {
-      fireEvent.submit(getByTestId("form"));
-    });
+      fireEvent.submit(getByTestId('form'))
+    })
 
-    await wait(() => expect(!!getByText("Tech is required")).toBe(true));
-  });
+    await wait(() => expect(!!getByText('Tech is required')).toBe(true))
+  })
 
-  it("should return correct selected value", () => {
-    const submitMock = jest.fn();
+  it('should display error on blur', async () => {
+    const schema = Yup.object().shape({
+      tech: Yup.string().required('Tech is required'),
+    })
 
-    const { getByTestId, getByLabelText } = render(
+    const {getByText, getByLabelText} = render(
+      <Form schema={schema} onSubmit={jest.fn()}>
+        <Select options={[{id: 'node', title: 'NodeJS'}]} name="tech" label="Tech" validateOnBlur />
+      </Form>,
+    )
+
+    act(() => {
+      fireEvent.blur(getByLabelText(/tech/i))
+    })
+
+    await wait(() => expect(!!getByText('Tech is required')).toBe(true))
+  })
+
+  it('should return correct selected value', () => {
+    const submitMock = jest.fn()
+
+    const {getByTestId, getByLabelText} = render(
       <Form onSubmit={submitMock}>
-        <Select
-          options={[
-            { id: "node", title: "NodeJS" },
-            { id: "react", title: "ReactJS" }
-          ]}
-          name="tech"
-          label="Tech"
-        />
-      </Form>
-    );
+        <Select options={[{id: 'node', title: 'NodeJS'}, {id: 'react', title: 'ReactJS'}]} name="tech" label="Tech" />
+      </Form>,
+    )
 
     act(() => {
-      fireEvent.change(getByLabelText("tech"), { target: { value: "react" } });
-    });
+      fireEvent.change(getByLabelText('tech'), {target: {value: 'react'}})
+    })
 
-    fireEvent.submit(getByTestId("form"));
+    fireEvent.submit(getByTestId('form'))
 
     expect(submitMock).toHaveBeenCalledWith(
       {
-        tech: "react"
+        tech: 'react',
       },
       {
-        resetForm: expect.any(Function)
-      }
-    );
-  });
+        resetForm: expect.any(Function),
+      },
+    )
+  })
 
   // it("should be able to return multiple values", () => {
   //   const submitMock = jest.fn();
@@ -104,4 +107,4 @@ describe("Form", () => {
   //     tech: ["node", "react"]
   //   });
   // });
-});
+})
