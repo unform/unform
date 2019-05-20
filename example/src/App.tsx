@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { hot } from "react-hot-loader/root";
 import * as Yup from "yup";
 
-import { Form, Input, Textarea, Select, Scope } from "../../lib";
+import { Form, Input, Select, Scope } from "../../lib";
 import DatePicker from "./components/DatePicker";
 import ReactSelect from "./components/ReactSelect";
 
@@ -69,7 +69,7 @@ function App() {
       onSubmit={handleSubmit}
     >
       <Input name="name" label="Nome" />
-      <Textarea name="profile" label="Perfil" />
+      <Input multiline name="profile" label="Perfil" />
 
       <ReactSelect
         name="tech"

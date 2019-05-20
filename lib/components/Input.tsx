@@ -1,14 +1,23 @@
-import React, { InputHTMLAttributes, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 import useField from "../useField";
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
+interface Props<T> {
   name: string;
   label?: string;
+  multiline?: T;
 }
 
-export default function Input({ name, label, ...rest }: Props) {
-  const ref = useRef<HTMLInputElement>(null);
+type InputProps = JSX.IntrinsicElements["input"] & Props<true>;
+type TextAreaProps = JSX.IntrinsicElements["textarea"] & Props<false>;
+
+export default function Input({
+  name,
+  label,
+  multiline = false,
+  ...rest
+}: InputProps | TextAreaProps) {
+  const ref = useRef<HTMLInputElement | HTMLTextAreaElement>(null);
   const { fieldName, registerField, defaultValue, error } = useField(name);
 
   useEffect(() => {
@@ -17,18 +26,24 @@ export default function Input({ name, label, ...rest }: Props) {
     }
   }, [ref.current, fieldName]);
 
+  const props = {
+    ...rest,
+    ref,
+    id: fieldName,
+    name: fieldName,
+    "aria-label": fieldName,
+    defaultValue
+  };
+
   return (
     <>
       {label && <label htmlFor={fieldName}>{label}</label>}
 
-      <input
-        {...rest}
-        ref={ref}
-        id={fieldName}
-        name={fieldName}
-        aria-label={fieldName}
-        defaultValue={defaultValue}
-      />
+      {multiline ? (
+        <textarea {...props as TextAreaProps} />
+      ) : (
+        <input {...props as InputProps} />
+      )}
 
       {error && <span>{error}</span>}
     </>
