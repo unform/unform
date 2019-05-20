@@ -106,8 +106,9 @@ export default function Form({
     }
   }
 
-  function registerField(field: UnformField) {
-    setFields(state => [...state, field]);
+  function registerField(field: Field) {
+    if (!fields.find(f => f.name === field.name))
+      setFields(state => [...state, field]);
   }
 
   function unregisterField(name: string) {
