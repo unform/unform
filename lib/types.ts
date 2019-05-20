@@ -1,7 +1,8 @@
 export interface UnformField {
   name: string;
-  ref?: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
+  ref?: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement | (HTMLInputElement | null)[];
   path: string;
+  getValues?: Function;
   parseValue?: Function;
   clearValue?: Function;
 }

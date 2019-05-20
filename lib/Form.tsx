@@ -47,9 +47,9 @@ export default function Form({
     const data = {};
 
     fields.forEach(({
- name, ref, path, parseValue,
+ name, ref, path, parseValue, getValues,
 }) => {
-      const value = dot.pick(path, ref);
+      const value = getValues ? getValues(ref) : dot.pick(path, ref);
 
       data[name] = parseValue ? parseValue(value) : value;
     });
@@ -106,9 +106,8 @@ export default function Form({
     }
   }
 
-  function registerField(field: Field) {
-    if (!fields.find(f => f.name === field.name))
-      setFields(state => [...state, field]);
+  function registerField(field: UnformField) {
+    if (!fields.find(f => f.name === field.name)) setFields(state => [...state, field]);
   }
 
   function unregisterField(name: string) {
@@ -125,12 +124,7 @@ export default function Form({
         unregisterField,
       }}
     >
-      <form
-        data-testid="form"
-        style={style}
-        className={className}
-        onSubmit={handleSubmit}
-      >
+      <form data-testid="form" style={style} className={className} onSubmit={handleSubmit}>
         {children}
       </form>
     </FormContext.Provider>
