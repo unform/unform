@@ -1,7 +1,7 @@
-import React, { useRef, useEffect } from "react";
-import Select from "react-select";
+import React, { useRef, useEffect } from 'react';
+import Select from 'react-select';
 
-import { useField } from "../../../lib";
+import { useField } from '../../../lib';
 
 interface Option {
   id: string;
@@ -23,11 +23,13 @@ export default function ReactSelect({
   ...rest
 }: Props) {
   const ref = useRef(null);
-  const { fieldName, registerField, defaultValue, error } = useField(name);
+  const {
+ fieldName, registerField, defaultValue, error,
+} = useField(name);
 
   function parseSelectValue(selectValue) {
     if (!multiple) {
-      return selectValue ? selectValue.id : "";
+      return selectValue ? selectValue.id : '';
     }
 
     return selectValue ? selectValue.map(option => option.id) : [];
@@ -37,11 +39,11 @@ export default function ReactSelect({
     registerField({
       name: fieldName,
       ref: ref.current,
-      path: "state.value",
+      path: 'state.value',
       parseValue: parseSelectValue,
-      clearValue: selectRef => {
+      clearValue: (selectRef) => {
         selectRef.select.clearValue();
-      }
+      },
     });
   }, [ref.current, fieldName]);
 

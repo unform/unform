@@ -1,6 +1,6 @@
-import React, { InputHTMLAttributes, useEffect, useRef } from "react";
+import React, { InputHTMLAttributes, useEffect, useRef } from 'react';
 
-import { useField } from "../../lib";
+import { useField } from '../../lib';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
@@ -16,9 +16,9 @@ export default function Input({ name, label, ...rest }: Props) {
       registerField({
         name: fieldName,
         ref: ref.current,
-        path: "value",
+        path: 'value',
         clearValue: (inputRef: HTMLInputElement) => {
-          inputRef.value = "test";
+          inputRef.value = 'test';
         }
       });
     }

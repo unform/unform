@@ -1,10 +1,12 @@
-import React, { useState } from "react";
-import { hot } from "react-hot-loader/root";
-import * as Yup from "yup";
+import React, { useState } from 'react';
+import { hot } from 'react-hot-loader/root';
+import * as Yup from 'yup';
 
-import { Form, Input, Textarea, Select, Scope } from "../../lib";
-import DatePicker from "./components/DatePicker";
-import ReactSelect from "./components/ReactSelect";
+import {
+ Form, Input, Select, Scope, SubmitHandler,
+} from '../../lib';
+import DatePicker from './components/DatePicker';
+import ReactSelect from './components/ReactSelect';
 
 const schema = Yup.object().shape({
   name: Yup.string().required(),
@@ -16,16 +18,16 @@ const schema = Yup.object().shape({
     .required(),
   billingAddress: Yup.object().shape({
     street: Yup.string().required(),
-    number: Yup.string().required()
+    number: Yup.string().required(),
   }),
-  shippingAddress: Yup.object().when("$useShippingAsBilling", {
+  shippingAddress: Yup.object().when('$useShippingAsBilling', {
     is: false,
     then: Yup.object().shape({
       street: Yup.string().required(),
-      number: Yup.string().required()
+      number: Yup.string().required(),
     }),
-    otherwise: Yup.object().strip(true)
-  })
+    otherwise: Yup.object().strip(true),
+  }),
 });
 
 interface Data {
@@ -41,25 +43,25 @@ interface Data {
 
 function App() {
   const [useShippingAsBilling, setUseShippingAsBilling] = useState<boolean>(
-    true
+    true,
   );
 
   const [formData] = useState<Data>({
-    name: "Diego",
-    profile: "CTO na Rocketseat",
-    tech: "node",
-    people: ["1", "3"],
+    name: 'Diego',
+    profile: 'CTO na Rocketseat',
+    tech: 'node',
+    people: ['1', '3'],
     date: new Date(),
     billingAddress: {
-      number: 833
-    }
+      number: 833,
+    },
   });
 
-  function handleSubmit(data, { resetForm }) {
+  const handleSubmit: SubmitHandler<Data> = (data, { resetForm }) => {
     console.log(data);
 
     resetForm();
-  }
+  };
 
   return (
     <Form
@@ -69,14 +71,14 @@ function App() {
       onSubmit={handleSubmit}
     >
       <Input name="name" label="Nome" />
-      <Textarea name="profile" label="Perfil" />
+      <Input multiline name="profile" label="Perfil" />
 
       <ReactSelect
         name="tech"
         options={[
-          { id: "react", title: "ReactJS" },
-          { id: "node", title: "NodeJS" },
-          { id: "rn", title: "React Native" }
+          { id: 'react', title: 'ReactJS' },
+          { id: 'node', title: 'NodeJS' },
+          { id: 'rn', title: 'React Native' },
         ]}
       />
 
@@ -84,9 +86,9 @@ function App() {
         name="people"
         multiple
         options={[
-          { id: "1", title: "Diego" },
-          { id: "2", title: "João" },
-          { id: "3", title: "Higo" }
+          { id: '1', title: 'Diego' },
+          { id: '2', title: 'João' },
+          { id: '3', title: 'Higo' },
         ]}
       />
 

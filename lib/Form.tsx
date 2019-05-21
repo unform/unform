@@ -1,9 +1,14 @@
-import dot from "dot-object";
-import React, { FormEvent, useState } from "react";
-import { ObjectSchema, ValidationError } from "yup";
+import dot from 'dot-object';
+import React, {
+  DetailedHTMLProps,
+  FormHTMLAttributes,
+  FormEvent,
+  useState
+} from 'react';
+import { ObjectSchema, ValidationError } from 'yup';
 
-import FormContext from "./Context";
-import { Field, Errors } from "./types";
+import FormContext from './Context';
+import { UnformField, UnformErrors, Omit } from './types';
 
 interface Context {
   [key: string]: any;
@@ -13,23 +18,39 @@ interface Helpers {
   resetForm: () => void;
 }
 
-interface Props {
+type HTMLFormProps = DetailedHTMLProps<
+  FormHTMLAttributes<HTMLFormElement>,
+  HTMLFormElement
+>;
+
+interface FormContent {
+  [key: string]: any;
+}
+
+export interface SubmitHandler<T = FormContent> {
+  (data: T, helpers: Helpers): void;
+}
+
+export interface FormProps extends Omit<HTMLFormProps, 'onSubmit'> {
   initialData?: object;
   children: React.ReactNode;
   context?: Context;
   schema?: ObjectSchema<object>;
-  onSubmit: (data: object, helpers: Helpers) => void;
+  onSubmit: SubmitHandler;
 }
 
-export default function Form({
-  initialData = {},
-  children,
-  schema,
-  context = {},
-  onSubmit
-}: Props) {
-  const [errors, setErrors] = useState<Errors>({});
-  const [fields, setFields] = useState<Field[]>([]);
+export default function Form(props: FormProps) {
+  const {
+    initialData = {},
+    children,
+    schema,
+    context = {},
+    onSubmit,
+    ...rest
+  } = props;
+
+  const [errors, setErrors] = useState<UnformErrors>({});
+  const [fields, setFields] = useState<UnformField[]>([]);
 
   function parseFormData() {
     const data = {};
@@ -51,7 +72,7 @@ export default function Form({
         return clearValue(ref);
       }
 
-      return dot.set(path, "", ref as object);
+      return dot.set(path, '', ref as object);
     });
   }
 
@@ -77,7 +98,7 @@ export default function Form({
       setErrors({});
       onSubmit(data, { resetForm });
     } catch (err) {
-      const validationErrors: Errors = {};
+      const validationErrors: UnformErrors = {};
 
       /* istanbul ignore next  */
       if (!err.inner) {
@@ -92,7 +113,7 @@ export default function Form({
     }
   }
 
-  function registerField(field: Field) {
+  function registerField(field: UnformField) {
     setFields(state => [...state, field]);
   }
 
@@ -105,12 +126,12 @@ export default function Form({
       value={{
         initialData,
         errors,
-        scopePath: "",
+        scopePath: '',
         registerField,
         unregisterField
       }}
     >
-      <form data-testid="form" onSubmit={handleSubmit}>
+      <form {...rest} data-testid="form" onSubmit={handleSubmit}>
         {children}
       </form>
     </FormContext.Provider>
