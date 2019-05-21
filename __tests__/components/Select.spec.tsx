@@ -41,14 +41,9 @@ describe("Form", () => {
       tech: Yup.string().required("Tech is required")
     });
 
-    const initialData = {
-      tech: ""
-    };
-
     const { getByText, getByTestId } = render(
-      <Form schema={schema} initialData={initialData} onSubmit={jest.fn()}>
+      <Form schema={schema} onSubmit={jest.fn()}>
         <Select
-          placeholder="Select..."
           options={[{ id: "node", title: "NodeJS" }]}
           name="tech"
           label="Tech"
