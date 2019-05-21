@@ -195,7 +195,7 @@ Issues and pull request can be referenced on the footer: #3 #12
 
 ### Skipping building process
 
-By default, Travis CI automatically run the building process whenever you push changes. If your commit is about documentation or meta files, you can override this behavior by adding a **[skip ci]** tag anywhere in a commit’s **footer**. This not only skips the marked commit, but also **all other commits** in the push.
+By default, Travis CI automatically runs the building process whenever you push changes. If your commit is about documentation or meta files, you can override this behavior by adding a **[skip ci]** tag anywhere in a commit’s **footer**. This not only skips the marked commit, but also **all other commits** in the push.
 
 ### Why all these rules?
 
