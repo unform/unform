@@ -156,6 +156,8 @@ function App() {
 
 ### Initial data
 
+_Optional_: Here you can set what the initial data for each field will be, you store the initial field values into a variable and load it in the `Form` using the prop `initialData`.
+
 ```js
 import React from "react";
 import { Form, Input, Scope } from "@rocketseat/unform";
