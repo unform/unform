@@ -1,7 +1,13 @@
 import React from "react";
 import "react-testing-library/cleanup-after-each";
 import "jest-dom/extend-expect";
-import { act, render, fireEvent, wait } from "react-testing-library";
+import {
+  act,
+  render,
+  fireEvent,
+  wait,
+  getByTestId
+} from "react-testing-library";
 import * as Yup from "yup";
 
 import { Form, Input, Textarea, Select, Scope } from "../lib";
@@ -185,5 +191,18 @@ describe("Form", () => {
     fireEvent.submit(getByTestId("form"));
 
     expect((getByLabelText("name") as HTMLInputElement).value).toBe("test");
+  });
+
+  it("should render form with class attribute", () => {
+    const { container } = render(
+      <Form onSubmit={jest.fn()} className="test-class">
+        <Input name="name" />
+      </Form>
+    );
+
+    expect(getByTestId(container, "form")).toHaveAttribute(
+      "class",
+      "test-class"
+    );
   });
 });
