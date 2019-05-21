@@ -1,9 +1,14 @@
 import dot from "dot-object";
-import React, { FormEvent, useState } from "react";
+import React, {
+  DetailedHTMLProps,
+  FormHTMLAttributes,
+  FormEvent,
+  useState
+} from "react";
 import { ObjectSchema, ValidationError } from "yup";
 
 import FormContext from "./Context";
-import { Field, Errors } from "./types";
+import { Field, Errors, Omit } from "./types";
 
 interface Context {
   [key: string]: any;
@@ -13,7 +18,12 @@ interface Helpers {
   resetForm: () => void;
 }
 
-interface Props {
+type FormProps = DetailedHTMLProps<
+  FormHTMLAttributes<HTMLFormElement>,
+  HTMLFormElement
+>;
+
+interface Props extends Omit<FormProps, "onSubmit"> {
   initialData?: object;
   children: React.ReactNode;
   context?: Context;
@@ -21,13 +31,16 @@ interface Props {
   onSubmit: (data: object, helpers: Helpers) => void;
 }
 
-export default function Form({
-  initialData = {},
-  children,
-  schema,
-  context = {},
-  onSubmit
-}: Props) {
+export default function Form(props: Props) {
+  const {
+    initialData = {},
+    children,
+    schema,
+    context = {},
+    onSubmit,
+    ...restProps
+  } = props;
+
   const [errors, setErrors] = useState<Errors>({});
   const [fields, setFields] = useState<Field[]>([]);
 
@@ -110,7 +123,7 @@ export default function Form({
         unregisterField
       }}
     >
-      <form data-testid="form" onSubmit={handleSubmit}>
+      <form {...restProps} data-testid="form" onSubmit={handleSubmit}>
         {children}
       </form>
     </FormContext.Provider>
