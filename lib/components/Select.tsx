@@ -21,6 +21,8 @@ export default function Select({
   options,
   ...rest
 }: Props) {
+  const defaultPlaceholderValue = "";
+  const defaultPlaceholderText = "";
   const ref = useRef<HTMLSelectElement>(null);
   const { fieldName, registerField, defaultValue, error } = useField(name);
 
@@ -39,15 +41,13 @@ export default function Select({
         multiple={false}
         id={fieldName}
         name={fieldName}
-        defaultValue={defaultValue}
+        defaultValue={defaultValue || defaultPlaceholderValue}
         aria-label={fieldName}
         ref={ref}
       >
-        {placeholder && (
-          <option value="" disabled hidden>
-            {placeholder}
-          </option>
-        )}
+        <option value={defaultPlaceholderValue} disabled hidden>
+          {placeholder || defaultPlaceholderText}
+        </option>
         {options.map(({ id, title }: Option) => (
           <option key={id} value={id}>
             {title}
