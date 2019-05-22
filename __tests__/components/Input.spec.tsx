@@ -34,4 +34,16 @@ describe("Form", () => {
 
     await wait(() => expect(!!getByText("Name is required")).toBe(true));
   });
+
+  it("should act as textarea when multiline prop is supplied", () => {
+    const { container } = render(
+      <Form onSubmit={jest.fn()}>
+        <Input name="name" label="Name" />
+        <Input name="profile" label="Profile" multiline />
+      </Form>
+    );
+
+    expect(!!container.querySelector("input[name=name]")).toBe(true);
+    expect(!!container.querySelector("textarea[name=profile]")).toBe(true);
+  });
 });
