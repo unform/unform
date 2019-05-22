@@ -7,7 +7,7 @@ interface Option {
   title: string;
 }
 
-interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
+export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   name: string;
   label?: string;
   options: Option[];
@@ -15,7 +15,7 @@ interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
 
 export default function Select({
  name, label, options, ...rest
-}: Props) {
+}: SelectProps) {
   const ref = useRef<HTMLSelectElement>(null);
   const {
  fieldName, registerField, defaultValue, error,

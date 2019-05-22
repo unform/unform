@@ -2,9 +2,9 @@
 
 import { createContext } from 'react';
 
-import { Context } from './types';
+import { UnformContext } from './types';
 
-export default createContext<Context>({
+export default createContext<UnformContext>({
   initialData: {},
   errors: {},
   scopePath: '',

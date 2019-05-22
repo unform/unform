@@ -20,6 +20,31 @@ Create ReactJS uncontrolled form structures with nested fields, validations and 
 
 Unform is a performance focused library that helps you creating beautiful forms in React with the power of uncontrolled components performance and React Hooks.
 
+## Table of contents
+
+- [Key features](#key-features)
+- [Why not Formik, Redux Form or another library?](#why-not-formik-redux-form-or-another-library)
+- [Roadmap](#roadmap)
+- [Installation](#installation)
+- [Guides](#guides)
+  - [Basics](#basics)
+  - [Elements](#elements)
+    - [Input element](#input-element)
+    - [Select element](#select-element)
+  - [Reset Form](#reset-form)
+  - [Nested fields](#nested-fields)
+  - [Initial data](#initial-data)
+  - [Validation](#validation)
+  - [Styling](#styling)
+  - [Manipulate data](#manipulate-data)
+- [Custom elements](#custom-elements)
+  - [React select](#react-select)
+  - [React datepicker](#react-datepicker)
+- [Contributing](#contributing)
+  - [Contribution Guidelines](#contribution-guidelines)
+  - [Code of Conduct](#code-of-conduct)
+- [License](#license)
+
 ## Key features
 
 - Beautiful syntax;
@@ -37,7 +62,6 @@ Formik/Redux Form has a really great syntax while it has a really poor support t
 ## Roadmap
 
 - Native checkbox/radio support;
-- Styled components support;
 - React Native support (should we?);
 - Better docs;
 
@@ -48,26 +72,6 @@ Just add unform to your project:
 ```
 yarn add @rocketseat/unform
 ```
-
-## Table of contents
-
-- [Guides](#guides)
-  - [Basics](#basics)
-  - [Elements](#elements)
-    - [Input element](#input-element)
-    - [Select element](#select-element)
-  - [Reset Form](#reset-form)
-  - [Nested fields](#nested-fields)
-  - [Initial data](#initial-data)
-  - [Validation](#validation)
-  - [Manipulate data](#manipulate-data)
-  - [Custom Elements](#custom-elements)
-    - [React Select](#react-select)
-    - [React Datepicker](#react-datepicker)
-- [Contributing](#contributing)
-  - [Contribution Guidelines](#contributing-guide)
-  - [Code of Conduct](#code-of-conduct)
-- [License](#license)
 
 ## Guides
 
@@ -269,6 +273,19 @@ function App() {
     </Form>
   );
 }
+```
+
+### Styling
+
+The `Form` component exposes two props for that: `style` and `className`. You can use any `CSS-in-JS` library to style your form or just pass the class name string, or even the `style` object directly! For example:
+
+```js
+import styled from 'styled-components'; // or emotion, for example
+
+// weird choice for a background color, huh?
+export default styled(MyForm)`
+  background: red;
+`;
 ```
 
 ### Manipulate data
