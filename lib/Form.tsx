@@ -1,9 +1,9 @@
-import dot from "dot-object";
-import React, { FormEvent, useState, CSSProperties } from "react";
-import { ObjectSchema, ValidationError } from "yup";
+import dot from 'dot-object';
+import React, { FormEvent, useState, CSSProperties } from 'react';
+import { ObjectSchema, ValidationError } from 'yup';
 
-import FormContext from "./Context";
-import { UnformErrors, UnformField } from "./types";
+import FormContext from './Context';
+import { UnformErrors, UnformField } from './types';
 
 interface Context {
   [key: string]: any;
@@ -38,7 +38,7 @@ export default function Form({
   className,
   schema,
   context = {},
-  onSubmit
+  onSubmit,
 }: FormProps) {
   const [errors, setErrors] = useState<UnformErrors>({});
   const [fields, setFields] = useState<UnformField[]>([]);
@@ -46,7 +46,9 @@ export default function Form({
   function parseFormData() {
     const data = {};
 
-    fields.forEach(({ name, ref, path, parseValue }) => {
+    fields.forEach(({
+ name, ref, path, parseValue,
+}) => {
       const value = dot.pick(path, ref);
 
       data[name] = parseValue ? parseValue(value) : value;
@@ -63,7 +65,7 @@ export default function Form({
         return clearValue(ref);
       }
 
-      return dot.set(path, "", ref as object);
+      return dot.set(path, '', ref as object);
     });
   }
 
@@ -77,12 +79,12 @@ export default function Form({
         await schema.validate(data, {
           abortEarly: false,
           stripUnknown: true,
-          context
+          context,
         });
 
         data = schema.cast(data, {
           stripUnknown: true,
-          context
+          context,
         });
       }
 
@@ -117,9 +119,9 @@ export default function Form({
       value={{
         initialData,
         errors,
-        scopePath: "",
+        scopePath: '',
         registerField,
-        unregisterField
+        unregisterField,
       }}
     >
       <form

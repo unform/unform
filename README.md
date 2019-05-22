@@ -90,7 +90,7 @@ function App() {
     /**
      * {
      *   email: 'email@example.com',
-     *   password: "123456"
+     *   password: '123456'
      * }
      */
   }
