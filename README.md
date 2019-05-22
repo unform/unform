@@ -135,9 +135,9 @@ import React from 'react';
 import { Form, Select } from '@rocketseat/unform';
 
 const options = [
-  { id: 'react', title: 'ReactJS' },
-  { id: 'node', title: 'NodeJS' },
-  { id: 'rn', title: 'React Native' },
+  { id: "react", title: "ReactJS" },
+  { id: "node", title: "NodeJS" },
+  { id: "rn", title: "React Native" },
 ];
 
 function App() {
@@ -218,9 +218,9 @@ import { Form, Input, Scope } from '@rocketseat/unform';
 
 function App() {
   const initialData = {
-    name: 'John Doe',
+    name: "John Doe",
     address: {
-      street: 'Sample Avenue',
+      street: "Sample Avenue",
     },
   };
 
@@ -250,8 +250,8 @@ import * as Yup from 'yup';
 
 const schema = Yup.object().shape({
   email: Yup.string()
-    .email('Custom invalid email message')
-    .required('Custom required message'),
+    .email("Custom invalid email message")
+    .required("Custom required message"),
   password: Yup.string()
     .min(4)
     .required(),
@@ -283,7 +283,7 @@ const schema = Yup.object().shape({
   email: Yup.string()
     .email()
     .required(),
-  password: Yup.string().when('$updatePassword', {
+  password: Yup.string().when("$updatePassword", {
     is: true,
     then: Yup.string()
       .min(4)
@@ -296,8 +296,8 @@ function App() {
   const [updatePassword, setUpdatePassword] = useState(false);
 
   const initialData = {
-    name: 'John Doe',
-    email: 'johndoe@example.com',
+    name: "John Doe",
+    email: "johndoe@example.com",
   };
 
   function handleSubmit(data) {}
@@ -353,7 +353,7 @@ export default function ReactSelect({
 
   function parseSelectValue(selectValue) {
     if (!multiple) {
-      return selectValue ? selectValue.id : '';
+      return selectValue ? selectValue.id : "";
     }
 
     return selectValue ? selectValue.map(option => option.id) : [];
@@ -363,7 +363,7 @@ export default function ReactSelect({
     registerField({
       name: fieldName,
       ref: ref.current,
-      path: 'state.value',
+      path: "state.value",
       parseValue: parseSelectValue,
       clearValue: selectRef => {
         selectRef.select.clearValue();
@@ -422,7 +422,7 @@ export default function DatePicker({ name }) {
     registerField({
       name: fieldName,
       ref: ref.current,
-      path: 'props.selected',
+      path: "props.selected",
       clearValue: pickerRef => {
         pickerRef.clear();
       },
