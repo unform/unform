@@ -13,6 +13,14 @@ interface Helpers {
   resetForm: () => void;
 }
 
+interface FormContent {
+  [key: string]: any;
+}
+
+export interface SubmitHandler<T = FormContent> {
+  (data: T, helpers: Helpers): void;
+}
+
 export interface FormProps {
   initialData?: object;
   children: React.ReactNode;
@@ -20,7 +28,7 @@ export interface FormProps {
   className?: string;
   style?: CSSProperties;
   schema?: ObjectSchema<object>;
-  onSubmit: (data: object, helpers: Helpers) => void;
+  onSubmit: SubmitHandler;
 }
 
 export default function Form({
