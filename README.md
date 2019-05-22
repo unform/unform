@@ -89,7 +89,7 @@ function App() {
      *   password: '123456'
      * }
      */
-  };
+  }
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -115,7 +115,7 @@ import React from 'react';
 import { Form, Input } from '@rocketseat/unform';
 
 function App() {
-  function handleSubmit(data) {};
+  function handleSubmit(data) {}
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -137,11 +137,11 @@ import { Form, Select } from '@rocketseat/unform';
 const options = [
   { id: 'react', title: 'ReactJS' },
   { id: 'node', title: 'NodeJS' },
-  { id: 'rn', title: 'React Native' }
+  { id: 'rn', title: 'React Native' },
 ];
 
 function App() {
-  function handleSubmit(data) {};
+  function handleSubmit(data) {}
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -162,7 +162,7 @@ import { Form, Input } from '@rocketseat/unform';
 function App() {
   function handleSubmit(data, { resetForm }) {
     resetForm();
-  };
+  }
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -191,7 +191,7 @@ function App() {
      *   address: { street: "Name of street", number: 123 }
      * }
      */
-  };
+  }
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -222,9 +222,9 @@ function App() {
     address: {
       street: 'Sample Avenue',
     },
-  }
+  };
 
-  function handleSubmit(data) {};
+  function handleSubmit(data) {}
 
   return (
     <Form onSubmit={handleSubmit} initialData={initialData}>
@@ -252,11 +252,13 @@ const schema = Yup.object().shape({
   email: Yup.string()
     .email('Custom invalid email message')
     .required('Custom required message'),
-  password: Yup.string().min(4).required(),
-})
+  password: Yup.string()
+    .min(4)
+    .required(),
+});
 
 function App() {
-  function handleSubmit(data) {};
+  function handleSubmit(data) {}
 
   return (
     <Form schema={schema} onSubmit={handleSubmit}>
@@ -278,13 +280,17 @@ import * as Yup from 'yup';
 
 const schema = Yup.object().shape({
   name: Yup.string().required(),
-  email: Yup.string().email().required(),
+  email: Yup.string()
+    .email()
+    .required(),
   password: Yup.string().when('$updatePassword', {
     is: true,
-    then: Yup.string().min(4).required(),
-    otherwise: Yup.string().strip(true)
+    then: Yup.string()
+      .min(4)
+      .required(),
+    otherwise: Yup.string().strip(true),
   }),
-})
+});
 
 function App() {
   const [updatePassword, setUpdatePassword] = useState(false);
@@ -292,9 +298,9 @@ function App() {
   const initialData = {
     name: 'John Doe',
     email: 'johndoe@example.com',
-  }
+  };
 
-  function handleSubmit(data) {};
+  function handleSubmit(data) {}
 
   return (
     <Form
@@ -361,7 +367,7 @@ export default function ReactSelect({
       parseValue: parseSelectValue,
       clearValue: selectRef => {
         selectRef.select.clearValue();
-      }
+      },
     });
   }, [ref.current, fieldName]);
 
@@ -419,7 +425,7 @@ export default function DatePicker({ name }) {
       path: 'props.selected',
       clearValue: pickerRef => {
         pickerRef.clear();
-      }
+      },
     });
   }, [ref.current, fieldName]);
 
@@ -435,7 +441,6 @@ export default function DatePicker({ name }) {
     </>
   );
 }
-
 ```
 
 ## Contributing
