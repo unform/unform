@@ -10,7 +10,7 @@ import {
 } from "react-testing-library";
 import * as Yup from "yup";
 
-import { Form, Input, Textarea, Select, Scope } from "../lib";
+import { Form, Input, Select, Scope } from "../lib";
 import CustomInputClear from "./utils/CustomInputClear";
 import CustomInputParse from "./utils/CustomInputParse";
 
@@ -19,7 +19,7 @@ describe("Form", () => {
     const { container } = render(
       <Form onSubmit={jest.fn()}>
         <Input name="name" />
-        <Textarea name="bio" />
+        <Input multiline name="bio" />
         <Select name="tech" options={[{ id: "node", title: "Node" }]} />
       </Form>
     );

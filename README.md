@@ -53,6 +53,9 @@ yarn add @rocketseat/unform
 
 - [Guides](#guides)
   - [Basics](#basics)
+  - [Elements](#elements)
+    - [Input element](#input-element)
+    - [Select element](#select-element)
   - [Reset Form](#reset-form)
   - [Nested fields](#nested-fields)
   - [Initial data](#initial-data)
@@ -70,7 +73,7 @@ yarn add @rocketseat/unform
 
 ### Basics
 
-Unform exposes three default form elements: `<Input />`, `<Select />` and `<Textarea />`. Currently, `<Select />` element does not support multiple values, you can use [React Select](#react-select) example to achieve that.
+Unform exposes two default form elements: `<Input />` and `<Select />`. Currently, `<Select />` element does not support multiple values, you can use [React Select](#react-select) example to achieve that.
 
 ```js
 import React from "react";
@@ -94,6 +97,57 @@ function App() {
       <Input name="password" type="password" />
 
       <button type="submit">Sign in</button>
+    </Form>
+  );
+}
+```
+
+### Elements
+
+Unform exposes two elements by default, Input and Select.
+
+#### Input element
+
+Input elements can receive a `multiline` prop that will render a textarea instead.
+
+```js
+import React from "react";
+import { Form, Input } from "@rocketseat/unform";
+
+function App() {
+  function handleSubmit(data) {};
+
+  return (
+    <Form onSubmit={handleSubmit}>
+      <Input name="name" />
+      <Input multiline name="bio" />
+
+      <button type="submit">Send</button>
+    </Form>
+  );
+}
+```
+
+#### Select element
+
+```js
+import React from "react";
+import { Form, Select } from "@rocketseat/unform";
+
+const options = [
+  { id: "react", title: "ReactJS" },
+  { id: "node", title: "NodeJS" },
+  { id: "rn", title: "React Native" }
+];
+
+function App() {
+  function handleSubmit(data) {};
+
+  return (
+    <Form onSubmit={handleSubmit}>
+      <Select name="tech" options={options} />
+
+      <button type="submit">Send</button>
     </Form>
   );
 }
@@ -155,6 +209,8 @@ function App() {
 ```
 
 ### Initial data
+
+_Optional_: Here you can set what the initial data for each field will be, you store the initial field values into a variable and load it in the `Form` using the prop `initialData`.
 
 ```js
 import React from "react";
