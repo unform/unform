@@ -1,6 +1,6 @@
-import React, { useContext, ReactNode } from "react";
+import React, { useContext, ReactNode } from 'react';
 
-import FormContext from "./Context";
+import FormContext from './Context';
 
 interface Props {
   path: string;
@@ -14,7 +14,7 @@ export default function Scope({ path, children }: Props) {
     <FormContext.Provider
       value={{
         ...form,
-        scopePath: scopePath.concat(scopePath ? `.${path}` : path)
+        scopePath: scopePath.concat(scopePath ? `.${path}` : path),
       }}
     >
       {children}
