@@ -20,6 +20,31 @@ Create ReactJS uncontrolled form structures with nested fields, validations and 
 
 Unform is a performance focused library that helps you creating beautiful forms in React with the power of uncontrolled components performance and React Hooks.
 
+## Table of contents
+
+- [Key features](#key-features)
+- [Why not Formik, Redux Form or another library?](#why-not-formik-redux-form-or-another-library)
+- [Roadmap](#roadmap)
+- [Installation](#installation)
+- [Guides](#guides)
+  - [Basics](#basics)
+  - [Elements](#elements)
+    - [Input element](#input-element)
+    - [Select element](#select-element)
+  - [Reset Form](#reset-form)
+  - [Nested fields](#nested-fields)
+  - [Initial data](#initial-data)
+  - [Validation](#validation)
+  - [Styling](#styling)
+  - [Manipulate data](#manipulate-data)
+- [Custom elements](#custom-elements)
+  - [React select](#react-select)
+  - [React datepicker](#react-datepicker)
+- [Contributing](#contributing)
+  - [Contribution Guidelines](#contribution-guidelines)
+  - [Code of Conduct](#code-of-conduct)
+- [License](#license)
+
 ## Key features
 
 - Beautiful syntax;
@@ -48,33 +73,6 @@ Just add unform to your project:
 yarn add @rocketseat/unform
 ```
 
-## Table of contents
-
-- [Overview](#overview)
-- [Key features](#key-features)
-- [Why not Formik, Redux Form or another library?](#why-not-formik-redux-form-or-another-library)
-- [Roadmap](#roadmap)
-- [Installation](#installation)
-- [Table of contents](#table-of-contents)
-- [Guides](#guides)
-  - [Basics](#basics)
-  - [Elements](#elements)
-    - [Input element](#input-element)
-    - [Select element](#select-element)
-  - [Reset Form](#reset-form)
-  - [Nested fields](#nested-fields)
-  - [Initial data](#initial-data)
-  - [Validation](#validation)
-  - [Styling](#styling)
-  - [Manipulate data](#manipulate-data)
-- [Custom elements](#custom-elements)
-  - [React select](#react-select)
-  - [React datepicker](#react-datepicker)
-- [Contributing](#contributing)
-  - [Contribution Guidelines](#contribution-guidelines)
-  - [Code of Conduct](#code-of-conduct)
-- [License](#license)
-
 ## Guides
 
 ### Basics
@@ -95,7 +93,7 @@ function App() {
      *   password: "123456"
      * }
      */
-  };
+  }
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -121,7 +119,7 @@ import React from "react";
 import { Form, Input } from "@rocketseat/unform";
 
 function App() {
-  function handleSubmit(data) {};
+  function handleSubmit(data) {}
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -147,7 +145,7 @@ const options = [
 ];
 
 function App() {
-  function handleSubmit(data) {};
+  function handleSubmit(data) {}
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -168,7 +166,7 @@ import { Form, Input } from "@rocketseat/unform";
 function App() {
   function handleSubmit(data, { resetForm }) {
     resetForm();
-  };
+  }
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -197,7 +195,7 @@ function App() {
      *   address: { street: "Name of street", number: 123 }
      * }
      */
-  };
+  }
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -224,13 +222,13 @@ import { Form, Input, Scope } from "@rocketseat/unform";
 
 function App() {
   const initialData = {
-    name: 'John Doe',
+    name: "John Doe",
     address: {
-      street: 'Sample Avenue',
-    },
-  }
+      street: "Sample Avenue"
+    }
+  };
 
-  function handleSubmit(data) {};
+  function handleSubmit(data) {}
 
   return (
     <Form onSubmit={handleSubmit} initialData={initialData}>
@@ -252,17 +250,19 @@ function App() {
 ```js
 import React from "react";
 import { Form, Input } from "@rocketseat/unform";
-import * as Yup from 'yup';
+import * as Yup from "yup";
 
 const schema = Yup.object().shape({
   email: Yup.string()
-    .email('Custom invalid email message')
-    .required('Custom required message'),
-  password: Yup.string().min(4).required(),
-})
+    .email("Custom invalid email message")
+    .required("Custom required message"),
+  password: Yup.string()
+    .min(4)
+    .required()
+});
 
 function App() {
-  function handleSubmit(data) {};
+  function handleSubmit(data) {}
 
   return (
     <Form schema={schema} onSubmit={handleSubmit}>
@@ -280,12 +280,12 @@ function App() {
 The `Form` component exposes two props for that: `style` and `className`. You can use any `CSS-in-JS` library to style your form or just pass the class name string, or even the `style` object directly! For example:
 
 ```js
-import styled from 'styled-components' // or emotion, for example
+import styled from "styled-components"; // or emotion, for example
 
 // weird choice for a background color, huh?
 export default styled(MyForm)`
   background: red;
-`
+`;
 ```
 
 ### Manipulate data
@@ -293,27 +293,31 @@ export default styled(MyForm)`
 ```js
 import React, { useState } from "react";
 import { Form, Input } from "@rocketseat/unform";
-import * as Yup from 'yup';
+import * as Yup from "yup";
 
 const schema = Yup.object().shape({
   name: Yup.string().required(),
-  email: Yup.string().email().required(),
-  password: Yup.string().when('$updatePassword', {
+  email: Yup.string()
+    .email()
+    .required(),
+  password: Yup.string().when("$updatePassword", {
     is: true,
-    then: Yup.string().min(4).required(),
+    then: Yup.string()
+      .min(4)
+      .required(),
     otherwise: Yup.string().strip(true)
-  }),
-})
+  })
+});
 
 function App() {
   const [updatePassword, setUpdatePassword] = useState(false);
 
   const initialData = {
-    name: 'John Doe',
-    email: 'johndoe@example.com',
-  }
+    name: "John Doe",
+    email: "johndoe@example.com"
+  };
 
-  function handleSubmit(data) {};
+  function handleSubmit(data) {}
 
   return (
     <Form
@@ -454,7 +458,6 @@ export default function DatePicker({ name }) {
     </>
   );
 }
-
 ```
 
 ## Contributing
