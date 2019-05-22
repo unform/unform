@@ -73,7 +73,7 @@ yarn add @rocketseat/unform
 
 ### Basics
 
-Unform exposes three default form elements: `<Input />`, `<Select />` and `<Textarea />`. Currently, `<Select />` element does not support multiple values, you can use [React Select](#react-select) example to achieve that.
+Unform exposes two default form elements: `<Input />` and `<Select />`. Currently, `<Select />` element does not support multiple values, you can use [React Select](#react-select) example to achieve that.
 
 ```js
 import React from "react";
