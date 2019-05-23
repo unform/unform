@@ -8,8 +8,8 @@ interface Props<T> {
   multiline?: T;
 }
 
-type InputProps = JSX.IntrinsicElements['input'] & Props<true>;
-type TextAreaProps = JSX.IntrinsicElements['textarea'] & Props<false>;
+type InputProps = JSX.IntrinsicElements['input'] & Props<false>;
+type TextAreaProps = JSX.IntrinsicElements['textarea'] & Props<true>;
 
 export default function Input({
   name,
