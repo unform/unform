@@ -1,13 +1,13 @@
 /* istanbul ignore file */
 
-import { createContext } from 'react';
+import { createContext } from "react";
 
-import { UnformContext } from './types';
+import { UnformContext } from "./types";
 
 export default createContext<UnformContext>({
   initialData: {},
   errors: {},
-  scopePath: '',
+  scopePath: "",
   registerField: () => {},
-  unregisterField: () => {},
+  unregisterField: () => {}
 });
