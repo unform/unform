@@ -1,7 +1,7 @@
-import dot from "dot-object";
-import { useContext, useEffect } from "react";
+import dot from 'dot-object';
+import { useContext, useEffect } from 'react';
 
-import FormContext from "./Context";
+import FormContext from './Context';
 
 export default function useField(name: string) {
   const {
