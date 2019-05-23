@@ -1,6 +1,6 @@
-import React, { useContext, ReactNode } from "react";
+import React, { useContext, ReactNode } from 'react';
 
-import FormContext from "./Context";
+import FormContext from './Context';
 
 export interface ScopeProps {
   path: string;

@@ -1,6 +1,6 @@
-import React, { SelectHTMLAttributes, useEffect, useRef } from "react";
+import React, { SelectHTMLAttributes, useEffect, useRef } from 'react';
 
-import useField from "../useField";
+import useField from '../useField';
 
 interface Option {
   id: string;
@@ -19,7 +19,7 @@ export default function Select({ name, label, options, ...rest }: SelectProps) {
 
   useEffect(() => {
     if (ref.current) {
-      registerField({ name: fieldName, ref: ref.current, path: "value" });
+      registerField({ name: fieldName, ref: ref.current, path: 'value' });
     }
   }, [ref.current, fieldName]);
 
