@@ -10,4 +10,5 @@ export default createContext<UnformContext>({
   scopePath: '',
   registerField: () => {},
   unregisterField: () => {},
+  handleSubmit: () => {},
 });

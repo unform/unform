@@ -1,0 +1,30 @@
+{
+  "name": "example-rn",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "react": "link:../node_modules/react",
+    "react-native": "link:../node_modules/react-native",
+    "yup": "link:../node_modules/yup"
+  },
+  "devDependencies": {
+    "@babel/core": "link:../node_modules/@babel/core",
+    "@babel/runtime": "^7.4.5",
+    "@types/jest": "link:../node_modules/@types/jest",
+    "@types/react": "link:../node_modules/@types/react",
+    "@types/react-native": "link:../node_modules/@types/react-native",
+    "@types/react-test-renderer": "link:../node_modules/@types/react-test-renderer",
+    "babel-jest": "^24.8.0",
+    "jest": "link:../node_modules/jest",
+    "metro-react-native-babel-preset": "^0.54.1",
+    "react-test-renderer": "link:../node_modules/react-test-renderer",
+    "typescript": "link:../node_modules/typescript"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
