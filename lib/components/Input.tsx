@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from 'react';
 
-import useField from "../useField";
+import useField from '../useField';
 
 interface Props<T> {
   name: string;
@@ -8,8 +8,8 @@ interface Props<T> {
   multiline?: T;
 }
 
-type InputProps = JSX.IntrinsicElements["input"] & Props<true>;
-type TextAreaProps = JSX.IntrinsicElements["textarea"] & Props<false>;
+type InputProps = JSX.IntrinsicElements['input'] & Props<true>;
+type TextAreaProps = JSX.IntrinsicElements['textarea'] & Props<false>;
 
 export default function Input({
   name,
@@ -22,7 +22,7 @@ export default function Input({
 
   useEffect(() => {
     if (ref.current) {
-      registerField({ name: fieldName, ref: ref.current, path: "value" });
+      registerField({ name: fieldName, ref: ref.current, path: 'value' });
     }
   }, [ref.current, fieldName]);
 
@@ -31,7 +31,7 @@ export default function Input({
     ref,
     id: fieldName,
     name: fieldName,
-    "aria-label": fieldName,
+    'aria-label': fieldName,
     defaultValue
   };
 

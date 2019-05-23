@@ -1,14 +1,14 @@
-import dot from "dot-object";
+import dot from 'dot-object';
 import React, {
   DetailedHTMLProps,
   FormHTMLAttributes,
   FormEvent,
   useState
-} from "react";
-import { ObjectSchema, ValidationError } from "yup";
+} from 'react';
+import { ObjectSchema, ValidationError } from 'yup';
 
-import FormContext from "./Context";
-import { UnformField, UnformErrors, Omit } from "./types";
+import FormContext from './Context';
+import { UnformField, UnformErrors, Omit } from './types';
 
 interface Context {
   [key: string]: any;
@@ -31,7 +31,7 @@ export interface SubmitHandler<T = FormContent> {
   (data: T, helpers: Helpers): void;
 }
 
-export interface FormProps extends Omit<HTMLFormProps, "onSubmit"> {
+export interface FormProps extends Omit<HTMLFormProps, 'onSubmit'> {
   initialData?: object;
   children: React.ReactNode;
   context?: Context;
@@ -72,7 +72,7 @@ export default function Form(props: FormProps) {
         return clearValue(ref);
       }
 
-      return dot.set(path, "", ref as object);
+      return dot.set(path, '', ref as object);
     });
   }
 
@@ -126,7 +126,7 @@ export default function Form(props: FormProps) {
       value={{
         initialData,
         errors,
-        scopePath: "",
+        scopePath: '',
         registerField,
         unregisterField
       }}

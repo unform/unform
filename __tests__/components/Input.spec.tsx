@@ -1,9 +1,7 @@
 import React from 'react';
 import 'react-testing-library/cleanup-after-each';
 import 'jest-dom/extend-expect';
-import {
- act, render, fireEvent, wait,
-} from 'react-testing-library';
+import { act, render, fireEvent, wait } from 'react-testing-library';
 import * as Yup from 'yup';
 
 import { Form, Input } from '../../lib';
@@ -13,7 +11,7 @@ describe('Form', () => {
     const { getByText } = render(
       <Form onSubmit={jest.fn()}>
         <Input name="name" label="Name" />
-      </Form>,
+      </Form>
     );
 
     expect(!!getByText('Name')).toBe(true);
@@ -21,13 +19,13 @@ describe('Form', () => {
 
   it('should display error', async () => {
     const schema = Yup.object().shape({
-      name: Yup.string().required('Name is required'),
+      name: Yup.string().required('Name is required')
     });
 
     const { getByText, getByTestId } = render(
       <Form schema={schema} onSubmit={jest.fn()}>
         <Input name="name" label="Nome" />
-      </Form>,
+      </Form>
     );
 
     act(() => {
@@ -42,7 +40,7 @@ describe('Form', () => {
       <Form onSubmit={jest.fn()}>
         <Input name="name" label="Name" />
         <Input name="profile" label="Profile" multiline />
-      </Form>,
+      </Form>
     );
 
     expect(!!container.querySelector('input[name=name]')).toBe(true);
