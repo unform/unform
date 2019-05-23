@@ -13,7 +13,7 @@ type TextAreaProps = JSX.IntrinsicElements['textarea'] & Props;
 export default function Textarea(props: TextAreaProps) {
   useEffect(() => {
     console.warn(
-      'Textarea will be deprecated in the next unform release. Please use <Input multiline /> instead',
+      'Textarea will be deprecated in the next major unform release. Please use <Input multiline /> instead',
     );
   }, []);
 
