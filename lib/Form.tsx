@@ -8,7 +8,7 @@ import React, {
 import { ObjectSchema, ValidationError } from "yup";
 
 import FormContext from "./Context";
-import { Field, Errors, Omit } from "./types";
+import { UnformField, UnformErrors, Omit } from "./types";
 
 interface Context {
   [key: string]: any;
@@ -18,7 +18,7 @@ interface Helpers {
   resetForm: () => void;
 }
 
-type FormProps = DetailedHTMLProps<
+type HTMLFormProps = DetailedHTMLProps<
   FormHTMLAttributes<HTMLFormElement>,
   HTMLFormElement
 >;
@@ -31,7 +31,7 @@ export interface SubmitHandler<T = FormContent> {
   (data: T, helpers: Helpers): void;
 }
 
-interface Props extends Omit<FormProps, "onSubmit"> {
+export interface FormProps extends Omit<HTMLFormProps, "onSubmit"> {
   initialData?: object;
   children: React.ReactNode;
   context?: Context;
@@ -39,18 +39,18 @@ interface Props extends Omit<FormProps, "onSubmit"> {
   onSubmit: SubmitHandler;
 }
 
-export default function Form(props: Props) {
+export default function Form(props: FormProps) {
   const {
     initialData = {},
     children,
     schema,
     context = {},
     onSubmit,
-    ...restProps
+    ...rest
   } = props;
 
-  const [errors, setErrors] = useState<Errors>({});
-  const [fields, setFields] = useState<Field[]>([]);
+  const [errors, setErrors] = useState<UnformErrors>({});
+  const [fields, setFields] = useState<UnformField[]>([]);
 
   function parseFormData() {
     const data = {};
@@ -98,7 +98,7 @@ export default function Form(props: Props) {
       setErrors({});
       onSubmit(data, { resetForm });
     } catch (err) {
-      const validationErrors: Errors = {};
+      const validationErrors: UnformErrors = {};
 
       /* istanbul ignore next  */
       if (!err.inner) {
@@ -113,7 +113,7 @@ export default function Form(props: Props) {
     }
   }
 
-  function registerField(field: Field) {
+  function registerField(field: UnformField) {
     setFields(state => [...state, field]);
   }
 
@@ -131,7 +131,7 @@ export default function Form(props: Props) {
         unregisterField
       }}
     >
-      <form {...restProps} data-testid="form" onSubmit={handleSubmit}>
+      <form {...rest} data-testid="form" onSubmit={handleSubmit}>
         {children}
       </form>
     </FormContext.Provider>
