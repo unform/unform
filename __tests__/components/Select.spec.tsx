@@ -1,9 +1,7 @@
 import React from 'react';
 import 'react-testing-library/cleanup-after-each';
 import 'jest-dom/extend-expect';
-import {
- act, render, fireEvent, wait,
-} from 'react-testing-library';
+import { act, render, fireEvent, wait } from 'react-testing-library';
 import * as Yup from 'yup';
 
 import { Form, Select } from '../../lib';
@@ -17,7 +15,7 @@ describe('Form', () => {
           name="tech"
           label="Tech"
         />
-      </Form>,
+      </Form>
     );
 
     expect(!!getByText('Tech')).toBe(true);
@@ -25,7 +23,7 @@ describe('Form', () => {
 
   it('should display error', async () => {
     const schema = Yup.object().shape({
-      tech: Yup.string().required('Tech is required'),
+      tech: Yup.string().required('Tech is required')
     });
 
     const { getByText, getByTestId } = render(
@@ -35,7 +33,7 @@ describe('Form', () => {
           name="tech"
           label="Tech"
         />
-      </Form>,
+      </Form>
     );
 
     act(() => {
@@ -53,12 +51,12 @@ describe('Form', () => {
         <Select
           options={[
             { id: 'node', title: 'NodeJS' },
-            { id: 'react', title: 'ReactJS' },
+            { id: 'react', title: 'ReactJS' }
           ]}
           name="tech"
           label="Tech"
         />
-      </Form>,
+      </Form>
     );
 
     act(() => {
@@ -69,11 +67,11 @@ describe('Form', () => {
 
     expect(submitMock).toHaveBeenCalledWith(
       {
-        tech: 'react',
+        tech: 'react'
       },
       {
-        resetForm: expect.any(Function),
-      },
+        resetForm: expect.any(Function)
+      }
     );
   });
 

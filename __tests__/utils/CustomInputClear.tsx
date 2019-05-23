@@ -9,9 +9,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 
 export default function Input({ name, label, ...rest }: Props) {
   const ref = useRef<HTMLInputElement>(null);
-  const {
- fieldName, registerField, defaultValue, error,
-} = useField(name);
+  const { fieldName, registerField, defaultValue, error } = useField(name);
 
   useEffect(() => {
     if (ref.current) {
@@ -21,7 +19,7 @@ export default function Input({ name, label, ...rest }: Props) {
         path: 'value',
         clearValue: (inputRef: HTMLInputElement) => {
           inputRef.value = 'test';
-        },
+        }
       });
     }
   }, [ref.current, fieldName]);

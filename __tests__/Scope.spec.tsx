@@ -12,7 +12,7 @@ describe('Form', () => {
         <Scope path="profile">
           <Input name="name" />
         </Scope>
-      </Form>,
+      </Form>
     );
 
     expect(!!container.querySelector("input[name='profile.name']")).toBe(true);
@@ -26,11 +26,11 @@ describe('Form', () => {
             <Input name="name" />
           </Scope>
         </Scope>
-      </Form>,
+      </Form>
     );
 
     expect(!!container.querySelector("input[name='profile.user.name']")).toBe(
-      true,
+      true
     );
   });
 });
