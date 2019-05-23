@@ -76,8 +76,8 @@ yarn add @rocketseat/unform
 Unform exposes two default form elements: `<Input />` and `<Select />`. Currently, `<Select />` element does not support multiple values, you can use [React Select](#react-select) example to achieve that.
 
 ```js
-import React from 'react';
-import { Form, Input } from '@rocketseat/unform';
+import React from "react";
+import { Form, Input } from "@rocketseat/unform";
 
 function App() {
   function handleSubmit(data) {
@@ -111,8 +111,8 @@ Unform exposes two elements by default, Input and Select.
 Input elements can receive a `multiline` prop that will render a textarea instead.
 
 ```js
-import React from 'react';
-import { Form, Input } from '@rocketseat/unform';
+import React from "react";
+import { Form, Input } from "@rocketseat/unform";
 
 function App() {
   function handleSubmit(data) {}
@@ -131,8 +131,8 @@ function App() {
 #### Select element
 
 ```js
-import React from 'react';
-import { Form, Select } from '@rocketseat/unform';
+import React from "react";
+import { Form, Select } from "@rocketseat/unform";
 
 const options = [
   { id: "react", title: "ReactJS" },
@@ -156,8 +156,8 @@ function App() {
 ### Reset form
 
 ```js
-import React from 'react';
-import { Form, Input } from '@rocketseat/unform';
+import React from "react";
+import { Form, Input } from "@rocketseat/unform";
 
 function App() {
   function handleSubmit(data, { resetForm }) {
@@ -178,8 +178,8 @@ function App() {
 ### Nested fields
 
 ```js
-import React from 'react';
-import { Form, Input, Scope } from '@rocketseat/unform';
+import React from "react";
+import { Form, Input, Scope } from "@rocketseat/unform";
 
 function App() {
   function handleSubmit(data) {
@@ -213,8 +213,8 @@ function App() {
 _Optional_: Here you can set what the initial data for each field will be, you store the initial field values into a variable and load it in the `Form` using the prop `initialData`.
 
 ```js
-import React from 'react';
-import { Form, Input, Scope } from '@rocketseat/unform';
+import React from "react";
+import { Form, Input, Scope } from "@rocketseat/unform";
 
 function App() {
   const initialData = {
@@ -244,9 +244,9 @@ function App() {
 ### Validation
 
 ```js
-import React from 'react';
-import { Form, Input } from '@rocketseat/unform';
-import * as Yup from 'yup';
+import React from "react";
+import { Form, Input } from "@rocketseat/unform";
+import * as Yup from "yup";
 
 const schema = Yup.object().shape({
   email: Yup.string()
@@ -274,9 +274,9 @@ function App() {
 ### Manipulate data
 
 ```js
-import React, { useState } from 'react';
-import { Form, Input } from '@rocketseat/unform';
-import * as Yup from 'yup';
+import React, { useState } from "react";
+import { Form, Input } from "@rocketseat/unform";
+import * as Yup from "yup";
 
 const schema = Yup.object().shape({
   name: Yup.string().required(),
@@ -336,10 +336,10 @@ Below are some examples with [react-select](https://github.com/JedWatson/react-s
 ### React select
 
 ```js
-import React, { useRef, useEffect } from 'react';
-import Select from 'react-select';
+import React, { useRef, useEffect } from "react";
+import Select from "react-select";
 
-import { useField } from '@rocketseat/unform';
+import { useField } from "@rocketseat/unform";
 
 export default function ReactSelect({
   name,
@@ -406,12 +406,12 @@ export default function ReactSelect({
 ### React datepicker
 
 ```js
-import React, { useRef, useEffect, useState } from 'react';
-import ReactDatePicker from 'react-datepicker';
+import React, { useRef, useEffect, useState } from "react";
+import ReactDatePicker from "react-datepicker";
 
-import { useField } from '@rocketseat/unform';
+import { useField } from "@rocketseat/unform";
 
-import 'react-datepicker/dist/react-datepicker.css';
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function DatePicker({ name }) {
   const ref = useRef(null);
