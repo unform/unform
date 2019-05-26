@@ -1,0 +1,44 @@
+@media only screen and (max-width: 735px) {
+  .navSearchWrapper.reactNavSearchWrapper {
+    display: none !important;
+  }
+  ul.nav-site {
+    width: 100%;
+    justify-content: flex-end !important;
+  }
+}
+
+@media only screen and (max-width: 560px) {
+  li.navSearchWrapper.reactNavSearchWrapper {
+    display: none;
+  }
+  ul.nav-site.nav-site-internal {
+    display: none;
+  }
+  .navigationSlider .slidingNav ul {
+    margin-top: 6px !important;
+    justify-content: right;
+  }
+}
+
+@media only screen and (max-width: 1023px) {
+  #docsNav {
+    top: 66px; /* links no header 96px */
+  }
+  .mainContainer {
+    margin-top: 60px;
+  }
+  .navGroups {
+    padding-top: 80px !important;
+  }
+  .navigationSlider .slidingNav ul {
+    background: white;
+    margin-top: 6px;
+    justify-content: center;
+  }
+
+  .navigationSlider .slidingNav ul li {
+    display: flex;
+    flex: 0;
+  }
+}
