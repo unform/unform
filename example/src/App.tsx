@@ -3,7 +3,7 @@ import { hot } from 'react-hot-loader/root';
 import * as Yup from 'yup';
 
 import {
- Form, Input, Select, Scope, SubmitHandler,
+  Form, Input, Select, Scope, SubmitHandler, FileInput,
 } from '../../lib';
 import DatePicker from './components/DatePicker';
 import ReactSelect from './components/ReactSelect';
@@ -28,6 +28,7 @@ const schema = Yup.object().shape({
     }),
     otherwise: Yup.object().strip(true),
   }),
+  attach: Yup.string(),
 });
 
 interface Data {
@@ -39,6 +40,7 @@ interface Data {
   billingAddress: {
     number: number;
   };
+  attach: string;
 }
 
 function App() {
@@ -55,6 +57,7 @@ function App() {
     billingAddress: {
       number: 833,
     },
+    attach: '',
   });
 
   const handleSubmit: SubmitHandler<Data> = (data, { resetForm }) => {
@@ -112,6 +115,8 @@ function App() {
         <Input name="street" />
         <Input name="number" />
       </Scope>
+
+      <FileInput name="attach" label="Attachment" />
 
       <button type="submit">Enviar</button>
     </Form>
