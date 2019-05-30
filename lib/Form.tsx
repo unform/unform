@@ -47,8 +47,8 @@ export default function Form({
     const data = {};
 
     fields.forEach(({
- name, ref, path, parseValue,
-}) => {
+      name, ref, path, parseValue,
+    }) => {
       const value = dot.pick(path, ref);
 
       data[name] = parseValue ? parseValue(value) : value;
