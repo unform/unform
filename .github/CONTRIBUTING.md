@@ -15,7 +15,7 @@
     - [Dev environment](#dev-environment)
 - [Commiting](#commiting)
   - [Skipping building process](#skipping-building-process)
-  - [Why all this rules?](#why-all-this-rules)
+  - [Why all these rules?](#why-all-these-rules)
 - [Submitting a pull request](#submitting-a-pull-request)
 
 ## Getting started
