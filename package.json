@@ -22,6 +22,14 @@
       "eslint --fix",
       "prettier --write",
       "jest --bail --findRelatedTests"
+    ],
+    "__tests__/**/*.{ts,tsx}" : [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "example/**/*.{ts,tsx}" : [
+      "eslint --fix",
+      "prettier --write"
     ]
   },
   "scripts": {

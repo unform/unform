@@ -3,7 +3,7 @@ import React, {
   FormEvent,
   useState,
   DetailedHTMLProps,
-  FormHTMLAttributes
+  FormHTMLAttributes,
 } from 'react';
 import { ObjectSchema, ValidationError } from 'yup';
 
@@ -84,12 +84,12 @@ export default function Form({
         await schema.validate(data, {
           abortEarly: false,
           stripUnknown: true,
-          context
+          context,
         });
 
         data = schema.cast(data, {
           stripUnknown: true,
-          context
+          context,
         });
       }
 
@@ -126,7 +126,7 @@ export default function Form({
         errors,
         scopePath: '',
         registerField,
-        unregisterField
+        unregisterField,
       }}
     >
       <form {...rest} data-testid="form" onSubmit={handleSubmit}>
