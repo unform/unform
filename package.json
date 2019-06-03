@@ -21,15 +21,18 @@
     "lib/**/*.{ts,tsx}": [
       "eslint --fix",
       "prettier --write",
-      "jest --bail --findRelatedTests"
+      "jest --bail --findRelatedTests",
+      "git add"
     ],
     "__tests__/**/*.{ts,tsx}" : [
       "eslint --fix",
-      "prettier --write"
+      "prettier --write",
+      "git add"
     ],
     "example/**/*.{ts,tsx}" : [
       "eslint --fix",
-      "prettier --write"
+      "prettier --write",
+      "git add"
     ]
   },
   "scripts": {
