@@ -1,9 +1,7 @@
 import React from 'react';
 import 'react-testing-library/cleanup-after-each';
 import 'jest-dom/extend-expect';
-import {
- act, render, fireEvent, wait,
-} from 'react-testing-library';
+import { act, render, fireEvent, wait } from 'react-testing-library';
 import * as Yup from 'yup';
 
 import { Form, Select } from '../../lib';
@@ -17,28 +15,42 @@ describe('Form', () => {
           name="tech"
           label="Tech"
         />
-      </Form>,
+      </Form>
     );
 
     expect(!!getByText('Tech')).toBe(true);
   });
 
-  it("should display placeholder", () => {
+  it('should display placeholder', () => {
     const { getByText } = render(
       <Form onSubmit={jest.fn()}>
         <Select
           placeholder="Select..."
-          options={[{ id: "node", title: "NodeJS" }]}
+          options={[{ id: 'node', title: 'NodeJS' }]}
           name="tech"
           label="Tech"
         />
       </Form>
     );
 
-    expect(!!getByText("Select...")).toBe(true);
+    expect(!!getByText('Select...')).toBe(true);
   });
 
-  it("should display error", async () => {
+  it('shoud use default placeholder when no one is defined', () => {
+    const { getByDisplayValue } = render(
+      <Form onSubmit={jest.fn()}>
+        <Select
+          options={[{ id: 'node', title: 'NodeJS' }]}
+          name="tech"
+          label="Tech"
+        />
+      </Form>
+    );
+
+    expect(!!getByDisplayValue('')).toBe(true);
+  });
+
+  it('should display error', async () => {
     const schema = Yup.object().shape({
       tech: Yup.string().required('Tech is required'),
     });
@@ -50,7 +62,7 @@ describe('Form', () => {
           name="tech"
           label="Tech"
         />
-      </Form>,
+      </Form>
     );
 
     act(() => {
@@ -73,7 +85,7 @@ describe('Form', () => {
           name="tech"
           label="Tech"
         />
-      </Form>,
+      </Form>
     );
 
     act(() => {
@@ -88,7 +100,7 @@ describe('Form', () => {
       },
       {
         resetForm: expect.any(Function),
-      },
+      }
     );
   });
 
