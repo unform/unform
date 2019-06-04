@@ -17,16 +17,18 @@ export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
 export default function Select({
   name,
   label,
-  placeholder,
+  placeholder = '',
+  defaultValue = '',
   options,
   ...rest
 }: SelectProps) {
-  const defaultPlaceholderValue = "";
-  const defaultPlaceholderText = "";
   const ref = useRef<HTMLSelectElement>(null);
   const {
- fieldName, registerField, defaultValue, error,
-} = useField(name);
+    fieldName,
+    registerField,
+    defaultValue: initialData,
+    error,
+  } = useField(name);
 
   useEffect(() => {
     if (ref.current) {
@@ -43,12 +45,12 @@ export default function Select({
         multiple={false}
         id={fieldName}
         name={fieldName}
-        defaultValue={defaultValue || defaultPlaceholderValue}
+        defaultValue={initialData || defaultValue}
         aria-label={fieldName}
         ref={ref}
       >
-        <option value={defaultPlaceholderValue} disabled hidden>
-          {placeholder || defaultPlaceholderText}
+        <option value={defaultValue} disabled hidden>
+          {placeholder}
         </option>
         {options.map(({ id, title }: Option) => (
           <option key={id} value={id}>
