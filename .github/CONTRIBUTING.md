@@ -14,7 +14,8 @@
   - [Code](#code)
     - [Dev environment](#dev-environment)
 - [Commiting](#commiting)
-  - [Why all this rules?](#why-all-this-rules)
+  - [Skipping building process](#skipping-building-process)
+  - [Why all these rules?](#why-all-these-rules)
 - [Submitting a pull request](#submitting-a-pull-request)
 
 ## Getting started
@@ -153,6 +154,7 @@ To ensure that a commit is valid, easy to read, and changelog-ready, we have a h
 - The footer:
   - Must have a leading blank line;
   - Each line must be limited to 72 characters or less;
+  - If your commit is about documentation or meta files, please add the tag **[skip ci]** to skip the building process.
   - If needed, reference to issues and pull requests must be made here in the last line.
 
 You also should follow these general guidelines when committing:
@@ -191,6 +193,10 @@ text editors are capable of automating this.
 Issues and pull request can be referenced on the footer: #3 #12
 ```
 
+### Skipping building process
+
+By default, Travis CI automatically runs the building process whenever you push changes. If your commit is about documentation or meta files, you can override this behavior by adding a **[skip ci]** tag anywhere in a commit’s **footer**. This not only skips the marked commit, but also **all other commits** in the push.
+
 ### Why all these rules?
 
 We try to enforce these rules for the following reasons:
@@ -211,4 +217,3 @@ Before submitting a pull request, please make sure the following is done:
 - If you’ve fixed a bug or added code that should be tested, **add tests**;
 - Ensure the test suite passes;
 - Ensure your commit is validated;
-- If your pull request is about documentation or meta files, please add the tag **[skip ci]** in the title.

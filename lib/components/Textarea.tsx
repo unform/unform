@@ -1,36 +1,21 @@
-import React, { TextareaHTMLAttributes, useEffect, useRef } from "react";
+import React, { useEffect } from 'react';
 
-import useField from "../useField";
+import Input from './Input';
 
-interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+interface Props {
   name: string;
   label?: string;
+  multiline?: true;
 }
 
-export default function Textarea({ name, label, ...rest }: Props) {
-  const ref = useRef<HTMLTextAreaElement>(null);
-  const { fieldName, registerField, defaultValue, error } = useField(name);
+type TextAreaProps = JSX.IntrinsicElements['textarea'] & Props;
 
+export default function Textarea(props: TextAreaProps) {
   useEffect(() => {
-    if (ref.current) {
-      registerField({ name: fieldName, ref: ref.current, path: "value" });
-    }
-  }, [ref.current, fieldName]);
+    console.warn(
+      'Textarea will be deprecated in the next major unform release. Please use <Input multiline /> instead',
+    );
+  }, []);
 
-  return (
-    <>
-      {label && <label htmlFor={fieldName}>{label}</label>}
-
-      <textarea
-        {...rest}
-        ref={ref}
-        id={fieldName}
-        name={fieldName}
-        aria-label={fieldName}
-        defaultValue={defaultValue}
-      />
-
-      {error && <span>{error}</span>}
-    </>
-  );
+  return <Input {...props} multiline />;
 }
