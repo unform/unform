@@ -1,7 +1,4 @@
 {
-  "docs": {
-    "Overview": ["overview/overview"]
-  },
   "guides": {
     "Guides": [
       "guides/installation",

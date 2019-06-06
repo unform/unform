@@ -5,16 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// eslint-disable-next-line import/no-extraneous-dependencies
 const React = require('react');
 
+// eslint-disable-next-line import/no-unresolved
 const CompLibrary = require('../../core/CompLibrary.js');
 
-const Container = CompLibrary.Container;
-const GridBlock = CompLibrary.GridBlock;
+const { Container } = CompLibrary;
+const { GridBlock } = CompLibrary;
 
 function Help(props) {
-  const {config: siteConfig, language = ''} = props;
-  const {baseUrl, docsUrl} = siteConfig;
+  const { config: siteConfig, language = '' } = props;
+  const { baseUrl, docsUrl } = siteConfig;
   const docsPart = `${docsUrl ? `${docsUrl}/` : ''}`;
   const langPart = `${language ? `${language}/` : ''}`;
   const docUrl = doc => `${baseUrl}${docsPart}${langPart}${doc}`;

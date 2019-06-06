@@ -5,32 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// eslint-disable-next-line import/no-extraneous-dependencies
 const React = require('react');
 
+// eslint-disable-next-line import/no-unresolved
 const CompLibrary = require('../../core/CompLibrary.js');
 
-const MarkdownBlock = CompLibrary.MarkdownBlock; /* Used to read markdown */
-const Container = CompLibrary.Container;
-const GridBlock = CompLibrary.GridBlock;
-
-const Docs = [
-  {
-    path: 'guides/installation',
-    title: 'Guides',
-    icon: 'fas fa-file-code',
-    description: 'Start from here! 🚀',
-  }, {
-    path: 'contributing/contributing',
-    title: 'Contributing',
-    icon: 'fas fa-users',
-    description: 'Contribute',
-  },
-]
+const { MarkdownBlock, Container, GridBlock } = CompLibrary;
 
 class HomeSplash extends React.Component {
   render() {
-    const {siteConfig, language = ''} = this.props;
-    const {baseUrl, docsUrl} = siteConfig;
+    const { siteConfig, language = '' } = this.props;
+    const { baseUrl, docsUrl } = siteConfig;
     const docsPart = `${docsUrl ? `${docsUrl}/` : ''}`;
     const langPart = `${language ? `${language}/` : ''}`;
     const docUrl = doc => `${baseUrl}${docsPart}${langPart}${doc}`;
@@ -77,21 +63,7 @@ class HomeSplash extends React.Component {
         {/* <Logo img_src={`${baseUrl}img/undraw_monitor.svg`} /> */}
         <div className="inner">
           <ProjectTitle siteConfig={siteConfig} />
-          <PromoSection>
-            <div className="docs-grid">
-            {Docs.map(doc => (
-              <a
-                key={doc.path}
-                className="item"
-                href={`${docsPart + doc.path}`}
-              >
-                <i className={doc.icon} />
-                <h3>{doc.title}</h3>
-                <p>{doc.description}</p>
-              </a>
-            ))}
-          </div>
-          </PromoSection>
+          {/* <PromoSection /> */}
         </div>
       </SplashContainer>
     );
@@ -116,73 +88,69 @@ class Index extends React.Component {
       </Container>
     );
 
-    const FeatureCallout = () => (
-      <div
-        className="productShowcaseSection paddingBottom"
-        style={{textAlign: 'center'}}>
-        <h2>Feature Callout</h2>
-        <MarkdownBlock>These are features of this project</MarkdownBlock>
-      </div>
-    );
-
-    const TryOut = () => (
-      <Block id="try">
-        {[
-          {
-            content:
-              'To make your landing page more attractive, use illustrations! Check out ' +
-              '[**unDraw**](https://undraw.co/) which provides you with customizable illustrations which are free to use. ' +
-              'The illustrations you see on this page are from unDraw.',
-            image: `${baseUrl}img/undraw_code_review.svg`,
-            imageAlign: 'left',
-            title: 'Wonderful SVG Illustrations',
-          },
-        ]}
-      </Block>
-    );
-
-    const Description = () => (
-      <Block background="dark">
-        {[
-          {
-            content:
-              'This is another description of how this project is useful',
-            image: `${baseUrl}img/undraw_note_list.svg`,
-            imageAlign: 'right',
-            title: 'Description',
-          },
-        ]}
-      </Block>
-    );
-
-    const LearnHow = () => (
-      <Block background="light">
-        {[
-          {
-            content:
-              'Each new Docusaurus project has **randomly-generated** theme colors.',
-            image: `${baseUrl}img/undraw_youtube_tutorial.svg`,
-            imageAlign: 'right',
-            title: 'Randomly Generated Theme Colors',
-          },
-        ]}
-      </Block>
-    );
-
     const Features = () => (
       <Block layout="fourColumn">
         {[
           {
-            content: 'This is the content of my feature',
+            content: 'Unform is a performance focused library that helps you creating beautiful forms in React with the power of uncontrolled components performance and React Hooks.',
             image: `${baseUrl}img/undraw_react.svg`,
             imageAlign: 'top',
-            title: 'Feature One',
+            title: 'Overview',
           },
           {
-            content: 'The content of my second feature',
+            content: 
+            ' Beautiful syntax; </br>' + 
+            'React Hooks 😍; </br>' +
+            ' Performance focused; </br>' + 
+            ' Use of uncontrolled components; </br>' + 
+            ' Integration with pickers, dropdowns and other libraries;',
             image: `${baseUrl}img/undraw_operating_system.svg`,
             imageAlign: 'top',
-            title: 'Feature Two',
+            title: 'Key Features',
+          },
+        ]}
+      </Block>
+    );
+
+    const WhyUnform = () => (
+      <Block background="light">
+        {[
+          {
+            content:
+              'Formik/Redux Form has a really great syntax while it has a really poor support to uncontrolled components and deep nested data structures. With unform it\'s easy to create forms with complex relationships without losing performance.',
+            image: `${baseUrl}img/undraw_youtube_tutorial.svg`,
+            imageAlign: 'right',
+            title: 'Why not Formik, Redux Form or another library?',
+          },
+        ]}
+      </Block>
+    );
+
+    const RoadMap = () => (
+      <Block id="try">
+        {[
+          {
+            content:
+              'Native checkbox/radio support; </br>' +
+              'React Native support (should we?); </br>' +
+              'Better docs;',
+            image: `${baseUrl}img/undraw_code_review.svg`,
+            imageAlign: 'left',
+            title: 'Road Map',
+          },
+        ]}
+      </Block>
+    );
+
+    const License = () => (
+      <Block background="dark">
+        {[
+          {
+            content:
+              'MIT © [Rocketseat](https://github.com/Rocketseat)',
+            image: `${baseUrl}img/undraw_note_list.svg`,
+            imageAlign: 'right',
+            title: 'License',
           },
         ]}
       </Block>
@@ -220,14 +188,11 @@ class Index extends React.Component {
     return (
       <div>
         <HomeSplash siteConfig={siteConfig} language={language} />
-        {/* <div className="mainContainer">
-          <Features />
-          <FeatureCallout />
-          <LearnHow />
-          <TryOut />
-          <Description />
-          <Showcase />
-        </div> */}
+        <Features />
+        <WhyUnform />
+        <RoadMap />
+        <License />
+        <Showcase />
       </div>
     );
   }

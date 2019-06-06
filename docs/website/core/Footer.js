@@ -9,50 +9,58 @@ const React = require('react');
 
 class Footer extends React.Component {
   docUrl(doc, language) {
-    const baseUrl = this.props.config.baseUrl;
-    const docsUrl = this.props.config.docsUrl;
+    const { config: { baseUrl, docsUrl } } = this.props;
     const docsPart = `${docsUrl ? `${docsUrl}/` : ''}`;
     const langPart = `${language ? `${language}/` : ''}`;
     return `${baseUrl}${docsPart}${langPart}${doc}`;
   }
 
   pageUrl(doc, language) {
-    const baseUrl = this.props.config.baseUrl;
+    const { config: { baseUrl } } = this.props;
     return baseUrl + (language ? `${language}/` : '') + doc;
   }
 
   render() {
+    const {
+      config: {
+        baseUrl, footerIcon, title, repoUrl, copyright, 
+      }, 
+      language 
+    } = this.props;
+
     return (
       <footer className="nav-footer" id="footer">
         <section className="sitemap">
-          <a href={this.props.config.baseUrl} className="nav-home">
-            {this.props.config.footerIcon && (
+          <a href={baseUrl} className="nav-home">
+            {footerIcon && (
               <img
-                src={this.props.config.baseUrl + this.props.config.footerIcon}
-                alt={this.props.config.title}
-                width="66"
+                src={`${baseUrl}${footerIcon}` }
+                alt={title}
+                width="136"
                 height="58"
+                style={{ objectFit: 'contain' }}
               />
             )}
           </a>
           <div>
             <h5>Docs</h5>
-            <a href={this.docUrl('overview/overview.html', this.props.language)}>
+            <a href={this.docUrl('guides/installation.html', language)}>
               Getting Started
             </a>
-            <a href={this.docUrl('guides/basics.html', this.props.language)}>
-              Guides
+            <a href={this.docUrl('contributing/contributing.html', language)}>
+              Contributing
             </a>
           </div>
           <div>
             <h5>Community</h5>
-            <a href={this.pageUrl('users.html', this.props.language)}>
+            <a href={this.pageUrl('users.html', language)}>
               User Showcase
             </a>
             <a
               href="http://stackoverflow.com/questions/tagged/unform"
               target="_blank"
-              rel="noreferrer noopener">
+              rel="noreferrer noopener"
+            >
               Stack Overflow
             </a>
             <a
@@ -64,11 +72,11 @@ class Footer extends React.Component {
           </div>
           <div>
             <h5>More</h5>
-            <a href={`${this.props.config.baseUrl}blog`}>Blog</a>
+            <a href={`${baseUrl}blog`}>Blog</a>
             <a href="https://github.com/Rocketseat/unform">GitHub</a>
             <a
               className="github-button"
-              href={this.props.config.repoUrl}
+              href={repoUrl}
               data-icon="octicon-star"
               data-count-href="/Rocketseat/unform/stargazers"
               data-show-count="true"
@@ -83,15 +91,16 @@ class Footer extends React.Component {
           href="https://opensource.facebook.com/"
           target="_blank"
           rel="noreferrer noopener"
-          className="fbOpenSource">
+          className="fbOpenSource"
+        >
           <img
-            src={`${this.props.config.baseUrl}img/oss_logo.png`}
+            src={`${baseUrl}img/oss_logo.png`}
             alt="Facebook Open Source"
             width="170"
             height="45"
           />
         </a>
-        <section className="copyright">{this.props.config.copyright}</section>
+        <section className="copyright">{copyright}</section>
       </footer>
     );
   }
