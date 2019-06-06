@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState, ChangeEvent } from "react";
+import React, { useEffect, useRef, useState, ChangeEvent } from 'react';
 
-import useField from "../useField";
+import useField from '../useField';
 
 interface Props {
   name: string;
@@ -8,7 +8,7 @@ interface Props {
   onStartProgress?: (progress: number, event: ProgressEvent) => void;
 }
 
-type InputProps = JSX.IntrinsicElements["input"] & Props;
+type InputProps = JSX.IntrinsicElements['input'] & Props;
 
 export default function Input({
   name,
@@ -25,11 +25,11 @@ export default function Input({
       registerField({
         name: fieldName,
         ref: ref.current,
-        path: "dataset.file",
+        path: 'dataset.file',
         clearValue: (fileRef: HTMLInputElement) => {
-          fileRef.value = "";
-          setFile("");
-        }
+          fileRef.value = '';
+          setFile('');
+        },
       });
     }
   }, [ref.current, fieldName]);
@@ -39,7 +39,7 @@ export default function Input({
     ref,
     id: fieldName,
     name: fieldName,
-    "aria-label": fieldName
+    'aria-label': fieldName,
   };
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
