@@ -44,18 +44,15 @@ class Footer extends React.Component {
           </a>
           <div>
             <h5>Docs</h5>
-            <a href={this.docUrl('guides/installation.html', language)}>
+            <a href={this.docUrl('installation', language)}>
               Getting Started
             </a>
-            <a href={this.docUrl('contributing/contributing.html', language)}>
+            <a href={'contributing'}>
               Contributing
             </a>
           </div>
           <div>
             <h5>Community</h5>
-            <a href={this.pageUrl('users.html', language)}>
-              User Showcase
-            </a>
             <a
               href="http://stackoverflow.com/questions/tagged/unform"
               target="_blank"

@@ -1,5 +1,5 @@
 ---
-id: react_datepicker
+id: react-datepicker
 title: React Datepicker
 sidebar_label: React Datepicker
 ---

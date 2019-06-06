@@ -1,5 +1,5 @@
 ---
-id: manipulate_data
+id: manipulate-data
 title: Manipulate Data
 sidebar_label: Manipulate Data
 ---

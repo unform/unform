@@ -127,7 +127,7 @@ const languages = [
     tag: 'pt-PT',
   },
   {
-    enabled: false,
+    enabled: true,
     name: 'Português (Brasil)',
     tag: 'pt-BR',
   },
@@ -176,6 +176,6 @@ const languages = [
     name: '中文',
     tag: 'zh-CN',
   },
-  {enabled: false, name: '繁體中文', tag: 'zh-TW'},
+  { enabled: false, name: '繁體中文', tag: 'zh-TW' },
 ];
 module.exports = languages;
