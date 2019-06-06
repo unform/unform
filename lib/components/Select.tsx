@@ -14,11 +14,16 @@ export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   options: Option[];
 }
 
+const defaultProps: Partial<SelectProps> = {
+  placeholder: '',
+  defaultValue: '',
+};
+
 function Select({
   name,
   label,
-  placeholder = '',
-  defaultValue = '',
+  placeholder,
+  defaultValue,
   options,
   ...rest
 }: SelectProps) {
@@ -63,5 +68,7 @@ function Select({
     </>
   );
 }
+
+Select.defaultProps = defaultProps;
 
 export default Select;
