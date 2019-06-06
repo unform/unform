@@ -1,9 +1,4 @@
-import React, {
-  SelectHTMLAttributes,
-  FunctionComponent,
-  useEffect,
-  useRef,
-} from 'react';
+import React, { SelectHTMLAttributes, useEffect, useRef } from 'react';
 
 import useField from '../useField';
 
@@ -19,19 +14,14 @@ export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   options: Option[];
 }
 
-const defaultProps: Partial<SelectProps> = {
-  placeholder: '',
-  defaultValue: '',
-};
-
-const Select: FunctionComponent<SelectProps> = ({
+function Select({
   name,
   label,
-  placeholder,
-  defaultValue,
+  placeholder = '',
+  defaultValue = '',
   options,
   ...rest
-}) => {
+}: SelectProps) {
   const ref = useRef<HTMLSelectElement>(null);
   const {
     fieldName,
@@ -72,8 +62,6 @@ const Select: FunctionComponent<SelectProps> = ({
       {error && <span>{error}</span>}
     </>
   );
-};
-
-Select.defaultProps = defaultProps;
+}
 
 export default Select;
