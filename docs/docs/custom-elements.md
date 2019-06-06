@@ -1,5 +1,5 @@
 ---
-id: custom_elements
+id: custom-elements
 title: Custom Elements
 sidebar_label: Custom Elements
 ---

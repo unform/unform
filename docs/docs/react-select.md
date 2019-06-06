@@ -1,5 +1,5 @@
 ---
-id: react_select
+id: react-select
 title: React Select
 sidebar_label: React Select
 ---

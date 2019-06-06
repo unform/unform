@@ -4,7 +4,7 @@ title: Basics
 sidebar_label: Basics
 ---
 
-Unform exposes two default form elements: `<Input />` and `<Select />`. Currently, `<Select />` element does not support multiple values, you can use [React Select](#react-select) example to achieve that.
+Unform te dá dois elementos principais: `<Input />` e `<Select />`. Por enquanto, o elemento `<Select />` não suporte múltiplos valores, então você pode usar o exemplo em [React Select](react-select) para esse resultado.
 
 ```js
 import React from "react";

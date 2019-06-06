@@ -1,5 +1,5 @@
 ---
-id: initial_data
+id: initial-data
 title: Initial Data
 sidebar_label: Initial Data
 ---

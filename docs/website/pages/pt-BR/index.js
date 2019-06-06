@@ -12,11 +12,11 @@ const { FaRocket, FaCode, FaHeart, FaCubes } = require('react-icons/fa')
 const features = [
   {
     icon: <FaRocket className="text-purple-500" size={36} />,
-    title: 'Performance focused'
+    title: 'Foco em perfomance'
   },
   {
     icon: <FaCode className="text-blue-500" size={36} />,
-    title: 'Beautiful syntax'
+    title: 'Bela sintaxe'
   },
   {
     icon: <FaHeart className="text-red-500" size={36} />,
@@ -24,7 +24,7 @@ const features = [
   },
   {
     icon: <FaCubes className="text-indigo-500" size={36} />,
-    title: 'Custom integrations'
+    title: 'Integrações'
   },
 ]
 
@@ -44,11 +44,11 @@ function Index(props) {
   return (
     <div className="container mx-auto p-8 flex flex-1 flex-col justify-center align-center text-center">
       <img src={`${baseUrl}img/logo.png`} alt="Logo" className="object-contain h-18" />
-      <p className="text-2xl font-bold mt-6">Uncontrolled forms for ReactJS</p>
+      <p className="text-2xl font-bold mt-6">Uncontrolled forms para ReactJS</p>
 
       <div className="mt-4">
-        <Button href={`${docUrl}installation`}>Read Docs</Button>
-        <Button disabled href="#">See examples</Button>
+        <Button href={`${docUrl}installation`}>Documentação</Button>
+        <Button disabled href="#">Exemplos</Button>
       </div>
       <div className="features mt-12 flex flex-wrap">
         {features.map(f => (

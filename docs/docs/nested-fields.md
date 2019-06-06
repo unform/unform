@@ -1,5 +1,5 @@
 ---
-id: nested_fields
+id: nested-fields
 title: Nested Fields
 sidebar_label: Nested Fields
 ---

@@ -1,5 +1,5 @@
 ---
-id: reset_form
+id: reset-form
 title: Reset Form
 sidebar_label: Reset Form
 ---
