@@ -247,6 +247,8 @@ function App() {
 
 ### Validation
 
+> When you define your schema to validation, only data defined in it will be sent to `data` in `onSubmit` event even though there are other fields.
+
 ```js
 import React from 'react';
 import { Form, Input } from '@rocketseat/unform';
