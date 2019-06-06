@@ -1,0 +1,23 @@
+{
+  "guides": {
+    "Guides": [
+      "guides/installation",
+      "guides/basics",
+      "guides/elements",
+      "guides/reset_form",
+      "guides/nested_fields",
+      "guides/initial_data",
+      "guides/validation",
+      "guides/styling",
+      "guides/manipulate_data"
+    ],
+    "Custom elements": [
+      "custom_elements/custom_elements",
+      "custom_elements/react_select",
+      "custom_elements/react_datepicker"
+    ]
+  },
+  "contributing": {
+    "Contributing": ["contributing/contributing"]
+  }
+}
