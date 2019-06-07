@@ -52,7 +52,7 @@ function Index(props) {
       </div>
       <div className="features mt-12 flex flex-wrap">
         {features.map(f => (
-          <div key={f.title} className="rounded m-3 flex flex-1 flex-col items-center justify-center p-6 text-xl text-gray-800 font-bold shadow">
+          <div key={f.title} className="rounded m-3 flex flex-1 flex-col items-center justify-center p-6 text-xl text-gray-800 font-bold">
             {f.icon}
             <p className="mt-2">{f.title}</p>
           </div>

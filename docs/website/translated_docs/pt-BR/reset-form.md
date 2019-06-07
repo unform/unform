@@ -18,7 +18,7 @@ function App() {
       <Input name="email" />
       <Input name="password" type="password" />
 
-      <button type="submit">Sign in</button>
+      <button type="submit">Entrar</button>
     </Form>
   );
 }

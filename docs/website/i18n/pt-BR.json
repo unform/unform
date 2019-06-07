@@ -13,9 +13,9 @@
         "title": "Contribua",
         "sidebar_label": "Contribua"
       },
-      "custom-elements": {
-        "title": "Elementos personalizados",
-        "sidebar_label": "Elementos personalizados"
+      "usefield": {
+        "title": "useField",
+        "sidebar_label": "useField"
       },
       "elements": {
         "title": "Elementos",

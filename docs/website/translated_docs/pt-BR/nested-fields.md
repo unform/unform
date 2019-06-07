@@ -15,7 +15,7 @@ function App() {
     /**
      * {
      *   name: 'Diego',
-     *   address: { street: "Name of street", number: 123 }
+     *   address: { street: "Nome da rua", number: 123 }
      * }
      */
   }
@@ -29,7 +29,7 @@ function App() {
         <Input name="number" />
       </Scope>
 
-      <button type="submit">Save</button>
+      <button type="submit">Salvar</button>
     </Form>
   );
 }

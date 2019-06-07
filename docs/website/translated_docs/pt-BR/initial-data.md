@@ -12,9 +12,9 @@ import { Form, Input, Scope } from "@rocketseat/unform";
 
 function App() {
   const initialData = {
-    name: "John Doe",
+    name: "João",
     address: {
-      street: "Sample Avenue"
+      street: "Rua Exemplo"
     }
   };
 
@@ -29,7 +29,7 @@ function App() {
         <Input name="number" />
       </Scope>
 
-      <button type="submit">Save</button>
+      <button type="submit">Salvar</button>
     </Form>
   );
 }

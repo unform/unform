@@ -9,10 +9,6 @@
         "title": "Basics",
         "sidebar_label": "Basics"
       },
-      "custom-elements": {
-        "title": "Custom Elements",
-        "sidebar_label": "Custom Elements"
-      },
       "elements": {
         "title": "Elements",
         "sidebar_label": "Elements"
@@ -48,6 +44,10 @@
       "styling": {
         "title": "Styling",
         "sidebar_label": "Styling"
+      },
+      "usefield": {
+        "title": "useField",
+        "sidebar_label": "useField"
       },
       "validation": {
         "title": "Validation",

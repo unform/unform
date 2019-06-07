@@ -22,7 +22,7 @@ const siteConfig = {
   users,
   headerIcon: 'img/logo.png',
   footerIcon: 'img/logo.png',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.png',
   colors: {
     primaryColor: '#ee5253',
     secondaryColor: '#ff6b6b',

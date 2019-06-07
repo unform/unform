@@ -28,7 +28,7 @@ function App() {
 
   const initialData = {
     name: "John Doe",
-    email: "johndoe@example.com"
+    email: "johndoe@exemplo.com"
   };
 
   function handleSubmit(data) {}
@@ -52,7 +52,7 @@ function App() {
 
       <Input name="password" type="password" />
 
-      <button type="submit">Save</button>
+      <button type="submit">Salvar</button>
     </Form>
   );
 }
