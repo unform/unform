@@ -11,6 +11,6 @@
       "styling",
       "manipulate-data"
     ],
-    "Custom elements": ["custom-elements", "react-select", "react-datepicker"]
+    "Custom elements": ["usefield", "react-select", "react-datepicker"]
   }
 }

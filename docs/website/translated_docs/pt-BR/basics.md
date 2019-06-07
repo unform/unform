@@ -16,7 +16,7 @@ function App() {
 
     /**
      * {
-     *   email: 'email@example.com',
+     *   email: 'email@examplo.com',
      *   password: '123456'
      * }
      */
@@ -27,7 +27,7 @@ function App() {
       <Input name="email" />
       <Input name="password" type="password" />
 
-      <button type="submit">Sign in</button>
+      <button type="submit">Entrar</button>
     </Form>
   );
 }

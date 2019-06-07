@@ -11,8 +11,8 @@ import * as Yup from "yup";
 
 const schema = Yup.object().shape({
   email: Yup.string()
-    .email("Custom invalid email message")
-    .required("Custom required message"),
+    .email("Mensagem personalizada de e-mail inválido")
+    .required("Mensagem personalizada de e-mail necessário"),
   password: Yup.string()
     .min(4)
     .required()
@@ -26,7 +26,7 @@ function App() {
       <Input name="email" />
       <Input name="password" type="password" />
 
-      <button type="submit">Save</button>
+      <button type="submit">Salvar</button>
     </Form>
   );
 }

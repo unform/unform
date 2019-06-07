@@ -20,7 +20,7 @@ function App() {
       <Input name="name" />
       <Input multiline name="bio" />
 
-      <button type="submit">Send</button>
+      <button type="submit">Enviar</button>
     </Form>
   );
 }
@@ -45,7 +45,7 @@ function App() {
     <Form onSubmit={handleSubmit}>
       <Select name="tech" options={options} />
 
-      <button type="submit">Send</button>
+      <button type="submit">Enviar</button>
     </Form>
   );
 }
