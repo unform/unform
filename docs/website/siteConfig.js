@@ -11,7 +11,7 @@ const siteConfig = {
   title: 'unform', // Title for your website.
   tagline: 'A reactjs library to create uncontrolled form structures with nested fields, validations and much more!',
   url: 'https://rocketseat.github.io', // Your website URL
-  baseUrl: '/unform',
+  baseUrl: '/unform/',
   projectName: 'unform',
   organizationName: 'rocketseat',
   headerLinks: [
