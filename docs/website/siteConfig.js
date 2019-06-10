@@ -10,9 +10,9 @@ const users = [
 const siteConfig = {
   title: 'Unform', // Title for your website.
   tagline: 'A reactjs library to create uncontrolled form structures with nested fields, validations and much more!',
-  url: 'https://unform.github.io', // Your website URL
+  url: 'https://rocketseat.github.io', // Your website URL
   baseUrl: '/',
-  projectName: 'Unform',
+  projectName: 'unform',
   organizationName: 'Rocketseat',
   headerLinks: [
     { doc: 'installation', label: 'Docs' },
