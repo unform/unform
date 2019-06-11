@@ -2,13 +2,15 @@ import React from 'react';
 import 'react-testing-library/cleanup-after-each';
 import 'jest-dom/extend-expect';
 import {
- act, render, fireEvent, wait,
+  act,
+  render,
+  fireEvent,
+  wait,
+  getByTestId
 } from 'react-testing-library';
 import * as Yup from 'yup';
 
-import {
- Form, Input, Select, Scope,
-} from '../lib';
+import { Form, Input, Select, Scope } from '../lib';
 import CustomInputClear from './utils/CustomInputClear';
 import CustomInputParse from './utils/CustomInputParse';
 
@@ -19,7 +21,7 @@ describe('Form', () => {
         <Input name="name" />
         <Input multiline name="bio" />
         <Select name="tech" options={[{ id: 'node', title: 'Node' }]} />
-      </Form>,
+      </Form>
     );
 
     expect(!!container.querySelector('input[name=name]')).toBe(true);
@@ -31,12 +33,12 @@ describe('Form', () => {
     const { container } = render(
       <Form onSubmit={jest.fn()} initialData={{ name: 'Diego' }}>
         <Input name="name" />
-      </Form>,
+      </Form>
     );
 
     expect(container.querySelector('input[name=name]')).toHaveAttribute(
       'value',
-      'Diego',
+      'Diego'
     );
   });
 
@@ -52,11 +54,11 @@ describe('Form', () => {
         <Scope path="address">
           <Input name="street" />
         </Scope>
-      </Form>,
+      </Form>
     );
 
     fireEvent.change(getByLabelText('name'), {
-      target: { value: 'Diego' },
+      target: { value: 'Diego' }
     });
 
     fireEvent.submit(getByTestId('form'));
@@ -65,12 +67,12 @@ describe('Form', () => {
       {
         name: 'Diego',
         address: {
-          street: 'John Doe Avenue',
-        },
+          street: 'John Doe Avenue'
+        }
       },
       {
-        resetForm: expect.any(Function),
-      },
+        resetForm: expect.any(Function)
+      }
     );
   });
 
@@ -80,24 +82,24 @@ describe('Form', () => {
     const { getByTestId, rerender } = render(
       <Form onSubmit={submitMock} initialData={{ name: 'Diego' }}>
         <Input name="name" />
-      </Form>,
+      </Form>
     );
 
     rerender(
       <Form onSubmit={submitMock} initialData={{ another: 'Diego' }}>
         <Input name="another" />
-      </Form>,
+      </Form>
     );
 
     fireEvent.submit(getByTestId('form'));
 
     expect(submitMock).toHaveBeenCalledWith(
       {
-        another: 'Diego',
+        another: 'Diego'
       },
       {
-        resetForm: expect.any(Function),
-      },
+        resetForm: expect.any(Function)
+      }
     );
   });
 
@@ -107,8 +109,8 @@ describe('Form', () => {
       name: Yup.string(),
       bio: Yup.string().when('$stripBio', {
         is: true,
-        then: Yup.string().strip(true),
-      }),
+        then: Yup.string().strip(true)
+      })
     });
 
     const { getByTestId } = render(
@@ -120,7 +122,7 @@ describe('Form', () => {
       >
         <Input name="name" />
         <Input name="bio" />
-      </Form>,
+      </Form>
     );
 
     act(() => {
@@ -131,8 +133,8 @@ describe('Form', () => {
       expect(submitMock).toHaveBeenCalledWith(
         { name: 'Diego' },
         {
-          resetForm: expect.any(Function),
-        },
+          resetForm: expect.any(Function)
+        }
       );
     });
   });
@@ -165,18 +167,18 @@ describe('Form', () => {
     const { getByTestId } = render(
       <Form onSubmit={submitMock} initialData={{ name: 'Diego' }}>
         <CustomInputParse name="name" />
-      </Form>,
+      </Form>
     );
 
     fireEvent.submit(getByTestId('form'));
 
     expect(submitMock).toHaveBeenCalledWith(
       {
-        name: 'Diego-test',
+        name: 'Diego-test'
       },
       {
-        resetForm: expect.any(Function),
-      },
+        resetForm: expect.any(Function)
+      }
     );
   });
 
@@ -187,11 +189,24 @@ describe('Form', () => {
         initialData={{ name: 'Diego' }}
       >
         <CustomInputClear name="name" />
-      </Form>,
+      </Form>
     );
 
     fireEvent.submit(getByTestId('form'));
 
     expect((getByLabelText('name') as HTMLInputElement).value).toBe('test');
+  });
+
+  it('should render form with class attribute', () => {
+    const { container } = render(
+      <Form onSubmit={jest.fn()} className="test-class">
+        <Input name="name" />
+      </Form>
+    );
+
+    expect(getByTestId(container, 'form')).toHaveAttribute(
+      'class',
+      'test-class'
+    );
   });
 });
