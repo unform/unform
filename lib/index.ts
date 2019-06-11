@@ -15,6 +15,7 @@ export { default as Scope } from './Scope';
 export { default as Input } from './components/Input';
 export { default as Textarea } from './components/Textarea';
 export { default as Select } from './components/Select';
+export { default as FileInput } from './components/FileInput';
 
 /**
  * Types

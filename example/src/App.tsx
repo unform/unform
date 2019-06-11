@@ -3,7 +3,7 @@ import { hot } from 'react-hot-loader/root';
 import * as Yup from 'yup';
 
 import {
- Form, Input, Select, Scope, SubmitHandler,
+  Form, Input, Select, Scope, SubmitHandler, FileInput,
 } from '../../lib';
 import DatePicker from './components/DatePicker';
 import ReactSelect from './components/ReactSelect';
@@ -11,6 +11,7 @@ import ReactSelect from './components/ReactSelect';
 const schema = Yup.object().shape({
   name: Yup.string().required(),
   profile: Yup.string().required(),
+  theme: Yup.string().required(),
   tech: Yup.string().required(),
   date: Yup.date().required(),
   people: Yup.array(Yup.string())
@@ -28,17 +29,20 @@ const schema = Yup.object().shape({
     }),
     otherwise: Yup.object().strip(true),
   }),
+  attach: Yup.string(),
 });
 
 interface Data {
   name: string;
   profile: string;
+  theme: string;
   tech: string;
   people: string[];
   date: Date;
   billingAddress: {
     number: number;
   };
+  attach: string;
 }
 
 function App() {
@@ -47,14 +51,16 @@ function App() {
   );
 
   const [formData] = useState<Data>({
-    name: 'Diego',
-    profile: 'CTO na Rocketseat',
-    tech: 'node',
-    people: ['1', '3'],
+    name: "Diego",
+    profile: "CTO na Rocketseat",
+    theme: "dracula",
+    tech: "node",
+    people: ["1", "3"],
     date: new Date(),
     billingAddress: {
       number: 833,
     },
+    attach: '',
   });
 
   const handleSubmit: SubmitHandler<Data> = (data, { resetForm }) => {
@@ -72,6 +78,16 @@ function App() {
     >
       <Input name="name" label="Nome" />
       <Input multiline name="profile" label="Perfil" />
+
+      <Select
+        name="theme"
+        placeholder="Selecione..."
+        options={[
+          { id: "dracula", title: "Dracula" },
+          { id: "material", title: "Material" },
+          { id: "shades-of-purple", title: "Shades of Purple" }
+        ]}
+      />
 
       <ReactSelect
         name="tech"
@@ -112,6 +128,8 @@ function App() {
         <Input name="street" />
         <Input name="number" />
       </Scope>
+
+      <FileInput name="attach" label="Attachment" />
 
       <button type="submit">Enviar</button>
     </Form>

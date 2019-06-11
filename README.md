@@ -31,6 +31,7 @@ Unform is a performance focused library that helps you creating beautiful forms 
   - [Elements](#elements)
     - [Input element](#input-element)
     - [Select element](#select-element)
+    - [File Input element](#file-input-element)
   - [Reset Form](#reset-form)
   - [Nested fields](#nested-fields)
   - [Initial data](#initial-data)
@@ -157,6 +158,29 @@ function App() {
 }
 ```
 
+#### File Input element
+
+FileInput components may receive an `onStartProgress` property that will be called when file loading starts.
+
+```js
+import React from 'react';
+import { Form, FileInput } from '@rocketseat/unform';
+
+function App() {
+  function handleSubmit(data) {}
+
+  function handleProgress(progress, event) {}
+
+  return (
+    <Form onSubmit={handleSubmit}>
+      <FileInput name="attach" onStartProgress={handleProgress} />
+
+      <button type="submit">Send</button>
+    </Form>
+  );
+}
+```
+
 ### Reset form
 
 ```js
@@ -246,6 +270,8 @@ function App() {
 ```
 
 ### Validation
+
+> When you define your schema to validation, only data defined in it will be sent to `data` in `onSubmit` event even though there are other fields.
 
 ```js
 import React from 'react';

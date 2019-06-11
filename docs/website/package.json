@@ -1,0 +1,19 @@
+{
+  "scripts": {
+    "examples": "docusaurus-examples",
+    "start": "docusaurus-start",
+    "build": "docusaurus-build",
+    "publish-gh-pages": "docusaurus-publish",
+    "write-translations": "docusaurus-write-translations",
+    "version": "docusaurus-version",
+    "rename-version": "docusaurus-rename-version"
+  },
+  "devDependencies": {
+    "docusaurus": "^1.10.0"
+  },
+  "dependencies": {
+    "@emotion/core": "^10.0.10",
+    "benefit": "^1.1.1",
+    "react-icons": "^3.7.0"
+  }
+}

@@ -10,16 +10,30 @@ interface Option {
 export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   name: string;
   label?: string;
+  placeholder?: string;
   options: Option[];
 }
 
-export default function Select({
- name, label, options, ...rest
+const defaultProps: Partial<SelectProps> = {
+  placeholder: '',
+  defaultValue: '',
+};
+
+function Select({
+  name,
+  label,
+  placeholder,
+  defaultValue,
+  options,
+  ...rest
 }: SelectProps) {
   const ref = useRef<HTMLSelectElement>(null);
   const {
- fieldName, registerField, defaultValue, error,
-} = useField(name);
+    fieldName,
+    registerField,
+    defaultValue: initialData,
+    error,
+  } = useField(name);
 
   useEffect(() => {
     if (ref.current) {
@@ -36,11 +50,13 @@ export default function Select({
         multiple={false}
         id={fieldName}
         name={fieldName}
-        defaultValue={defaultValue}
+        defaultValue={initialData || defaultValue}
         aria-label={fieldName}
         ref={ref}
       >
-        <option value="">Selecione...</option>
+        <option value={defaultValue} disabled hidden>
+          {placeholder}
+        </option>
         {options.map(({ id, title }: Option) => (
           <option key={id} value={id}>
             {title}
@@ -52,3 +68,7 @@ export default function Select({
     </>
   );
 }
+
+Select.defaultProps = defaultProps;
+
+export default Select;

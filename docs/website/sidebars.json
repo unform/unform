@@ -1,0 +1,16 @@
+{
+  "guides": {
+    "Guides": [
+      "installation",
+      "basics",
+      "elements",
+      "reset-form",
+      "nested-fields",
+      "initial-data",
+      "validation",
+      "styling",
+      "manipulate-data"
+    ],
+    "Custom elements": ["usefield", "react-select", "react-datepicker"]
+  }
+}
