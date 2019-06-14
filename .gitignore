@@ -4,3 +4,5 @@ yarn-error.log
 dist
 
 __tests__/coverage
+
+.DS_Store
