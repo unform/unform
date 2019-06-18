@@ -3,7 +3,13 @@ import { hot } from 'react-hot-loader/root';
 import * as Yup from 'yup';
 
 import {
-  Form, Input, Select, Scope, SubmitHandler, FileInput,
+  Form,
+  Input,
+  Select,
+  Scope,
+  SubmitHandler,
+  FileInput,
+  Check,
 } from '../../lib';
 import DatePicker from './components/DatePicker';
 import ReactSelect from './components/ReactSelect';
@@ -30,6 +36,8 @@ const schema = Yup.object().shape({
     otherwise: Yup.object().strip(true),
   }),
   attach: Yup.string(),
+  termo1: Yup.boolean(),
+  termo2: Yup.boolean().oneOf([true], 'Termo 2 é obrigatório'),
 });
 
 interface Data {
@@ -43,24 +51,28 @@ interface Data {
     number: number;
   };
   attach: string;
+  termo1: boolean;
+  termo2: boolean;
 }
 
 function App() {
   const [useShippingAsBilling, setUseShippingAsBilling] = useState<boolean>(
-    true,
+    true
   );
 
   const [formData] = useState<Data>({
-    name: "Diego",
-    profile: "CTO na Rocketseat",
-    theme: "dracula",
-    tech: "node",
-    people: ["1", "3"],
+    name: 'Diego',
+    profile: 'CTO na Rocketseat',
+    theme: 'dracula',
+    tech: 'node',
+    people: ['1', '3'],
     date: new Date(),
     billingAddress: {
       number: 833,
     },
     attach: '',
+    termo1: true,
+    termo2: false,
   });
 
   const handleSubmit: SubmitHandler<Data> = (data, { resetForm }) => {
@@ -83,9 +95,9 @@ function App() {
         name="theme"
         placeholder="Selecione..."
         options={[
-          { id: "dracula", title: "Dracula" },
-          { id: "material", title: "Material" },
-          { id: "shades-of-purple", title: "Shades of Purple" }
+          { id: 'dracula', title: 'Dracula' },
+          { id: 'material', title: 'Material' },
+          { id: 'shades-of-purple', title: 'Shades of Purple' },
         ]}
       />
 
@@ -131,6 +143,12 @@ function App() {
 
       <FileInput name="attach" label="Attachment" />
 
+      <br />
+      <Check name="termo1" label="Aceita o Termo 1?" />
+      <br />
+      <Check name="termo2" label="Aceita o Termo 2 (obrigatório)?" />
+
+      <br />
       <button type="submit">Enviar</button>
     </Form>
   );
