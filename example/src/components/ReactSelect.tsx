@@ -23,11 +23,10 @@ export default function ReactSelect({
   ...rest
 }: Props) {
   const ref = useRef(null);
-  const {
- fieldName, registerField, defaultValue, error,
-} = useField(name);
+  const { fieldName, registerField, defaultValue, error } = useField(name);
 
-  function parseSelectValue(selectValue) {
+  function parseSelectValue(selectRef) {
+    const selectValue = selectRef.state.value;
     if (!multiple) {
       return selectValue ? selectValue.id : '';
     }
@@ -41,7 +40,7 @@ export default function ReactSelect({
       ref: ref.current,
       path: 'state.value',
       parseValue: parseSelectValue,
-      clearValue: (selectRef) => {
+      clearValue: selectRef => {
         selectRef.select.clearValue();
       },
     });
