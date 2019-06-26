@@ -116,7 +116,7 @@ export default function Form({
   }
 
   function unregisterField(name: string) {
-    setFields(fields.filter(field => field.name !== name));
+    setFields(state => state.filter(field => field.name !== name));
   }
 
   return (
