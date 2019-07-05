@@ -10,6 +10,7 @@ import {
   SubmitHandler,
   FileInput,
   Check,
+  Choice,
 } from '../../lib';
 import DatePicker from './components/DatePicker';
 import ReactSelect from './components/ReactSelect';
@@ -38,6 +39,10 @@ const schema = Yup.object().shape({
   attach: Yup.string(),
   termo1: Yup.boolean(),
   termo2: Yup.boolean().oneOf([true], 'Termo 2 é obrigatório'),
+  choice1: Yup.array(Yup.string())
+    .min(1)
+    .required(),
+  choice2: Yup.string().required(),
 });
 
 interface Data {
@@ -53,6 +58,8 @@ interface Data {
   attach: string;
   termo1: boolean;
   termo2: boolean;
+  choice1: string[];
+  choice2: string;
 }
 
 function App() {
@@ -73,6 +80,8 @@ function App() {
     attach: '',
     termo1: true,
     termo2: false,
+    choice1: ['2', '3'],
+    choice2: '',
   });
 
   const handleSubmit: SubmitHandler<Data> = (data, { resetForm }) => {
@@ -147,6 +156,30 @@ function App() {
       <Check name="termo1" label="Aceita o Termo 1?" />
       <br />
       <Check name="termo2" label="Aceita o Termo 2 (obrigatório)?" />
+      <br />
+
+      <Choice
+        name="choice1"
+        options={[
+          { value: '1', label: 'Um' },
+          { value: '2', label: 'Dois' },
+          { value: '3', label: 'Três' },
+          { value: '4', label: 'Quatro' },
+        ]}
+        multiple
+      />
+      <br />
+
+      <Choice
+        name="choice2"
+        options={[
+          { value: '1', label: 'Um' },
+          { value: '2', label: 'Dois' },
+          { value: '3', label: 'Três' },
+          { value: '4', label: 'Quatro' },
+        ]}
+      />
+      <br />
 
       <br />
       <button type="submit">Enviar</button>
