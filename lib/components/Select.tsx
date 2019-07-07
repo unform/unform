@@ -1,4 +1,10 @@
-import React, { SelectHTMLAttributes, useEffect, useRef } from 'react';
+import classNames from 'classnames';
+import React, {
+  SelectHTMLAttributes,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import useField from '../useField';
 
@@ -22,6 +28,7 @@ const defaultProps: Partial<SelectProps> = {
 function Select({
   name,
   label,
+  className,
   placeholder,
   defaultValue,
   options,
@@ -34,27 +41,51 @@ function Select({
     defaultValue: initialData,
     error,
   } = useField(name);
+  const value = (ref.current && ref.current.value) || defaultValue;
+  const hasInitialValue = value === defaultValue;
+  const [isEmpty, setIsEmpty] = useState<boolean>(hasInitialValue);
+  const [hasError, setHasError] = useState<boolean>(false);
 
   useEffect(() => {
-    if (ref.current) {
-      registerField({ name: fieldName, ref: ref.current, path: 'value' });
-    }
+    /* istanbul ignore next  */
+    if (!ref.current) return;
+    registerField({ name: fieldName, ref: ref.current, path: 'value' });
   }, [ref.current, fieldName]);
 
+  useEffect(() => {
+    /* istanbul ignore next  */
+    if (!ref.current) return;
+    ref.current.addEventListener(
+      'change',
+      () => {
+        setIsEmpty(false);
+      },
+      { once: true }
+    );
+  }, [ref.current]);
+
+  useEffect(() => {
+    setHasError(!!error);
+  }, [error]);
+
   return (
-    <>
+    <div className={className} role="presentation">
       {label && <label htmlFor={fieldName}>{label}</label>}
 
       <select
         {...rest}
-        multiple={false}
         id={fieldName}
         name={fieldName}
-        defaultValue={initialData || defaultValue}
         aria-label={fieldName}
+        defaultValue={initialData || defaultValue}
+        className={classNames({
+          'is-empty': isEmpty,
+          'has-error': hasError,
+        })}
+        multiple={false}
         ref={ref}
       >
-        <option value={defaultValue} disabled hidden>
+        <option className="placeholder" value={defaultValue} disabled hidden>
           {placeholder}
         </option>
         {options.map(({ id, title }: Option) => (
@@ -65,7 +96,7 @@ function Select({
       </select>
 
       {error && <span>{error}</span>}
-    </>
+    </div>
   );
 }
 

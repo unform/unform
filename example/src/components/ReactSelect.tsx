@@ -18,14 +18,13 @@ interface Props {
 export default function ReactSelect({
   name,
   label,
+  className,
   options,
   multiple,
   ...rest
 }: Props) {
   const ref = useRef(null);
-  const {
- fieldName, registerField, defaultValue, error,
-} = useField(name);
+  const { fieldName, registerField, defaultValue, error } = useField(name);
 
   function parseSelectValue(selectValue) {
     if (!multiple) {
@@ -41,7 +40,7 @@ export default function ReactSelect({
       ref: ref.current,
       path: 'state.value',
       parseValue: parseSelectValue,
-      clearValue: (selectRef) => {
+      clearValue: selectRef => {
         selectRef.select.clearValue();
       },
     });
@@ -58,7 +57,7 @@ export default function ReactSelect({
   }
 
   return (
-    <>
+    <div className={className}>
       {label && <label htmlFor={fieldName}>{label}</label>}
 
       <Select
@@ -74,6 +73,6 @@ export default function ReactSelect({
       />
 
       {error && <span>{error}</span>}
-    </>
+    </div>
   );
 }

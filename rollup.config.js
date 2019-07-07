@@ -10,7 +10,7 @@ import pkg from './package.json';
 
 export default {
   input: 'lib/index.ts',
-  external: ['react', 'react-dom', 'yup'],
+  external: ['react', 'react-dom', 'yup', 'styled-components'],
   output: [
     {
       file: pkg.main,

@@ -5,11 +5,9 @@ import { useField } from '../../../lib';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
-export default function ReactDatePicker({ name }) {
+export default function ReactDatePicker({ name, label, className = '' }) {
   const ref = useRef(null);
-  const {
- fieldName, registerField, defaultValue, error,
-} = useField(name);
+  const { fieldName, registerField, defaultValue, error } = useField(name);
   const [selected, setSelected] = useState(defaultValue);
 
   useEffect(() => {
@@ -17,14 +15,15 @@ export default function ReactDatePicker({ name }) {
       name: fieldName,
       ref: ref.current,
       path: 'props.selected',
-      clearValue: (pickerRef) => {
+      clearValue: pickerRef => {
         pickerRef.clear();
       },
     });
   }, [ref.current, fieldName]);
 
   return (
-    <>
+    <div className={className}>
+      {label && <label htmlFor={fieldName}>{label}</label>}
       <DatePicker
         name={fieldName}
         selected={selected}
@@ -32,6 +31,6 @@ export default function ReactDatePicker({ name }) {
         ref={ref}
       />
       {error && <span>{error}</span>}
-    </>
+    </div>
   );
 }

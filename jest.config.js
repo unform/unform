@@ -7,7 +7,7 @@ module.exports = {
   bail: true,
   clearMocks: true,
   collectCoverage: true,
-  collectCoverageFrom: ['lib/**/*.{ts,tsx}'],
+  collectCoverageFrom: ['lib/**/*.{ts,tsx}', '!lib/styled/*'],
   coverageDirectory: '__tests__/coverage',
   coverageReporters: ['json', 'lcov'],
   coverageThreshold: {
