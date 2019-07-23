@@ -205,6 +205,34 @@ function App() {
 }
 ```
 
+_Optional:_ `resetForm` may receive an object that will be applied when the form is reset.
+
+```js
+import React from 'react';
+import { Form, Input } from '@rocketseat/unform';
+
+const options = [
+  { id: 'react', title: 'ReactJS' },
+  { id: 'node', title: 'NodeJS' },
+  { id: 'rn', title: 'React Native' },
+];
+
+function App() {
+  function handleSubmit(data, { resetForm }) {
+    resetForm({ tech: 'react' });
+  }
+
+  return (
+    <Form onSubmit={handleSubmit}>
+      <Select name="tech" options={options} />
+
+      <button type="submit">Send</button>
+    </Form>
+  );
+}
+```
+
+
 ### Nested fields
 
 ```js
