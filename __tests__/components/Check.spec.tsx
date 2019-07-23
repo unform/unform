@@ -92,4 +92,16 @@ describe('Form', () => {
       }
     );
   });
+
+  it('should reset state after submit', () => {
+    const { getByTestId, getByLabelText } = render(
+      <Form onSubmit={(_, { resetForm }) => resetForm()}>
+        <Check name="check" label="Check" />
+      </Form>
+    );
+
+    fireEvent.submit(getByTestId('form'));
+
+    expect((getByLabelText('check') as HTMLInputElement).checked).toBe(false);
+  });
 });

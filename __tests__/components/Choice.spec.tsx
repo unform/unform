@@ -167,4 +167,28 @@ describe('Form', () => {
     expectCheckbox(getByLabelText('ReactJS'), false);
     expectCheckbox(getByLabelText('React Native'), false);
   });
+
+  it('should reset state after submit', () => {
+    const { getByTestId, getByLabelText } = render(
+      <Form
+        onSubmit={(_, { resetForm }) => resetForm()}
+        initialData={{ tech: ['node', 'react'] }}
+      >
+        <Choice
+          name="tech"
+          multiple
+          options={[
+            { value: 'node', label: 'NodeJS' },
+            { value: 'react', label: 'ReactJS' },
+            { value: 'rn', label: 'React Native' },
+          ]}
+        />
+      </Form>
+    );
+
+    fireEvent.submit(getByTestId('form'));
+    expectCheckbox(getByLabelText('NodeJS'), false);
+    expectCheckbox(getByLabelText('ReactJS'), false);
+    expectCheckbox(getByLabelText('React Native'), false);
+  });
 });
