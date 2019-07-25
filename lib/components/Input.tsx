@@ -18,9 +18,7 @@ export default function Input({
   ...rest
 }: InputProps | TextAreaProps) {
   const ref = useRef<HTMLInputElement | HTMLTextAreaElement>(null);
-  const {
- fieldName, registerField, defaultValue, error,
-} = useField(name);
+  const { fieldName, registerField, defaultValue, error } = useField(name);
 
   useEffect(() => {
     if (ref.current) {
