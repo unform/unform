@@ -107,6 +107,10 @@ function App() {
 }
 ```
 
+**↑ back to:** [Table of contents](#table-of-contents) · [Guides](#guides)
+
+<hr>
+
 ### Elements
 
 Unform exposes two elements by default, Input and Select.
@@ -132,6 +136,10 @@ function App() {
   );
 }
 ```
+
+**↑ back to:** [Table of contents](#table-of-contents) · [Guides](#guides)
+
+<hr>
 
 #### Select element
 
@@ -160,6 +168,10 @@ function App() {
 }
 ```
 
+**↑ back to:** [Table of contents](#table-of-contents) · [Guides](#guides)
+
+<hr>
+
 #### File Input element
 
 FileInput components may receive an `onStartProgress` property that will be called when file loading starts.
@@ -183,6 +195,10 @@ function App() {
 }
 ```
 
+**↑ back to:** [Table of contents](#table-of-contents) · [Guides](#guides)
+
+<hr>
+
 ### Reset form
 
 ```js
@@ -204,6 +220,10 @@ function App() {
   );
 }
 ```
+
+**↑ back to:** [Table of contents](#table-of-contents) · [Guides](#guides)
+
+<hr>
 
 ### Nested fields
 
@@ -238,6 +258,10 @@ function App() {
 }
 ```
 
+**↑ back to:** [Table of contents](#table-of-contents) · [Guides](#guides)
+
+<hr>
+
 ### Initial data
 
 _Optional_: Here you can set what the initial data for each field will be, you store the initial field values into a variable and load it in the `Form` using the prop `initialData`.
@@ -271,6 +295,10 @@ function App() {
 }
 ```
 
+**↑ back to:** [Table of contents](#table-of-contents) · [Guides](#guides)
+
+<hr>
+
 ### Validation
 
 > When you define your schema to validation, only data defined in it will be sent to `data` in `onSubmit` event even though there are other fields.
@@ -303,6 +331,10 @@ function App() {
 }
 ```
 
+**↑ back to:** [Table of contents](#table-of-contents) · [Guides](#guides)
+
+<hr>
+
 ### Styling
 
 The `Form` component exposes two props for that: `style` and `className`. You can use any `CSS-in-JS` library to style your form or just pass the class name string, or even the `style` object directly! For example:
@@ -315,6 +347,10 @@ export default styled(MyForm)`
   background: red;
 `;
 ```
+
+**↑ back to:** [Table of contents](#table-of-contents) · [Guides](#guides)
+
+<hr>
 
 ### Manipulate data
 
@@ -371,6 +407,10 @@ function App() {
   );
 }
 ```
+
+**↑ back to:** [Table of contents](#table-of-contents) · [Guides](#guides)
+
+<hr>
 
 ## Custom elements
 
@@ -448,6 +488,10 @@ export default function ReactSelect({
 }
 ```
 
+**↑ back to:** [Table of contents](#table-of-contents) · [Guides](#guides)
+
+<hr>
+
 ### React datepicker
 
 ```js
@@ -487,6 +531,10 @@ export default function DatePicker({ name }) {
   );
 }
 ```
+
+**↑ back to:** [Table of contents](#table-of-contents) · [Guides](#guides)
+
+<hr>
 
 ## Contributing
 
