@@ -1,21 +1,18 @@
 import React from 'react';
-import 'react-testing-library/cleanup-after-each';
-import 'jest-dom/extend-expect';
-import { act, render, fireEvent, wait } from 'react-testing-library';
+import { act, fireEvent, wait } from 'react-testing-library';
 import * as Yup from 'yup';
 
-import { Form, Select } from '../../lib';
+import { Select } from '../../lib';
+import render from '../../lib/RenderTest';
 
 describe('Form', () => {
   it('should display label', () => {
     const { getByText } = render(
-      <Form onSubmit={jest.fn()}>
-        <Select
-          options={[{ id: 'node', title: 'NodeJS' }]}
-          name="tech"
-          label="Tech"
-        />
-      </Form>
+      <Select
+        options={[{ id: 'node', title: 'NodeJS' }]}
+        name="tech"
+        label="Tech"
+      />,
     );
 
     expect(!!getByText('Tech')).toBe(true);
@@ -23,14 +20,12 @@ describe('Form', () => {
 
   it('should display placeholder', () => {
     const { getByText } = render(
-      <Form onSubmit={jest.fn()}>
-        <Select
-          placeholder="Select..."
-          options={[{ id: 'node', title: 'NodeJS' }]}
-          name="tech"
-          label="Tech"
-        />
-      </Form>
+      <Select
+        placeholder="Select..."
+        options={[{ id: 'node', title: 'NodeJS' }]}
+        name="tech"
+        label="Tech"
+      />,
     );
 
     expect(!!getByText('Select...')).toBe(true);
@@ -38,13 +33,11 @@ describe('Form', () => {
 
   it('shoud use default placeholder when no one is defined', () => {
     const { getByDisplayValue } = render(
-      <Form onSubmit={jest.fn()}>
-        <Select
-          options={[{ id: 'node', title: 'NodeJS' }]}
-          name="tech"
-          label="Tech"
-        />
-      </Form>
+      <Select
+        options={[{ id: 'node', title: 'NodeJS' }]}
+        name="tech"
+        label="Tech"
+      />,
     );
 
     expect(!!getByDisplayValue('')).toBe(true);
@@ -56,13 +49,12 @@ describe('Form', () => {
     });
 
     const { getByText, getByTestId } = render(
-      <Form schema={schema} onSubmit={jest.fn()}>
-        <Select
-          options={[{ id: 'node', title: 'NodeJS' }]}
-          name="tech"
-          label="Tech"
-        />
-      </Form>
+      <Select
+        options={[{ id: 'node', title: 'NodeJS' }]}
+        name="tech"
+        label="Tech"
+      />,
+      { schema },
     );
 
     act(() => {
@@ -74,18 +66,16 @@ describe('Form', () => {
 
   it('should return correct selected value', () => {
     const submitMock = jest.fn();
-
     const { getByTestId, getByLabelText } = render(
-      <Form onSubmit={submitMock}>
-        <Select
-          options={[
-            { id: 'node', title: 'NodeJS' },
-            { id: 'react', title: 'ReactJS' },
-          ]}
-          name="tech"
-          label="Tech"
-        />
-      </Form>
+      <Select
+        options={[
+          { id: 'node', title: 'NodeJS' },
+          { id: 'react', title: 'ReactJS' },
+        ]}
+        name="tech"
+        label="Tech"
+      />,
+      { onSubmit: submitMock },
     );
 
     act(() => {
@@ -100,7 +90,7 @@ describe('Form', () => {
       },
       {
         resetForm: expect.any(Function),
-      }
+      },
     );
   });
 

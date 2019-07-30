@@ -1,18 +1,14 @@
 import React from 'react';
-import 'react-testing-library/cleanup-after-each';
-import 'jest-dom/extend-expect';
-import { render } from 'react-testing-library';
 
-import { Form, Scope, Input } from '../lib';
+import { Scope, Input } from '../lib';
+import render from '../lib/RenderTest';
 
-describe('Form', () => {
+describe('RenderTest', () => {
   it('should name form elements based on scope', () => {
     const { container } = render(
-      <Form onSubmit={jest.fn()}>
-        <Scope path="profile">
-          <Input name="name" />
-        </Scope>
-      </Form>,
+      <Scope path="profile">
+        <Input name="name" />
+      </Scope>,
     );
 
     expect(!!container.querySelector("input[name='profile.name']")).toBe(true);
@@ -20,13 +16,11 @@ describe('Form', () => {
 
   it('should concat scope paths', () => {
     const { container } = render(
-      <Form onSubmit={jest.fn()}>
-        <Scope path="profile">
-          <Scope path="user">
-            <Input name="name" />
-          </Scope>
+      <Scope path="profile">
+        <Scope path="user">
+          <Input name="name" />
         </Scope>
-      </Form>,
+      </Scope>,
     );
 
     expect(!!container.querySelector("input[name='profile.user.name']")).toBe(

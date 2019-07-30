@@ -1,29 +1,20 @@
 import React from 'react';
-import 'react-testing-library/cleanup-after-each';
-import 'jest-dom/extend-expect';
-import {
-  act, render, fireEvent, wait,
-} from 'react-testing-library';
+import { act, fireEvent, wait } from 'react-testing-library';
 import * as Yup from 'yup';
 
-import { Form, FileInput } from '../../lib';
+import { FileInput } from '../../lib';
+import render from '../../lib/RenderTest';
 
 describe('Form', () => {
   it('should render file input', () => {
-    const { container } = render(
-      <Form onSubmit={jest.fn()}>
-        <FileInput name="name" label="Name" />
-      </Form>,
-    );
+    const { container } = render(<FileInput name="name" label="Name" />);
 
     expect(!!container.querySelector('input[type=file]')).toBe(true);
   });
 
   it('should display label', () => {
     const { getByText } = render(
-      <Form onSubmit={jest.fn()}>
-        <FileInput name="attach" label="Attachment" />
-      </Form>,
+      <FileInput name="attach" label="Attachment" />,
     );
 
     expect(!!getByText('Attachment')).toBe(true);
@@ -35,9 +26,8 @@ describe('Form', () => {
     });
 
     const { getByText, getByTestId } = render(
-      <Form schema={schema} onSubmit={jest.fn()}>
-        <FileInput name="attach" label="Attachment" />
-      </Form>,
+      <FileInput name="attach" label="Attachment" />,
+      { schema },
     );
 
     act(() => {
@@ -51,9 +41,7 @@ describe('Form', () => {
     const onStartProgressMock = jest.fn();
 
     const { getByLabelText } = render(
-      <Form onSubmit={jest.fn()}>
-        <FileInput name="attach" onStartProgress={onStartProgressMock} />
-      </Form>,
+      <FileInput name="attach" onStartProgress={onStartProgressMock} />,
     );
 
     const file = new Blob(['file contents'], { type: 'text/plain' });
@@ -67,16 +55,15 @@ describe('Form', () => {
     await wait(() => {
       expect(onStartProgressMock).toHaveBeenCalledWith(
         expect.any(Number),
-        expect.any(ProgressEvent)
+        expect.any(ProgressEvent),
       );
     });
   });
 
   it('should reset file input when resetFrom dispatched', async () => {
     const { getByTestId, getByLabelText } = render(
-      <Form onSubmit={(_, { resetForm }) => resetForm()}>
-        <FileInput name="attach" />
-      </Form>,
+      <FileInput name="attach" />,
+      { onSubmit: (_: any, { resetForm }: { resetForm: any }) => resetForm() },
     );
 
     const file = new Blob(['file contents'], { type: 'text/plain' });
