@@ -135,6 +135,8 @@ function App() {
 
 #### Select element
 
+Every `<Select />` element must receive an property with an array of options. Every option inside this array must be an object with `id` and `title` as shown in the example below.
+
 ```js
 import React from 'react';
 import { Form, Select } from '@rocketseat/unform';

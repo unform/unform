@@ -1,19 +1,16 @@
 import React from 'react';
-import 'react-testing-library/cleanup-after-each';
-import 'jest-dom/extend-expect';
 import {
- act, render, fireEvent, wait,
+ act, fireEvent, wait,
 } from 'react-testing-library';
 import * as Yup from 'yup';
 
-import { Form, Textarea } from '../../lib';
+import { Textarea } from '../../lib';
+import render from '../../lib/RenderTest';
 
 describe('Form', () => {
   it('should display label', () => {
     const { getByText } = render(
-      <Form onSubmit={jest.fn()}>
-        <Textarea name="name" label="Name" />
-      </Form>,
+      <Textarea name="name" label="Name" />,
     );
 
     expect(!!getByText('Name')).toBe(true);
@@ -25,9 +22,8 @@ describe('Form', () => {
     });
 
     const { getByText, getByTestId } = render(
-      <Form schema={schema} onSubmit={jest.fn()}>
-        <Textarea name="name" label="Nome" />
-      </Form>,
+      <Textarea name="name" label="Nome" />,
+      { schema },
     );
 
     act(() => {

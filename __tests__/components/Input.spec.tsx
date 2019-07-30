@@ -1,19 +1,14 @@
 import React from 'react';
-import 'react-testing-library/cleanup-after-each';
-import 'jest-dom/extend-expect';
-import {
- act, render, fireEvent, wait,
-} from 'react-testing-library';
+import { act, fireEvent, wait } from 'react-testing-library';
 import * as Yup from 'yup';
 
-import { Form, Input } from '../../lib';
+import { Input } from '../../lib';
+import render from '../../lib/RenderTest';
 
 describe('Form', () => {
   it('should display label', () => {
     const { getByText } = render(
-      <Form onSubmit={jest.fn()}>
-        <Input name="name" label="Name" />
-      </Form>,
+      <Input name="name" label="Name" />,
     );
 
     expect(!!getByText('Name')).toBe(true);
@@ -25,9 +20,8 @@ describe('Form', () => {
     });
 
     const { getByText, getByTestId } = render(
-      <Form schema={schema} onSubmit={jest.fn()}>
-        <Input name="name" label="Nome" />
-      </Form>,
+      <Input name="name" label="Nome" />,
+      { schema },
     );
 
     act(() => {
@@ -39,10 +33,10 @@ describe('Form', () => {
 
   it('should act as textarea when multiline prop is supplied', () => {
     const { container } = render(
-      <Form onSubmit={jest.fn()}>
+      <>
         <Input name="name" label="Name" />
         <Input name="profile" label="Profile" multiline />
-      </Form>,
+      </>,
     );
 
     expect(!!container.querySelector('input[name=name]')).toBe(true);
