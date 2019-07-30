@@ -378,14 +378,15 @@ Sometimes we need to use third-party component in our forms. But don't you worry
 
 Below are some examples with [react-select](https://github.com/JedWatson/react-select) and [react-datepicker](https://github.com/Hacker0x01/react-datepicker/).
 
-Observation: If your are using Eslint + Prettier you need to take care with your useEffect dependecies, probably they will change when you format your code. To fix that you can add a comment on the line above of your useEffect dependencies. Follow the example bellow.
+_Observation_: If your are using Eslint + Prettier you need to take care with your useEffect dependecies, probably they will change when you format your code. To fix that you can add a comment on the line above of your useEffect dependencies. You can justo follow the example bellow.
 
-Example:
+_Example:_
+
 ```js
- useEffect(() => {
-    registerField();
-    // eslint-disable-next-line
-  }, [ref.current, fieldName]);
+useEffect(() => {
+  registerField();
+  // eslint-disable-next-line
+}, [ref.current, fieldName]);
 ```
 
 ### React select
