@@ -32,6 +32,8 @@ Unform is a performance focused library that helps you creating beautiful forms 
     - [Input element](#input-element)
     - [Select element](#select-element)
     - [File Input element](#file-input-element)
+    - [Choice element](#choice-element)
+    - [Check element](#check-element)
   - [Reset Form](#reset-form)
   - [Nested fields](#nested-fields)
   - [Initial data](#initial-data)
@@ -194,6 +196,91 @@ function App() {
   );
 }
 ```
+
+**↑ back to:** [Table of contents](#table-of-contents) · [Guides](#guides)
+
+<hr>
+
+#### Choice element
+
+Choice element represents multiple options elements.
+The `options` property is the options list, and is necessary.
+
+It will display checkboxes or radio buttons based on `multiple` property.
+
+To display multiple checkboxes:
+```js
+import React from 'react';
+import { Form, FileInput } from '@rocketseat/unform';
+
+function App() {
+  function handleSubmit(data) {}
+
+  function handleProgress(progress, event) {}
+
+  return (
+    <Form onSubmit={handleSubmit}>
+      <Choice name="fieldName" options={[
+        { value: '1', label: 'One' },
+        { value: '2', label: 'Two' }
+      ]} multiple />
+
+      <button type="submit">Send</button>
+    </Form>
+  );
+}
+```
+When the value is returned, the format is an array of selected values (*..., fieldName: ['1', '2', ...], ...*).
+
+
+To display multiple radio buttons:
+```js
+import React from 'react';
+import { Form, Choice } from '@rocketseat/unform';
+
+function App() {
+  function handleSubmit(data) {}
+
+  return (
+    <Form onSubmit={handleSubmit}>
+      <Choice name="fieldName" options={[
+        { value: '1', label: 'One' },
+        { value: '2', label: 'Two' }
+      ]} />
+
+      <button type="submit">Send</button>
+    </Form>
+  );
+}
+```
+When the value is returned in this case, the format will be the value selected (*..., fieldName: '1', ...*).
+
+
+**↑ back to:** [Table of contents](#table-of-contents) · [Guides](#guides)
+
+<hr>
+
+#### Check element
+
+This component display only one option in form of a single checkbox.
+
+```js
+import React from 'react';
+import { Form, Check } from '@rocketseat/unform';
+
+function App() {
+  function handleSubmit(data) {}
+
+  return (
+    <Form onSubmit={handleSubmit}>
+      <Check name="fieldName" label="Test Field" />
+
+      <button type="submit">Send</button>
+    </Form>
+  );
+}
+```
+The value of this element will be true if checked or false otherwise (*..., fieldName: true, ...*).
 
 **↑ back to:** [Table of contents](#table-of-contents) · [Guides](#guides)
 
