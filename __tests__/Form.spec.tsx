@@ -161,6 +161,36 @@ describe('Form', () => {
     expect((getByLabelText('tech') as HTMLSelectElement).value).toBe('');
   });
 
+  it('should apply data when resetForm is dispatched with new values', () => {
+    const newData = {
+      name: 'John Doe',
+      tech: 'react'
+    };
+
+    const { getByTestId, getByLabelText } = render(
+      <Form onSubmit={(_, { resetForm }) => resetForm(newData)}>
+        <Input name="name" />
+        <Select
+          name="tech"
+          placeholder="Select..."
+          options={[
+            { id: "node", title: "NodeJS" },
+            { id: "react", title: "ReactJS" },
+          ]}
+        />
+      </Form>
+    );
+
+    getByLabelText('name').setAttribute('value', 'Diego');
+
+    fireEvent.change(getByLabelText('tech'), { target: { value: 'node' } });
+
+    fireEvent.submit(getByTestId('form'));
+
+    expect((getByLabelText('name') as HTMLInputElement).value).toBe('John Doe');
+    expect((getByLabelText('tech') as HTMLSelectElement).value).toBe('react');
+  });
+
   it('should be able to have custom value parser', () => {
     const submitMock = jest.fn();
 
