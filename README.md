@@ -32,6 +32,8 @@ Unform is a performance focused library that helps you creating beautiful forms 
     - [Input element](#input-element)
     - [Select element](#select-element)
     - [File Input element](#file-input-element)
+    - [Choice element](#choice-element)
+    - [Check element](#check-element)
   - [Reset Form](#reset-form)
   - [Nested fields](#nested-fields)
   - [Initial data](#initial-data)
@@ -107,6 +109,10 @@ function App() {
 }
 ```
 
+**↑ back to:** [Table of contents](#table-of-contents) · [Guides](#guides)
+
+<hr>
+
 ### Elements
 
 Unform exposes two elements by default, Input and Select.
@@ -132,6 +138,10 @@ function App() {
   );
 }
 ```
+
+**↑ back to:** [Table of contents](#table-of-contents) · [Guides](#guides)
+
+<hr>
 
 #### Select element
 
@@ -160,6 +170,10 @@ function App() {
 }
 ```
 
+**↑ back to:** [Table of contents](#table-of-contents) · [Guides](#guides)
+
+<hr>
+
 #### File Input element
 
 FileInput components may receive an `onStartProgress` property that will be called when file loading starts.
@@ -183,6 +197,95 @@ function App() {
 }
 ```
 
+**↑ back to:** [Table of contents](#table-of-contents) · [Guides](#guides)
+
+<hr>
+
+#### Choice element
+
+Choice element represents multiple options elements.
+The `options` property is the options list, and is necessary.
+
+It will display checkboxes or radio buttons based on `multiple` property.
+
+To display multiple checkboxes:
+```js
+import React from 'react';
+import { Form, FileInput } from '@rocketseat/unform';
+
+function App() {
+  function handleSubmit(data) {}
+
+  function handleProgress(progress, event) {}
+
+  return (
+    <Form onSubmit={handleSubmit}>
+      <Choice name="fieldName" options={[
+        { value: '1', label: 'One' },
+        { value: '2', label: 'Two' }
+      ]} multiple />
+
+      <button type="submit">Send</button>
+    </Form>
+  );
+}
+```
+When the value is returned, the format is an array of selected values (*..., fieldName: ['1', '2', ...], ...*).
+
+
+To display multiple radio buttons:
+```js
+import React from 'react';
+import { Form, Choice } from '@rocketseat/unform';
+
+function App() {
+  function handleSubmit(data) {}
+
+  return (
+    <Form onSubmit={handleSubmit}>
+      <Choice name="fieldName" options={[
+        { value: '1', label: 'One' },
+        { value: '2', label: 'Two' }
+      ]} />
+
+      <button type="submit">Send</button>
+    </Form>
+  );
+}
+```
+When the value is returned in this case, the format will be the value selected (*..., fieldName: '1', ...*).
+
+
+**↑ back to:** [Table of contents](#table-of-contents) · [Guides](#guides)
+
+<hr>
+
+#### Check element
+
+This component display only one option in form of a single checkbox.
+
+```js
+import React from 'react';
+import { Form, Check } from '@rocketseat/unform';
+
+function App() {
+  function handleSubmit(data) {}
+
+  return (
+    <Form onSubmit={handleSubmit}>
+      <Check name="fieldName" label="Test Field" />
+
+      <button type="submit">Send</button>
+    </Form>
+  );
+}
+```
+The value of this element will be true if checked or false otherwise (*..., fieldName: true, ...*).
+
+**↑ back to:** [Table of contents](#table-of-contents) · [Guides](#guides)
+
+<hr>
+
 ### Reset form
 
 ```js
@@ -204,6 +307,37 @@ function App() {
   );
 }
 ```
+
+_Optional:_ `resetForm` may receive an object that will be applied when the form is reset.
+
+```js
+import React from 'react';
+import { Form, Input } from '@rocketseat/unform';
+
+const options = [
+  { id: 'react', title: 'ReactJS' },
+  { id: 'node', title: 'NodeJS' },
+  { id: 'rn', title: 'React Native' },
+];
+
+function App() {
+  function handleSubmit(data, { resetForm }) {
+    resetForm({ tech: 'react' });
+  }
+
+  return (
+    <Form onSubmit={handleSubmit}>
+      <Select name="tech" options={options} />
+
+      <button type="submit">Send</button>
+    </Form>
+  );
+}
+```
+
+**↑ back to:** [Table of contents](#table-of-contents) · [Guides](#guides)
+
+<hr>
 
 ### Nested fields
 
@@ -238,6 +372,10 @@ function App() {
 }
 ```
 
+**↑ back to:** [Table of contents](#table-of-contents) · [Guides](#guides)
+
+<hr>
+
 ### Initial data
 
 _Optional_: Here you can set what the initial data for each field will be, you store the initial field values into a variable and load it in the `Form` using the prop `initialData`.
@@ -271,6 +409,10 @@ function App() {
 }
 ```
 
+**↑ back to:** [Table of contents](#table-of-contents) · [Guides](#guides)
+
+<hr>
+
 ### Validation
 
 > When you define your schema to validation, only data defined in it will be sent to `data` in `onSubmit` event even though there are other fields.
@@ -303,6 +445,10 @@ function App() {
 }
 ```
 
+**↑ back to:** [Table of contents](#table-of-contents) · [Guides](#guides)
+
+<hr>
+
 ### Styling
 
 The `Form` component exposes two props for that: `style` and `className`. You can use any `CSS-in-JS` library to style your form or just pass the class name string, or even the `style` object directly! For example:
@@ -315,6 +461,10 @@ export default styled(MyForm)`
   background: red;
 `;
 ```
+
+**↑ back to:** [Table of contents](#table-of-contents) · [Guides](#guides)
+
+<hr>
 
 ### Manipulate data
 
@@ -371,6 +521,10 @@ function App() {
   );
 }
 ```
+
+**↑ back to:** [Table of contents](#table-of-contents) · [Guides](#guides)
+
+<hr>
 
 ## Custom elements
 
@@ -448,6 +602,10 @@ export default function ReactSelect({
 }
 ```
 
+**↑ back to:** [Table of contents](#table-of-contents) · [Guides](#guides)
+
+<hr>
+
 ### React datepicker
 
 ```js
@@ -487,6 +645,10 @@ export default function DatePicker({ name }) {
   );
 }
 ```
+
+**↑ back to:** [Table of contents](#table-of-contents) · [Guides](#guides)
+
+<hr>
 
 ## Contributing
 

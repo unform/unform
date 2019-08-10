@@ -12,7 +12,7 @@ const expectCheckbox = (field: HTMLElement, checked: boolean) => {
 describe('Form', () => {
   it('should display labels if specified', () => {
     const { getByText } = render(
-      <Choice name="choice" options={[{ value: '1', label: 'choice_1' }]} />
+      <Choice name="choice" options={[{ value: '1', label: 'choice_1' }]} />,
     );
 
     expect(getByText('choice_1')).toBeDefined();
@@ -20,7 +20,7 @@ describe('Form', () => {
 
   it('should not display labels unless specified', () => {
     const { getByText } = render(
-      <Choice name="choice" options={[{ value: '1' }]} />
+      <Choice name="choice" options={[{ value: '1' }]} />,
     );
 
     expect(() => getByText('choice_1')).toThrow(/^Unable to find an element.*/);
@@ -35,7 +35,7 @@ describe('Form', () => {
 
     const { getByText, getByTestId } = render(
       <Choice name="choice" options={[{ value: '1', label: 'choice_1' }]} />,
-      { schema }
+      { schema },
     );
 
     act(() => {
@@ -60,7 +60,7 @@ describe('Form', () => {
       />,
       {
         onSubmit: submitMock,
-      }
+      },
     );
 
     fireEvent.click(getByLabelText('choice_1'));
@@ -72,7 +72,7 @@ describe('Form', () => {
       },
       {
         resetForm: expect.any(Function),
-      }
+      },
     );
   });
 
@@ -91,7 +91,7 @@ describe('Form', () => {
       />,
       {
         onSubmit: submitMock,
-      }
+      },
     );
 
     fireEvent.click(getByLabelText('choice_1'));
@@ -103,7 +103,7 @@ describe('Form', () => {
       },
       {
         resetForm: expect.any(Function),
-      }
+      },
     );
   });
 
@@ -120,7 +120,7 @@ describe('Form', () => {
       />,
       {
         initialData: { tech: ['node', 'react'] },
-      }
+      },
     );
     expectCheckbox(getByLabelText('NodeJS'), true);
     expectCheckbox(getByLabelText('ReactJS'), true);
@@ -141,7 +141,7 @@ describe('Form', () => {
 
       {
         initialData: { tech: 'react' },
-      }
+      },
     );
     expectCheckbox(getByLabelText('NodeJS'), false);
     expectCheckbox(getByLabelText('ReactJS'), true);
@@ -158,7 +158,7 @@ describe('Form', () => {
           { value: 'react', label: 'ReactJS' },
           { value: 'rn', label: 'React Native' },
         ]}
-      />
+      />,
     );
     expectCheckbox(getByLabelText('NodeJS'), false);
     expectCheckbox(getByLabelText('ReactJS'), false);
@@ -179,7 +179,7 @@ describe('Form', () => {
       {
         onSubmit: (_: any, { resetForm }: { resetForm: any }) => resetForm(),
         initialData: { tech: ['node', 'react'] },
-      }
+      },
     );
 
     fireEvent.submit(getByTestId('form'));

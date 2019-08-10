@@ -20,7 +20,7 @@ interface Context {
 }
 
 interface Helpers {
-  resetForm: () => void;
+  resetForm: (data?: object) => void;
 }
 
 interface FormContent {
@@ -64,13 +64,13 @@ export default function Form({
     return data;
   }
 
-  function resetForm() {
-    fields.forEach(({ ref, path, clearValue }) => {
+  function resetForm(data = {}) {
+    fields.forEach(({ name, ref, path, clearValue }) => {
       if (clearValue) {
-        return clearValue(ref);
+        return clearValue(ref, data[name]);
       }
 
-      return dot.set(path, '', ref as object);
+      return dot.set(path, data[name] ? data[name] : '', ref as object);
     });
   }
 

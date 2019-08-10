@@ -19,7 +19,7 @@ describe('Form', () => {
 
     const { getByText, getByTestId } = render(
       <Check name="check" label="Check" />,
-      { schema }
+      { schema },
     );
 
     fireEvent.submit(getByTestId('form'));
@@ -41,7 +41,7 @@ describe('Form', () => {
       },
       {
         resetForm: expect.any(Function),
-      }
+      },
     );
   });
 
@@ -50,7 +50,7 @@ describe('Form', () => {
 
     const { getByTestId, getByLabelText } = render(
       <Check name="check" label="Check" />,
-      { onSubmit: submitMock }
+      { onSubmit: submitMock },
     );
 
     fireEvent.click(getByLabelText('Check'));
@@ -61,7 +61,7 @@ describe('Form', () => {
       },
       {
         resetForm: expect.any(Function),
-      }
+      },
     );
   });
 
@@ -79,7 +79,7 @@ describe('Form', () => {
       },
       {
         resetForm: expect.any(Function),
-      }
+      },
     );
   });
 
@@ -88,7 +88,7 @@ describe('Form', () => {
       <Check name="check" label="Check" />,
       {
         onSubmit: (_: any, { resetForm }: { resetForm: any }) => resetForm(),
-      }
+      },
     );
 
     fireEvent.submit(getByTestId('form'));
