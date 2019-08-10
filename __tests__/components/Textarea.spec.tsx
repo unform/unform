@@ -19,7 +19,7 @@ describe('Form', () => {
 
     const { getByText, getByTestId } = render(
       <Textarea name="name" label="Nome" />,
-      { schema },
+      { schema }
     );
 
     act(() => {

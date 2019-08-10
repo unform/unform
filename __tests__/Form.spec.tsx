@@ -1,12 +1,8 @@
 import React from 'react';
-import {
- act, fireEvent, wait, getByTestId,
-} from 'react-testing-library';
+import { act, fireEvent, wait, getByTestId } from 'react-testing-library';
 import * as Yup from 'yup';
 
-import {
- Form, Input, Select, Scope,
-} from '../lib';
+import { Form, Input, Select, Scope } from '../lib';
 import render from '../lib/RenderTest';
 import CustomInputClear from './utils/CustomInputClear';
 import CustomInputParse from './utils/CustomInputParse';
@@ -18,7 +14,7 @@ describe('Form', () => {
         <Input name="name" />
         <Input multiline name="bio" />
         <Select name="tech" options={[{ id: 'node', title: 'Node' }]} />
-      </>,
+      </>
     );
 
     expect(!!container.querySelector('input[name=name]')).toBe(true);
@@ -33,7 +29,7 @@ describe('Form', () => {
 
     expect(container.querySelector('input[name=name]')).toHaveAttribute(
       'value',
-      'Diego',
+      'Diego'
     );
   });
 
@@ -50,7 +46,7 @@ describe('Form', () => {
       {
         onSubmit: submitMock,
         initialData: { address: { street: 'John Doe Avenue' } },
-      },
+      }
     );
 
     fireEvent.change(getByLabelText('name'), {
@@ -68,7 +64,7 @@ describe('Form', () => {
       },
       {
         resetForm: expect.any(Function),
-      },
+      }
     );
   });
 
@@ -83,7 +79,7 @@ describe('Form', () => {
     rerender(
       <Form onSubmit={submitMock} initialData={{ another: 'Diego' }}>
         <Input name="another" />
-      </Form>,
+      </Form>
     );
 
     fireEvent.submit(getByTestId('form'));
@@ -94,7 +90,7 @@ describe('Form', () => {
       },
       {
         resetForm: expect.any(Function),
-      },
+      }
     );
   });
 
@@ -118,7 +114,7 @@ describe('Form', () => {
         context: { stripBio: true },
         onSubmit: submitMock,
         initialData: { name: 'Diego', bio: 'Testing' },
-      },
+      }
     );
 
     act(() => {
@@ -130,7 +126,7 @@ describe('Form', () => {
         { name: 'Diego' },
         {
           resetForm: expect.any(Function),
-        },
+        }
       );
     });
   });
@@ -145,7 +141,7 @@ describe('Form', () => {
           options={[{ id: 'node', title: 'NodeJS' }]}
         />
       </>,
-      { onSubmit: (_: any, { resetForm }: { resetForm: any }) => resetForm() },
+      { onSubmit: (_: any, { resetForm }: { resetForm: any }) => resetForm() }
     );
 
     getByLabelText('name').setAttribute('value', 'Diego');
@@ -165,7 +161,7 @@ describe('Form', () => {
       <>
         <CustomInputParse name="name" />
       </>,
-      { onSubmit: submitMock, initialData: { name: 'Diego' } },
+      { onSubmit: submitMock, initialData: { name: 'Diego' } }
     );
 
     fireEvent.submit(getByTestId('form'));
@@ -176,7 +172,7 @@ describe('Form', () => {
       },
       {
         resetForm: expect.any(Function),
-      },
+      }
     );
   });
 
@@ -188,7 +184,7 @@ describe('Form', () => {
       {
         onSubmit: (_: any, { resetForm }: { resetForm: any }) => resetForm(),
         initialData: { name: 'Diego' },
-      },
+      }
     );
 
     fireEvent.submit(getByTestId('form'));
@@ -201,12 +197,12 @@ describe('Form', () => {
       <>
         <Input name="name" />
       </>,
-      { className: 'test-class' },
+      { className: 'test-class' }
     );
 
     expect(getByTestId(container, 'form')).toHaveAttribute(
       'class',
-      'test-class',
+      'test-class'
     );
   });
 });

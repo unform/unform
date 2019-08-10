@@ -8,7 +8,7 @@ describe('RenderTest', () => {
     const { container } = render(
       <Scope path="profile">
         <Input name="name" />
-      </Scope>,
+      </Scope>
     );
 
     expect(!!container.querySelector("input[name='profile.name']")).toBe(true);
@@ -20,11 +20,11 @@ describe('RenderTest', () => {
         <Scope path="user">
           <Input name="name" />
         </Scope>
-      </Scope>,
+      </Scope>
     );
 
     expect(!!container.querySelector("input[name='profile.user.name']")).toBe(
-      true,
+      true
     );
   });
 });
