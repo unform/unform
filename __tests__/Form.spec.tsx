@@ -157,21 +157,25 @@ describe('Form', () => {
   it('should apply data when resetForm is dispatched with new values', () => {
     const newData = {
       name: 'John Doe',
-      tech: 'react'
+      tech: 'react',
     };
 
     const { getByTestId, getByLabelText } = render(
-      <Form onSubmit={(_, { resetForm }) => resetForm(newData)}>
+      <>
         <Input name="name" />
         <Select
           name="tech"
           placeholder="Select..."
           options={[
-            { id: "node", title: "NodeJS" },
-            { id: "react", title: "ReactJS" },
+            { id: 'node', title: 'NodeJS' },
+            { id: 'react', title: 'ReactJS' },
           ]}
         />
-      </Form>
+      </>,
+      {
+        onSubmit: (_: any, { resetForm }: { resetForm: any }) =>
+          resetForm(newData),
+      }
     );
 
     getByLabelText('name').setAttribute('value', 'Diego');
