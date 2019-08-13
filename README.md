@@ -381,11 +381,11 @@ Below are some examples with [react-select](https://github.com/JedWatson/react-s
 Observation: If your are using Eslint + Prettier you need to take care with your useEffect dependecies, probably they will change when you format your code. To fix that you can add a comment on the line above of your useEffect dependencies. Follow the example bellow.
 
 Example:
+
 ```js
- useEffect(() => {
-    registerField();
-    // eslint-disable-next-line
-  }, [ref.current, fieldName]);
+useEffect(() => {
+  registerField();
+}, [ref.current, fieldName]); // eslint-disable-line
 ```
 
 ### React select
@@ -424,7 +424,7 @@ export default function ReactSelect({
         selectRef.select.clearValue();
       },
     });
-  }, [ref.current, fieldName]);
+  }, [ref.current, fieldName]); // eslint-disable-line
 
   function getDefaultValue() {
     if (!defaultValue) return null;
@@ -482,7 +482,7 @@ export default function DatePicker({ name }) {
         pickerRef.clear();
       },
     });
-  }, [ref.current, fieldName]);
+  }, [ref.current, fieldName]); // eslint-disable-line
 
   return (
     <>
