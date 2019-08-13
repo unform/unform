@@ -1,18 +1,13 @@
 import React from 'react';
-import 'react-testing-library/cleanup-after-each';
-import 'jest-dom/extend-expect';
-import { render, fireEvent, wait } from 'react-testing-library';
+import { fireEvent, wait } from 'react-testing-library';
 import * as Yup from 'yup';
 
-import { Form, Check } from '../../lib';
+import { Check } from '../../lib';
+import render from '../../lib/RenderTest';
 
 describe('Form', () => {
   it('should display label', () => {
-    const { getByText } = render(
-      <Form onSubmit={jest.fn()}>
-        <Check name="check" label="Check" />
-      </Form>
-    );
+    const { getByText } = render(<Check name="check" label="Check" />);
 
     expect(!!getByText('Check')).toBe(true);
   });
@@ -23,9 +18,8 @@ describe('Form', () => {
     });
 
     const { getByText, getByTestId } = render(
-      <Form schema={schema} onSubmit={jest.fn()}>
-        <Check name="check" label="Check" />
-      </Form>
+      <Check name="check" label="Check" />,
+      { schema },
     );
 
     fireEvent.submit(getByTestId('form'));
@@ -35,11 +29,10 @@ describe('Form', () => {
   it('should return true if default value is true', () => {
     const submitMock = jest.fn();
 
-    const { getByTestId } = render(
-      <Form onSubmit={submitMock} initialData={{ check: true }}>
-        <Check name="check" label="Check" />
-      </Form>
-    );
+    const { getByTestId } = render(<Check name="check" label="Check" />, {
+      initialData: { check: true },
+      onSubmit: submitMock,
+    });
 
     fireEvent.submit(getByTestId('form'));
     expect(submitMock).toHaveBeenCalledWith(
@@ -48,7 +41,7 @@ describe('Form', () => {
       },
       {
         resetForm: expect.any(Function),
-      }
+      },
     );
   });
 
@@ -56,9 +49,8 @@ describe('Form', () => {
     const submitMock = jest.fn();
 
     const { getByTestId, getByLabelText } = render(
-      <Form onSubmit={submitMock}>
-        <Check name="check" label="Check" />
-      </Form>
+      <Check name="check" label="Check" />,
+      { onSubmit: submitMock },
     );
 
     fireEvent.click(getByLabelText('Check'));
@@ -69,18 +61,16 @@ describe('Form', () => {
       },
       {
         resetForm: expect.any(Function),
-      }
+      },
     );
   });
 
   it('should return false unless selected', () => {
     const submitMock = jest.fn();
 
-    const { getByTestId } = render(
-      <Form onSubmit={submitMock}>
-        <Check name="check" label="Check" />
-      </Form>
-    );
+    const { getByTestId } = render(<Check name="check" label="Check" />, {
+      onSubmit: submitMock,
+    });
 
     fireEvent.submit(getByTestId('form'));
     expect(submitMock).toHaveBeenCalledWith(
@@ -89,15 +79,16 @@ describe('Form', () => {
       },
       {
         resetForm: expect.any(Function),
-      }
+      },
     );
   });
 
   it('should reset state after submit', () => {
     const { getByTestId, getByLabelText } = render(
-      <Form onSubmit={(_, { resetForm }) => resetForm()}>
-        <Check name="check" label="Check" />
-      </Form>
+      <Check name="check" label="Check" />,
+      {
+        onSubmit: (_: any, { resetForm }: { resetForm: any }) => resetForm(),
+      },
     );
 
     fireEvent.submit(getByTestId('form'));

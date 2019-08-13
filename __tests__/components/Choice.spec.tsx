@@ -1,10 +1,9 @@
 import React from 'react';
-import 'react-testing-library/cleanup-after-each';
-import 'jest-dom/extend-expect';
-import { render, fireEvent, wait, act } from 'react-testing-library';
+import { fireEvent, wait, act } from 'react-testing-library';
 import * as Yup from 'yup';
 
-import { Form, Choice } from '../../lib';
+import { Choice } from '../../lib';
+import render from '../../lib/RenderTest';
 
 const expectCheckbox = (field: HTMLElement, checked: boolean) => {
   expect((field as HTMLInputElement).checked).toBe(checked);
@@ -13,9 +12,7 @@ const expectCheckbox = (field: HTMLElement, checked: boolean) => {
 describe('Form', () => {
   it('should display labels if specified', () => {
     const { getByText } = render(
-      <Form onSubmit={jest.fn()}>
-        <Choice name="choice" options={[{ value: '1', label: 'choice_1' }]} />
-      </Form>
+      <Choice name="choice" options={[{ value: '1', label: 'choice_1' }]} />,
     );
 
     expect(getByText('choice_1')).toBeDefined();
@@ -23,9 +20,7 @@ describe('Form', () => {
 
   it('should not display labels unless specified', () => {
     const { getByText } = render(
-      <Form onSubmit={jest.fn()}>
-        <Choice name="choice" options={[{ value: '1' }]} />
-      </Form>
+      <Choice name="choice" options={[{ value: '1' }]} />,
     );
 
     expect(() => getByText('choice_1')).toThrow(/^Unable to find an element.*/);
@@ -39,9 +34,8 @@ describe('Form', () => {
     });
 
     const { getByText, getByTestId } = render(
-      <Form schema={schema} onSubmit={jest.fn()}>
-        <Choice name="choice" options={[{ value: '1', label: 'choice_1' }]} />
-      </Form>
+      <Choice name="choice" options={[{ value: '1', label: 'choice_1' }]} />,
+      { schema },
     );
 
     act(() => {
@@ -54,18 +48,19 @@ describe('Form', () => {
     const submitMock = jest.fn();
 
     const { getByTestId, getByLabelText } = render(
-      <Form onSubmit={submitMock}>
-        <Choice
-          name="choice"
-          options={[
-            { value: '1', label: 'choice_1' },
-            { value: '2', label: 'choice_2' },
-            { value: '3', label: 'choice_3' },
-            { value: '4', label: 'choice_4' },
-          ]}
-          multiple
-        />
-      </Form>
+      <Choice
+        name="choice"
+        options={[
+          { value: '1', label: 'choice_1' },
+          { value: '2', label: 'choice_2' },
+          { value: '3', label: 'choice_3' },
+          { value: '4', label: 'choice_4' },
+        ]}
+        multiple
+      />,
+      {
+        onSubmit: submitMock,
+      },
     );
 
     fireEvent.click(getByLabelText('choice_1'));
@@ -77,7 +72,7 @@ describe('Form', () => {
       },
       {
         resetForm: expect.any(Function),
-      }
+      },
     );
   });
 
@@ -85,17 +80,18 @@ describe('Form', () => {
     const submitMock = jest.fn();
 
     const { getByTestId, getByLabelText } = render(
-      <Form onSubmit={submitMock}>
-        <Choice
-          name="choice"
-          options={[
-            { value: '1', label: 'choice_1' },
-            { value: '2', label: 'choice_2' },
-            { value: '3', label: 'choice_3' },
-            { value: '4', label: 'choice_4' },
-          ]}
-        />
-      </Form>
+      <Choice
+        name="choice"
+        options={[
+          { value: '1', label: 'choice_1' },
+          { value: '2', label: 'choice_2' },
+          { value: '3', label: 'choice_3' },
+          { value: '4', label: 'choice_4' },
+        ]}
+      />,
+      {
+        onSubmit: submitMock,
+      },
     );
 
     fireEvent.click(getByLabelText('choice_1'));
@@ -107,23 +103,24 @@ describe('Form', () => {
       },
       {
         resetForm: expect.any(Function),
-      }
+      },
     );
   });
 
   it('should default check field if initialData supplied as array', async () => {
     const { getByLabelText } = render(
-      <Form onSubmit={() => {}} initialData={{ tech: ['node', 'react'] }}>
-        <Choice
-          name="tech"
-          multiple
-          options={[
-            { value: 'node', label: 'NodeJS' },
-            { value: 'react', label: 'ReactJS' },
-            { value: 'rn', label: 'React Native' },
-          ]}
-        />
-      </Form>
+      <Choice
+        name="tech"
+        multiple
+        options={[
+          { value: 'node', label: 'NodeJS' },
+          { value: 'react', label: 'ReactJS' },
+          { value: 'rn', label: 'React Native' },
+        ]}
+      />,
+      {
+        initialData: { tech: ['node', 'react'] },
+      },
     );
     expectCheckbox(getByLabelText('NodeJS'), true);
     expectCheckbox(getByLabelText('ReactJS'), true);
@@ -132,17 +129,19 @@ describe('Form', () => {
 
   it('should default check field if initialData supplied as string', async () => {
     const { getByLabelText } = render(
-      <Form onSubmit={() => {}} initialData={{ tech: 'react' }}>
-        <Choice
-          name="tech"
-          multiple
-          options={[
-            { value: 'node', label: 'NodeJS' },
-            { value: 'react', label: 'ReactJS' },
-            { value: 'rn', label: 'React Native' },
-          ]}
-        />
-      </Form>
+      <Choice
+        name="tech"
+        multiple
+        options={[
+          { value: 'node', label: 'NodeJS' },
+          { value: 'react', label: 'ReactJS' },
+          { value: 'rn', label: 'React Native' },
+        ]}
+      />,
+
+      {
+        initialData: { tech: 'react' },
+      },
     );
     expectCheckbox(getByLabelText('NodeJS'), false);
     expectCheckbox(getByLabelText('ReactJS'), true);
@@ -151,17 +150,15 @@ describe('Form', () => {
 
   it('should not default check field unless initialData supplied', async () => {
     const { getByLabelText } = render(
-      <Form onSubmit={() => {}}>
-        <Choice
-          name="tech"
-          multiple
-          options={[
-            { value: 'node', label: 'NodeJS' },
-            { value: 'react', label: 'ReactJS' },
-            { value: 'rn', label: 'React Native' },
-          ]}
-        />
-      </Form>
+      <Choice
+        name="tech"
+        multiple
+        options={[
+          { value: 'node', label: 'NodeJS' },
+          { value: 'react', label: 'ReactJS' },
+          { value: 'rn', label: 'React Native' },
+        ]}
+      />,
     );
     expectCheckbox(getByLabelText('NodeJS'), false);
     expectCheckbox(getByLabelText('ReactJS'), false);
@@ -170,20 +167,19 @@ describe('Form', () => {
 
   it('should reset state after submit', () => {
     const { getByTestId, getByLabelText } = render(
-      <Form
-        onSubmit={(_, { resetForm }) => resetForm()}
-        initialData={{ tech: ['node', 'react'] }}
-      >
-        <Choice
-          name="tech"
-          multiple
-          options={[
-            { value: 'node', label: 'NodeJS' },
-            { value: 'react', label: 'ReactJS' },
-            { value: 'rn', label: 'React Native' },
-          ]}
-        />
-      </Form>
+      <Choice
+        name="tech"
+        multiple
+        options={[
+          { value: 'node', label: 'NodeJS' },
+          { value: 'react', label: 'ReactJS' },
+          { value: 'rn', label: 'React Native' },
+        ]}
+      />,
+      {
+        onSubmit: (_: any, { resetForm }: { resetForm: any }) => resetForm(),
+        initialData: { tech: ['node', 'react'] },
+      },
     );
 
     fireEvent.submit(getByTestId('form'));
