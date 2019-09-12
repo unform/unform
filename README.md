@@ -211,7 +211,7 @@ It will display checkboxes or radio buttons based on `multiple` property.
 To display multiple checkboxes:
 ```js
 import React from 'react';
-import { Form, FileInput } from '@rocketseat/unform';
+import { Form, Choice } from '@rocketseat/unform';
 
 function App() {
   function handleSubmit(data) {}
