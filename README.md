@@ -46,6 +46,7 @@ Unform is a performance focused library that helps you creating beautiful forms 
 - [Contributing](#contributing)
   - [Contribution Guidelines](#contribution-guidelines)
   - [Code of Conduct](#code-of-conduct)
+- [Need help?](#need-help?)
 - [License](#license)
 
 ## Key features
@@ -209,6 +210,7 @@ The `options` property is the options list, and is necessary.
 It will display checkboxes or radio buttons based on `multiple` property.
 
 To display multiple checkboxes:
+
 ```js
 import React from 'react';
 import { Form, Choice } from '@rocketseat/unform';
@@ -220,20 +222,22 @@ function App() {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Choice name="fieldName" options={[
-        { value: '1', label: 'One' },
-        { value: '2', label: 'Two' }
-      ]} multiple />
+      <Choice
+        name="fieldName"
+        options={[{ value: '1', label: 'One' }, { value: '2', label: 'Two' }]}
+        multiple
+      />
 
       <button type="submit">Send</button>
     </Form>
   );
 }
 ```
-When the value is returned, the format is an array of selected values (*..., fieldName: ['1', '2', ...], ...*).
 
+When the value is returned, the format is an array of selected values (_..., fieldName: ['1', '2', ...], ..._).
 
 To display multiple radio buttons:
+
 ```js
 import React from 'react';
 import { Form, Choice } from '@rocketseat/unform';
@@ -241,20 +245,22 @@ import { Form, Choice } from '@rocketseat/unform';
 function App() {
   function handleSubmit(data) {}
 
+  function handleProgress(progress, event) {}
+
   return (
     <Form onSubmit={handleSubmit}>
-      <Choice name="fieldName" options={[
-        { value: '1', label: 'One' },
-        { value: '2', label: 'Two' }
-      ]} />
+      <Choice
+        name="fieldName"
+        options={[{ value: '1', label: 'One' }, { value: '2', label: 'Two' }]}
+      />
 
       <button type="submit">Send</button>
     </Form>
   );
 }
 ```
-When the value is returned in this case, the format will be the value selected (*..., fieldName: '1', ...*).
 
+When the value is returned in this case, the format will be the value selected (_..., fieldName: '1', ..._).
 
 **↑ back to:** [Table of contents](#table-of-contents) · [Guides](#guides)
 
@@ -280,7 +286,8 @@ function App() {
   );
 }
 ```
-The value of this element will be true if checked or false otherwise (*..., fieldName: true, ...*).
+
+The value of this element will be true if checked or false otherwise (_..., fieldName: true, ..._).
 
 **↑ back to:** [Table of contents](#table-of-contents) · [Guides](#guides)
 
@@ -671,6 +678,10 @@ Take a moment to read about our [Contribution Guidelines](/.github/CONTRIBUTING.
 ### Code of Conduct
 
 We expect you to follow our [Code of Conduct](/.github/CODE_OF_CONDUCT.md). You can read it to understand what kind of behaviour will and will not be tolerated.
+
+## Need help?
+
+If you need help with Unform, feel free to open an issue with a description of the problem you're facing or, if you prefer, you can chat with us on our [Discord Community](https://discordapp.com/invite/gCRAFhc).
 
 ## License
 
