@@ -245,6 +245,8 @@ import { Form, Choice } from '@rocketseat/unform';
 function App() {
   function handleSubmit(data) {}
 
+  function handleProgress(progress, event) {}
+
   return (
     <Form onSubmit={handleSubmit}>
       <Choice
