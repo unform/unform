@@ -1,6 +1,6 @@
 <h1 align="center">
 
-![](assets/unform.png)
+![](.github/assets/logo.png)
 
 </h1>
 
@@ -46,7 +46,7 @@ Unform is a performance focused library that helps you creating beautiful forms 
 - [Contributing](#contributing)
   - [Contribution Guidelines](#contribution-guidelines)
   - [Code of Conduct](#code-of-conduct)
-- [Need help?](#need-help?)
+- [Need help?](#need-help)
 - [License](#license)
 
 ## Key features
