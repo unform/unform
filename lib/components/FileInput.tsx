@@ -40,6 +40,7 @@ export default function Input({
     id: fieldName,
     name: fieldName,
     'aria-label': fieldName,
+    'aria-invalid': !!error,
   };
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {

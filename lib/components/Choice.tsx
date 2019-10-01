@@ -67,6 +67,7 @@ export default function Choice({
               id={checkboxId}
               name={fieldName}
               aria-label={checkboxId}
+              aria-invalid={!!error}
               value={value}
               defaultChecked={checked(value)}
             />

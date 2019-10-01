@@ -36,6 +36,7 @@ export default function Input({ name, label, ...rest }: InputProps) {
     name: fieldName,
     type: 'checkbox',
     'aria-label': fieldName,
+    'aria-invalid': !!error,
     defaultChecked: defaultValue,
   };
 

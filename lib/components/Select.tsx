@@ -52,6 +52,7 @@ function Select({
         name={fieldName}
         defaultValue={initialData || defaultValue}
         aria-label={fieldName}
+        aria-invalid={!!error}
         ref={ref}
       >
         <option value={defaultValue} disabled hidden>
