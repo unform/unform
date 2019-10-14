@@ -567,7 +567,8 @@ export default function ReactSelect({
   const ref = useRef(null);
   const { fieldName, registerField, defaultValue, error } = useField(name);
 
-  function parseSelectValue(selectValue) {
+  function parseSelectValue(selectRef) {
+    const selectValue = selectRef.state.value
     if (!multiple) {
       return selectValue ? selectValue.id : '';
     }
