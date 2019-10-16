@@ -42,7 +42,7 @@ Unform is a performance focused library that helps you creating beautiful forms 
   - [Validation](#validation)
   - [Styling](#styling)
   - [Manipulate data](#manipulate-data)
-  - [Check if it's submitting and status](#check-if-its-submitting-and-status)
+  - [Check if the form is submitting and status](#check-if-the-form-is-submitting-and-status)
 - [Custom elements](#custom-elements)
   - [React select](#react-select)
   - [React datepicker](#react-datepicker)
@@ -536,7 +536,7 @@ function App() {
 
 <hr>
 
-### Check if it's submitting and status
+### Check if the form is submitting and status
 
 Just like Formik, we expose properties on the global status of the form and its submission state.
 You can use it like so:
