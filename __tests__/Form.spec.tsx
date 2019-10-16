@@ -112,7 +112,7 @@ describe('Form', () => {
     jest.useRealTimers();
   });
 
-  it('should set a status on the form', () => {
+  it('should set a status on the form if it succeed', () => {
     const statusContent = 'it works!';
     const submitMock = () => statusContent;
 
@@ -122,6 +122,34 @@ describe('Form', () => {
       return (
         <>
           {status && <span data-testid="status">{status}</span>}
+          <Input name="name" />
+        </>
+      );
+    };
+
+    const { getByTestId, baseElement } = render(<Content />, {
+      onSubmit: submitMock,
+      initialData: { name: 'Zaguini' },
+    });
+
+    const form = getByTestId('form');
+
+    fireEvent.submit(form);
+    wait(() => expect(getByText(baseElement, statusContent)).toBe(true));
+  });
+
+  it('should set a status on the form if it fails', () => {
+    const statusContent = 'it works!';
+    const submitMock = () => {
+      throw new Error(statusContent);
+    };
+
+    const Content = () => {
+      const { status } = useFormContext();
+
+      return (
+        <>
+          {status && <span data-testid="status">{status.message}</span>}
           <Input name="name" />
         </>
       );
