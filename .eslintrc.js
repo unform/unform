@@ -20,13 +20,21 @@ module.exports = {
     project: resolve(__dirname, 'tsconfig.json'),
   },
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'import', 'import-helpers', 'react-hooks', 'jest', 'prettier'],
+  plugins: [
+    '@typescript-eslint',
+    'import',
+    'import-helpers',
+    'react-hooks',
+    'jest',
+    'prettier',
+  ],
   extends: [
     'airbnb',
     'plugin:@typescript-eslint/recommended',
     'prettier/@typescript-eslint',
   ],
   rules: {
+    'object-curly-newline': 'off',
     'class-methods-use-this': 'off',
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/no-var-requires': 'off',
@@ -53,7 +61,7 @@ module.exports = {
     'jsx-a11y/label-has-for': 'off',
     'import/prefer-default-export': 'off',
     'react-hooks/rules-of-hooks': 'error',
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
   },
   settings: {
     'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
@@ -61,7 +69,7 @@ module.exports = {
       '@typescript-eslint/parser': ['.ts', '.tsx'],
     },
     'import/resolver': {
-      typescript: {}
+      typescript: {},
     },
   },
 };

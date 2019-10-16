@@ -22,6 +22,8 @@ Unform is a performance focused library that helps you creating beautiful forms 
 
 ## Table of contents
 
+- [Overview](#overview)
+- [Table of contents](#table-of-contents)
 - [Key features](#key-features)
 - [Why not Formik, Redux Form or another library?](#why-not-formik-redux-form-or-another-library)
 - [Roadmap](#roadmap)
@@ -34,12 +36,13 @@ Unform is a performance focused library that helps you creating beautiful forms 
     - [File Input element](#file-input-element)
     - [Choice element](#choice-element)
     - [Check element](#check-element)
-  - [Reset Form](#reset-form)
+  - [Reset form](#reset-form)
   - [Nested fields](#nested-fields)
   - [Initial data](#initial-data)
   - [Validation](#validation)
   - [Styling](#styling)
   - [Manipulate data](#manipulate-data)
+  - [Check if it's submitting and status](#check-if-its-submitting-and-status)
 - [Custom elements](#custom-elements)
   - [React select](#react-select)
   - [React datepicker](#react-datepicker)
@@ -533,6 +536,53 @@ function App() {
 
 <hr>
 
+### Check if it's submitting and status
+
+Just like Formik, we expose properties on the global status of the form and its submission state.
+You can use it like so:
+
+```js
+const { useFormContext } from '@rocketseat/unform';
+
+function FormBody() {
+  const { status, isSubmitting } = useFormContext();
+
+  return (
+    <>
+      {status && <span>{status}</span>}
+      <Input name="ordinaryInput" />
+      <button type="submit" disabled={isSubmitting}>Enviar</button>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <Form>
+      <FormBody />
+    </Form>
+  )
+}
+```
+
+The `status` property is useful when you want to set some global state, for example after an API response and you want to display feedback to the user. There's also a setter (`setStatus`) that you can use freely.
+
+The `isSubmitting` property is set to true before the `onSubmit` is ran and set to `false` after it finishes. It's worth saying that you can make `onSubmit` as a `Promise` so it can wait until all promises finished executing. Example of a submit handler with `Promise`:
+
+```js
+async function onSubmit(values) {
+  await sendToBackEnd(values);
+
+  return 'Success!';
+}
+```
+
+In this example, the `isSubmitting` flag will be `true` until it finished executing (e.g. the Promise succeed or fail). At the end, the "Success!" string will be set as the `status` property. Worth telling that the `status` will be set as the error too, so be sure to handle the errors in your handler.
+
+**↑ back to:** [Table of contents](#table-of-contents) · [Guides](#guides)
+
+<hr>
+
 ## Custom elements
 
 Sometimes we need to use third-party component in our forms. But don't you worry, Unform has your back! You can do that via `useField` which provides all the resources you need to use your component with Unform.
@@ -568,7 +618,7 @@ export default function ReactSelect({
   const { fieldName, registerField, defaultValue, error } = useField(name);
 
   function parseSelectValue(selectRef) {
-    const selectValue = selectRef.state.value
+    const selectValue = selectRef.state.value;
     if (!multiple) {
       return selectValue ? selectValue.id : '';
     }

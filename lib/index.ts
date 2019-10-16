@@ -2,6 +2,7 @@
  * Hooks
  */
 export { default as useField } from './useField';
+export { default as useFormContext } from './useFormContext';
 
 /**
  * Main components

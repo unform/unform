@@ -52,6 +52,7 @@
     "@commitlint/travis-cli": "^7.6.1",
     "@types/dot-object": "^1.7.0",
     "@types/jest": "^24.0.11",
+    "@types/lodash.pick": "^4.4.6",
     "@types/react": "^16.8.13",
     "@types/react-dom": "^16.8.4",
     "@types/react-test-renderer": "^16.8.1",
@@ -99,5 +100,8 @@
     "react": ">= 16.8.0",
     "react-dom": ">= 16.8.0",
     "yup": ">= 0.27.0"
+  },
+  "dependencies": {
+    "lodash.pick": "^4.4.0"
   }
 }

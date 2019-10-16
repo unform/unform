@@ -27,12 +27,14 @@ interface FormContent {
   [key: string]: any;
 }
 
-export interface SubmitHandler<T = FormContent> {
-  (data: T, helpers: Helpers): void;
-}
+export type SubmitHandler<T = FormContent, Status = any> = (
+  data: T,
+  helpers: Helpers
+) => Status | Promise<Status>;
 
 export interface FormProps extends Omit<HTMLFormProps, 'onSubmit'> {
   initialData?: object;
+  initialStatus?: any;
   children: React.ReactNode;
   context?: Context;
   schema?: ObjectSchema<object>;
@@ -41,12 +43,15 @@ export interface FormProps extends Omit<HTMLFormProps, 'onSubmit'> {
 
 export default function Form({
   initialData = {},
+  initialStatus,
   children,
   schema,
   context = {},
   onSubmit,
   ...rest
 }: FormProps) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<any>(initialStatus);
   const [errors, setErrors] = useState<UnformErrors>({});
   const [fields, setFields] = useState<UnformField[]>([]);
 
@@ -94,7 +99,6 @@ export default function Form({
       }
 
       setErrors({});
-      onSubmit(data, { resetForm });
     } catch (err) {
       const validationErrors: UnformErrors = {};
 
@@ -108,7 +112,19 @@ export default function Form({
       });
 
       setErrors(validationErrors);
+
+      return;
     }
+
+    setIsSubmitting(true);
+
+    try {
+      setStatus(await onSubmit(data, { resetForm }));
+    } catch (err) {
+      setStatus(err);
+    }
+
+    setIsSubmitting(false);
   }
 
   function registerField(field: UnformField) {
@@ -127,6 +143,9 @@ export default function Form({
         scopePath: '',
         registerField,
         unregisterField,
+        status,
+        setStatus,
+        isSubmitting,
       }}
     >
       <form {...rest} data-testid="form" onSubmit={handleSubmit}>

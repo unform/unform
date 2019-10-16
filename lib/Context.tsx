@@ -10,4 +10,7 @@ export default createContext<UnformContext>({
   scopePath: '',
   registerField: () => {},
   unregisterField: () => {},
+  status: undefined,
+  setStatus: () => {},
+  isSubmitting: false,
 });

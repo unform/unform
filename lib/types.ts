@@ -21,6 +21,9 @@ export interface UnformContext {
   scopePath: string;
   registerField: (field: UnformField) => void;
   unregisterField: (name: string) => void;
+  status?: any;
+  setStatus: (status?: any) => void;
+  isSubmitting: boolean;
 }
 
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
