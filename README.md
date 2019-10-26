@@ -689,6 +689,10 @@ To help you get your feet wet and get you familiar with our contribution process
 
 If you need help with Unform, feel free to open an issue with a description of the problem you're facing or, if you prefer, you can chat with us on our [Discord Community](https://discordapp.com/invite/gCRAFhc).
 
+### Good First Issues
+
+To help you get your feet wet and get you familiar with our contribution process, we have a list of [good first issue](https://github.com/rocketseat/unform/labels/good%20first%20issue) that contain bugs which have a relatively limited scope. This is a great place to get started.
+
 ## License
 
 MIT © [Rocketseat](https://github.com/Rocketseat)
