@@ -681,6 +681,10 @@ Take a moment to read about our [Contribution Guidelines](/.github/CONTRIBUTING.
 
 We expect you to follow our [Code of Conduct](/.github/CODE_OF_CONDUCT.md). You can read it to understand what kind of behaviour will and will not be tolerated.
 
+**↑ back to:** [Table of contents](#table-of-contents) · [Guides](#guides)
+
+<hr>
+
 ## Good First Issues
 
 To help you get your feet wet and get you familiar with our contribution process, we have a list of [good first issue](https://github.com/rocketseat/unform/labels/good%20first%20issue) that contain bugs which have a relatively limited scope. This is a great place to get started.
