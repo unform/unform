@@ -46,6 +46,7 @@ Unform is a performance focused library that helps you creating beautiful forms 
 - [Contributing](#contributing)
   - [Contribution Guidelines](#contribution-guidelines)
   - [Code of Conduct](#code-of-conduct)
+- [Good First Issues](#good-first-issues)
 - [Need help?](#need-help)
 - [License](#license)
 
@@ -679,6 +680,10 @@ Take a moment to read about our [Contribution Guidelines](/.github/CONTRIBUTING.
 ### Code of Conduct
 
 We expect you to follow our [Code of Conduct](/.github/CODE_OF_CONDUCT.md). You can read it to understand what kind of behaviour will and will not be tolerated.
+
+## Good First Issues
+
+To help you get your feet wet and get you familiar with our contribution process, we have a list of [good first issue](https://github.com/rocketseat/unform/labels/good%20first%20issue) that contain bugs which have a relatively limited scope. This is a great place to get started.
 
 ## Need help?
 
