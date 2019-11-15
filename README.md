@@ -5,7 +5,7 @@
 </h1>
 
 <h3 align="center">
-Create ReactJS uncontrolled form structures with nested fields, validations and much more! 🚀
+Create uncontrolled form structures in ReactJS, with nested fields, validations and much more! 🚀
 </h3>
 
 <div align="center">
@@ -18,7 +18,7 @@ Create ReactJS uncontrolled form structures with nested fields, validations and 
 
 ## Overview
 
-Unform is a performance focused library that helps you creating beautiful forms in React with the power of uncontrolled components performance and React Hooks.
+Unform is a performance-focused library that helps you create beautiful forms in React with the power of uncontrolled components and React Hooks.
 
 ## Table of contents
 
@@ -54,12 +54,12 @@ Unform is a performance focused library that helps you creating beautiful forms 
 - Beautiful syntax;
 - React Hooks 😍;
 - Performance focused;
-- Use of uncontrolled components;
+- Uses uncontrolled components;
 - Integration with pickers, dropdowns and other libraries;
 
 ## Why not Formik, Redux Form or another library?
 
-Formik/Redux Form has a really great syntax while it has a really poor support to uncontrolled components and deep nested data structures. With unform it's easy to create forms with complex relationships without losing performance.
+Formik/Redux Form has a really great syntax, yet mediocre support for uncontrolled components and deep-nested data structures. Unform easily let's you create forms with complex relationships and no performance loss.
 
 <!-- ADD GIF EXAMPLE -->
 
@@ -81,7 +81,7 @@ yarn add @rocketseat/unform
 
 ### Basics
 
-Unform exposes two default form elements: `<Input />` and `<Select />`. Currently, `<Select />` element does not support multiple values, you can use [React Select](#react-select) example to achieve that.
+Unform exposes two default form elements: `<Input />` and `<Select />`. Currently, `<Select />` element doesn't support multiple values (you can use the [React Select](#react-select) example to achieve that).
 
 ```js
 import React from 'react';
@@ -116,11 +116,11 @@ function App() {
 
 ### Elements
 
-Unform exposes two elements by default, Input and Select.
+Unform exposes two elements by default: Input and Select.
 
 #### Input element
 
-Input elements can receive a `multiline` prop that will render a textarea instead.
+Input elements can receive a `multiline` prop that will render as a textarea.
 
 ```js
 import React from 'react';
@@ -146,7 +146,7 @@ function App() {
 
 #### Select element
 
-Every `<Select />` element must receive an property with an array of options. Every option inside this array must be an object with `id` and `title` as shown in the example below.
+Every `<Select />` element must receive an property with an array of options. Every option inside this array must be an object with an `id` and a `title`, like the example below.
 
 ```js
 import React from 'react';
@@ -205,9 +205,9 @@ function App() {
 #### Choice element
 
 Choice element represents multiple options elements.
-The `options` property is the options list, and is necessary.
+The `options` property is the options list, and it is required.
 
-It will display checkboxes or radio buttons based on `multiple` property.
+It will display checkboxes or radio buttons based on the `multiple` property.
 
 To display multiple checkboxes:
 
@@ -234,7 +234,7 @@ function App() {
 }
 ```
 
-When the value is returned, the format is an array of selected values (_..., fieldName: ['1', '2', ...], ..._).
+The value is returned as an array of selected values (_..., fieldName: ['1', '2', ...], ..._).
 
 To display multiple radio buttons:
 
@@ -260,7 +260,7 @@ function App() {
 }
 ```
 
-When the value is returned in this case, the format will be the value selected (_..., fieldName: '1', ..._).
+In this case, it only returns the selected value (_..., fieldName: '1', ..._).
 
 **↑ back to:** [Table of contents](#table-of-contents) · [Guides](#guides)
 
@@ -268,7 +268,7 @@ When the value is returned in this case, the format will be the value selected (
 
 #### Check element
 
-This component display only one option in form of a single checkbox.
+This component display only one option as a single checkbox.
 
 ```js
 import React from 'react';
@@ -385,7 +385,7 @@ function App() {
 
 ### Initial data
 
-_Optional_: Here you can set what the initial data for each field will be, you store the initial field values into a variable and load it in the `Form` using the prop `initialData`.
+_Optional_: Here you can set what the initial data for each field will be: store the initial field values into a variable, and load it in the `Form` with the prop `initialData`.
 
 ```js
 import React from 'react';
@@ -422,7 +422,7 @@ function App() {
 
 ### Validation
 
-> When you define your schema to validation, only data defined in it will be sent to `data` in `onSubmit` event even though there are other fields.
+> When you define your validation schema, only the data defined in it will be sent to `data` when the `onSubmit` event triggers, even if there are other fields.
 
 ```js
 import React from 'react';
@@ -458,7 +458,7 @@ function App() {
 
 ### Styling
 
-The `Form` component exposes two props for that: `style` and `className`. You can use any `CSS-in-JS` library to style your form or just pass the class name string, or even the `style` object directly! For example:
+The `Form` component exposes two props for styling: `style` and `className`. You can use any `CSS-in-JS` library to style your form  or pass the class name string, or even pass the `style` object directly! For example:
 
 ```js
 import styled from 'styled-components'; // or emotion, for example
@@ -535,11 +535,11 @@ function App() {
 
 ## Custom elements
 
-Sometimes we need to use third-party component in our forms. But don't you worry, Unform has your back! You can do that via `useField` which provides all the resources you need to use your component with Unform.
+Sometimes we need to use third-party component in our forms. Don't you worry though, Unform's got you covered! You can do that via `useField`, which provides all the resources you need to use your component with Unform.
 
 Below are some examples with [react-select](https://github.com/JedWatson/react-select) and [react-datepicker](https://github.com/Hacker0x01/react-datepicker/).
 
-_Observation_: If you are using Eslint + Prettier you need to take care with your `useEffect` dependecies, probably they will change when you format your code. To fix that you can add a comment on the line above of your `useEffect` dependencies disabling the eslint on that line. You can just follow the example below.
+_Observation_: If you are using Eslint + Prettier, you need be careful with your `useEffect` dependecies; they will probably change when you format your code. To fix this you can add a comment on the line above your `useEffect` dependencies that disables eslint on that line, as shown below.
 
 _Example:_
 
@@ -670,19 +670,19 @@ export default function DatePicker({ name }) {
 
 ## Contributing
 
-Thanks for being interested on making this package better. We encourage everyone to help improving this project with some new features, bug fixes and performance issues. Please take a little bit of your time to read our guides, so this process can be faster and easier.
+Thank you for being interested in making this package better! We encourage everyone to help improve Unform with new features, bug fixes and performance issues. Please take a bit of your time to read our guides, so facilitate this process.
 
 ### Contribution Guidelines
 
-Take a moment to read about our [Contribution Guidelines](/.github/CONTRIBUTING.md) so you can understand how to submit an issue, commit and create pull requests.
+Take a moment to read our [Contribution Guidelines](/.github/CONTRIBUTING.md) so you can understand how to submit an issue, commit changes and create pull requests.
 
 ### Code of Conduct
 
-We expect you to follow our [Code of Conduct](/.github/CODE_OF_CONDUCT.md). You can read it to understand what kind of behaviour will and will not be tolerated.
+We expect you to follow our [Code of Conduct](/.github/CODE_OF_CONDUCT.md). In it you will find what kind of behaviour will and will not be tolerated.
 
 ## Need help?
 
-If you need help with Unform, feel free to open an issue with a description of the problem you're facing or, if you prefer, you can chat with us on our [Discord Community](https://discordapp.com/invite/gCRAFhc).
+If you need any help with Unform, feel free to open an issue describing the problem you're facing or, if you prefer, chat with us in our [Discord Community](https://discordapp.com/invite/gCRAFhc).
 
 ## License
 
