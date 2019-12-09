@@ -1,8 +1,13 @@
-.name: Publish package
+name: Publish package
+
+# on:
+#   release:
+#     types: [created]
 
 on:
-  release:
-    types: [created]
+  push:
+    branches:
+      - v2.0
 
 jobs:
   build:
