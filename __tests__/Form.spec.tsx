@@ -14,7 +14,7 @@ describe('Form', () => {
         <Input name="name" />
         <Input multiline name="bio" />
         <Select name="tech" options={[{ id: 'node', title: 'Node' }]} />
-      </>
+      </>,
     );
 
     expect(!!container.querySelector('input[name=name]')).toBe(true);
@@ -29,7 +29,7 @@ describe('Form', () => {
 
     expect(container.querySelector('input[name=name]')).toHaveAttribute(
       'value',
-      'Diego'
+      'Diego',
     );
   });
 
@@ -46,7 +46,7 @@ describe('Form', () => {
       {
         onSubmit: submitMock,
         initialData: { address: { street: 'John Doe Avenue' } },
-      }
+      },
     );
 
     fireEvent.change(getByLabelText('name'), {
@@ -64,7 +64,7 @@ describe('Form', () => {
       },
       {
         resetForm: expect.any(Function),
-      }
+      },
     );
   });
 
@@ -79,7 +79,7 @@ describe('Form', () => {
     rerender(
       <Form onSubmit={submitMock} initialData={{ another: 'Diego' }}>
         <Input name="another" />
-      </Form>
+      </Form>,
     );
 
     fireEvent.submit(getByTestId('form'));
@@ -90,7 +90,7 @@ describe('Form', () => {
       },
       {
         resetForm: expect.any(Function),
-      }
+      },
     );
   });
 
@@ -114,7 +114,7 @@ describe('Form', () => {
         context: { stripBio: true },
         onSubmit: submitMock,
         initialData: { name: 'Diego', bio: 'Testing' },
-      }
+      },
     );
 
     act(() => {
@@ -126,7 +126,7 @@ describe('Form', () => {
         { name: 'Diego' },
         {
           resetForm: expect.any(Function),
-        }
+        },
       );
     });
   });
@@ -141,7 +141,7 @@ describe('Form', () => {
           options={[{ id: 'node', title: 'NodeJS' }]}
         />
       </>,
-      { onSubmit: (_: any, { resetForm }: { resetForm: any }) => resetForm() }
+      { onSubmit: (_: any, { resetForm }: { resetForm: any }) => resetForm() },
     );
 
     getByLabelText('name').setAttribute('value', 'Diego');
@@ -175,7 +175,7 @@ describe('Form', () => {
       {
         onSubmit: (_: any, { resetForm }: { resetForm: any }) =>
           resetForm(newData),
-      }
+      },
     );
 
     getByLabelText('name').setAttribute('value', 'Diego');
@@ -195,7 +195,7 @@ describe('Form', () => {
       <>
         <CustomInputParse name="name" />
       </>,
-      { onSubmit: submitMock, initialData: { name: 'Diego' } }
+      { onSubmit: submitMock, initialData: { name: 'Diego' } },
     );
 
     fireEvent.submit(getByTestId('form'));
@@ -206,7 +206,7 @@ describe('Form', () => {
       },
       {
         resetForm: expect.any(Function),
-      }
+      },
     );
   });
 
@@ -218,7 +218,7 @@ describe('Form', () => {
       {
         onSubmit: (_: any, { resetForm }: { resetForm: any }) => resetForm(),
         initialData: { name: 'Diego' },
-      }
+      },
     );
 
     fireEvent.submit(getByTestId('form'));
@@ -231,12 +231,12 @@ describe('Form', () => {
       <>
         <Input name="name" />
       </>,
-      { className: 'test-class' }
+      { className: 'test-class' },
     );
 
     expect(getByTestId(container, 'form')).toHaveAttribute(
       'class',
-      'test-class'
+      'test-class',
     );
   });
 });

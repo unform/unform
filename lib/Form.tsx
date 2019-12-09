@@ -1,9 +1,13 @@
 import dot from 'dot-object';
 import React, {
+  forwardRef,
   FormEvent,
   useState,
   DetailedHTMLProps,
   FormHTMLAttributes,
+  useImperativeHandle,
+  RefObject,
+  useCallback,
 } from 'react';
 import { ObjectSchema, ValidationError } from 'yup';
 
@@ -20,11 +24,25 @@ interface Context {
 }
 
 interface Helpers {
-  resetForm: (data?: object) => void;
+  reset: (data?: object) => void;
 }
 
 interface FormContent {
   [key: string]: any;
+}
+
+export interface FormRef {
+  getFieldValue: (fieldName: string) => any;
+  setFieldValue: (fieldName: string, value: any) => void | boolean;
+  getFieldError: (fieldName: string) => string;
+  setFieldError: (fieldName: string, error: string) => void;
+  clearField: (fieldName: string) => void;
+  getData(): object;
+  getFieldRef: (fieldName: string) => any;
+  setData: (data: object) => void;
+  getErrors: () => UnformErrors;
+  setErrors: (errors: object) => void;
+  reset: (data?: object) => void;
 }
 
 export interface SubmitHandler<T = FormContent> {
@@ -39,85 +57,207 @@ export interface FormProps extends Omit<HTMLFormProps, 'onSubmit'> {
   onSubmit: SubmitHandler;
 }
 
-export default function Form({
-  initialData = {},
-  children,
-  schema,
-  context = {},
-  onSubmit,
-  ...rest
-}: FormProps) {
+function Form(
+  {
+    initialData = {},
+    children,
+    schema,
+    context = {},
+    onSubmit,
+    ...rest
+  }: FormProps,
+  formRef: RefObject<FormRef>,
+) {
   const [errors, setErrors] = useState<UnformErrors>({});
   const [fields, setFields] = useState<UnformField[]>([]);
 
-  function parseFormData() {
-    const data = {};
+  const getFieldByName = useCallback(
+    fieldName => fields.find(unformField => unformField.name === fieldName),
+    [fields],
+  );
 
-    fields.forEach(({ name, ref, path, parseValue }) => {
+  const getFieldValue = useCallback(
+    ({ ref, path, parseValue }: UnformField) => {
       const value = dot.pick(path, ref);
 
-      data[name] = parseValue ? parseValue(ref) : value;
+      return parseValue ? parseValue(ref) : value;
+    },
+    [],
+  );
+
+  const setFieldValue = useCallback(
+    ({ path, ref }: UnformField, value: any) => {
+      dot.set(path, value, ref as object);
+    },
+    [],
+  );
+
+  const clearFieldValue = useCallback(
+    ({ clearValue, ref, path }: UnformField) => {
+      if (clearValue) {
+        return clearValue(ref, '');
+      }
+
+      return dot.set(path, '', ref as object);
+    },
+    [],
+  );
+
+  const reset = useCallback(
+    (data = {}) => {
+      fields.forEach(({ name, ref, path, clearValue }) => {
+        if (clearValue) {
+          return clearValue(ref, data[name]);
+        }
+
+        return dot.set(path, data[name] ? data[name] : '', ref as object);
+      });
+    },
+    [fields],
+  );
+
+  const setData = useCallback(
+    (data: object) => {
+      const parsedData = dot.dot(data);
+
+      Object.entries(parsedData).forEach(([fieldName, value]) => {
+        const field = getFieldByName(fieldName);
+
+        if (field) {
+          setFieldValue(field, value);
+        }
+      });
+    },
+    [getFieldByName, setFieldValue],
+  );
+
+  const setFormErrors = useCallback(
+    (formErrors: object) => {
+      const parsedErrors = dot.dot(formErrors);
+
+      setErrors({ ...errors, ...parsedErrors });
+    },
+    [errors],
+  );
+
+  const parseFormData = useCallback(() => {
+    const data = {};
+
+    fields.forEach(field => {
+      data[field.name] = getFieldValue(field);
     });
 
     dot.object(data);
 
     return data;
-  }
+  }, [fields, getFieldValue]);
 
-  function resetForm(data = {}) {
-    fields.forEach(({ name, ref, path, clearValue }) => {
-      if (clearValue) {
-        return clearValue(ref, data[name]);
+  useImperativeHandle(formRef, () => ({
+    getFieldValue(fieldName) {
+      const field = getFieldByName(fieldName);
+
+      if (!field) {
+        return false;
       }
 
-      return dot.set(path, data[name] ? data[name] : '', ref as object);
-    });
-  }
+      return getFieldValue(field);
+    },
+    setFieldValue(fieldName, value) {
+      const field = getFieldByName(fieldName);
 
-  async function handleSubmit(e: FormEvent) {
-    e.preventDefault();
+      if (!field) {
+        return false;
+      }
 
-    let data = parseFormData();
+      return setFieldValue(field, value);
+    },
+    getFieldError(fieldName) {
+      return errors[fieldName];
+    },
+    setFieldError(fieldName, error) {
+      setErrors({ ...errors, [fieldName]: error });
+    },
 
-    try {
-      if (schema) {
-        await schema.validate(data, {
-          abortEarly: false,
-          stripUnknown: true,
-          context,
+    clearField(fieldName) {
+      const field = getFieldByName(fieldName);
+
+      if (field) {
+        clearFieldValue(field);
+      }
+    },
+    getErrors() {
+      return errors;
+    },
+    setErrors(formErrors) {
+      return setFormErrors(formErrors);
+    },
+    getData() {
+      return parseFormData();
+    },
+    getFieldRef(fieldName) {
+      const field = getFieldByName(fieldName);
+
+      if (!field) {
+        return false;
+      }
+
+      return field.ref;
+    },
+    setData(data) {
+      return setData(data);
+    },
+    reset(data) {
+      return reset(data);
+    },
+  }));
+
+  const handleSubmit = useCallback(
+    async (e: FormEvent) => {
+      e.preventDefault();
+
+      let data = parseFormData();
+
+      try {
+        if (schema) {
+          await schema.validate(data, {
+            abortEarly: false,
+            stripUnknown: true,
+            context,
+          });
+
+          data = schema.cast(data, {
+            stripUnknown: true,
+            context,
+          });
+        }
+
+        setErrors({});
+        onSubmit(data, { reset });
+      } catch (err) {
+        const validationErrors: UnformErrors = {};
+
+        /* istanbul ignore next  */
+        if (!err.inner) {
+          throw err;
+        }
+
+        err.inner.forEach((error: ValidationError) => {
+          validationErrors[error.path] = error.message;
         });
 
-        data = schema.cast(data, {
-          stripUnknown: true,
-          context,
-        });
+        setErrors(validationErrors);
       }
+    },
+    [context, onSubmit, parseFormData, reset, schema],
+  );
 
-      setErrors({});
-      onSubmit(data, { resetForm });
-    } catch (err) {
-      const validationErrors: UnformErrors = {};
-
-      /* istanbul ignore next  */
-      if (!err.inner) {
-        throw err;
-      }
-
-      err.inner.forEach((error: ValidationError) => {
-        validationErrors[error.path] = error.message;
-      });
-
-      setErrors(validationErrors);
-    }
-  }
-
-  function registerField(field: UnformField) {
+  const registerField = useCallback((field: UnformField) => {
     setFields(state => [...state, field]);
-  }
+  }, []);
 
-  function unregisterField(name: string) {
-    setFields(state => state.filter(field => field.name !== name));
-  }
+  const unregisterField = useCallback((fieldName: string) => {
+    setFields(state => state.filter(field => field.name !== fieldName));
+  }, []);
 
   return (
     <FormContext.Provider
@@ -135,3 +275,5 @@ export default function Form({
     </FormContext.Provider>
   );
 }
+
+export default forwardRef(Form);

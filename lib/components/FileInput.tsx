@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, ChangeEvent } from 'react';
+import React, { useEffect, useRef, useState, ChangeEvent, memo } from 'react';
 
 import useField from '../useField';
 
@@ -10,12 +10,7 @@ interface Props {
 
 type InputProps = JSX.IntrinsicElements['input'] & Props;
 
-export default function Input({
-  name,
-  label,
-  onStartProgress,
-  ...rest
-}: InputProps) {
+function Input({ name, label, onStartProgress, ...rest }: InputProps) {
   const ref = useRef<HTMLInputElement>(null);
   const { fieldName, registerField, defaultValue, error } = useField(name);
   const [file, setFile] = useState(defaultValue);
@@ -32,7 +27,7 @@ export default function Input({
         },
       });
     }
-  }, [ref.current, fieldName]);
+  }, [fieldName, registerField]);
 
   const props = {
     ...rest,
@@ -76,3 +71,5 @@ export default function Input({
     </>
   );
 }
+
+export default memo(Input);

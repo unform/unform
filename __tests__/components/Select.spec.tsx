@@ -12,7 +12,7 @@ describe('Form', () => {
         options={[{ id: 'node', title: 'NodeJS' }]}
         name="tech"
         label="Tech"
-      />
+      />,
     );
 
     expect(!!getByText('Tech')).toBe(true);
@@ -25,7 +25,7 @@ describe('Form', () => {
         options={[{ id: 'node', title: 'NodeJS' }]}
         name="tech"
         label="Tech"
-      />
+      />,
     );
 
     expect(!!getByText('Select...')).toBe(true);
@@ -37,7 +37,7 @@ describe('Form', () => {
         options={[{ id: 'node', title: 'NodeJS' }]}
         name="tech"
         label="Tech"
-      />
+      />,
     );
 
     expect(!!getByDisplayValue('')).toBe(true);
@@ -54,7 +54,7 @@ describe('Form', () => {
         name="tech"
         label="Tech"
       />,
-      { schema }
+      { schema },
     );
 
     act(() => {
@@ -75,7 +75,7 @@ describe('Form', () => {
         name="tech"
         label="Tech"
       />,
-      { onSubmit: submitMock }
+      { onSubmit: submitMock },
     );
 
     act(() => {
@@ -90,7 +90,7 @@ describe('Form', () => {
       },
       {
         resetForm: expect.any(Function),
-      }
+      },
     );
   });
 
