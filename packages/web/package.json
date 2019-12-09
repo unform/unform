@@ -1,0 +1,29 @@
+{
+  "name": "@unform/web",
+  "version": "2.0.0",
+  "description": "> TODO: description",
+  "author": "Diego Fernandes <diego.schell.f@gmail.com>",
+  "homepage": "https://github.com/Rocketseat/unform#readme",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rocketseat/unform.git"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "bugs": {
+    "url": "https://github.com/Rocketseat/unform/issues"
+  },
+  "dependencies": {
+    "@unform/core": "*"
+  }
+}

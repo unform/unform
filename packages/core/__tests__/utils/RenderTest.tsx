@@ -1,7 +1,7 @@
 import { render as rtlRender } from '@testing-library/react';
 import React from 'react';
 
-import { Form } from '.';
+import { Form } from '../../lib';
 
 export default function RenderTest(
   children: React.ReactNode,

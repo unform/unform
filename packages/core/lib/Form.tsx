@@ -3,10 +3,11 @@ import React, {
   forwardRef,
   FormEvent,
   useState,
+  useMemo,
+  useCallback,
   DetailedHTMLProps,
   FormHTMLAttributes,
   useImperativeHandle,
-  useCallback,
   RefForwardingComponent,
 } from 'react';
 
@@ -38,6 +39,7 @@ export interface FormHandles {
   getErrors: () => UnformErrors;
   setErrors: (errors: object) => void;
   reset: (data?: object) => void;
+  submitForm: () => void;
 }
 
 export interface SubmitHandler<T = FormContent> {
@@ -138,6 +140,27 @@ const Form: RefForwardingComponent<FormHandles, FormProps> = (
     return data;
   }, [fields, getFieldValue]);
 
+  const handleSubmit = useCallback(
+    async (e?: FormEvent) => {
+      if (e) {
+        e.preventDefault();
+      }
+
+      const data = parseFormData();
+
+      onSubmit(data, { reset });
+    },
+    [onSubmit, parseFormData, reset],
+  );
+
+  const registerField = useCallback((field: UnformField) => {
+    setFields(state => [...state, field]);
+  }, []);
+
+  const unregisterField = useCallback((fieldName: string) => {
+    setFields(state => state.filter(field => field.name !== fieldName));
+  }, []);
+
   useImperativeHandle<{}, FormHandles>(formRef, () => ({
     getFieldValue(fieldName) {
       const field = getFieldByName(fieldName);
@@ -195,26 +218,22 @@ const Form: RefForwardingComponent<FormHandles, FormProps> = (
     reset(data) {
       return reset(data);
     },
+    submitForm() {
+      handleSubmit();
+    },
   }));
 
-  const handleSubmit = useCallback(
-    async (e: FormEvent) => {
-      e.preventDefault();
-
-      const data = parseFormData();
-
-      onSubmit(data, { reset });
-    },
-    [onSubmit, parseFormData, reset],
+  const formView = useMemo(
+    () =>
+      window ? (
+        <form {...rest} data-testid="form" onSubmit={handleSubmit}>
+          {children}
+        </form>
+      ) : (
+        children
+      ),
+    [children, handleSubmit, rest],
   );
-
-  const registerField = useCallback((field: UnformField) => {
-    setFields(state => [...state, field]);
-  }, []);
-
-  const unregisterField = useCallback((fieldName: string) => {
-    setFields(state => state.filter(field => field.name !== fieldName));
-  }, []);
 
   return (
     <FormContext.Provider
@@ -226,9 +245,7 @@ const Form: RefForwardingComponent<FormHandles, FormProps> = (
         unregisterField,
       }}
     >
-      <form {...rest} data-testid="form" onSubmit={handleSubmit}>
-        {children}
-      </form>
+      {formView}
     </FormContext.Provider>
   );
 };
