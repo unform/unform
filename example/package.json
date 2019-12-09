@@ -9,8 +9,6 @@
   },
   "dependencies": {
     "@rocketseat/rocket-scripts": "^0.0.17",
-    "formik": "^1.5.2",
-    "immutability-helper": "^3.0.0",
     "react": "link:../node_modules/react",
     "react-datepicker": "^2.5.0",
     "react-dom": "link:../node_modules/react-dom",
