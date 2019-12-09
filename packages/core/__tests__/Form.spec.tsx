@@ -3,10 +3,10 @@ import '@testing-library/jest-dom/extend-expect';
 import React, { RefObject } from 'react';
 
 import { Form, Scope, FormHandles } from '../lib';
-import render from '../lib/RenderTest';
 import Input from './components/Input';
 import CustomInputClear from './utils/CustomInputClear';
 import CustomInputParse from './utils/CustomInputParse';
+import render from './utils/RenderTest';
 
 describe('Form', () => {
   it('should render form elements', () => {

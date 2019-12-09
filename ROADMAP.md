@@ -33,14 +33,15 @@
 
 ## API 2.0
 
-- [x] `getFieldValue`
-- [x] `setFieldValue`
-- [x] `setFieldError`
-- [x] `getFieldError`
-- [x] `getFieldRef`
-- [x] `clearField`
-- [x] `reset`
-- [x] `getData`
-- [x] `setData`
-- [x] `getErrors`
-- [x] `setErrors`
+- getFieldValue
+- setFieldValue
+- setFieldError
+- getFieldError
+- getFieldRef
+- clearField
+- reset
+- getData
+- setData
+- getErrors
+- setErrors
+- submitForm
