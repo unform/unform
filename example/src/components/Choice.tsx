@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useRef } from 'react';
 
-import useField from '../useField';
+import { useField } from '../../../lib';
 
 interface OptionProps {
   value: string;
@@ -50,7 +50,7 @@ export default function Choice({
         });
       },
     });
-  }, [fieldName]);
+  }, [fieldName, options.length, parseValue, registerField]);
 
   return (
     <Fragment>

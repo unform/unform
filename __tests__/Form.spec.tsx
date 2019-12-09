@@ -1,9 +1,10 @@
-import React from 'react';
-import { act, fireEvent, wait, getByTestId } from 'react-testing-library';
-import * as Yup from 'yup';
+import { act, fireEvent, wait } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
+import React, { RefObject } from 'react';
 
-import { Form, Input, Select, Scope } from '../lib';
+import { Form, Scope, FormHandles } from '../lib';
 import render from '../lib/RenderTest';
+import Input from './components/Input';
 import CustomInputClear from './utils/CustomInputClear';
 import CustomInputParse from './utils/CustomInputParse';
 
@@ -13,13 +14,11 @@ describe('Form', () => {
       <>
         <Input name="name" />
         <Input multiline name="bio" />
-        <Select name="tech" options={[{ id: 'node', title: 'Node' }]} />
       </>,
     );
 
     expect(!!container.querySelector('input[name=name]')).toBe(true);
     expect(!!container.querySelector('textarea[name=bio]')).toBe(true);
-    expect(!!container.querySelector('select[name=tech]')).toBe(true);
   });
 
   it('should load initial data inside form elements', () => {
@@ -63,7 +62,7 @@ describe('Form', () => {
         },
       },
       {
-        resetForm: expect.any(Function),
+        reset: expect.any(Function),
       },
     );
   });
@@ -89,72 +88,27 @@ describe('Form', () => {
         another: 'Diego',
       },
       {
-        resetForm: expect.any(Function),
+        reset: expect.any(Function),
       },
     );
   });
 
-  it('should update data to match schema', async () => {
-    const submitMock = jest.fn();
-    const schema = Yup.object().shape({
-      name: Yup.string(),
-      bio: Yup.string().when('$stripBio', {
-        is: true,
-        then: Yup.string().strip(true),
-      }),
-    });
-
-    const { getByTestId } = render(
-      <>
-        <Input name="name" />
-        <Input name="bio" />
-      </>,
-      {
-        schema,
-        context: { stripBio: true },
-        onSubmit: submitMock,
-        initialData: { name: 'Diego', bio: 'Testing' },
-      },
-    );
-
-    act(() => {
-      fireEvent.submit(getByTestId('form'));
-    });
-
-    await wait(() => {
-      expect(submitMock).toHaveBeenCalledWith(
-        { name: 'Diego' },
-        {
-          resetForm: expect.any(Function),
-        },
-      );
-    });
-  });
-
-  it('should reset form data when resetForm helper is dispatched', () => {
+  it('should reset form data when reset helper is dispatched', () => {
     const { getByTestId, getByLabelText } = render(
       <>
         <Input name="name" />
-        <Select
-          name="tech"
-          placeholder="Select..."
-          options={[{ id: 'node', title: 'NodeJS' }]}
-        />
       </>,
-      { onSubmit: (_: any, { resetForm }: { resetForm: any }) => resetForm() },
+      { onSubmit: (_: any, { reset }: { reset: Function }) => reset() },
     );
 
     getByLabelText('name').setAttribute('value', 'Diego');
 
-    fireEvent.change(getByLabelText('tech'), { target: { value: 'node' } });
-
     fireEvent.submit(getByTestId('form'));
 
     expect((getByLabelText('name') as HTMLInputElement).value).toBe('');
-    expect((getByLabelText('tech') as HTMLSelectElement).value).toBe('');
   });
 
-  it('should apply data when resetForm is dispatched with new values', () => {
+  it('should apply data when reset is dispatched with new values', () => {
     const newData = {
       name: 'John Doe',
       tech: 'react',
@@ -163,29 +117,17 @@ describe('Form', () => {
     const { getByTestId, getByLabelText } = render(
       <>
         <Input name="name" />
-        <Select
-          name="tech"
-          placeholder="Select..."
-          options={[
-            { id: 'node', title: 'NodeJS' },
-            { id: 'react', title: 'ReactJS' },
-          ]}
-        />
       </>,
       {
-        onSubmit: (_: any, { resetForm }: { resetForm: any }) =>
-          resetForm(newData),
+        onSubmit: (_: any, { reset }: { reset: Function }) => reset(newData),
       },
     );
 
     getByLabelText('name').setAttribute('value', 'Diego');
 
-    fireEvent.change(getByLabelText('tech'), { target: { value: 'node' } });
-
     fireEvent.submit(getByTestId('form'));
 
     expect((getByLabelText('name') as HTMLInputElement).value).toBe('John Doe');
-    expect((getByLabelText('tech') as HTMLSelectElement).value).toBe('react');
   });
 
   it('should be able to have custom value parser', () => {
@@ -205,7 +147,7 @@ describe('Form', () => {
         name: 'Diego-test',
       },
       {
-        resetForm: expect.any(Function),
+        reset: expect.any(Function),
       },
     );
   });
@@ -216,7 +158,7 @@ describe('Form', () => {
         <CustomInputClear name="name" />
       </>,
       {
-        onSubmit: (_: any, { resetForm }: { resetForm: any }) => resetForm(),
+        onSubmit: (_: any, { reset }: { reset: Function }) => reset(),
         initialData: { name: 'Diego' },
       },
     );
@@ -226,17 +168,246 @@ describe('Form', () => {
     expect((getByLabelText('name') as HTMLInputElement).value).toBe('test');
   });
 
-  it('should render form with class attribute', () => {
-    const { container } = render(
+  it('should be able to manually set field value', () => {
+    const formRef: RefObject<FormHandles> = { current: null };
+
+    const { getByLabelText } = render(
       <>
         <Input name="name" />
       </>,
-      { className: 'test-class' },
+      {
+        ref: formRef,
+      },
     );
 
-    expect(getByTestId(container, 'form')).toHaveAttribute(
-      'class',
-      'test-class',
+    if (formRef.current) {
+      formRef.current.setFieldValue('name', 'John Doe');
+
+      const valueNonExistent = formRef.current.setFieldValue(
+        'notexists',
+        'John Doe',
+      );
+
+      expect(valueNonExistent).toBe(false);
+    }
+
+    expect((getByLabelText('name') as HTMLInputElement).value).toBe('John Doe');
+  });
+
+  it('should be able to manually get field value', () => {
+    const formRef: RefObject<FormHandles> = { current: null };
+
+    render(
+      <>
+        <Input name="name" />
+      </>,
+      {
+        ref: formRef,
+        initialData: { name: 'John Doe' },
+      },
     );
+
+    if (formRef.current) {
+      const value = formRef.current.getFieldValue('name');
+      const valueNonExistent = formRef.current.getFieldValue('notexists');
+
+      expect(value).toBe('John Doe');
+      expect(valueNonExistent).toBe(false);
+    }
+  });
+
+  it('should be able to manually set field error', () => {
+    const formRef: RefObject<FormHandles> = { current: null };
+
+    const { getByText } = render(
+      <>
+        <Input name="name" />
+      </>,
+      {
+        onSubmit: (_: any, { reset }: { reset: Function }) => reset(),
+        ref: formRef,
+      },
+    );
+
+    act(() => {
+      if (formRef.current) {
+        formRef.current.setFieldError('name', 'Name is required');
+      }
+    });
+
+    expect(!!getByText('Name is required')).toBe(true);
+  });
+
+  it('should be able to manually get field error', async () => {
+    const formRef: RefObject<FormHandles> = { current: null };
+
+    render(
+      <>
+        <Input name="name" />
+      </>,
+      {
+        ref: formRef,
+      },
+    );
+
+    act(() => {
+      if (formRef.current) {
+        formRef.current.setFieldError('name', 'Name is required');
+      }
+    });
+
+    await wait(() => {
+      if (formRef.current) {
+        const error = formRef.current.getFieldError('name');
+
+        expect(error).toBe('Name is required');
+      }
+    });
+  });
+
+  it('should be able to manually clear field value', () => {
+    const formRef: RefObject<FormHandles> = { current: null };
+
+    const { getByLabelText } = render(
+      <>
+        <Input name="name" />
+        <CustomInputClear name="bio" />
+      </>,
+      {
+        ref: formRef,
+        initialData: { name: 'Diego', bio: 'Should clear' },
+      },
+    );
+
+    if (formRef.current) {
+      formRef.current.clearField('name');
+      formRef.current.clearField('bio');
+    }
+
+    expect((getByLabelText('name') as HTMLInputElement).value).toBe('');
+    expect((getByLabelText('bio') as HTMLInputElement).value).toBe('test');
+  });
+
+  it('should be able to manually set form data', () => {
+    const formRef: RefObject<FormHandles> = { current: null };
+
+    const { getByLabelText } = render(
+      <>
+        <Input name="name" />
+        <Input name="bio" />
+      </>,
+      {
+        ref: formRef,
+      },
+    );
+
+    if (formRef.current) {
+      formRef.current.setData({ name: 'John Doe', bio: 'React developer' });
+    }
+
+    expect((getByLabelText('name') as HTMLInputElement).value).toBe('John Doe');
+    expect((getByLabelText('bio') as HTMLInputElement).value).toBe(
+      'React developer',
+    );
+  });
+
+  it('should be able to manually get form data', () => {
+    const formRef: RefObject<FormHandles> = { current: null };
+
+    render(
+      <>
+        <Input name="name" />
+        <Input name="bio" />
+      </>,
+      {
+        ref: formRef,
+        initialData: { name: 'John Doe', bio: 'React developer' },
+      },
+    );
+
+    if (formRef.current) {
+      const data = formRef.current.getData();
+
+      expect(data).toEqual({ name: 'John Doe', bio: 'React developer' });
+    }
+  });
+
+  it('should be able to manually set form errors', async () => {
+    const formRef: RefObject<FormHandles> = { current: null };
+
+    render(
+      <>
+        <Input name="name" />
+        <Input name="bio" />
+      </>,
+      {
+        ref: formRef,
+      },
+    );
+
+    act(() => {
+      if (formRef.current) {
+        formRef.current.setErrors({
+          name: 'Name is required',
+          bio: 'Bio is required',
+        });
+      }
+    });
+
+    await wait(() => {
+      if (formRef.current) {
+        const errorName = formRef.current.getFieldError('name');
+        const errorBio = formRef.current.getFieldError('bio');
+        const errors = formRef.current.getErrors();
+
+        expect(errorName).toBe('Name is required');
+        expect(errorBio).toBe('Bio is required');
+        expect(errors).toEqual({
+          name: 'Name is required',
+          bio: 'Bio is required',
+        });
+      }
+    });
+  });
+
+  it('should be able to manually get field ref', () => {
+    const formRef: RefObject<FormHandles> = { current: null };
+
+    render(
+      <>
+        <Input name="name" />
+      </>,
+      {
+        ref: formRef,
+      },
+    );
+
+    if (formRef.current) {
+      const ref = formRef.current.getFieldRef('name');
+      const refNonExistent = formRef.current.getFieldRef('notexists');
+
+      expect((ref as HTMLInputElement).name).toBe('name');
+      expect(refNonExistent).toBe(false);
+    }
+  });
+
+  it('should be able to manually reset form', () => {
+    const formRef: RefObject<FormHandles> = { current: null };
+
+    const { getByLabelText } = render(
+      <>
+        <Input name="name" />
+      </>,
+      {
+        ref: formRef,
+        initialData: { name: 'John Doe' },
+      },
+    );
+
+    if (formRef.current) {
+      formRef.current.reset();
+
+      expect((getByLabelText('name') as HTMLInputElement).value).toBe('');
+    }
   });
 });

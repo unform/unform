@@ -2,7 +2,8 @@ import React, { useState, useRef } from 'react';
 import { hot } from 'react-hot-loader/root';
 import * as Yup from 'yup';
 
-import { Form, Input, SubmitHandler, FormRef, Scope } from '../../lib';
+import { Form, SubmitHandler, FormHandles, Scope } from '../../lib';
+import Input from './components/Input';
 
 const schema = Yup.object().shape({
   name: Yup.string().required(),
@@ -21,7 +22,7 @@ interface Data {
 }
 
 function App() {
-  const formRef = useRef<FormRef>();
+  const formRef = useRef<FormHandles>();
 
   const [formData] = useState<Data>({
     name: 'Diego',

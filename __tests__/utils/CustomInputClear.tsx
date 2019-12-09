@@ -22,7 +22,7 @@ export default function Input({ name, label, ...rest }: Props) {
         },
       });
     }
-  }, [ref.current, fieldName]);
+  }, [fieldName, registerField]);
 
   return (
     <>

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
-import useField from '../useField';
+import { useField } from '../../../lib';
 
 interface Props {
   name: string;
@@ -27,7 +27,7 @@ export default function Input({ name, label, ...rest }: InputProps) {
         },
       });
     }
-  }, [ref.current, fieldName]);
+  }, [fieldName, registerField]);
 
   const props = {
     ...rest,

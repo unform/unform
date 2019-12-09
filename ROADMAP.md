@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Testes da nova API
+- [x] Testes da nova API
 - [x] Setar `initialData` de forma assíncrona
 - [x] `get/set` nos campos
 - [x] `resetForm` por fora do submit
@@ -9,9 +9,9 @@
 - [x] `registerField` causa uma nova renderização
 - [ ] Suporte ao React Native
 - [ ] Alterar para Github Actions
-- [ ] Changelog automático
-- [ ] Errors uncontrolled?
-- [ ] Remover validação do Unform?
+- [?] Changelog automático
+- [?] Errors uncontrolled?
+- [x] Remover validação do Unform?
 
 ## Identity
 

@@ -21,5 +21,8 @@
     "esModuleInterop": true
   },
   "include": ["lib"],
-  "exclude": ["node_modules", "build", "dist", "example", "rollup.config.js"]
-} 
+  "exclude": ["node_modules", "build", "dist", "example", "rollup.config.js"],
+  "files": [
+    "./node_modules/@testing-library/jest-dom/extend-expect.d.ts"
+  ]
+}
