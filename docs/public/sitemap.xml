@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+<url> <loc>https://unform.dev/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://unform.dev/faq/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://unform.dev/why-unform/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://unform.dev/usage/creating-docs/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://unform.dev/usage/navigation/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://unform.dev/usage/shadowing/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://unform.dev/third-party/react-datepicker/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://unform.dev/third-party/react-input-mask/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://unform.dev/third-party/react-simple-code-editor/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://unform.dev/third-party/react-select/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://unform.dev/recipes/accessing-form-ref/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://unform.dev/recipes/creating-your-own-inputs/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://unform.dev/recipes/simple-input/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://unform.dev/recipes/styled-components/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://unform.dev/recipes/typescript/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://unform.dev/guides/basic-form/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://unform.dev/guides/complex-structures/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://unform.dev/guides/get-set-field-error/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://unform.dev/guides/get-set-field-value/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://unform.dev/guides/initial-data/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://unform.dev/guides/manual-form-submit/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://unform.dev/guides/react-native/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://unform.dev/guides/reset-form/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://unform.dev/guides/validation/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+</urlset>
