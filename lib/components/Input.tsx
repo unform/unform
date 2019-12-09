@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, memo } from 'react';
 
 import useField from '../useField';
 
@@ -11,7 +11,7 @@ interface Props<T> {
 type InputProps = JSX.IntrinsicElements['input'] & Props<false>;
 type TextAreaProps = JSX.IntrinsicElements['textarea'] & Props<true>;
 
-export default function Input({
+function Input({
   name,
   label,
   multiline = false,
@@ -24,7 +24,7 @@ export default function Input({
     if (ref.current) {
       registerField({ name: fieldName, ref: ref.current, path: 'value' });
     }
-  }, [ref.current, fieldName]);
+  }, [fieldName, registerField]);
 
   const props = {
     ...rest,
@@ -49,3 +49,5 @@ export default function Input({
     </>
   );
 }
+
+export default memo(Input);

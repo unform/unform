@@ -19,7 +19,7 @@ describe('Form', () => {
 
     const { getByText, getByTestId } = render(
       <Input name="name" label="Nome" />,
-      { schema }
+      { schema },
     );
 
     act(() => {
@@ -34,7 +34,7 @@ describe('Form', () => {
       <>
         <Input name="name" label="Name" />
         <Input name="profile" label="Profile" multiline />
-      </>
+      </>,
     );
 
     expect(!!container.querySelector('input[name=name]')).toBe(true);

@@ -5,12 +5,12 @@ import { Form } from '.';
 
 export default function RenderTest(
   children: React.ReactNode,
-  props: object = {}
+  props: object = {},
 ) {
   const mockFunction = jest.fn();
   return rtlRender(
     <Form onSubmit={mockFunction} {...props}>
       {children}
-    </Form>
+    </Form>,
   );
 }

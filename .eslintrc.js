@@ -25,8 +25,10 @@ module.exports = {
     'airbnb',
     'plugin:@typescript-eslint/recommended',
     'prettier/@typescript-eslint',
+    'plugin:prettier/recommended'
   ],
   rules: {
+    'prettier/prettier': 'error',
     'class-methods-use-this': 'off',
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/no-var-requires': 'off',
@@ -52,7 +54,8 @@ module.exports = {
     'react/prop-types': 'off',
     'jsx-a11y/label-has-for': 'off',
     'import/prefer-default-export': 'off',
-    'react-hooks/rules-of-hooks': 'error',
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
   },
   settings: {

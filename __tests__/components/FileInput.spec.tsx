@@ -14,7 +14,7 @@ describe('Form', () => {
 
   it('should display label', () => {
     const { getByText } = render(
-      <FileInput name="attach" label="Attachment" />
+      <FileInput name="attach" label="Attachment" />,
     );
 
     expect(!!getByText('Attachment')).toBe(true);
@@ -27,7 +27,7 @@ describe('Form', () => {
 
     const { getByText, getByTestId } = render(
       <FileInput name="attach" label="Attachment" />,
-      { schema }
+      { schema },
     );
 
     act(() => {
@@ -41,7 +41,7 @@ describe('Form', () => {
     const onStartProgressMock = jest.fn();
 
     const { getByLabelText } = render(
-      <FileInput name="attach" onStartProgress={onStartProgressMock} />
+      <FileInput name="attach" onStartProgress={onStartProgressMock} />,
     );
 
     const file = new Blob(['file contents'], { type: 'text/plain' });
@@ -55,7 +55,7 @@ describe('Form', () => {
     await wait(() => {
       expect(onStartProgressMock).toHaveBeenCalledWith(
         expect.any(Number),
-        expect.any(ProgressEvent)
+        expect.any(ProgressEvent),
       );
     });
   });
@@ -63,7 +63,7 @@ describe('Form', () => {
   it('should reset file input when resetFrom dispatched', async () => {
     const { getByTestId, getByLabelText } = render(
       <FileInput name="attach" />,
-      { onSubmit: (_: any, { resetForm }: { resetForm: any }) => resetForm() }
+      { onSubmit: (_: any, { resetForm }: { resetForm: any }) => resetForm() },
     );
 
     const file = new Blob(['file contents'], { type: 'text/plain' });

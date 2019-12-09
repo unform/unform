@@ -1,187 +1,149 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { hot } from 'react-hot-loader/root';
 import * as Yup from 'yup';
 
-import {
-  Form,
-  Input,
-  Select,
-  Scope,
-  SubmitHandler,
-  FileInput,
-  Check,
-  Choice,
-} from '../../lib';
-import DatePicker from './components/DatePicker';
-import ReactSelect from './components/ReactSelect';
+import { Form, Input, SubmitHandler, FormRef, Scope } from '../../lib';
 
 const schema = Yup.object().shape({
   name: Yup.string().required(),
-  profile: Yup.string().required(),
-  theme: Yup.string().required(),
-  tech: Yup.string().required(),
-  date: Yup.date().required(),
-  people: Yup.array(Yup.string())
-    .min(2)
-    .required(),
-  billingAddress: Yup.object().shape({
-    street: Yup.string().required(),
-    number: Yup.string().required(),
+  bio: Yup.string().required(),
+  address: Yup.object().shape({
+    street: Yup.string(),
   }),
-  shippingAddress: Yup.object().when('$useShippingAsBilling', {
-    is: false,
-    then: Yup.object().shape({
-      street: Yup.string().required(),
-      number: Yup.string().required(),
-    }),
-    otherwise: Yup.object().strip(true),
-  }),
-  attach: Yup.string(),
-  termo1: Yup.boolean(),
-  termo2: Yup.boolean().oneOf([true], 'Termo 2 é obrigatório'),
-  choice1: Yup.array(Yup.string())
-    .min(1)
-    .required(),
-  choice2: Yup.string().required(),
 });
 
 interface Data {
   name: string;
-  profile: string;
-  theme: string;
-  tech: string;
-  people: string[];
-  date: Date;
-  billingAddress: {
-    number: number;
+  address: {
+    street: string;
   };
-  attach: string;
-  termo1: boolean;
-  termo2: boolean;
-  choice1: string[];
-  choice2: string;
+  bio: string;
 }
 
 function App() {
-  const [useShippingAsBilling, setUseShippingAsBilling] = useState<boolean>(
-    true
-  );
+  const formRef = useRef<FormRef>();
 
   const [formData] = useState<Data>({
     name: 'Diego',
-    profile: 'CTO na Rocketseat',
-    theme: 'dracula',
-    tech: 'node',
-    people: ['1', '3'],
-    date: new Date(),
-    billingAddress: {
-      number: 833,
+    address: {
+      street: 'Rua Teste',
     },
-    attach: '',
-    termo1: true,
-    termo2: false,
-    choice1: ['2', '3'],
-    choice2: '',
+    bio: 'Testando biografia',
   });
 
-  const handleSubmit: SubmitHandler<Data> = (data, { resetForm }) => {
+  const handleSubmit: SubmitHandler<Data> = (data, { reset }) => {
     console.log(data);
 
-    resetForm();
+    reset();
   };
+
+  function getFieldValue() {
+    console.log(formRef.current.getFieldValue('name'));
+    console.log(formRef.current.getFieldValue('address.street'));
+  }
+
+  function setFieldValue() {
+    formRef.current.setFieldValue('name', 'Diego');
+    formRef.current.setFieldValue('address.street', 'Street 1');
+  }
+
+  function setFieldError() {
+    formRef.current.setFieldError('name', 'Nome com problemas...');
+    formRef.current.setFieldError('address.street', 'Rua com problemas');
+  }
+
+  function getFieldError() {
+    console.log(formRef.current.getFieldError('name'));
+    console.log(formRef.current.getFieldError('address.street'));
+  }
+
+  function getFieldRef() {
+    console.log(formRef.current.getFieldRef('name'));
+    console.log(formRef.current.getFieldRef('address.street'));
+  }
+
+  function clearField() {
+    formRef.current.clearField('name');
+    formRef.current.clearField('address.street');
+  }
+
+  function resetForm() {
+    formRef.current.reset();
+  }
+
+  function getData() {
+    console.log(formRef.current.getData());
+  }
+
+  function setData() {
+    formRef.current.setData({
+      name: 'John Doe',
+      address: {
+        street: 'Test street',
+      },
+    });
+  }
+
+  function getErrors() {
+    console.log(formRef.current.getErrors());
+  }
+
+  function setErrors() {
+    formRef.current.setErrors({
+      name: 'Name not cool',
+      address: {
+        street: 'Problems with address',
+      },
+    });
+  }
 
   return (
     <Form
       initialData={formData}
-      context={{ useShippingAsBilling }}
       schema={schema}
       onSubmit={handleSubmit}
+      ref={formRef}
     >
-      <Input name="name" label="Nome" />
-      <Input multiline name="profile" label="Perfil" />
-
-      <Select
-        name="theme"
-        placeholder="Selecione..."
-        options={[
-          { id: 'dracula', title: 'Dracula' },
-          { id: 'material', title: 'Material' },
-          { id: 'shades-of-purple', title: 'Shades of Purple' },
-        ]}
-      />
-
-      <ReactSelect
-        name="tech"
-        options={[
-          { id: 'react', title: 'ReactJS' },
-          { id: 'node', title: 'NodeJS' },
-          { id: 'rn', title: 'React Native' },
-        ]}
-      />
-
-      <ReactSelect
-        name="people"
-        multiple
-        options={[
-          { id: '1', title: 'Diego' },
-          { id: '2', title: 'João' },
-          { id: '3', title: 'Higo' },
-        ]}
-      />
-
-      <DatePicker name="date" />
-
-      <h2>Endereço</h2>
-
-      <Scope path="billingAddress">
-        <Input name="street" />
-        <Input name="number" />
+      <Input name="name" placeholder="Digite seu nome" />
+      <Scope path="address">
+        <Input name="street" placeholder="Digite seu endereço" />
       </Scope>
+      <Input multiline name="bio" placeholder="Biografia" />
 
-      <input
-        type="checkbox"
-        name="useShippingAsBilling"
-        checked={useShippingAsBilling}
-        onChange={e => setUseShippingAsBilling(e.target.checked)}
-      />
+      <button type="button" onClick={getFieldValue}>
+        getFieldValue
+      </button>
+      <button type="button" onClick={setFieldValue}>
+        setFieldValue
+      </button>
+      <button type="button" onClick={setFieldError}>
+        setFieldError
+      </button>
+      <button type="button" onClick={getFieldError}>
+        getFieldError
+      </button>
+      <button type="button" onClick={getFieldRef}>
+        getFieldRef
+      </button>
+      <button type="button" onClick={clearField}>
+        clearField
+      </button>
+      <button type="button" onClick={resetForm}>
+        reset
+      </button>
+      <button type="button" onClick={getData}>
+        getData
+      </button>
+      <button type="button" onClick={setData}>
+        setData
+      </button>
+      <button type="button" onClick={getErrors}>
+        getErrors
+      </button>
+      <button type="button" onClick={setErrors}>
+        setErrors
+      </button>
 
-      <Scope path="shippingAddress">
-        <Input name="street" />
-        <Input name="number" />
-      </Scope>
-
-      <FileInput name="attach" label="Attachment" />
-
-      <br />
-      <Check name="termo1" label="Aceita o Termo 1?" />
-      <br />
-      <Check name="termo2" label="Aceita o Termo 2 (obrigatório)?" />
-      <br />
-
-      <Choice
-        name="choice1"
-        options={[
-          { value: '1', label: 'Um' },
-          { value: '2', label: 'Dois' },
-          { value: '3', label: 'Três' },
-          { value: '4', label: 'Quatro' },
-        ]}
-        multiple
-      />
-      <br />
-
-      <Choice
-        name="choice2"
-        options={[
-          { value: '1', label: 'Um' },
-          { value: '2', label: 'Dois' },
-          { value: '3', label: 'Três' },
-          { value: '4', label: 'Quatro' },
-        ]}
-      />
-      <br />
-
-      <br />
       <button type="submit">Enviar</button>
     </Form>
   );
