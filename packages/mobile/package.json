@@ -25,5 +25,12 @@
   },
   "dependencies": {
     "@unform/core": "*"
+  },
+  "devDependencies": {
+    "@testing-library/react-native": "^5.0.2"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0",
+    "react-native": "*"
   }
 }
