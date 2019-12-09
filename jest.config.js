@@ -19,7 +19,7 @@ module.exports = {
     },
   },
   testMatch: ['**/__tests__/**/*.spec.+(ts|tsx|js)'],
-  setupFilesAfterEnv: [resolve('./lib/setupTest.tsx')],
+  setupFilesAfterEnv: [resolve('./lib/setupTest.ts')],
   transform: {
     '^.+\\.(ts|tsx)$': 'ts-jest',
   },

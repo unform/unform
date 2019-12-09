@@ -6,10 +6,9 @@ import React, {
   DetailedHTMLProps,
   FormHTMLAttributes,
   useImperativeHandle,
-  RefObject,
   useCallback,
+  RefForwardingComponent,
 } from 'react';
-import { ObjectSchema, ValidationError } from 'yup';
 
 import FormContext from './Context';
 import { UnformErrors, UnformField, Omit } from './types';
@@ -19,10 +18,6 @@ type HTMLFormProps = DetailedHTMLProps<
   HTMLFormElement
 >;
 
-interface Context {
-  [key: string]: any;
-}
-
 interface Helpers {
   reset: (data?: object) => void;
 }
@@ -31,7 +26,7 @@ interface FormContent {
   [key: string]: any;
 }
 
-export interface FormRef {
+export interface FormHandles {
   getFieldValue: (fieldName: string) => any;
   setFieldValue: (fieldName: string, value: any) => void | boolean;
   getFieldError: (fieldName: string) => string;
@@ -52,22 +47,13 @@ export interface SubmitHandler<T = FormContent> {
 export interface FormProps extends Omit<HTMLFormProps, 'onSubmit'> {
   initialData?: object;
   children: React.ReactNode;
-  context?: Context;
-  schema?: ObjectSchema<object>;
   onSubmit: SubmitHandler;
 }
 
-function Form(
-  {
-    initialData = {},
-    children,
-    schema,
-    context = {},
-    onSubmit,
-    ...rest
-  }: FormProps,
-  formRef: RefObject<FormRef>,
-) {
+const Form: RefForwardingComponent<FormHandles, FormProps> = (
+  { initialData = {}, children, onSubmit, ...rest },
+  formRef,
+) => {
   const [errors, setErrors] = useState<UnformErrors>({});
   const [fields, setFields] = useState<UnformField[]>([]);
 
@@ -152,7 +138,7 @@ function Form(
     return data;
   }, [fields, getFieldValue]);
 
-  useImperativeHandle(formRef, () => ({
+  useImperativeHandle<{}, FormHandles>(formRef, () => ({
     getFieldValue(fieldName) {
       const field = getFieldByName(fieldName);
 
@@ -215,40 +201,11 @@ function Form(
     async (e: FormEvent) => {
       e.preventDefault();
 
-      let data = parseFormData();
+      const data = parseFormData();
 
-      try {
-        if (schema) {
-          await schema.validate(data, {
-            abortEarly: false,
-            stripUnknown: true,
-            context,
-          });
-
-          data = schema.cast(data, {
-            stripUnknown: true,
-            context,
-          });
-        }
-
-        setErrors({});
-        onSubmit(data, { reset });
-      } catch (err) {
-        const validationErrors: UnformErrors = {};
-
-        /* istanbul ignore next  */
-        if (!err.inner) {
-          throw err;
-        }
-
-        err.inner.forEach((error: ValidationError) => {
-          validationErrors[error.path] = error.message;
-        });
-
-        setErrors(validationErrors);
-      }
+      onSubmit(data, { reset });
     },
-    [context, onSubmit, parseFormData, reset, schema],
+    [onSubmit, parseFormData, reset],
   );
 
   const registerField = useCallback((field: UnformField) => {
@@ -274,6 +231,6 @@ function Form(
       </form>
     </FormContext.Provider>
   );
-}
+};
 
 export default forwardRef(Form);

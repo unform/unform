@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, memo } from 'react';
 
-import useField from '../useField';
+import { useField } from '../../lib';
 
 interface Props<T> {
   name: string;

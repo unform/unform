@@ -1,7 +1,8 @@
 import React from 'react';
 
-import { Scope, Input } from '../lib';
+import { Scope } from '../lib';
 import render from '../lib/RenderTest';
+import Input from './components/Input';
 
 describe('RenderTest', () => {
   it('should name form elements based on scope', () => {

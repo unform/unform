@@ -21,7 +21,7 @@ export default function Input({ name, label, ...rest }: Props) {
           currentRef.value.concat('-test'),
       });
     }
-  }, [ref.current, fieldName]);
+  }, [fieldName, registerField]);
 
   return (
     <>

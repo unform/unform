@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, ChangeEvent, memo } from 'react';
 
-import useField from '../useField';
+import useField from '../../../lib/useField';
 
 interface Props {
   name: string;
