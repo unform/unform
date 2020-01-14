@@ -1,7 +1,8 @@
-import { render as rtlRender } from '@testing-library/react';
 import React from 'react';
 
-import { Form } from '../../lib';
+import { render as rtlRender } from '@testing-library/react';
+
+import { Form } from '../../../web/lib';
 
 export default function RenderTest(
   children: React.ReactNode,
@@ -9,7 +10,7 @@ export default function RenderTest(
 ) {
   const mockFunction = jest.fn();
   return rtlRender(
-    <Form onSubmit={mockFunction} {...props}>
+    <Form data-testid="form" onSubmit={mockFunction} {...props}>
       {children}
     </Form>,
   );

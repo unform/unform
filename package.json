@@ -10,7 +10,7 @@
   "license": "MIT",
   "scripts": {
     "prebuild": "lerna exec --parallel -- rimraf dist",
-    "build": "lerna exec --parallel -- rollup -c=../../rollup.config.js",
+    "build": "lerna exec --parallel -- rollup",
     "test": "jest",
     "coveralls": "jest && cat ./__tests__/coverage/lcov.info | coveralls"
   },
@@ -28,8 +28,8 @@
     "@types/react-native": "^0.60.24",
     "@types/react-test-renderer": "^16.8.1",
     "@types/yup": "^0.26.12",
-    "@typescript-eslint/eslint-plugin": "^1.6.0",
-    "@typescript-eslint/parser": "^1.6.0",
+    "@typescript-eslint/eslint-plugin": "^2.15.0",
+    "@typescript-eslint/parser": "^2.15.0",
     "commitlint-config-rocketseat": "^0.0.1",
     "coveralls": "^3.0.3",
     "eslint": "^5.16.0",
@@ -63,6 +63,6 @@
     "rollup-plugin-typescript2": "^0.25.3",
     "rollup-plugin-url": "^3.0.1",
     "ts-jest": "^24.0.2",
-    "typescript": "^3.4.3"
+    "typescript": "^3.7.4"
   }
 }

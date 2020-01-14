@@ -12,4 +12,9 @@ export { default as Scope } from './Scope';
 /**
  * Types
  */
-export { SubmitHandler, FormHandles } from './Form';
+export * from './types';
+
+/**
+ * Context
+ */
+export { default as FormContext } from './Context';

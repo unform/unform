@@ -1,19 +1,69 @@
-import { render } from '@testing-library/react-native';
-import React from 'react';
-import { Text, View } from 'react-native';
+import React, { RefObject, ReactNode, forwardRef } from 'react';
 
-function Example() {
-  return (
-    <View>
-      <Text>Test</Text>
-    </View>
-  );
+import { render } from '@testing-library/react-native';
+import { FormHandles } from '@unform/core';
+
+import { Form } from '../lib';
+import Input from './components/Input';
+
+interface UnformProps {
+  onSubmit(): void;
+  children?: ReactNode;
+  initialData?: object;
 }
 
-test('examples of some things', async () => {
-  const { getByText } = render(<Example />);
+const UnformRoot: React.RefForwardingComponent<FormHandles, UnformProps> = (
+  { children, ...rest },
+  ref,
+) => {
+  const mock = jest.fn();
 
-  const text = getByText('Test');
+  return (
+    <Form ref={ref} onSubmit={mock} {...rest}>
+      {children}
+    </Form>
+  );
+};
 
-  expect(!!text).toBe(true);
+const Unform = forwardRef(UnformRoot);
+
+test('it should return data with submits', async () => {
+  const formRef: RefObject<FormHandles> = { current: null };
+  const submitMock = jest.fn();
+
+  render(
+    <Unform ref={formRef} onSubmit={submitMock}>
+      <Input testID="name-input" name="name" label="Test" />
+    </Unform>,
+  );
+
+  formRef.current?.setFieldValue('name', 'John Doe');
+  formRef.current?.submitForm();
+
+  expect(submitMock).toBeCalledWith(
+    { name: 'John Doe' },
+    { reset: expect.any(Function) },
+  );
+});
+
+test('it should be able to set initial data', async () => {
+  const formRef: RefObject<FormHandles> = { current: null };
+  const submitMock = jest.fn();
+
+  render(
+    <Unform
+      initialData={{ name: 'John Doe' }}
+      ref={formRef}
+      onSubmit={submitMock}
+    >
+      <Input testID="name-input" name="name" label="Test" />
+    </Unform>,
+  );
+
+  formRef.current?.submitForm();
+
+  expect(submitMock).toBeCalledWith(
+    { name: 'John Doe' },
+    { reset: expect.any(Function) },
+  );
 });
