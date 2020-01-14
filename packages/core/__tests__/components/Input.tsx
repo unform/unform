@@ -40,9 +40,9 @@ function Input({
       {label && <label htmlFor={fieldName}>{label}</label>}
 
       {multiline ? (
-        <textarea {...props as TextAreaProps} />
+        <textarea {...(props as TextAreaProps)} />
       ) : (
-        <input {...props as InputProps} />
+        <input {...(props as InputProps)} />
       )}
 
       {error && <span>{error}</span>}

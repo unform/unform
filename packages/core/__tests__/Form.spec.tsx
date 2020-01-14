@@ -1,8 +1,11 @@
-import { act, fireEvent, wait } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
 import React, { RefObject } from 'react';
 
-import { Form, Scope, FormHandles } from '../lib';
+import { act, fireEvent, wait } from '@testing-library/react';
+
+import '@testing-library/jest-dom/extend-expect.js';
+
+import { Form } from '../../web/lib';
+import { Scope, FormHandles } from '../lib';
 import Input from './components/Input';
 import CustomInputClear from './utils/CustomInputClear';
 import CustomInputParse from './utils/CustomInputParse';
@@ -76,7 +79,7 @@ describe('Form', () => {
     });
 
     rerender(
-      <Form onSubmit={submitMock} initialData={{ another: 'Diego' }}>
+      <Form data-testid="form" onSubmit={submitMock}>
         <Input name="another" />
       </Form>,
     );

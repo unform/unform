@@ -1,7 +1,9 @@
-import dot from 'dot-object';
 import { useContext, useEffect } from 'react';
 
+import dot from 'dot-object';
+
 import FormContext from './Context';
+import { UnformContext } from './types';
 
 export default function useField(name: string) {
   const {
@@ -10,7 +12,7 @@ export default function useField(name: string) {
     scopePath,
     unregisterField,
     registerField,
-  } = useContext(FormContext);
+  } = useContext<UnformContext>(FormContext);
 
   const fieldName = scopePath ? `${scopePath}.${name}` : name;
 

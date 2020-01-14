@@ -7,7 +7,7 @@
 - [x] `registerField` dando loop
 - [x] `initialData` não funciona com `textarea`
 - [x] `registerField` causa uma nova renderização
-- [ ] Suporte ao React Native
+- [x] Suporte ao React Native
 - [ ] Alterar para Github Actions
 - [?] Changelog automático
 - [?] Errors uncontrolled?
@@ -15,7 +15,7 @@
 
 ## Identity
 
-- [ ] Deprecear pacote `@rocketseat/unform`
+- [ ] Depreciar pacote `@rocketseat/unform`
 - [ ] Remover `unform` do NPM [support@npmjs.com](support@npmjs.com)
 - [ ] Usar `@unform` no NPM
 - [ ] Mudar para nova organização

@@ -1,59 +1,19 @@
-import dot from 'dot-object';
 import React, {
   forwardRef,
   FormEvent,
   useState,
-  useMemo,
   useCallback,
-  DetailedHTMLProps,
-  FormHTMLAttributes,
   useImperativeHandle,
   RefForwardingComponent,
 } from 'react';
 
+import dot from 'dot-object';
+
 import FormContext from './Context';
-import { UnformErrors, UnformField, Omit } from './types';
-
-type HTMLFormProps = DetailedHTMLProps<
-  FormHTMLAttributes<HTMLFormElement>,
-  HTMLFormElement
->;
-
-interface Helpers {
-  reset: (data?: object) => void;
-}
-
-interface FormContent {
-  [key: string]: any;
-}
-
-export interface FormHandles {
-  getFieldValue: (fieldName: string) => any;
-  setFieldValue: (fieldName: string, value: any) => void | boolean;
-  getFieldError: (fieldName: string) => string;
-  setFieldError: (fieldName: string, error: string) => void;
-  clearField: (fieldName: string) => void;
-  getData(): object;
-  getFieldRef: (fieldName: string) => any;
-  setData: (data: object) => void;
-  getErrors: () => UnformErrors;
-  setErrors: (errors: object) => void;
-  reset: (data?: object) => void;
-  submitForm: () => void;
-}
-
-export interface SubmitHandler<T = FormContent> {
-  (data: T, helpers: Helpers): void;
-}
-
-export interface FormProps extends Omit<HTMLFormProps, 'onSubmit'> {
-  initialData?: object;
-  children: React.ReactNode;
-  onSubmit: SubmitHandler;
-}
+import { UnformErrors, UnformField, FormHandles, FormProps } from './types';
 
 const Form: RefForwardingComponent<FormHandles, FormProps> = (
-  { initialData = {}, children, onSubmit, ...rest },
+  { initialData = {}, children, onSubmit },
   formRef,
 ) => {
   const [errors, setErrors] = useState<UnformErrors>({});
@@ -64,18 +24,21 @@ const Form: RefForwardingComponent<FormHandles, FormProps> = (
     [fields],
   );
 
-  const getFieldValue = useCallback(
-    ({ ref, path, parseValue }: UnformField) => {
-      const value = dot.pick(path, ref);
+  const getFieldValue = useCallback(({ ref, path, getValue }: UnformField) => {
+    if (getValue) {
+      return getValue(ref);
+    }
 
-      return parseValue ? parseValue(ref) : value;
-    },
-    [],
-  );
+    return dot.pick(path, ref);
+  }, []);
 
   const setFieldValue = useCallback(
-    ({ path, ref }: UnformField, value: any) => {
-      dot.set(path, value, ref as object);
+    ({ path, ref, setValue }: UnformField, value: any) => {
+      if (setValue) {
+        return setValue(ref, value);
+      }
+
+      return dot.set(path, value, ref as object);
     },
     [],
   );
@@ -223,18 +186,6 @@ const Form: RefForwardingComponent<FormHandles, FormProps> = (
     },
   }));
 
-  const formView = useMemo(
-    () =>
-      window ? (
-        <form {...rest} data-testid="form" onSubmit={handleSubmit}>
-          {children}
-        </form>
-      ) : (
-        children
-      ),
-    [children, handleSubmit, rest],
-  );
-
   return (
     <FormContext.Provider
       value={{
@@ -243,9 +194,10 @@ const Form: RefForwardingComponent<FormHandles, FormProps> = (
         scopePath: '',
         registerField,
         unregisterField,
+        handleSubmit,
       }}
     >
-      {formView}
+      {children}
     </FormContext.Provider>
   );
 };

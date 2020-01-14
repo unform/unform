@@ -30,6 +30,7 @@ module.exports = {
   rules: {
     'prettier/prettier': 'error',
     'class-methods-use-this': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
@@ -44,19 +45,31 @@ module.exports = {
       {
         'newlines-between': 'always',
         groups: [
+          ['/^react/'],
           ['builtin', 'external', 'internal'],
+          '/^@/',
           ['parent', 'sibling', 'index'],
         ],
         alphabetize: { order: 'asc', ignoreCase: true },
       },
     ],
     'no-param-reassign': 'off',
+    'no-unused-expressions': 'off',
+    'no-underscore-dangle': 'off',
     'react/prop-types': 'off',
     'jsx-a11y/label-has-for': 'off',
     'import/prefer-default-export': 'off',
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "ts": "never",
+        "tsx": "never"
+      }
+    ]
   },
   settings: {
     'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],

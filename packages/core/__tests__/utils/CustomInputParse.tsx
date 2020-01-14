@@ -17,7 +17,7 @@ export default function Input({ name, label, ...rest }: Props) {
         name: fieldName,
         ref: ref.current,
         path: '',
-        parseValue: (currentRef: HTMLInputElement) =>
+        getValue: (currentRef: HTMLInputElement) =>
           currentRef.value.concat('-test'),
       });
     }
