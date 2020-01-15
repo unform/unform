@@ -5,7 +5,9 @@
   "author": "Diego Fernandes <diego.schell.f@gmail.com>",
   "homepage": "https://github.com/Rocketseat/unform#readme",
   "license": "MIT",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "typings": "dist/index.d.ts",
   "directories": {
     "lib": "lib",
     "test": "__tests__"

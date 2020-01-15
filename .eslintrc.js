@@ -53,6 +53,7 @@ module.exports = {
         alphabetize: { order: 'asc', ignoreCase: true },
       },
     ],
+    'import/no-dynamic-require': 'off',
     'no-param-reassign': 'off',
     'no-unused-expressions': 'off',
     'no-underscore-dangle': 'off',

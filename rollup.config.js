@@ -1,32 +1,46 @@
+import path from 'path';
 import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import resolve from 'rollup-plugin-node-resolve';
-import external from 'rollup-plugin-peer-deps-external';
 import { terser } from 'rollup-plugin-terser';
 import typescript from 'rollup-plugin-typescript2';
 import url from 'rollup-plugin-url';
 
-import pkg from './package.json';
+const PACKAGE_ROOT_PATH = process.cwd();
+const INPUT_FILE = path.join(PACKAGE_ROOT_PATH, 'lib/index.ts');
+const pkg = require(path.join(PACKAGE_ROOT_PATH, 'package.json'));
+
+function makeExternalPredicate(externalArr) {
+  if (!externalArr.length) {
+    return () => false;
+  }
+  const pattern = new RegExp(`^(${externalArr.join('|')})($|/)`);
+  return id => pattern.test(id);
+}
+
+function getExternal() {
+  const external = Object.keys(pkg.peerDependencies || {});
+  const allExternal = [...external, ...Object.keys(pkg.dependencies || {})];
+
+  return makeExternalPredicate(allExternal);
+}
 
 export default {
-  input: 'lib/index.ts',
-  external: ['react', 'react-dom', 'yup'],
+  input: INPUT_FILE,
+  external: getExternal(),
   output: [
     {
-      file: pkg.main,
+      file: path.resolve(PACKAGE_ROOT_PATH, 'dist/index.js'),
       format: 'cjs',
       sourcemap: true,
     },
     {
-      file: pkg.module,
+      file: path.resolve(PACKAGE_ROOT_PATH, 'dist/index.es.js'),
       format: 'es',
       sourcemap: true,
     },
   ],
   plugins: [
-    external({
-      includeDependencies: false,
-    }),
     url(),
     resolve(),
     babel({
