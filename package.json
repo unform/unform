@@ -10,7 +10,7 @@
   "license": "MIT",
   "scripts": {
     "prebuild": "lerna exec --parallel -- rimraf dist",
-    "build": "lerna exec --parallel -- rollup",
+    "build": "lerna exec --parallel -- rollup -c ../../rollup.config.js",
     "test": "jest",
     "coveralls": "jest && cat ./__tests__/coverage/lcov.info | coveralls"
   },
@@ -58,7 +58,6 @@
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-peer-deps-external": "^2.2.0",
     "rollup-plugin-terser": "^5.1.2",
     "rollup-plugin-typescript2": "^0.25.3",
     "rollup-plugin-url": "^3.0.1",
