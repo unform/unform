@@ -1,6 +1,6 @@
 {
   "name": "@unform/mobile",
-  "version": "2.0.0",
+  "version": "1.9.1",
   "description": "Unform React Native implementation",
   "author": "Diego Fernandes <diego.schell.f@gmail.com>",
   "homepage": "https://github.com/Rocketseat/unform#readme",
@@ -29,8 +29,8 @@
     "@testing-library/react-native": "^5.0.2"
   },
   "peerDependencies": {
+    "@unform/core": "*",
     "react": "^16.8.0",
-    "react-native": "*",
-    "@unform/core": "*"
+    "react-native": "*"
   }
 }
