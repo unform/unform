@@ -32,5 +32,6 @@
     "@unform/core": "*",
     "react": "^16.8.0",
     "react-native": "*"
-  }
+  },
+  "gitHead": "af1e2d163688b6c2f0a11fe4ea73a974849e872d"
 }
