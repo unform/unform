@@ -1,6 +1,12 @@
 import React, { RefForwardingComponent, forwardRef } from 'react';
 
-import { Form as Unform, FormHandles, FormProps } from '@unform/core';
+import { Form as Unform, FormHandles, SubmitHandler } from '@unform/core';
+
+export interface FormProps {
+  initialData?: object;
+  children: React.ReactNode;
+  onSubmit: SubmitHandler;
+}
 
 const Form: RefForwardingComponent<FormHandles, FormProps> = (
   { initialData = {}, children, onSubmit },
