@@ -3,6 +3,7 @@ yarn-error.log
 coverage
 
 dist
+typings
 
 __tests__/coverage
 
