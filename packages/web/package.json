@@ -13,7 +13,8 @@
     "test": "__tests__"
   },
   "files": [
-    "dist"
+    "dist",
+    "typings"
   ],
   "repository": {
     "type": "git",
@@ -30,5 +31,5 @@
     "react": "^16.8.0",
     "react-dom": "^16.8.0"
   },
-  "gitHead": "af1e2d163688b6c2f0a11fe4ea73a974849e872d"
+  "gitHead": "9dc430258f988502b6368ed28e166410c5a7b7d8"
 }
