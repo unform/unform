@@ -9,7 +9,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "prebuild": "lerna exec --parallel -- rimraf dist",
+    "prebuild": "lerna exec --parallel -- rimraf dist typings",
     "build": "lerna exec --parallel -- rollup -c ../../rollup.config.js",
     "test": "jest",
     "coveralls": "jest && cat ./__tests__/coverage/lcov.info | coveralls"
