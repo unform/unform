@@ -1,0 +1,6 @@
+- label: 'Home' # just a simple item
+  link: '/'
+- label: 'With dropdown' # to create a 'dropdown'
+  items:
+    - label: 'My Example'
+      link: '/my-example'
