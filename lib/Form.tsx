@@ -64,12 +64,15 @@ export default function Form({
     return data;
   }
 
-  function resetForm(data = {}) {
+  function resetForm(data = {}, focusedElement = '') {
     fields.forEach(({ name, ref, path, clearValue }) => {
       if (clearValue) {
         return clearValue(ref, data[name]);
       }
-
+      if (focusedElement && name === focusedElement) {
+        const newRef = ref as HTMLElement;
+        newRef.focus();
+      }
       return dot.set(path, data[name] ? data[name] : '', ref as object);
     });
   }
