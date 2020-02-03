@@ -86,7 +86,7 @@ const Form: RefForwardingComponent<FormHandles, FormProps> = (
     (formErrors: object) => {
       const parsedErrors = dot.dot(formErrors);
 
-      setErrors({ ...errors, ...parsedErrors });
+      setErrors(parsedErrors);
     },
     [errors],
   );
