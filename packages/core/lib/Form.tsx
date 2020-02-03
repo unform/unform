@@ -82,14 +82,11 @@ const Form: RefForwardingComponent<FormHandles, FormProps> = (
     [getFieldByName, setFieldValue],
   );
 
-  const setFormErrors = useCallback(
-    (formErrors: object) => {
-      const parsedErrors = dot.dot(formErrors);
+  const setFormErrors = useCallback((formErrors: object) => {
+    const parsedErrors = dot.dot(formErrors);
 
-      setErrors(parsedErrors);
-    },
-    [errors],
-  );
+    setErrors(parsedErrors);
+  }, []);
 
   const parseFormData = useCallback(() => {
     const data = {};
