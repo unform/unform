@@ -1,0 +1,23 @@
+---
+title: Navigation
+---
+
+To create a navigation file, simple add it under the config folder. Example:
+
+```yml title=sidebar.yml
+# Just a simple item
+- label: 'Home'
+  link: '/'
+# With a list of subitens
+- label: 'With subitens'
+  items:
+    - label: 'My Example'
+      link: '/my-example'
+```
+
+You can also add external links:
+
+```yml
+- label: 'GitHub'
+  link: 'https://github.com/jpedroschmitz'
+```

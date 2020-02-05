@@ -1,0 +1,107 @@
+# Validation
+
+Unform **does not includes validation by default**, so you can choose the best library that fits for you.
+
+Let's see an example using [Yup](https://github.com/jquense/yup) to validate form fields.
+
+## Validation with Yup
+
+```jsx lineNumbers=true
+import * as Yup from 'yup';
+
+export default function SignIn() {
+  function handleSubmit(data) {
+    try {
+      const schema = Yup.object().shape({
+        email: Yup.string().email().required(),
+        password: Yup.string().min(6).required(),
+      });
+
+      await schema.validate(data, {
+        abortEarly: false,
+      });
+
+      // Validation passed
+      console.log(data);
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        // Validation failed
+        console.log(err);
+      }
+    }
+  }
+
+  return (...);
+}
+```
+
+## Displaying errors
+
+Unform provides an easy way to set and get errors inside inputs:
+
+```jsx title=SignIn.jsx lineNumbers=true
+import React, { useRef } from 'react';
+import * as Yup from 'yup';
+
+export default function SignIn() {
+  const formRef = useRef(null);
+
+  function handleSubmit(data) {
+    try {
+      const schema = Yup.object().shape({
+        email: Yup.string().email().required(),
+        password: Yup.string().min(6).required(),
+      });
+
+      await schema.validate(data, {
+        abortEarly: false,
+      });
+
+      // Validation passed
+      console.log(data);
+    } catch (err) {
+      const validationErrors = {};
+
+      if (err instanceof Yup.ValidationError) {
+        err.inner.forEach(error => {
+          validationErrors[error.path] = error.message;
+        });
+
+        formRef.current.setErrors(validationErrors);
+      }
+    }
+  }
+
+  return (
+    <Form ref={formRef} onSubmit={handleSubmit}>
+      ...
+    </Form>
+  )
+}
+```
+
+And inside the input component you need to get `error` from `useField` and display it.
+
+You can also use the error message to add new class or styles to input.
+
+```jsx title=components/Input.js lineNumbers=true
+export default function Input({ name, ...rest }) {
+  const inputRef = useRef(null);
+  const { fieldName, defaultValue, registerField, error } = useField(name);
+
+  useEffect(...); // Same useEffect from basic form example
+
+  return (
+    <>
+      <input
+        ref={inputRef}
+        defaultValue={defaultValue}
+        className={error ? 'has-error' : ''}
+        {...rest}
+      />
+
+      { error && <span className="error">{error}</span> }
+    </>
+  );
+}
+```

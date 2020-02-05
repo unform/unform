@@ -1,0 +1,45 @@
+# Get/set field error
+
+Unform provides an easy way to set or access input error using form reference.
+
+```jsx lineNumbers=true
+export default function MyForm() {
+  const formRef = useRef(null);
+
+  function functionThatGetsErrors() {
+    // Get all errors
+    const allErrors = formRef.current.getErrors();
+
+    // Get single field error
+    const name = formRef.current.getFieldError('name');
+    const street = formRef.current.getFieldError('address.street');
+
+    console.log(allErrors, name, street);
+  }
+
+  function functionThatSetsErrors() {
+    // Set all errors
+    formRef.current.setErrors({
+      name: 'Name is required',
+      address: {
+        street: 'Street not found',
+      },
+    });
+
+    // Set single field error
+    formRef.current.setFieldError('name', 'Name is requored');
+    formRef.current.setFieldError('address.street', 'Street not found');
+  }
+
+  return (
+    <Form ref={formRef}>
+      <Input name="name" />
+
+      <Scope path="address">
+        <Input name="street" />
+        <Input name="number" />
+      </Scope>
+    </Form>
+  );
+}
+```

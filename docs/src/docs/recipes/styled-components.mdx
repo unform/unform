@@ -1,0 +1,40 @@
+# Usage with Styled Components
+
+As with Unform you create your own components for input sources, you can customize the inputs with any styling library you want or event with pure CSS.
+
+When using Unform in the Web, `<Form />` component automatically render an HTML form and you can style it using any library or pure CSS as well.
+
+## Using classNames
+
+```jsx lineNumbers=true
+export default function MyForm() {
+  return (
+    <Form className="my-form">
+      ...
+    </Form>
+  );
+}
+```
+
+## Using Styled Components
+
+```jsx title=styles.js lineNumbers=true
+import styled from 'styled-components';
+import { Form as Unform } from '@unform/web';
+
+export const Form = styled(Unform)`
+  // Form CSS
+`;
+```
+
+```jsx title=MyForm.js lineNumbers=true
+import { Form } from './styles';
+
+export default function MyForm() {
+  return (
+    <Form>
+      ...
+    </Form>
+  );
+}
+```

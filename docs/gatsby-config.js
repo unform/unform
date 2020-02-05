@@ -1,30 +1,48 @@
 module.exports = {
+  siteMetadata: {
+    siteTitle: `Unform`,
+    defaultTitle: `Unform | Easy peezy forms in React`,
+    siteTitleShort: `unform`,
+    siteDescription: `Out of the box Gatsby Theme for creating documentation websites easily and quickly`,
+    siteUrl: `https://rocketdocs.netlify.com`,
+    siteAuthor: `@rocketseat`,
+    siteImage: `/banner.png`,
+    siteLanguage: `en`,
+    themeColor: `#7159c1`,
+    footer: `Made with 💜 by Rocketseat`,
+  },
   plugins: [
     {
       resolve: `@rocketseat/gatsby-theme-docs`,
       options: {
-        metadata: {
-          // Used for the title template on pages other than the index site
-          siteTitle: `Unform`,
-          // Default title of the page
-          defaultTitle: `Unform - ReactJS form library`,
-          // Used in header, just appear on mobile
-          siteTitleShort: `Unform`,
-          // Default description, used for SEO
-          siteDescription: `ReactJS form library to create uncontrolled form structures with nested fields, validations and much more!`,
-          // Will be used to generate absolute URLs for og:image etc...
-          siteUrl: `https://unform.dev`,
-          // Twitter handle
-          siteAuthor: `@rocketseat`,
-          // Used for og:image and must be placed inside the `static` folder
-          siteImage: `/unform.png`,
-          // Will be set on the <html /> tag
-          siteLanguage: `en`,
-          // Used for (not required)
-          themeColor: `#7159c1`,
-          footer: `Created with <3`,
-        },
+        configPath: `src/config`,
+        docsPath: `src/docs`,
       },
     },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Unform`,
+        short_name: `Unform`,
+        start_url: `/`,
+        background_color: `#7159c1`,
+        display: `standalone`,
+        icon: `static/favicon.png`,
+      },
+    },
+    `gatsby-plugin-sitemap`,
+    // {
+    //   resolve: `gatsby-plugin-google-analytics`,
+    //   options: {
+    //     trackingId: `UA-99997611-9`,
+    //   },
+    // },
+    {
+      resolve: `gatsby-plugin-canonical-urls`,
+      options: {
+        siteUrl: `https://rocketdocs.netlify.com`,
+      },
+    },
+    `gatsby-plugin-offline`,
   ],
 };

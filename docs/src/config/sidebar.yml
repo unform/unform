@@ -1,0 +1,52 @@
+# Sidebar navigation
+
+- label: 'Getting started'
+  link: '/'
+- label: 'Why Unform?'
+  link: '/why-unform'
+- label: 'FAQ'
+  link: '/faq'
+- label: Guides
+  items:
+    - label: 'Basic form'
+      link: '/guides/basic-form'
+    - label: 'React Native'
+      link: '/guides/react-native'
+    - label: 'Initial data'
+      link: '/guides/initial-data'
+    - label: 'Complex structures'
+      link: '/guides/complex-structures'
+    - label: 'Validation'
+      link: '/guides/validation'
+    - label: 'Get/set field value'
+      link: '/guides/get-set-field-value'
+    - label: 'Get/set field error'
+      link: '/guides/get-set-field-error'
+    - label: 'Reset form'
+      link: '/guides/reset-form'
+    - label: 'Manual form submit'
+      link: '/guides/manual-form-submit'
+
+- label: Recipes
+  items:
+    - label: 'Simple Input'
+      link: '/recipes/simple-input'
+    - label: 'Creating your own inputs'
+      link: '/recipes/creating-your-own-inputs'
+    - label: 'Accessing form ref'
+      link: '/recipes/accessing-form-ref'
+    - label: 'Styled Components'
+      link: '/recipes/styled-components'
+    - label: 'TypeScript'
+      link: '/recipes/typescript'
+
+- label: Third party
+  items:
+    - label: 'React Select'
+      link: '/third-party/react-select'
+    - label: 'React DatePicker'
+      link: '/third-party/react-datepicker'
+    - label: 'React Simple Code Editor'
+      link: '/third-party/react-simple-code-editor'
+    - label: 'React Input Mask'
+      link: '/third-party/react-input-mask'
