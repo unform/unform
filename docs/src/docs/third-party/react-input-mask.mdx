@@ -1,0 +1,49 @@
+# React Input Mask
+
+[React Input Mask](https://github.com/sanniassin/react-input-mask) offers an easy way to add masks to inputs.
+
+> ⚠️ All examples below are using **TypeScript**, if you're not using it you can simply remove all type definitions as the `React.FC<Props>` from component definition.
+
+## Example
+
+```jsx lineNumbers=true
+import React, { useRef, useEffect }  from 'react';
+import ReactInputMask, { Props as InputProps } from 'react-input-mask';
+
+import { useField } from '@unform/core';
+
+import 'react-datepicker/dist/react-datepicker.css';
+
+interface Props extends InputProps {
+  name: string;
+}
+
+const InputMask: React.FC<Props> = ({ name, ...rest }) => {
+  const inputRef = useRef(null);
+  const { fieldName, registerField, defaultValue, error } = useField(name);
+
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: inputRef.current,
+      path: 'value',
+      setValue(ref: any, value: string) {
+        ref.setInputValue('');
+      },
+      clearValue(ref: any) {
+        ref.setInputValue('');
+      }
+    })
+  }, [fieldName, registerField]);
+
+  return (
+    <ReactInputMask
+      ref={inputRef}
+      defaultValue={defaultValue}
+      {...rest}
+    />
+  );
+};
+
+export default InputMask;
+```

@@ -1,0 +1,45 @@
+# Get/set field value
+
+Unform provides an easy way to set or access input data using form reference.
+
+```jsx lineNumbers=true
+export default function MyForm() {
+  const formRef = useRef(null);
+
+  function functionThatGetsData() {
+    // Get all data
+    const allData = formRef.current.getData();
+
+    // Get single field value
+    const name = formRef.current.getFieldValue('name');
+    const street = formRef.current.getFieldValue('address.street');
+
+    console.log(allData, name, street);
+  }
+
+  function functionThatSetsData() {
+    // Set all data
+    formRef.current.setData({
+      name: 'John Doe',
+      address: {
+        street: 'Some street',
+      },
+    });
+
+    // Set single field value
+    formRef.current.setFieldValue('name', 'John Doe');
+    formRef.current.setFieldValue('address.street', 'Some street');
+  }
+
+  return (
+    <Form ref={formRef}>
+      <Input name="name" />
+
+      <Scope path="address">
+        <Input name="street" />
+        <Input name="number" />
+      </Scope>
+    </Form>
+  );
+}
+```

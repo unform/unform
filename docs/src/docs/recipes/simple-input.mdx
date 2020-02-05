@@ -1,0 +1,44 @@
+# Simple input
+
+With Unform, all of your input sources must be created by you.
+
+Here we have an example of a very simple input with support for label and error.
+
+```jsx title=components/Input.js lineNumbers=true
+import React, { useRef } from 'react';
+import { useField } from '@unform/core'
+
+export default function Input({ name, label, ...rest }) {
+  const inputRef = useRef(null);
+
+  const {
+    fieldName,
+    defaultValue,
+    registerField,
+    error,
+  } = useField(name);
+
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: inputRef.current,
+      path: 'target.value',
+    });
+  }, [fieldName, registerField]);
+
+  return (
+    <>
+      <label htmlFor={fieldName}>{label}</label>
+
+      <input
+        id={fieldName}
+        ref={inputRef}
+        defaultValue={defaultValue}
+        {...rest}
+      />
+
+      { error && <span className="error">{error}</span> }
+    </>
+  );
+}
+```

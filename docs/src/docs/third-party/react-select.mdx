@@ -1,0 +1,169 @@
+# React Select
+
+[React Select](https://react-select.com/) is the coolest ReactJS custom `<select>` library.
+
+If you're not using it, we recommend using it instead of using simple `<select>` elements as it's highly customizable and provides an incredible API as we'll se below.
+
+> ⚠️ All examples below are using **TypeScript**, if you're not using it you can simply remove all type definitions as the `React.FC<Props>` from component definition.
+
+## Simple select
+
+A simple replacer for default HTML `<select>` element :)
+
+```jsx lineNumbers=true
+import React, { useRef, useEffect } from 'react';
+import ReactSelect, { OptionTypeBase, Props as SelectProps } from 'react-select';
+import { useField } from '@unform/core';
+
+interface Props extends SelectProps<OptionTypeBase> {
+  name: string;
+}
+
+const Select: React.FC<Props> = ({ name, ...rest }) => {
+  const selectRef = useRef(null);
+  const { fieldName, defaultValue, registerField, error } = useField(name);
+
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: selectRef.current,
+      path: 'state.value',
+      getValue: (ref: any) => {
+        if (rest.isMulti) {
+          if (!ref.state.value) {
+            return [];
+          }
+
+          return ref.state.value.map((option: OptionTypeBase) => option.value);
+        } else {
+          if (!ref.state.value) {
+            return '';
+          }
+
+          return ref.state.value.value;
+        }
+      }
+    });
+  }, [fieldName, registerField, rest.isMulti]);
+
+  return (
+    <ReactSelect
+      defaultValue={defaultValue}
+      ref={selectRef}
+      classNamePrefix="react-select"
+      {...rest}
+    />
+  );
+};
+
+export default Select;
+```
+
+## Creatable
+
+User can choose between default options or create new ones.
+
+```jsx lineNumbers=true
+import React, { useRef, useEffect } from 'react';
+import { OptionTypeBase } from 'react-select';
+import Select, { Props as CreatableProps } from 'react-select/creatable'
+import { useField } from '@unform/core';
+
+interface Props extends CreatableProps<OptionTypeBase> {
+  name: string;
+}
+
+const CreatableSelect: React.FC<Props> = ({ name, ...rest }) => {
+  const selectRef = useRef(null);
+  const { fieldName, defaultValue, registerField, error } = useField(name);
+
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: selectRef.current,
+      path: 'state.value',
+      getValue: (ref: any) => {
+        if (rest.isMulti) {
+          if (!ref.state.value) {
+            return [];
+          }
+
+          return ref.state.value.map((option: OptionTypeBase) => option.value);
+        } else {
+          if (!ref.state.value) {
+            return '';
+          }
+
+          return ref.state.value.value;
+        }
+      }
+    });
+  }, [fieldName, registerField, rest.isMulti]);
+
+  return (
+    <Select
+      defaultValue={defaultValue}
+      ref={selectRef}
+      classNamePrefix="react-select"
+      {...rest}
+    />
+  );
+};
+
+export default CreatableSelect;
+```
+
+## Async
+
+Long lists of options? No problem! Use Async Select to make an asynchronous call to an API everytime user type something in the search box.
+
+```jsx lineNumbers=true
+import React, { useRef, useEffect } from 'react';
+import { OptionTypeBase } from 'react-select';
+import Select, { Props as AsyncProps } from 'react-select/async'
+import { useField } from '@unform/core';
+
+interface Props extends AsyncProps<OptionTypeBase> {
+  name: string;
+}
+
+const AsyncSelect: React.FC<Props> = ({ name, ...rest }) => {
+  const selectRef = useRef(null);
+  const { fieldName, defaultValue, registerField, error } = useField(name);
+
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: selectRef.current,
+      path: 'select.state.value',
+      getValue: (ref: any) => {
+        if (rest.isMulti) {
+          if (!ref.select.state.value) {
+            return [];
+          }
+
+          return ref.select.state.value.map((option: OptionTypeBase) => option.value);
+        } else {
+          if (!ref.select.state.value) {
+            return '';
+          }
+
+          return ref.select.state.value.value;
+        }
+      }
+    });
+  }, [fieldName, registerField, rest.isMulti]);
+
+  return (
+    <Select
+      cacheOptions
+      defaultValue={defaultValue}
+      ref={selectRef}
+      classNamePrefix="react-select"
+      {...rest}
+    />
+  );
+};
+
+export default AsyncSelect;
+```

@@ -1,0 +1,74 @@
+# Accessing form reference
+
+Unform exposes a various helper functions through the form reference.
+
+```jsx lineNumbers=true
+export default function MyForm() {
+  const formRef = useRef(null);
+
+  // Use formRef.current to access all methods
+
+  return (
+    <Form ref={formRef}>
+      ...
+    </Form>
+  );
+}
+```
+
+## Methods
+
+<table>
+  <thead>
+    <tr>
+      <th>Function</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>submitForm()</td>
+      <td>Trigger onSubmit function</td>
+    </tr>
+    <tr>
+      <td>reset(data?: object)</td>
+      <td>Reset (and maybe replace) all form data</td>
+    </tr>
+    <tr>
+      <td>getData()</td>
+      <td>Returns all form data</td>
+    </tr>
+    <tr>
+      <td>setData(data: object)</td>
+      <td>Set multiple fields data</td>
+    </tr>
+    <tr>
+      <td>getErrors()</td>
+      <td>Returns all field errors</td>
+    </tr>
+    <tr>
+      <td>setErrors(errors: object)</td>
+      <td>Set multiple field errors</td>
+    </tr>
+    <tr>
+      <td>clearField(fieldName: string)</td>
+      <td>Clear single field value</td>
+    </tr>
+    <tr>
+      <td>getFieldValue(fieldName: string)</td>
+      <td>Get single field value</td>
+    </tr>
+    <tr>
+      <td>setFieldValue(fieldName: string, value: string)</td>
+      <td>Set single field value</td>
+    </tr>
+    <tr>
+      <td>getFieldError(fieldName: string)</td>
+      <td>Get single field error</td>
+    </tr>
+    <tr>
+      <td>setFieldError(fieldName: string, error: string)</td>
+      <td>Set single field error</td>
+    </tr>
+  </tbody>
+</table>

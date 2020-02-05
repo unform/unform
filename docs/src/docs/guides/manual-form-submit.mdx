@@ -1,0 +1,20 @@
+# Manual form submit
+
+With Unform you can submit your form without a submit button using the `submitForm` function exposed by form reference.
+
+```jsx lineNumbers=true
+export default function SignIn() {
+  const formRef = useRef(null);
+
+  function functionThatSubmitsForm() {
+    formRef.current.submitForm();
+  }
+
+  return (
+    <Form ref={formRef} onSubmit={handleSubmit}>
+      <Input name="email" type="email" />
+      <Input name="password" type="password" />
+    </Form>
+  );
+}
+```

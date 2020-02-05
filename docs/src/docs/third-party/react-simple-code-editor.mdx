@@ -1,0 +1,66 @@
+# React Simple Code Editor
+
+[React Simple Code Editor](http://satya164.xyz/react-simple-code-editor/) is a cool library focused on providing a simple way to add a code input source to user.
+
+> ⚠️ All examples below are using **TypeScript**, if you're not using it you can simply remove all type definitions as the `React.FC<Props>` from component definition.
+
+## Syntax Highlight
+
+React Simple Code Editor use PrismJS to add syntax highlighting to code.
+
+You need to import each [language](https://prismjs.com/#supported-languages) that you want to use from `prismjs/components/prism-{language}`.
+
+You can also import custom themes from `prismjs/themes/prism-{theme}.css`.
+
+## Example
+
+Below you can see an example using only HTML/CSS syntax highlighting and using `prism-dark` theme.
+
+```jsx lineNumbers=true
+import React, { useRef, useState, useEffect } from 'react';
+import Editor from 'react-simple-code-editor';
+import { useField } from '@unform/core'
+
+import { highlight, languages } from 'prismjs';
+
+import 'prismjs/components/prism-markup';
+import 'prismjs/components/prism-css';
+import 'prismjs/themes/prism-dark.css';
+
+interface Props {
+  name: string;
+};
+
+const CodeInput: React.FC<Props> = ({ name }) => {
+  const [code, setCode] = useState('');
+  const editorRef = useRef(null);
+
+  const { defaultValue, fieldName, registerField, error } = useField(name);
+
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: editorRef.current,
+      path: '_input.value',
+      setValue(_: any, value: string) {
+        setCode(value);
+      }
+    })
+  }, [fieldName, registerField]);
+
+  return (
+    <Editor
+      className="editor"
+      textareaId={fieldName}
+      value={code}
+      defaultValue={defaultValue}
+      onValueChange={setCode}
+      highlight={code => highlight(code, languages.markup, 'markup')}
+      padding={15}
+      ref={editorRef}
+    />
+  );
+};
+
+export default CodeInput;
+```

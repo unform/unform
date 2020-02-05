@@ -1,0 +1,100 @@
+# Basic form
+
+Let's suppose you're creating a sign in form with two fields, `email` and `password`.
+
+The first step after installing Unform is creating your custom Input component that will be used for every input in yout application.
+
+```jsx title=components/Input.js lineNumbers=true
+import React, { useRef } from 'react';
+import { useField } from '@unform/core'
+
+export default function Input({ name, ...rest }) {
+  const inputRef = useRef(null);
+  const { fieldName, defaultValue, registerField, error } = useField(name);
+
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: inputRef.current,
+      path: 'target.value',
+    });
+  }, [fieldName, registerField]);
+
+  return (
+    <input ref={inputRef} defaultValue={defaultValue} {...rest} />
+  );
+}
+```
+
+In the above example, we create an input component using the `useField` hook exposed by Unform.
+
+We also use the `useRef` hook from React so Unform can access the input reference directly to get/set the input value.
+
+The next step is creating our form:
+
+```jsx title=SignIn.js lineNumbers=true
+import React from 'react';
+import { Form } from '@unform/web';
+import Input from './components/Input';
+
+export default function SignIn() {
+  function handleSubmit(data) {
+    console.log(data);
+    // { email: 'test@example.com', password: '123456' }
+  }
+
+  return (
+    <Form onSubmit={handleSubmit}>
+      <Input name="email" type="email" />
+      <Input name="password" type="password" />
+
+      <button type="submit">Sign in</button>
+    </Form>
+  );
+}
+```
+
+If you're using React Native, proceed to [React Native guide](/guides/react-native).
+
+## Live example
+
+```jsx live=true
+import React from 'react';
+import { useField } from '@unform/web';
+import { Form } from '@unform/web';
+
+function Input({ name, ...rest }) {
+  const inputRef = useRef(null);
+  const { fieldName, defaultValue, registerField, error } = useField(name);
+
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: inputRef.current,
+      path: 'target.value',
+    });
+  }, [fieldName, registerField]);
+
+  return (
+    <input ref={inputRef} defaultValue={defaultValue} {...rest} />
+  );
+}
+
+function SignIn() {
+  function handleSubmit(data) {
+    console.log(data);
+    // { email: 'test@example.com', password: '123456' }
+  }
+
+  return (
+    <Form onSubmit={handleSubmit}>
+      <Input name="email" type="email" />
+      <Input name="password" type="password" />
+
+      <button type="submit">Sign in</button>
+    </Form>
+  );
+}
+
+render(<SignIn />)
+```
