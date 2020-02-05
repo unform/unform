@@ -4,10 +4,10 @@ name: Publish package
 #   release:
 #     types: [created]
 
-on:
-  push:
-    branches:
-      - v2.0
+# on:
+#   push:
+#     branches:
+#       - v2.0
 
 jobs:
   build:
