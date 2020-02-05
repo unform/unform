@@ -47,11 +47,7 @@ export interface FormHelpers {
   reset: (data?: object) => void;
 }
 
-export interface FormContent {
-  [key: string]: any;
-}
-
-export interface SubmitHandler<T = FormContent> {
+export interface SubmitHandler<T = any> {
   (data: T, helpers: FormHelpers): void;
 }
 
