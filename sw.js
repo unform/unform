@@ -27,28 +27,24 @@ workbox.core.clientsClaim();
  */
 self.__precacheManifest = [
   {
-    "url": "webpack-runtime-dc05a02feb578e614839.js"
+    "url": "webpack-runtime-6618ddf96afa5042946e.js"
   },
   {
     "url": "commons-bb04aa5fb8c633cef8fa.js"
   },
   {
-    "url": "app-bb436e4b21dfb3d3eb40.js"
+    "url": "app-955e3f2d5a75e5214b76.js"
   },
   {
     "url": "component---node-modules-gatsby-plugin-offline-app-shell-js-ceef87afc058962c4db9.js"
   },
   {
     "url": "offline-plugin-app-shell-fallback/index.html",
-    "revision": "252bc73be1097aa8e1c5535be63ee663"
-  },
-  {
-    "url": "page-data/offline-plugin-app-shell-fallback/page-data.json",
-    "revision": "c355c8040c47a63bfb3360e4b7cb6553"
+    "revision": "9560a54a7fa83b8943b5dbb8cba572e7"
   },
   {
     "url": "manifest.webmanifest",
-    "revision": "078056e38af45a2dcdb98f0e1b698909"
+    "revision": "668b9b169fc76a654fe0b71317b76df8"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
@@ -136,12 +132,12 @@ const navigationRoute = new NavigationRoute(async ({ event }) => {
   lastNavigationRequest = event.request.url
 
   let { pathname } = new URL(event.request.url)
-  pathname = pathname.replace(new RegExp(`^/unform`), ``)
+  pathname = pathname.replace(new RegExp(`^`), ``)
 
   // Check for resources + the app bundle
   // The latter may not exist if the SW is updating to a new version
   const resources = await idbKeyval.get(`resources:${pathname}`)
-  if (!resources || !(await caches.match(`/unform/app-bb436e4b21dfb3d3eb40.js`))) {
+  if (!resources || !(await caches.match(`/app-955e3f2d5a75e5214b76.js`))) {
     return await fetch(event.request)
   }
 
@@ -154,7 +150,7 @@ const navigationRoute = new NavigationRoute(async ({ event }) => {
     }
   }
 
-  const offlineShell = `/unform/offline-plugin-app-shell-fallback/index.html`
+  const offlineShell = `/offline-plugin-app-shell-fallback/index.html`
   const offlineShellWithKey = workbox.precaching.getCacheKeyForURL(offlineShell)
   return await caches.match(offlineShellWithKey)
 })
