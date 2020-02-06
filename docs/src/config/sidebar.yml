@@ -6,6 +6,8 @@
   link: '/why-unform'
 - label: 'FAQ'
   link: '/faq'
+- label: 'Github'
+  link: 'https://github.com/unform/unform'
 - label: Guides
   items:
     - label: 'Basic form'
@@ -26,6 +28,13 @@
       link: '/guides/reset-form'
     - label: 'Manual form submit'
       link: '/guides/manual-form-submit'
+
+- label: Playgrouds
+  items:
+    - label: 'ReactJS Live Demo'
+      link: 'https://codesandbox.io/embed/agitated-tdd-uf177?autoresize=1&expanddevtools=1&fontsize=14&hidenavigation=1&theme=dark'
+    - label: 'React Native Live Demo'
+      link: 'https://snack.expo.io/@diego3g/1e9fb3'
 
 - label: Recipes
   items:

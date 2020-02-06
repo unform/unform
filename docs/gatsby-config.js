@@ -1,10 +1,10 @@
 module.exports = {
   siteMetadata: {
     siteTitle: `Unform`,
-    defaultTitle: `Unform | Easy peezy forms in React`,
+    defaultTitle: `Unform | Easy peasy forms in React`,
     siteTitleShort: `unform`,
-    siteDescription: `Out of the box Gatsby Theme for creating documentation websites easily and quickly`,
-    siteUrl: `https://rocketdocs.netlify.com`,
+    siteDescription: `Unform is a performance focused library that helps you creating beautiful forms in React with the power of uncontrolled components performance and React Hooks.`,
+    siteUrl: `https://unform.dev`,
     siteAuthor: `@rocketseat`,
     siteImage: `/banner.png`,
     siteLanguage: `en`,
