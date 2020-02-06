@@ -10,19 +10,21 @@ Also, to keep the field uncontrolled, that is, don't store it's value within a s
 
 ```jsx title=Input.js lineNumbers=true
 import React, { useRef, useEffect }  from 'react';
-import { TextInput } from 'react-native';
-
+import { Text, TextInput } from 'react-native';
 import { useField } from '@unform/core';
 
-function Input({ name, ...rest }) {
+function Input({ name, label, ...rest }) {
   const inputRef = useRef(null);
-  const { fieldName, registerField, defaultValue, error } = useField(name);
+  const { fieldName, registerField, defaultValue = '', error } = useField(name);
 
   useEffect(() => {
     registerField({
       name: fieldName,
       ref: inputRef.current,
       path: '_lastNativeText',
+      getValue(ref) {
+        return ref._lastNativeText || '';
+      },
       setValue(ref, value) {
         ref.setNativeProps({ text: value });
         ref._lastNativeText = value;
@@ -35,13 +37,17 @@ function Input({ name, ...rest }) {
   }, [fieldName, registerField]);
 
   return (
-    <TextInput
-      ref={inputRef}
-      defaultValue={defaultValue}
-      {...rest}
-    />
+    <>
+      { label && <Text>{label}</Text> }
+
+      <TextInput
+        ref={inputRef}
+        defaultValue={defaultValue}
+        {...rest}
+      />
+    </>
   );
-};
+}
 
 export default Input;
 ```

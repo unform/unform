@@ -5,18 +5,18 @@ Let's suppose you're creating a sign in form with two fields, `email` and `passw
 The first step after installing Unform is creating your custom Input component that will be used for every input in yout application.
 
 ```jsx title=components/Input.js lineNumbers=true
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useField } from '@unform/core'
 
 export default function Input({ name, ...rest }) {
   const inputRef = useRef(null);
-  const { fieldName, defaultValue, registerField, error } = useField(name);
+  const { fieldName, defaultValue = '', registerField, error } = useField(name);
 
   useEffect(() => {
     registerField({
       name: fieldName,
       ref: inputRef.current,
-      path: 'target.value',
+      path: 'value',
     });
   }, [fieldName, registerField]);
 

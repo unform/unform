@@ -1,9 +1,9 @@
 <p align="center">
-  <img src="https://storage.googleapis.com/golden-wind/unform/unform.png" height="150" width="175" alt="Unform" />
+  <img src="https://storage.googleapis.com/golden-wind/unform/unform.svg" height="150" width="175" alt="Unform" />
 </p>
 
 <h3 align="center">
-  Easy peezy high scalable ReactJS & React Native forms! 🚀
+  Easy peasy high scalable ReactJS & React Native forms! 🚀
 </h3>
 
 <br>
@@ -26,8 +26,8 @@ Unform is a performance focused library that helps you creating beautiful forms 
 
 Wanna test Unform before using it?
 
-- **[ReactJS playground](https://unform.dev/why-unform)**
-- **[React Native playground](https://unform.dev/why-unform)**
+- **[ReactJS playground](https://codesandbox.io/embed/agitated-tdd-uf177?autoresize=1&expanddevtools=1&fontsize=14&hidenavigation=1&theme=dark)**
+- **[React Native playground](https://snack.expo.io/@diego3g/1e9fb3)**
 
 ## Contributing
 
