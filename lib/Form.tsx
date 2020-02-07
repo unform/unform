@@ -37,6 +37,7 @@ export interface FormProps extends Omit<HTMLFormProps, 'onSubmit'> {
   context?: Context;
   schema?: ObjectSchema<object>;
   onSubmit: SubmitHandler;
+  scrollOnError?: boolean;
 }
 
 export default function Form({
@@ -45,6 +46,7 @@ export default function Form({
   schema,
   context = {},
   onSubmit,
+  scrollOnError,
   ...rest
 }: FormProps) {
   const [errors, setErrors] = useState<UnformErrors>({});
@@ -72,6 +74,19 @@ export default function Form({
 
       return dot.set(path, data[name] ? data[name] : '', ref as object);
     });
+  }
+
+  function handleScrollError(validationErrors: UnformErrors) {
+    const [elementId] = Object.keys(validationErrors);
+    const element = document.getElementById(elementId);
+
+    if (element) {
+      window.scroll({
+        behavior: 'smooth',
+        left: 0,
+        top: element.offsetTop,
+      });
+    }
   }
 
   async function handleSubmit(e: FormEvent) {
@@ -107,6 +122,7 @@ export default function Form({
         validationErrors[error.path] = error.message;
       });
 
+      if (scrollOnError) handleScrollError(validationErrors);
       setErrors(validationErrors);
     }
   }
