@@ -3,16 +3,16 @@
     "develop": {
       "plugins": [
         {
-          "name": "/Users/diegofernandes/www/unform/docs/node_modules/@babel/plugin-proposal-object-rest-spread/lib/index.js",
+          "name": "/Users/jpedroschmitz/www/github/rocketseat/unform/docs/node_modules/@babel/plugin-proposal-object-rest-spread/lib/index.js",
           "options": {}
         }
       ],
       "presets": [
         {
-          "name": "/Users/diegofernandes/www/unform/docs/node_modules/@emotion/babel-preset-css-prop/dist/babel-preset-css-prop.cjs.js",
+          "name": "/Users/jpedroschmitz/www/github/rocketseat/unform/docs/node_modules/@emotion/babel-preset-css-prop/dist/babel-preset-css-prop.cjs.js",
           "options": {
-            "sourceMap": false,
-            "autoLabel": false,
+            "sourceMap": true,
+            "autoLabel": true,
             "plugins": []
           }
         }
@@ -25,16 +25,16 @@
     "develop-html": {
       "plugins": [
         {
-          "name": "/Users/diegofernandes/www/unform/docs/node_modules/@babel/plugin-proposal-object-rest-spread/lib/index.js",
+          "name": "/Users/jpedroschmitz/www/github/rocketseat/unform/docs/node_modules/@babel/plugin-proposal-object-rest-spread/lib/index.js",
           "options": {}
         }
       ],
       "presets": [
         {
-          "name": "/Users/diegofernandes/www/unform/docs/node_modules/@emotion/babel-preset-css-prop/dist/babel-preset-css-prop.cjs.js",
+          "name": "/Users/jpedroschmitz/www/github/rocketseat/unform/docs/node_modules/@emotion/babel-preset-css-prop/dist/babel-preset-css-prop.cjs.js",
           "options": {
-            "sourceMap": false,
-            "autoLabel": false,
+            "sourceMap": true,
+            "autoLabel": true,
             "plugins": []
           }
         }
@@ -47,16 +47,16 @@
     "build-html": {
       "plugins": [
         {
-          "name": "/Users/diegofernandes/www/unform/docs/node_modules/@babel/plugin-proposal-object-rest-spread/lib/index.js",
+          "name": "/Users/jpedroschmitz/www/github/rocketseat/unform/docs/node_modules/@babel/plugin-proposal-object-rest-spread/lib/index.js",
           "options": {}
         }
       ],
       "presets": [
         {
-          "name": "/Users/diegofernandes/www/unform/docs/node_modules/@emotion/babel-preset-css-prop/dist/babel-preset-css-prop.cjs.js",
+          "name": "/Users/jpedroschmitz/www/github/rocketseat/unform/docs/node_modules/@emotion/babel-preset-css-prop/dist/babel-preset-css-prop.cjs.js",
           "options": {
-            "sourceMap": false,
-            "autoLabel": false,
+            "sourceMap": true,
+            "autoLabel": true,
             "plugins": []
           }
         }
@@ -69,16 +69,16 @@
     "build-javascript": {
       "plugins": [
         {
-          "name": "/Users/diegofernandes/www/unform/docs/node_modules/@babel/plugin-proposal-object-rest-spread/lib/index.js",
+          "name": "/Users/jpedroschmitz/www/github/rocketseat/unform/docs/node_modules/@babel/plugin-proposal-object-rest-spread/lib/index.js",
           "options": {}
         }
       ],
       "presets": [
         {
-          "name": "/Users/diegofernandes/www/unform/docs/node_modules/@emotion/babel-preset-css-prop/dist/babel-preset-css-prop.cjs.js",
+          "name": "/Users/jpedroschmitz/www/github/rocketseat/unform/docs/node_modules/@emotion/babel-preset-css-prop/dist/babel-preset-css-prop.cjs.js",
           "options": {
-            "sourceMap": false,
-            "autoLabel": false,
+            "sourceMap": true,
+            "autoLabel": true,
             "plugins": []
           }
         }
