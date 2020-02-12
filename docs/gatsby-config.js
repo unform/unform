@@ -1,5 +1,4 @@
 module.exports = {
-  pathPrefix: '/unform',
   siteMetadata: {
     siteTitle: `Unform`,
     defaultTitle: `Unform | Easy peasy forms in React`,
