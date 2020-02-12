@@ -1,12 +1,14 @@
-# Basic form
+---
+title: Basic form
+---
 
 Let's suppose you're creating a sign in form with two fields, `email` and `password`.
 
-The first step after installing Unform is creating your custom Input component that will be used for every input in yout application.
+The first step after installing Unform is creating your custom Input component that will be used for every input in your application.
 
 ```jsx title=components/Input.js lineNumbers=true
 import React, { useEffect, useRef } from 'react';
-import { useField } from '@unform/core'
+import { useField } from '@unform/core';
 
 export default function Input({ name, ...rest }) {
   const inputRef = useRef(null);
@@ -20,9 +22,7 @@ export default function Input({ name, ...rest }) {
     });
   }, [fieldName, registerField]);
 
-  return (
-    <input ref={inputRef} defaultValue={defaultValue} {...rest} />
-  );
+  return <input ref={inputRef} defaultValue={defaultValue} {...rest} />;
 }
 ```
 
@@ -59,15 +59,11 @@ If you're using React Native, proceed to [React Native guide](/guides/react-nati
 ## Live example
 
 ```jsx live=true
-import React from 'react';
-import { useField } from '@unform/web';
-import { Form } from '@unform/web';
-
 function Input({ name, ...rest }) {
-  const inputRef = useRef(null);
+  const inputRef = React.useRef(null);
   const { fieldName, defaultValue, registerField, error } = useField(name);
 
-  useEffect(() => {
+  React.useEffect(() => {
     registerField({
       name: fieldName,
       ref: inputRef.current,
@@ -75,14 +71,12 @@ function Input({ name, ...rest }) {
     });
   }, [fieldName, registerField]);
 
-  return (
-    <input ref={inputRef} defaultValue={defaultValue} {...rest} />
-  );
+  return <input ref={inputRef} defaultValue={defaultValue} {...rest} />;
 }
 
 function SignIn() {
   function handleSubmit(data) {
-    console.log(data);
+    alert(JSON.stringify(data));
     // { email: 'test@example.com', password: '123456' }
   }
 
@@ -96,5 +90,9 @@ function SignIn() {
   );
 }
 
-render(<SignIn />)
+render(
+  <>
+    <SignIn />
+  </>,
+);
 ```

@@ -1,4 +1,6 @@
-# React Simple Code Editor
+---
+title: React Simple Code Editor
+---
 
 [React Simple Code Editor](http://satya164.xyz/react-simple-code-editor/) is a cool library focused on providing a simple way to add a code input source to user.
 
@@ -16,10 +18,10 @@ You can also import custom themes from `prismjs/themes/prism-{theme}.css`.
 
 Below you can see an example using only HTML/CSS syntax highlighting and using `prism-dark` theme.
 
-```jsx lineNumbers=true
+```tsx lineNumbers=true
 import React, { useRef, useState, useEffect } from 'react';
 import Editor from 'react-simple-code-editor';
-import { useField } from '@unform/core'
+import { useField } from '@unform/core';
 
 import { highlight, languages } from 'prismjs';
 
@@ -29,7 +31,7 @@ import 'prismjs/themes/prism-dark.css';
 
 interface Props {
   name: string;
-};
+}
 
 const CodeInput: React.FC<Props> = ({ name }) => {
   const [code, setCode] = useState('');
@@ -44,8 +46,8 @@ const CodeInput: React.FC<Props> = ({ name }) => {
       path: '_input.value',
       setValue(_: any, value: string) {
         setCode(value);
-      }
-    })
+      },
+    });
   }, [fieldName, registerField]);
 
   return (

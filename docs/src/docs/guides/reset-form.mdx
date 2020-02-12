@@ -1,4 +1,6 @@
-# Reset form
+---
+title: Reset form
+---
 
 There are two ways to reset all form data:
 
@@ -14,11 +16,7 @@ export default function SignIn() {
     reset();
   }
 
-  return (
-    <Form onSubmit={handleSubmit}>
-      ...
-    </Form>
-  )
+  return <Form onSubmit={handleSubmit}>...</Form>;
 }
 ```
 
@@ -41,6 +39,6 @@ export default function SignIn() {
     <Form ref={formRef} onSubmit={handleSubmit}>
       <Input name="email" />
     </Form>
-  )
+  );
 }
 ```

@@ -1,4 +1,6 @@
-# React DatePicker
+---
+title: React DatePicker
+---
 
 [React DatePicker](https://reactdatepicker.com/) is a very simple library that provides a fully customizable Date & Time input with a cool picker.
 
@@ -6,8 +8,8 @@
 
 ## Example
 
-```jsx
-import React, { useRef, useState, useEffect }  from 'react';
+```tsx
+import React, { useRef, useState, useEffect } from 'react';
 import ReactDatePicker, { ReactDatePickerProps } from 'react-datepicker';
 
 import { useField } from '@unform/core';
@@ -32,7 +34,7 @@ const DatePicker: React.FC<Props> = ({ name, ...rest }) => {
       clearValue: (ref: any) => {
         ref.clear();
       },
-    })
+    });
   }, [fieldName, registerField]);
 
   return (

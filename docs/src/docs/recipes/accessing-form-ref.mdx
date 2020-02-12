@@ -1,4 +1,6 @@
-# Accessing form reference
+---
+title: Accessing form reference
+---
 
 Unform exposes a various helper functions through the form reference.
 
@@ -8,11 +10,7 @@ export default function MyForm() {
 
   // Use formRef.current to access all methods
 
-  return (
-    <Form ref={formRef}>
-      ...
-    </Form>
-  );
+  return <Form ref={formRef}>...</Form>;
 }
 ```
 

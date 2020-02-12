@@ -1,4 +1,6 @@
-# React Select
+---
+title: React Select
+---
 
 [React Select](https://react-select.com/) is the coolest ReactJS custom `<select>` library.
 
@@ -10,9 +12,12 @@ If you're not using it, we recommend using it instead of using simple `<select>`
 
 A simple replacer for default HTML `<select>` element :)
 
-```jsx lineNumbers=true
+```tsx lineNumbers=true
 import React, { useRef, useEffect } from 'react';
-import ReactSelect, { OptionTypeBase, Props as SelectProps } from 'react-select';
+import ReactSelect, {
+  OptionTypeBase,
+  Props as SelectProps,
+} from 'react-select';
 import { useField } from '@unform/core';
 
 interface Props extends SelectProps<OptionTypeBase> {
@@ -42,7 +47,7 @@ const Select: React.FC<Props> = ({ name, ...rest }) => {
 
           return ref.state.value.value;
         }
-      }
+      },
     });
   }, [fieldName, registerField, rest.isMulti]);
 
@@ -63,10 +68,10 @@ export default Select;
 
 User can choose between default options or create new ones.
 
-```jsx lineNumbers=true
+```tsx lineNumbers=true
 import React, { useRef, useEffect } from 'react';
 import { OptionTypeBase } from 'react-select';
-import Select, { Props as CreatableProps } from 'react-select/creatable'
+import Select, { Props as CreatableProps } from 'react-select/creatable';
 import { useField } from '@unform/core';
 
 interface Props extends CreatableProps<OptionTypeBase> {
@@ -96,7 +101,7 @@ const CreatableSelect: React.FC<Props> = ({ name, ...rest }) => {
 
           return ref.state.value.value;
         }
-      }
+      },
     });
   }, [fieldName, registerField, rest.isMulti]);
 
@@ -117,10 +122,10 @@ export default CreatableSelect;
 
 Long lists of options? No problem! Use Async Select to make an asynchronous call to an API everytime user type something in the search box.
 
-```jsx lineNumbers=true
+```tsx lineNumbers=true
 import React, { useRef, useEffect } from 'react';
 import { OptionTypeBase } from 'react-select';
-import Select, { Props as AsyncProps } from 'react-select/async'
+import Select, { Props as AsyncProps } from 'react-select/async';
 import { useField } from '@unform/core';
 
 interface Props extends AsyncProps<OptionTypeBase> {
@@ -142,7 +147,9 @@ const AsyncSelect: React.FC<Props> = ({ name, ...rest }) => {
             return [];
           }
 
-          return ref.select.state.value.map((option: OptionTypeBase) => option.value);
+          return ref.select.state.value.map(
+            (option: OptionTypeBase) => option.value,
+          );
         } else {
           if (!ref.select.state.value) {
             return '';
@@ -150,7 +157,7 @@ const AsyncSelect: React.FC<Props> = ({ name, ...rest }) => {
 
           return ref.select.state.value.value;
         }
-      }
+      },
     });
   }, [fieldName, registerField, rest.isMulti]);
 

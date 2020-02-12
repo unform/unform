@@ -3,7 +3,7 @@ module.exports = {
   siteMetadata: {
     siteTitle: `Unform`,
     defaultTitle: `Unform | Easy peasy forms in React`,
-    siteTitleShort: `unform`,
+    siteTitleShort: `Unform`,
     siteDescription: `Unform is a performance focused library that helps you creating beautiful forms in React with the power of uncontrolled components performance and React Hooks.`,
     siteUrl: `https://unform.dev`,
     siteAuthor: `@rocketseat`,
@@ -16,7 +16,6 @@ module.exports = {
     {
       resolve: `@rocketseat/gatsby-theme-docs`,
       options: {
-        configPath: `src/config`,
         docsPath: `src/docs`,
       },
     },
@@ -32,16 +31,16 @@ module.exports = {
       },
     },
     `gatsby-plugin-sitemap`,
-    // {
-    //   resolve: `gatsby-plugin-google-analytics`,
-    //   options: {
-    //     trackingId: `UA-99997611-9`,
-    //   },
-    // },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: `UA-99997611-8`,
+      },
+    },
     {
       resolve: `gatsby-plugin-canonical-urls`,
       options: {
-        siteUrl: `https://rocketdocs.netlify.com`,
+        siteUrl: `https://unform.dev`,
       },
     },
     `gatsby-plugin-offline`,
