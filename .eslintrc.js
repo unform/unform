@@ -20,12 +20,19 @@ module.exports = {
     project: resolve(__dirname, 'tsconfig.json'),
   },
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'import', 'import-helpers', 'react-hooks', 'jest', 'prettier'],
+  plugins: [
+    '@typescript-eslint',
+    'import',
+    'import-helpers',
+    'react-hooks',
+    'jest',
+    'prettier',
+  ],
   extends: [
     'airbnb',
     'plugin:@typescript-eslint/recommended',
     'prettier/@typescript-eslint',
-    'plugin:prettier/recommended'
+    'plugin:prettier/recommended',
   ],
   rules: {
     'prettier/prettier': 'error',
@@ -33,6 +40,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/camelcase': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     'react/jsx-filename-extension': [
       'warn',
@@ -60,17 +68,17 @@ module.exports = {
     'react/prop-types': 'off',
     'jsx-a11y/label-has-for': 'off',
     'import/prefer-default-export': 'off',
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
-    "import/extensions": [
-      "error",
-      "ignorePackages",
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'import/extensions': [
+      'error',
+      'ignorePackages',
       {
-        "ts": "never",
-        "tsx": "never"
-      }
-    ]
+        ts: 'never',
+        tsx: 'never',
+      },
+    ],
   },
   settings: {
     'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
@@ -78,7 +86,7 @@ module.exports = {
       '@typescript-eslint/parser': ['.ts', '.tsx'],
     },
     'import/resolver': {
-      typescript: {}
+      typescript: {},
     },
   },
 };
