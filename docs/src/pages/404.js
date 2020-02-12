@@ -12,8 +12,8 @@ export default function NotFound() {
       <h1>Page not found!</h1>
       <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
       <p>
-        If you&#39;d like to go back to homepage,
-        <Link to="/">click here</Link>.
+        If you&#39;d like to go back to homepage, <Link to="/">click here</Link>
+        .
       </p>
     </Layout>
   );
