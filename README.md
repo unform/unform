@@ -19,8 +19,8 @@
 
 Unform is a performance focused library that helps you creating beautiful forms in ReactJS & React Native with the power of uncontrolled components performance and React Hooks.
 
-- **[Getting started](https://unform.dev/getting-started)**
-- **[Documentation](https://unform.dev)**
+- **[Getting started](https://unform.dev/)**
+- **[Documentation](https://unform.dev/guides/basic-form)**
 - **[Why Unform?](https://unform.dev/why-unform)**
 - **[FAQ](https://unform.dev/faq)**
 
@@ -28,6 +28,8 @@ Wanna test Unform before using it?
 
 - **[ReactJS playground](https://codesandbox.io/embed/agitated-tdd-uf177?autoresize=1&expanddevtools=1&fontsize=14&hidenavigation=1&theme=dark)**
 - **[React Native playground](https://snack.expo.io/@diego3g/1e9fb3)**
+
+*Not available with React Native Web or Expo Web, use the iOS/Android devices in Expo Snack*
 
 ## Contributing
 
