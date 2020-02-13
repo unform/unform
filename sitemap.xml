@@ -19,7 +19,7 @@
 <url> <loc>https://unform.dev/guides/manual-form-submit/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://unform.dev/guides/react-native/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://unform.dev/guides/reset-form/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://unform.dev/guides/validation/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://unform.dev/why-unform/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://unform.dev/migration-guide/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://unform.dev/guides/validation/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 </urlset>
