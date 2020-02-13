@@ -46,6 +46,8 @@
       link: '/recipes/creating-your-own-inputs'
     - label: 'Accessing form ref'
       link: '/recipes/accessing-form-ref'
+    - label: 'Accessing field ref'
+      link: '/recipes/accessing-field-ref'
     - label: 'Styled Components'
       link: '/recipes/styled-components'
     - label: 'TypeScript'
