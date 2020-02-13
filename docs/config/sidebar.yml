@@ -51,13 +51,16 @@
     - label: 'TypeScript'
       link: '/recipes/typescript'
 
-- label: Third party
+- label: Examples
   items:
+    - label: 'File input'
+      link: '/examples/file-input'
     - label: 'React Select'
-      link: '/third-party/react-select'
+      link: '/examples/react-select'
     - label: 'React DatePicker'
-      link: '/third-party/react-datepicker'
+      link: '/examples/react-datepicker'
     - label: 'React Simple Code Editor'
-      link: '/third-party/react-simple-code-editor'
+      link: '/examples/react-simple-code-editor'
     - label: 'React Input Mask'
-      link: '/third-party/react-input-mask'
+      link: '/examples/react-input-mask'
+
