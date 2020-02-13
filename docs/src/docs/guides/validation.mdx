@@ -12,7 +12,7 @@ Let's see an example using [Yup](https://github.com/jquense/yup) to validate for
 import * as Yup from 'yup';
 
 export default function SignIn() {
-  function handleSubmit(data) {
+  async function handleSubmit(data) {
     try {
       const schema = Yup.object().shape({
         email: Yup.string().email().required(),
@@ -48,8 +48,11 @@ import * as Yup from 'yup';
 export default function SignIn() {
   const formRef = useRef(null);
 
-  function handleSubmit(data) {
+  async function handleSubmit(data) {
     try {
+      // Remove all previus errors
+      formRef.current.setErrors({});
+    
       const schema = Yup.object().shape({
         email: Yup.string().email().required(),
         password: Yup.string().min(6).required(),
