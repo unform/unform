@@ -7,7 +7,7 @@
 - label: 'FAQ'
   link: '/faq'
 - label: 'Github'
-  link: 'https://github.com/unform/unform'
+  link: 'https://github.com/Rocketseat/unform'
 - label: Guides
   items:
     - label: 'Basic form'
