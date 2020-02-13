@@ -1,0 +1,24 @@
+# Migration from 1.x
+
+If you're still using Unform in any version below 2.0.0, we highly recommend you following this guide.
+
+## Package name
+
+Since unform supports React Native now, we changed all the packages name:
+
+- `@unform/core`: Core funcionalities, needed in web and mobile;
+- `@unform/web`: Web integration, used in ReactJS;
+- `@unform/mobile`: Mobile integration, used in React Native;
+
+<br />
+
+Use the platform (web/mobile) package to import `Form` component, all the other funcionalities can be imported directly from `@unform/core`.
+
+## Input components
+
+Since Unform 2.0, the package **do not include it's own inputs anymore**, so you cannot import Input, Select ou any other input components from unform library.
+
+Now you need to create your own inputs following the Recipes and Third party examples here in docs.
+
+Check the [Simple input](/recipes/simple-input) guide to create your first input.
+

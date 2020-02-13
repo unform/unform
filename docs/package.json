@@ -8,8 +8,8 @@
   "starter-name": "gatsby-starter-rocket-docs",
   "dependencies": {
     "@rocketseat/gatsby-theme-docs": "^2.0.5",
-    "@unform/core": "^1.9.8",
-    "@unform/web": "^1.9.8",
+    "@unform/core": "^2.0.0",
+    "@unform/web": "^2.0.0",
     "gatsby": "^2.19.10",
     "gatsby-plugin-canonical-urls": "^2.1.19",
     "gatsby-plugin-google-analytics": "^2.1.34",

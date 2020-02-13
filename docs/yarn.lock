@@ -1599,17 +1599,17 @@
     semver "^6.3.0"
     tsutils "^3.17.1"
 
-"@unform/core@^1.9.8":
-  version "1.9.8"
-  resolved "https://registry.yarnpkg.com/@unform/core/-/core-1.9.8.tgz#c207767b2fcc38c61c492529b8aa41b9d09aabf0"
-  integrity sha512-SG8ZumU2U3GECmA6uhkfWwgIL2dfhubFFP3zGEjf6p1rBq90TVRr1uNlyejEOBUjNGIqNWRWCmVAi30mXNLjNA==
+"@unform/core@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@unform/core/-/core-2.0.0.tgz#8b84bd2a249358566a6e041a11b8c231e092bf5b"
+  integrity sha512-dNbWoCEZlhLbLydRIbYvYFyY3K42HgFxnks1q+IJPw6otD/c6fAgnkmL3JFgY4CykkXJHzN8AIQpYmUrM2SCow==
   dependencies:
     dot-object "^2.1.2"
 
-"@unform/web@^1.9.8":
-  version "1.9.8"
-  resolved "https://registry.yarnpkg.com/@unform/web/-/web-1.9.8.tgz#dfe183c302f1c57e25833f60029db85db3e714bf"
-  integrity sha512-GxwFgbU3cxasLFO43a208FjiQVkI56FqslgvBO6b3uS2xvZgeBQMdOAT7/kGNfjGMC4AjH9qA6/T8ouCNbtS7w==
+"@unform/web@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@unform/web/-/web-2.0.0.tgz#8fc88ceb909400054c56c0ff0ad6df5cc3ea6ec2"
+  integrity sha512-ADRfVBqd0pv353Wr+lR5sIFOjb0b6iz9feSNFInY7NOB0S8sHIz2eOIO1YTpNjqDDSL65JeFlPIsmKnG29D/Vg==
 
 "@webassemblyjs/ast@1.8.5":
   version "1.8.5"

@@ -6,6 +6,8 @@
   link: '/why-unform'
 - label: 'FAQ'
   link: '/faq'
+- label: Migration from 1.x
+  link: '/migration-guide'
 - label: 'Github'
   link: 'https://github.com/unform/unform'
 - label: Guides
