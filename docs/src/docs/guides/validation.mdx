@@ -50,9 +50,9 @@ export default function SignIn() {
 
   async function handleSubmit(data) {
     try {
-      // Remove all previus errors
+      // Remove all previous errors
       formRef.current.setErrors({});
-    
+
       const schema = Yup.object().shape({
         email: Yup.string().email().required(),
         password: Yup.string().min(6).required(),
