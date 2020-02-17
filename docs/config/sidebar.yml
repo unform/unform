@@ -31,7 +31,7 @@
     - label: 'Manual form submit'
       link: '/guides/manual-form-submit'
 
-- label: Playgrouds
+- label: Playgrounds
   items:
     - label: 'ReactJS Live Demo'
       link: 'https://codesandbox.io/embed/agitated-tdd-uf177?autoresize=1&expanddevtools=1&fontsize=14&hidenavigation=1&theme=dark'
