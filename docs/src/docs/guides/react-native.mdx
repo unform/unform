@@ -73,7 +73,7 @@ export default function SignIn() {
       <Input name="email" type="email" />
       <Input name="password" type="password" />
 
-      <Button title="Sign in" onPress={formRef.current.submitForm} />
+      <Button title="Sign in" onPress={() => formRef.current.submitForm()} />
     </Form>
   );
 }
