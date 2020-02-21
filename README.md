@@ -3,7 +3,7 @@
 </p>
 
 <h3 align="center">
-  Easy peasy high scalable ReactJS & React Native forms! 🚀
+  Easy peasy high scalable ReactJS & React Native forms! 🚀 :heart:
 </h3>
 
 <br>
