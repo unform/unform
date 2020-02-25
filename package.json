@@ -12,7 +12,8 @@
     "prebuild": "lerna exec --parallel -- rimraf dist typings",
     "build": "lerna exec --parallel -- rollup -c ../../rollup.config.js",
     "test": "jest",
-    "coveralls": "jest && cat ./__tests__/coverage/lcov.info | coveralls"
+    "lint": "eslint packages --ext ts,tsx",
+    "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
