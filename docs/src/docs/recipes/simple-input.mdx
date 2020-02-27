@@ -8,7 +8,7 @@ with Unform, all of your input sources must be created by you.
 Here we have an example of a very simple input with support for label and error.
 
 ```jsx title=components/Input.js lineNumbers=true
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useField } from '@unform/core';
 
 export default function Input({ name, label, ...rest }) {
