@@ -20,7 +20,7 @@ export default function Input({ name, label, ...rest }) {
     registerField({
       name: fieldName,
       ref: inputRef.current,
-      path: 'target.value',
+      path: 'value',
     });
   }, [fieldName, registerField]);
 
