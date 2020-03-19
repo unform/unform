@@ -4,11 +4,11 @@ description: Unform migration guide from older versions
 disableTableOfContents: true
 ---
 
-# Migration from 1.x
+## Migration from 1.x
 
 If you're still using Unform in any version below 2.0.0, we highly recommend you following this guide.
 
-## Package name
+### Package name
 
 Since unform supports React Native now, we changed all the packages name:
 
@@ -20,11 +20,10 @@ Since unform supports React Native now, we changed all the packages name:
 
 Use the platform (web/mobile) package to import `Form` component, all the other functionalities can be imported directly from `@unform/core`.
 
-## Input components
+### Input components
 
 Since Unform 2.0, the package **does not include it's own input controls anymore**, so you cannot import Input, Select or any other input components from Unform library.
 
 Now you need to create your own input controls following the Recipes and Third party examples here in docs.
 
 Check the [Simple input](/recipes/simple-input) guide to create your first input control.
-

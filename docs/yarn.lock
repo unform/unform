@@ -1364,10 +1364,10 @@
     react-lifecycles-compat "^3.0.4"
     warning "^3.0.0"
 
-"@rocketseat/gatsby-theme-docs-core@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@rocketseat/gatsby-theme-docs-core/-/gatsby-theme-docs-core-1.0.3.tgz#9d5d6ccf4c1ee2f8dc5cb2d8ce8c14f586afc1fa"
-  integrity sha512-0Uag1+bAfRJVDLoo+67YmRsvbUJVlj6tyrWaylYIDOCAlIVHu0bIaKUFHFALpneu11ZWP/pUu/Nq8tPr1GXw7g==
+"@rocketseat/gatsby-theme-docs-core@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@rocketseat/gatsby-theme-docs-core/-/gatsby-theme-docs-core-1.1.0.tgz#292ff6f4da1924536b523ad2f84240db320eb220"
+  integrity sha512-woha2nK4CKmI7NreW0tzdROgctIqDdcRs8OWdHx+iW+43wqwCj3p5caoPvKW0AbBQzJaiQKKOvCfILLLarbhBg==
   dependencies:
     "@mdx-js/mdx" "^1.5.5"
     gatsby-plugin-mdx "^1.0.67"
@@ -1381,15 +1381,15 @@
     gatsby-transformer-sharp "^2.3.13"
     gatsby-transformer-yaml "^2.2.23"
 
-"@rocketseat/gatsby-theme-docs@^2.0.5":
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/@rocketseat/gatsby-theme-docs/-/gatsby-theme-docs-2.0.5.tgz#0eddfab806806bcce7b4006b9db29818a9ca8540"
-  integrity sha512-YI7dfd3Ndc3h+7Xd15X6r1DyDyO5TVWALMYKn6FbZo2oP44ejTe8kypGeQyk2wB+FRA1cU1qcCwl0zVqme1gtA==
+"@rocketseat/gatsby-theme-docs@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@rocketseat/gatsby-theme-docs/-/gatsby-theme-docs-2.1.0.tgz#48168024bcac8e1dd7d8dece96fff07211e8d970"
+  integrity sha512-JAS2+MLqrE6ax4anHBE74PWo97o92jCzyCabDzrafwon0YMaNFxLZEgtwrJpAM2prHmiP5Ci7bejJKYH0tqhsw==
   dependencies:
     "@emotion/core" "^10.0.27"
     "@emotion/styled" "^10.0.27"
     "@mdx-js/react" "^1.5.5"
-    "@rocketseat/gatsby-theme-docs-core" "^1.0.3"
+    "@rocketseat/gatsby-theme-docs-core" "^1.1.0"
     emotion-theming "^10.0.27"
     gatsby-plugin-catch-links "^2.1.24"
     gatsby-plugin-emotion "^4.1.21"
@@ -1402,6 +1402,7 @@
     react-helmet "^5.2.1"
     react-icons "^3.8.0"
     react-live "^2.2.2"
+    slug "^2.1.1"
     url-join "^4.0.1"
 
 "@sindresorhus/is@^0.14.0":
@@ -11755,6 +11756,13 @@ slice-ansi@^3.0.0:
     astral-regex "^2.0.0"
     is-fullwidth-code-point "^3.0.0"
 
+slug@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/slug/-/slug-2.1.1.tgz#08df390d4b4d51bafb41ac0067c0c2dd70734ef2"
+  integrity sha512-yNGhDdS0DR0JyxnPC84qIx/Vd01RHVY4guJeBqBNdBoOLNWnzw5zkWJvxVSmsuUb92bikdnQFnw3PfGY8uZ82g==
+  dependencies:
+    unicode ">= 0.3.1"
+
 slugify@^1.3.6:
   version "1.3.6"
   resolved "https://registry.yarnpkg.com/slugify/-/slugify-1.3.6.tgz#ba5fd6159b570fe4811d02ea9b1f4906677638c3"
@@ -12905,6 +12913,11 @@ unicode-property-aliases-ecmascript@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/unicode-property-aliases-ecmascript/-/unicode-property-aliases-ecmascript-1.0.5.tgz#a9cc6cc7ce63a0a3023fc99e341b94431d405a57"
   integrity sha512-L5RAqCfXqAwR3RriF8pM0lU0w4Ryf/GgzONwi6KnL1taJQa7x1TCxdJnILX59WIGOwR57IVxn7Nej0fz1Ny6fw==
+
+"unicode@>= 0.3.1":
+  version "12.1.0"
+  resolved "https://registry.yarnpkg.com/unicode/-/unicode-12.1.0.tgz#7ee53a7a0ca5539b353419432823d8da58bbbf33"
+  integrity sha512-Ty6+Ew21DiYTWLYtd05RF/X4c1ekOvOgANyHbBj0h3MaXpfaGr2Rdmc0hMFuGQLyPLb9cU4ArNxl0bTF5HSzXw==
 
 unified@8.4.2, unified@^8.4.2:
   version "8.4.2"
