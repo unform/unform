@@ -8,6 +8,7 @@ module.exports = {
     siteAuthor: `@rocketseat`,
     siteImage: `/banner.png`,
     siteLanguage: `en`,
+    basePath: `/`,
     themeColor: `#7159c1`,
     footer: `Made with 💜 by Rocketseat`,
   },
@@ -16,6 +17,8 @@ module.exports = {
       resolve: `@rocketseat/gatsby-theme-docs`,
       options: {
         docsPath: `src/docs`,
+        githubUrl: `https://github.com/Rocketseat/unform`,
+        baseDir: `docs/`,
       },
     },
     {
