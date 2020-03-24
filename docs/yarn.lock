@@ -1381,10 +1381,10 @@
     gatsby-transformer-sharp "^2.3.13"
     gatsby-transformer-yaml "^2.2.23"
 
-"@rocketseat/gatsby-theme-docs@^2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@rocketseat/gatsby-theme-docs/-/gatsby-theme-docs-2.1.0.tgz#48168024bcac8e1dd7d8dece96fff07211e8d970"
-  integrity sha512-JAS2+MLqrE6ax4anHBE74PWo97o92jCzyCabDzrafwon0YMaNFxLZEgtwrJpAM2prHmiP5Ci7bejJKYH0tqhsw==
+"@rocketseat/gatsby-theme-docs@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@rocketseat/gatsby-theme-docs/-/gatsby-theme-docs-2.1.1.tgz#26808c93e368fbc495b617ba55a7e0e80ece1c07"
+  integrity sha512-s9CSUZyjidHIUV30xY6w2GcR6xaJzPFOhCd5kczxTgRpEtqwOLlYYGh76jLCvwZNdDZitrr+n4jpz1vBfeCMzg==
   dependencies:
     "@emotion/core" "^10.0.27"
     "@emotion/styled" "^10.0.27"
