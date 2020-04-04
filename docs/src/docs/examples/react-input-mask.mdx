@@ -28,7 +28,7 @@ const InputMask: React.FC<Props> = ({ name, ...rest }) => {
       ref: inputRef.current,
       path: 'value',
       setValue(ref: any, value: string) {
-        ref.setInputValue('');
+        ref.setInputValue(value);
       },
       clearValue(ref: any) {
         ref.setInputValue('');
