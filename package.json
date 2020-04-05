@@ -31,6 +31,7 @@
     "@types/yup": "^0.26.12",
     "@typescript-eslint/eslint-plugin": "^2.15.0",
     "@typescript-eslint/parser": "^2.15.0",
+    "babel-jest": "^25.2.6",
     "commitlint-config-rocketseat": "^0.0.1",
     "coveralls": "^3.0.3",
     "eslint": "^5.16.0",

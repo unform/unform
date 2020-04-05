@@ -27,6 +27,8 @@
     "url": "https://github.com/Rocketseat/unform/issues"
   },
   "devDependencies": {
+    "@babel/plugin-transform-block-scoping": "^7.8.3",
+    "@babel/plugin-transform-flow-strip-types": "^7.9.0",
     "@testing-library/react-native": "^5.0.2"
   },
   "peerDependencies": {
