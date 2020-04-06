@@ -3,7 +3,7 @@
 </p>
 
 <h3 align="center">
-  Easy peasy high scalable ReactJS & React Native forms! 🚀
+  Easy peasy highly scalable ReactJS & React Native forms! 🚀
 </h3>
 
 <br>
@@ -33,7 +33,7 @@ Wanna test Unform before using it?
 
 ## Contributing
 
-Thanks for being interested on making this package better. We encourage everyone to help improving this project with some new features, bug fixes and performance issues. Please take a little bit of your time to read our guides, so this process can be faster and easier.
+Thank you for being interested on making this package better. We encourage everyone to help improving this project with some new features, bug fixes and performance issues. Please take a little bit of your time to read our guides, so this process can be faster and easier.
 
 ### Contribution Guidelines
 
@@ -45,7 +45,7 @@ We expect you to follow our [Code of Conduct](/.github/CODE_OF_CONDUCT.md). You 
 
 ## Need help?
 
-If you need help with Unform, feel free to open an issue with a description of the problem you're facing or, if you prefer, you can chat with us on our [Discord Community](https://discordapp.com/invite/gCRAFhc).
+If you need help with Unform, feel free to open an issue with a description of the problem you're facing. Or, if you prefer, you can chat with us on our [Discord Community](https://discordapp.com/invite/gCRAFhc).
 
 ## License
 
