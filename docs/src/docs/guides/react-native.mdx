@@ -8,44 +8,61 @@ The Unform API is almost identic between web and mobile, below you can see an ex
 
 In React Native we need to use `TextInput` provided by the `react-native` package.
 
-Also, to keep the field uncontrolled, that is, don't store it's value within a state, we need to use the `_lastNativeText` to get the field value and use the `setNativeProps` to set the value within native renderer.
+Also, to keep the field uncontrolled, that is, don't store it's value within a state, we need to track input changes and save its value inside the input reference.
 
 ```jsx title=Input.js lineNumbers=true
-import React, { useRef, useEffect } from 'react';
-import { Text, TextInput } from 'react-native';
+import React, {
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
+
+import { TextInput } from 'react-native';
 import { useField } from '@unform/core';
 
-function Input({ name, label, ...rest }) {
+function Input({ name, ...rest }) {
   const inputRef = useRef(null);
-  const { fieldName, registerField, defaultValue = '', error } = useField(name);
+
+  const { fieldName, registerField, defaultValue, error } = useField(name);
+
+  useEffect(() => {
+    inputRef.current.value = defaultValue;
+  }, [defaultValue]);
 
   useEffect(() => {
     registerField({
       name: fieldName,
       ref: inputRef.current,
-      path: '_lastNativeText',
-      getValue(ref) {
-        return ref._lastNativeText || '';
+      path: 'value',
+      clearValue(ref) {
+        ref.value = '';
+        ref.clear();
       },
       setValue(ref, value) {
         ref.setNativeProps({ text: value });
-        ref._lastNativeText = value;
+        inputRef.current.value = value;
       },
-      clearValue(ref) {
-        ref.setNativeProps({ text: '' });
-        ref._lastNativeText = '';
+      getValue(ref) {
+        return ref.value;
       },
     });
   }, [fieldName, registerField]);
 
   return (
-    <>
-      {label && <Text>{label}</Text>}
-
-      <TextInput ref={inputRef} defaultValue={defaultValue} {...rest} />
-    </>
+    <TextInput
+      ref={inputRef}
+      keyboardAppearance="dark"
+      defaultValue={defaultValue}
+      placeholderTextColor="#666360"
+      onChangeText={value => {
+        if (inputRef.current) {
+          inputRef.current.value = value;
+        }
+      }}
+      {...rest}
+    />
   );
-}
+};
 
 export default Input;
 ```
