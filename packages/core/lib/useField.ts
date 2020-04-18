@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo } from 'react';
+import { useContext, useEffect, useMemo, useCallback } from 'react';
 
 import dot from 'dot-object';
 
@@ -12,6 +12,7 @@ export default function useField(name: string) {
     scopePath,
     unregisterField,
     registerField,
+    clearFieldError,
   } = useContext<UnformContext>(FormContext);
 
   const fieldName = useMemo(() => {
@@ -26,6 +27,10 @@ export default function useField(name: string) {
     return errors[fieldName];
   }, [errors, fieldName]);
 
+  const clearError = useCallback(() => {
+    clearFieldError(fieldName);
+  }, [clearFieldError, fieldName]);
+
   useEffect(() => () => unregisterField(fieldName), [
     fieldName,
     unregisterField,
@@ -35,6 +40,7 @@ export default function useField(name: string) {
     fieldName,
     registerField,
     defaultValue,
+    clearError,
     error,
   };
 }

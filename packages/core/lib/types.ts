@@ -20,7 +20,7 @@ export interface FunctionUnformField<T> extends BaseUnformField<T> {
 export type UnformField<T = any> = PathUnformField<T> | FunctionUnformField<T>;
 
 export interface UnformErrors {
-  [key: string]: string;
+  [key: string]: string | undefined;
 }
 
 export interface UnformContext {
@@ -29,6 +29,7 @@ export interface UnformContext {
   scopePath: string;
   registerField<T>(field: UnformField<T>): void;
   unregisterField: (name: string) => void;
+  clearFieldError: (fieldName: string) => void;
   handleSubmit: (e?: FormEvent) => void;
 }
 
@@ -41,7 +42,7 @@ type HTMLFormProps = DetailedHTMLProps<
 export interface FormHandles {
   getFieldValue(fieldName: string): any;
   setFieldValue(fieldName: string, value: any): void | boolean;
-  getFieldError(fieldName: string): string;
+  getFieldError(fieldName: string): string | undefined;
   setFieldError(fieldName: string, error: string): void;
   clearField(fieldName: string): void;
   getData(): object;
