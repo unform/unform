@@ -68,9 +68,13 @@ const Form: RefForwardingComponent<FormHandles, FormProps> = (
 
   const setData = useCallback(
     (data: object) => {
-      const parsedData = dot.dot(data);
+      const fieldValue = {};
 
-      Object.entries(parsedData).forEach(([fieldName, value]) => {
+      fields.current.forEach(field => {
+        fieldValue[field.name] = dot.pick(field.name, data);
+      });
+
+      Object.entries(fieldValue).forEach(([fieldName, value]) => {
         const field = getFieldByName(fieldName);
 
         if (field) {
