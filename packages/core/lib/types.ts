@@ -58,7 +58,7 @@ export interface FormHelpers {
 }
 
 export interface SubmitHandler<T = any> {
-  (data: T, helpers: FormHelpers): void;
+  (data: T, helpers: FormHelpers, event?: FormEvent): void;
 }
 
 export interface FormProps extends Omit<HTMLFormProps, 'onSubmit'> {

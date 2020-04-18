@@ -67,6 +67,7 @@ describe('Form', () => {
       {
         reset: expect.any(Function),
       },
+      expect.any(Object),
     );
   });
 
@@ -93,6 +94,7 @@ describe('Form', () => {
       {
         reset: expect.any(Function),
       },
+      expect.any(Object),
     );
   });
 
@@ -152,6 +154,7 @@ describe('Form', () => {
       {
         reset: expect.any(Function),
       },
+      expect.any(Object),
     );
   });
 

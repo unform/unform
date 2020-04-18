@@ -107,7 +107,7 @@ const Form: RefForwardingComponent<FormHandles, FormProps> = (
 
       const data = parseFormData();
 
-      onSubmit(data, { reset });
+      onSubmit(data, { reset }, event);
     },
     [onSubmit, parseFormData, reset],
   );
