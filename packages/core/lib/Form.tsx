@@ -2,6 +2,7 @@ import React, {
   forwardRef,
   FormEvent,
   useState,
+  useRef,
   useCallback,
   useImperativeHandle,
   RefForwardingComponent,
@@ -17,11 +18,12 @@ const Form: RefForwardingComponent<FormHandles, FormProps> = (
   formRef,
 ) => {
   const [errors, setErrors] = useState<UnformErrors>({});
-  const [fields, setFields] = useState<UnformField[]>([]);
+  const fields = useRef<UnformField[]>([]);
 
   const getFieldByName = useCallback(
-    fieldName => fields.find(unformField => unformField.name === fieldName),
-    [fields],
+    fieldName =>
+      fields.current.find(unformField => unformField.name === fieldName),
+    [],
   );
 
   const getFieldValue = useCallback(({ ref, path, getValue }: UnformField) => {
@@ -54,18 +56,15 @@ const Form: RefForwardingComponent<FormHandles, FormProps> = (
     [],
   );
 
-  const reset = useCallback(
-    (data = {}) => {
-      fields.forEach(({ name, ref, path, clearValue }) => {
-        if (clearValue) {
-          return clearValue(ref, data[name]);
-        }
+  const reset = useCallback((data = {}) => {
+    fields.current.forEach(({ name, ref, path, clearValue }) => {
+      if (clearValue) {
+        return clearValue(ref, data[name]);
+      }
 
-        return dot.set(path, data[name] ? data[name] : '', ref as object);
-      });
-    },
-    [fields],
-  );
+      return dot.set(path, data[name] ? data[name] : '', ref as object);
+    });
+  }, []);
 
   const setData = useCallback(
     (data: object) => {
@@ -91,19 +90,19 @@ const Form: RefForwardingComponent<FormHandles, FormProps> = (
   const parseFormData = useCallback(() => {
     const data = {};
 
-    fields.forEach(field => {
+    fields.current.forEach(field => {
       data[field.name] = getFieldValue(field);
     });
 
     dot.object(data);
 
     return data;
-  }, [fields, getFieldValue]);
+  }, [getFieldValue]);
 
   const handleSubmit = useCallback(
-    async (e?: FormEvent) => {
-      if (e) {
-        e.preventDefault();
+    async (event?: FormEvent) => {
+      if (event) {
+        event.preventDefault();
       }
 
       const data = parseFormData();
@@ -114,11 +113,17 @@ const Form: RefForwardingComponent<FormHandles, FormProps> = (
   );
 
   const registerField = useCallback((field: UnformField) => {
-    setFields(state => [...state, field]);
+    fields.current.push(field);
   }, []);
 
   const unregisterField = useCallback((fieldName: string) => {
-    setFields(state => state.filter(field => field.name !== fieldName));
+    const fieldIndex = fields.current.findIndex(
+      field => field.name === fieldName,
+    );
+
+    if (fieldIndex > -1) {
+      fields.current.splice(fieldIndex, 1);
+    }
   }, []);
 
   useImperativeHandle<{}, FormHandles>(formRef, () => ({
@@ -146,7 +151,6 @@ const Form: RefForwardingComponent<FormHandles, FormProps> = (
     setFieldError(fieldName, error) {
       setErrors({ ...errors, [fieldName]: error });
     },
-
     clearField(fieldName) {
       const field = getFieldByName(fieldName);
 
