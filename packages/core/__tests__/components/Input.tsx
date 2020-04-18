@@ -18,7 +18,13 @@ function Input({
   ...rest
 }: InputProps | TextAreaProps) {
   const ref = useRef<HTMLInputElement | HTMLTextAreaElement>(null);
-  const { fieldName, registerField, defaultValue, error } = useField(name);
+  const {
+    fieldName,
+    registerField,
+    defaultValue,
+    error,
+    clearError,
+  } = useField(name);
 
   useEffect(() => {
     if (ref.current) {
@@ -40,9 +46,9 @@ function Input({
       {label && <label htmlFor={fieldName}>{label}</label>}
 
       {multiline ? (
-        <textarea {...(props as TextAreaProps)} />
+        <textarea onFocus={clearError} {...(props as TextAreaProps)} />
       ) : (
-        <input {...(props as InputProps)} />
+        <input onFocus={clearError} {...(props as InputProps)} />
       )}
 
       {error && <span>{error}</span>}

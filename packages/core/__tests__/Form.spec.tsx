@@ -298,6 +298,24 @@ describe('Form', () => {
     expect((getByLabelText('bio') as HTMLInputElement).value).toBe('test');
   });
 
+  it('should be able to clear input error from within it', () => {
+    const formRef: RefObject<FormHandles> = { current: null };
+
+    const { getByLabelText } = render(<Input name="name" />, {
+      ref: formRef,
+    });
+
+    act(() => {
+      if (formRef.current) {
+        formRef.current.setFieldError('name', 'Name is required');
+      }
+
+      fireEvent.focus(getByLabelText('name') as HTMLInputElement);
+    });
+
+    expect(formRef.current?.getFieldError('name')).toBeUndefined();
+  });
+
   it('should be able to manually set form data', () => {
     const formRef: RefObject<FormHandles> = { current: null };
 

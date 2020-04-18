@@ -130,6 +130,10 @@ const Form: RefForwardingComponent<FormHandles, FormProps> = (
     }
   }, []);
 
+  const clearFieldError = useCallback((fieldName: string) => {
+    setErrors(state => ({ ...state, [fieldName]: undefined }));
+  }, []);
+
   useImperativeHandle<{}, FormHandles>(formRef, () => ({
     getFieldValue(fieldName) {
       const field = getFieldByName(fieldName);
@@ -153,7 +157,7 @@ const Form: RefForwardingComponent<FormHandles, FormProps> = (
       return errors[fieldName];
     },
     setFieldError(fieldName, error) {
-      setErrors({ ...errors, [fieldName]: error });
+      setErrors(state => ({ ...state, [fieldName]: error }));
     },
     clearField(fieldName) {
       const field = getFieldByName(fieldName);
@@ -199,6 +203,7 @@ const Form: RefForwardingComponent<FormHandles, FormProps> = (
         scopePath: '',
         registerField,
         unregisterField,
+        clearFieldError,
         handleSubmit,
       }}
     >
