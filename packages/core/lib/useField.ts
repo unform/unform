@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useMemo } from 'react';
 
 import dot from 'dot-object';
 
@@ -14,15 +14,22 @@ export default function useField(name: string) {
     registerField,
   } = useContext<UnformContext>(FormContext);
 
-  const fieldName = scopePath ? `${scopePath}.${name}` : name;
+  const fieldName = useMemo(() => {
+    return scopePath ? `${scopePath}.${name}` : name;
+  }, [name, scopePath]);
+
+  const defaultValue = useMemo(() => {
+    return dot.pick(fieldName, initialData);
+  }, [fieldName, initialData]);
+
+  const error = useMemo(() => {
+    return errors[fieldName];
+  }, [errors, fieldName]);
 
   useEffect(() => () => unregisterField(fieldName), [
     fieldName,
     unregisterField,
   ]);
-
-  const defaultValue = dot.pick(fieldName, initialData);
-  const error = errors[fieldName];
 
   return {
     fieldName,
