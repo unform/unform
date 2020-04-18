@@ -1,13 +1,23 @@
 import { DetailedHTMLProps, FormHTMLAttributes, FormEvent } from 'react';
 
-export interface UnformField {
+interface BaseUnformField<T> {
   name: string;
   ref?: any;
-  path: string;
-  setValue?: Function;
-  getValue?: Function;
-  clearValue?: Function;
+  setValue?: (ref: any, value: T) => void;
+  clearValue?: (ref: any, newValue: T) => void;
 }
+
+export interface PathUnformField<T> extends BaseUnformField<T> {
+  path: string;
+  getValue?: undefined;
+}
+
+export interface FunctionUnformField<T> extends BaseUnformField<T> {
+  path?: undefined;
+  getValue: (ref: any) => T;
+}
+
+export type UnformField<T = any> = PathUnformField<T> | FunctionUnformField<T>;
 
 export interface UnformErrors {
   [key: string]: string;
@@ -17,7 +27,7 @@ export interface UnformContext {
   initialData: object;
   errors: UnformErrors;
   scopePath: string;
-  registerField: (field: UnformField) => void;
+  registerField<T>(field: UnformField<T>): void;
   unregisterField: (name: string) => void;
   handleSubmit: (e?: FormEvent) => void;
 }

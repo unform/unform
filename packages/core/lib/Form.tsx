@@ -26,12 +26,12 @@ const Form: RefForwardingComponent<FormHandles, FormProps> = (
     [],
   );
 
-  const getFieldValue = useCallback(({ ref, path, getValue }: UnformField) => {
+  const getFieldValue = useCallback(({ ref, getValue, path }: UnformField) => {
     if (getValue) {
       return getValue(ref);
     }
 
-    return dot.pick(path, ref);
+    return path && dot.pick(path, ref);
   }, []);
 
   const setFieldValue = useCallback(
@@ -40,7 +40,7 @@ const Form: RefForwardingComponent<FormHandles, FormProps> = (
         return setValue(ref, value);
       }
 
-      return dot.set(path, value, ref as object);
+      return path ? dot.set(path, value, ref as object) : false;
     },
     [],
   );
@@ -51,7 +51,7 @@ const Form: RefForwardingComponent<FormHandles, FormProps> = (
         return clearValue(ref, '');
       }
 
-      return dot.set(path, '', ref as object);
+      return path && dot.set(path, '', ref as object);
     },
     [],
   );
@@ -62,7 +62,7 @@ const Form: RefForwardingComponent<FormHandles, FormProps> = (
         return clearValue(ref, data[name]);
       }
 
-      return dot.set(path, data[name] ? data[name] : '', ref as object);
+      return path && dot.set(path, data[name] ? data[name] : '', ref as object);
     });
   }, []);
 
