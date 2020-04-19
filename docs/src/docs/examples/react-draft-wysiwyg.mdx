@@ -1,0 +1,67 @@
+---
+title: React Draft Wysiwyg
+---
+
+[React Draft Wysiwyg](https://jpuri.github.io/react-draft-wysiwyg/#/) is a Wysiwyg Built on ReactJS and DraftJS.
+
+> ⚠️ All examples below are using **TypeScript**, if you're not using it you can simply remove all type definitions as the `React.FC<Props>` from component definition.
+
+## Rich Text Editor converting Draft to HTML
+
+```tsx lineNumbers=true
+import React, { useEffect, useRef, useState, useCallback } from 'react';
+
+import { useField } from '@unform/core';
+
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
+import { Editor } from 'react-draft-wysiwyg';
+
+/**
+ * Plugins to convert from HTML to Draft and HTML to Draft.
+ */
+import draftToHtml from 'draftjs-to-html';
+import htmlToDraft from 'html-to-draftjs';
+
+const EditorInput = ({ name, onChange, ...rest }) {
+  const editorRef = useRef(null);
+
+  const [editor, setEditor] = useState(EditorState.createEmpty());
+  const { fieldName, defaultValue, registerField, error } = useField(name);
+
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: editorRef.current,
+      path: 'value',
+      setValue: (ref, value) => {
+        setEditor(
+          EditorState.createWithContent(convertFromRaw(htmlToDraft(value))),
+        );
+      },
+      getValue: () => {
+        return draftToHtml(convertToRaw(editor.getCurrentContent()));
+      },
+    });
+  }, [fieldName, registerField, editor]);
+
+  const handleChange = useCallback(editor => setEditor(editor), []);
+
+  return (
+    <>
+      <Editor
+        editorState={editor}
+        toolbarClassName="Editor__Toolbar"
+        wrapperClassName="Editor__Wrapper"
+        editorClassName="Editor__Container"
+        onEditorStateChange={handleChange}
+        {...rest}
+      />
+
+      {error && <span className="error">{error}</span>}
+    </>
+  );
+}
+
+export default EditorInput;
+```

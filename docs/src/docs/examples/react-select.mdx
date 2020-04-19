@@ -13,51 +13,52 @@ If you're not using it, we recommend using it instead of using simple `<select>`
 A simple replacer for default HTML `<select>` element :)
 
 ```tsx lineNumbers=true
-import React, { useRef, useEffect } from 'react';
-import ReactSelect, {
-  OptionTypeBase,
-  Props as SelectProps,
-} from 'react-select';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { useField } from '@unform/core';
 
-interface Props extends SelectProps<OptionTypeBase> {
-  name: string;
-}
+import ReactSelect from 'react-select';
 
-const Select: React.FC<Props> = ({ name, ...rest }) => {
+const Select = ({ name, className, options, isMulti, onChange, ...rest }) => {
   const selectRef = useRef(null);
-  const { fieldName, defaultValue, registerField, error } = useField(name);
+  const [selected, setSelected] = useState(null);
+  const { fieldName, registerField, error } = useField(name);
 
   useEffect(() => {
     registerField({
       name: fieldName,
       ref: selectRef.current,
-      path: 'state.value',
-      getValue: (ref: any) => {
-        if (rest.isMulti) {
-          if (!ref.state.value) {
-            return [];
-          }
-
-          return ref.state.value.map((option: OptionTypeBase) => option.value);
-        } else {
-          if (!ref.state.value) {
-            return '';
-          }
-
-          return ref.state.value.value;
+      setValue: (ref, value) => {
+        setSelected(options.find((option) => option.value === value) || null);
+      },
+      getValue: (ref) => {
+        if (isMulti) {
+          return selected.length ? selected.map(item => item.value) : [];
         }
+
+        return selected?.value
       },
     });
-  }, [fieldName, registerField, rest.isMulti]);
+  }, [fieldName, registerField, selected, isMulti]);
+
+  const handleSelect = useCallback((option) => {
+    setSelected(option);
+  }, []);
 
   return (
-    <ReactSelect
-      defaultValue={defaultValue}
-      ref={selectRef}
-      classNamePrefix="react-select"
-      {...rest}
-    />
+    <>
+      <ReactSelect
+        classNamePrefix="react-select"
+        ref={selectRef}
+        value={selected}
+        options={options}
+        isMulti={isMulti}
+        className={error ? `${className} has-error` : className}
+        onChange={handleSelect}
+        {...rest}
+      />
+
+      {error && <span className="error">{error}</span>}
+    </>
   );
 };
 
@@ -66,56 +67,66 @@ export default Select;
 
 ## Creatable
 
-User can choose between default options or create new ones.
+User can choose between default options or create new ones, by passing
+`creatable={true}` prop.
 
 ```tsx lineNumbers=true
-import React, { useRef, useEffect } from 'react';
-import { OptionTypeBase } from 'react-select';
-import Select, { Props as CreatableProps } from 'react-select/creatable';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { useField } from '@unform/core';
 
-interface Props extends CreatableProps<OptionTypeBase> {
-  name: string;
-}
+import ReactSelect from 'react-select';
+import Creatable from 'react-select/creatable';
 
-const CreatableSelect: React.FC<Props> = ({ name, ...rest }) => {
+const Select = ({ name, className, options, creatable, isMulti, onChange, ...rest }) => {
   const selectRef = useRef(null);
-  const { fieldName, defaultValue, registerField, error } = useField(name);
+  const [selected, setSelected] = useState(null);
+  const { fieldName, registerField, error } = useField(name);
 
   useEffect(() => {
     registerField({
       name: fieldName,
       ref: selectRef.current,
-      path: 'state.value',
-      getValue: (ref: any) => {
-        if (rest.isMulti) {
-          if (!ref.state.value) {
-            return [];
-          }
-
-          return ref.state.value.map((option: OptionTypeBase) => option.value);
-        } else {
-          if (!ref.state.value) {
-            return '';
-          }
-
-          return ref.state.value.value;
+      setValue: (ref, value) => {
+        setSelected(options.find((option) => option.value === value) || null);
+      },
+      getValue: (ref) => {
+        if (isMulti) {
+          return selected.length ? selected.map(item => item.value) : [];
         }
+
+        return selected?.value
       },
     });
-  }, [fieldName, registerField, rest.isMulti]);
+  }, [fieldName, registerField, selected, isMulti]);
+
+  const handleSelect = useCallback((option) => {
+    setSelected(option);
+  }, []);
+
+  /**
+   * Change the ReactSelect component based on "creatable" props.
+   */
+  const SelectComponent = creatable ? Creatable : ReactSelect;
 
   return (
-    <Select
-      defaultValue={defaultValue}
-      ref={selectRef}
-      classNamePrefix="react-select"
-      {...rest}
-    />
+    <>
+      <SelectComponent
+        classNamePrefix="react-select"
+        ref={selectRef}
+        value={selected}
+        options={options}
+        isMulti={isMulti}
+        className={error ? `${className} has-error` : className}
+        onChange={handleSelect}
+        {...rest}
+      />
+
+      {error && <span className="error">{error}</span>}
+    </>
   );
 };
 
-export default CreatableSelect;
+export default Select;
 ```
 
 ## Async
@@ -123,54 +134,61 @@ export default CreatableSelect;
 Long lists of options? No problem! Use Async Select to make an asynchronous call to an API everytime user type something in the search box.
 
 ```tsx lineNumbers=true
-import React, { useRef, useEffect } from 'react';
-import { OptionTypeBase } from 'react-select';
-import Select, { Props as AsyncProps } from 'react-select/async';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
+
+import AsyncCreatableSelect from 'react-select/async-creatable';
+import Async from 'react-select/async';
+
 import { useField } from '@unform/core';
 
-interface Props extends AsyncProps<OptionTypeBase> {
-  name: string;
-}
-
-const AsyncSelect: React.FC<Props> = ({ name, ...rest }) => {
+const AsyncSelect = ({ name, creatable, className, isMulti, onChange, ...rest }) => {
   const selectRef = useRef(null);
-  const { fieldName, defaultValue, registerField, error } = useField(name);
+  const [selected, setSelected] = useState(isMulti ? [] : null);
+  const { fieldName, registerField, error } = useField(name);
 
   useEffect(() => {
     registerField({
       name: fieldName,
       ref: selectRef.current,
-      path: 'select.state.value',
-      getValue: (ref: any) => {
-        if (rest.isMulti) {
-          if (!ref.select.state.value) {
-            return [];
-          }
-
-          return ref.select.state.value.map(
-            (option: OptionTypeBase) => option.value,
-          );
-        } else {
-          if (!ref.select.state.value) {
-            return '';
-          }
-
-          return ref.select.state.value.value;
+      setValue: (ref, value) => {
+        setSelected(JSON.parse(value));
+      },
+      getValue: () => {
+        if (isMulti) {
+          return selected.length ? selected.map(item => item.value) : [];
         }
+
+        return selected?.value || null;
       },
     });
-  }, [fieldName, registerField, rest.isMulti]);
+  }, [fieldName, registerField, selected, isMulti]);
+
+  const handleSelect = useCallback(option => {
+    setSelected(option);
+  }, []);
+
+  /**
+   * Change the ReactSelect component based on "creatable" props.
+   */
+  const Select = creatable ? AsyncCreatableSelect : Async;
 
   return (
-    <Select
-      cacheOptions
-      defaultValue={defaultValue}
-      ref={selectRef}
-      classNamePrefix="react-select"
-      {...rest}
-    />
+    <>
+      <Select
+        classNamePrefix="react-select"
+        ref={selectRef}
+        value={selected}
+        isMulti={isMulti}
+        className={error ? `${className} has-error` : className}
+        onChange={handleSelect}
+        {...rest}
+      />
+
+      {error && <span className="error">{error}</span>}
+    </>
   );
 };
 
 export default AsyncSelect;
+
 ```

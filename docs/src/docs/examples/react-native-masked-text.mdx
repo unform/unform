@@ -1,0 +1,63 @@
+---
+title: React Native Masked Text
+---
+
+[React Native Masked Text](https://github.com/benhurott/react-native-masked-text) is a pure javascript masked text and input text component for React-Native.
+
+> ⚠️ All examples below are using **TypeScript**, if you're not using it you can simply remove all type definitions as the `React.FC<Props>` from component definition.
+
+## Simple Masked Input
+
+```tsx lineNumbers=true
+import React, {useRef, useEffect, useState, useCallback} from 'react';
+import {useField} from '@unform/core';
+
+import { TextInputMask } from 'react-native-masked-text';
+
+const MaskedInput = ({ mask, ...rest }) {
+  const inputRef = useRef(null);
+  const {fieldName, registerField, defaultValue = '', error} = useField(name);
+
+  const [currentValue, setCurrentValue] = useState('');
+
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: inputRef.current._inputElement,
+      path: '_lastNativeText',
+      setValue(ref, value) {
+        ref.setNativeProps({text: value});
+        ref._lastNativeText = value;
+        setCurrentValue(value);
+      },
+      getValue(ref) {
+        return ref._lastNativeText || '';
+      },
+      clearValue(ref) {
+        ref.setNativeProps({text: ''});
+        ref._lastNativeText = '';
+        setCurrentValue('');
+      },
+    });
+  }, [fieldName, registerField]);
+
+  return (
+    <>
+      <TextInputMask
+        underlineColorAndroid="transparent"
+        ref={inputRef}
+        type={mask}
+        error={error}
+        value={currentValue}
+        defaultValue={defaultValue}
+        onChangeText={setCurrentValue}
+        {...rest}
+      />
+
+      {error && <Error>{error}</Error>}
+    </>
+  );
+}
+
+export default MaskedInput;
+```

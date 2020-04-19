@@ -65,4 +65,8 @@
       link: '/examples/react-simple-code-editor'
     - label: 'React Input Mask'
       link: '/examples/react-input-mask'
+    - label: 'React Draft Wysiwyg'
+      link: '/examples/react-draft-wysiwyg'
+    - label: 'React Native Masked Text'
+      link: '/examples/react-native-masked-text'
 
