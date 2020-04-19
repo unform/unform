@@ -1,0 +1,32 @@
+---
+title: Clear input error on focus
+---
+
+Unform exposes a function called `clearError` within `useField` hook, so use it inside `onFocus` and it's done.
+
+```jsx title=components/Input.js lineNumbers=true
+import React, { useRef, useEffect } from 'react';
+import { useField } from '@unform/core';
+
+export default function Input({ name, label, ...rest }) {
+  const inputRef = useRef(null);
+
+  const { ..., clearError } = useField(name);
+
+  useEffect(() => {
+    // ... registerField
+  }, []);
+
+  return (
+    <>
+      <input
+        ref={inputRef}
+        onFocus={clearError}
+        {...rest}
+      />
+
+      {error && <span className="error">{error}</span>}
+    </>
+  );
+}
+```
