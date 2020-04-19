@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, memo } from 'react';
 import { TextInput, TextInputProps, Text } from 'react-native';
 
-import { useField } from '@unform/core';
+import { useField } from '../../../core/lib';
 
 interface Props {
   name: string;
@@ -11,33 +11,37 @@ interface Props {
 type InputProps = TextInputProps & Props;
 
 function Input({ name, label, multiline = false, ...rest }: InputProps) {
-  const ref = useRef<TextInput>(null);
+  const inputRef: any = useRef(null);
 
   const { fieldName, registerField, defaultValue, error } = useField(name);
 
   useEffect(() => {
-    if (ref.current) {
-      registerField({
-        name: fieldName,
-        ref: ref.current,
-        path: '_lastNativeText',
-        getValue(inputRef: any) {
-          return inputRef._lastNativeText;
-        },
-        setValue(inputRef: any, text: string) {
-          inputRef.setNativeProps({ text });
-          inputRef._lastNativeText = text;
-        },
-      });
-    }
-  }, [fieldName, registerField]);
+    inputRef.current.value = defaultValue;
+  }, [defaultValue]);
+
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: inputRef.current,
+      clearValue(ref: any) {
+        ref.value = '';
+        ref.clear();
+      },
+      setValue(ref: any, value: string) {
+        ref.setNativeProps({ text: value });
+        inputRef.current.value = value;
+      },
+      getValue(ref: any) {
+        return ref.value;
+      },
+    });
+  }, [defaultValue, fieldName, registerField]);
 
   const props = {
     ...rest,
-    ref,
     id: fieldName,
     name: fieldName,
-    value: defaultValue,
+    defaultValue,
     multiline,
   };
 
@@ -45,7 +49,15 @@ function Input({ name, label, multiline = false, ...rest }: InputProps) {
     <>
       {label && <Text>{label}</Text>}
 
-      <TextInput ref={ref} {...props} />
+      <TextInput
+        ref={inputRef}
+        onChangeText={value => {
+          if (inputRef.current) {
+            inputRef.current.value = value;
+          }
+        }}
+        {...props}
+      />
 
       {error && <Text>{error}</Text>}
     </>
