@@ -1,0 +1,15 @@
+---
+title: Accessing form event
+---
+
+In web, you can access the form event in the 3rd parameter of the submit function.
+
+```jsx lineNumbers=true
+export default function MyForm() {
+  function handleSubmit(data, { reset }, event) {
+    console.log(event);
+  }
+
+  return <Form onSubmit={handleSubmit}>...</Form>;
+}
+```
