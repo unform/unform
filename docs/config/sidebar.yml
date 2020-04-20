@@ -65,4 +65,5 @@
       link: '/examples/react-simple-code-editor'
     - label: 'React Input Mask'
       link: '/examples/react-input-mask'
-
+    - label: 'React Native Input Mask'
+      link: '/examples/react-native-input-mask'

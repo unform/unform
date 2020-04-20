@@ -1,0 +1,119 @@
+---
+title: React Native Input Mask
+---
+
+[React Native Masked Text](https://github.com/benhurott/react-native-masked-text) offers an easy way to add masks to inputs.
+
+## Input component
+
+Create a base Input component, as described in the [React Native](/guides/react-native) example.
+
+Here is a small difference: assuming that the data to be sent in the form should not be formatted, we will use a `rawValue` property that will inform us of the component's gross value.
+
+Note that `getValue` can return the `rawValue` property, that is, if the form does not use an `InputMask`, the returned value will be the one stored in `inputRef`
+
+```jsx lineNumbers=true
+import React, { useRef, useEffect, useCallback } from 'react';
+import { TextInput } from 'react-native';
+import { useField } from '@unform/core';
+
+function Input({ name, onChangeText, rawValue, ...rest }) {
+  // add handleOnChange
+  const handleOnChange = useCallback(
+    text => {
+      if (inputRef.current) inputRef.current.value = text;
+
+      if (onChangeText) onChangeText(text);
+    },
+    [onChangeText],
+  );
+
+  useEffect(() => {
+    registerField({
+      // modify getValue
+      getValue(ref) {
+        return rawValue || ref.value;
+      },
+    });
+  }, [fieldName, rawValue, registerField]);
+
+  return (
+    <TextInput
+      ref={inputRef}
+      defaultValue={defaultValue}
+      onChangeText={handleOnChange}
+      {...rest}
+    />
+  );
+}
+
+export default Input;
+```
+
+## InputMask component
+
+Inform which component should be rendered using the `customTextInput` property, in this case `Input`.
+Add `rawValue` to the `Input` properties using `customTextInputProps`
+
+```jsx lineNumbers=true
+import React, { useState, useCallback } from 'react';
+import { TextInputMask } from 'react-native-masked-text';
+
+import Input from '../Input';
+
+const InputMask = ({ type, ...rest }) => {
+  const [value, setValue] = useState('');
+  const [rawValue, setRawValue] = useState('');
+
+  const handleOnChangeText = useCallback((maskedValue, unmaskedValue) => {
+    setValue(maskedValue);
+    setRawValue(unmaskedValue);
+  }, []);
+
+  return (
+    <TextInputMask
+      type={type}
+      includeRawValueInChangeText
+      value={value}
+      onChangeText={handleOnChangeText}
+      customTextInput={Input}
+      customTextInputProps={{
+        rawValue,
+        ...rest,
+      }}
+      {...rest}
+    />
+  );
+};
+
+export default InputMask;
+```
+
+## Example
+
+```jsx lineNumbers=true
+const App = () => {
+  const formRef = useRef(null);
+
+  function handleSubmit(data) {
+    /**
+      Out: { first_name: 'Lorem Ipsum', cpf: '11111111111' }
+      On screen: { first_name: 'Lorem Ipsum', cpf: '111.111.111-11' }
+    */
+    console.log(data);
+  }
+
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignContent: 'center' }}>
+      <Form ref={formRef} onSubmit={handleSubmit}>
+        <Input name="first_name" />
+        <InputMask type="cpf" name="cpf" keyboardType="numeric" />
+        <Button
+          onPress={() => formRef.current.submitForm()}
+          title="console.log"
+        />
+      </Form>
+    </View>
+  );
+};
+```
