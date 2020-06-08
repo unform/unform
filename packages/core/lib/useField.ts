@@ -15,6 +15,10 @@ export default function useField(name: string) {
     clearFieldError,
   } = useContext<UnformContext>(FormContext);
 
+  if (!name) {
+    throw new Error('You need to provide the "name" prop.');
+  }
+
   const fieldName = useMemo(() => {
     return scopePath ? `${scopePath}.${name}` : name;
   }, [name, scopePath]);
