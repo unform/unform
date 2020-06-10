@@ -20,7 +20,7 @@ export default function useField(name: string) {
   }, [name, scopePath]);
 
   const defaultValue = useMemo(() => {
-    return dot.pick(fieldName, initialData);
+    return fieldName && dot.pick(fieldName, initialData);
   }, [fieldName, initialData]);
 
   const error = useMemo(() => {
