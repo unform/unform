@@ -6,7 +6,7 @@ export { default as useField } from './useField';
 /**
  * Main components
  */
-export { default as Form } from './Form';
+export { default as FormProvider } from './FormProvider';
 export { default as Scope } from './Scope';
 
 /**
