@@ -32,7 +32,6 @@ const Select: React.FC<Props> = ({ name, ...rest }) => {
     registerField({
       name: fieldName,
       ref: selectRef.current,
-      path: 'state.value',
       getValue: (ref: any) => {
         if (rest.isMulti) {
           if (!ref.state.value) {
@@ -86,7 +85,6 @@ const CreatableSelect: React.FC<Props> = ({ name, ...rest }) => {
     registerField({
       name: fieldName,
       ref: selectRef.current,
-      path: 'state.value',
       getValue: (ref: any) => {
         if (rest.isMulti) {
           if (!ref.state.value) {
@@ -140,7 +138,6 @@ const AsyncSelect: React.FC<Props> = ({ name, ...rest }) => {
     registerField({
       name: fieldName,
       ref: selectRef.current,
-      path: 'select.state.value',
       getValue: (ref: any) => {
         if (rest.isMulti) {
           if (!ref.select.state.value) {
