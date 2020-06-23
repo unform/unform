@@ -32,21 +32,17 @@ const Select: React.FC<Props> = ({ name, ...rest }) => {
     registerField({
       name: fieldName,
       ref: selectRef.current,
-      path: 'state.value',
       getValue: (ref: any) => {
         if (rest.isMulti) {
           if (!ref.state.value) {
             return [];
           }
-
           return ref.state.value.map((option: OptionTypeBase) => option.value);
-        } else {
-          if (!ref.state.value) {
-            return '';
-          }
-
-          return ref.state.value.value;
         }
+        if (!ref.state.value) {
+          return '';
+        }
+        return ref.state.value.value;
       },
     });
   }, [fieldName, registerField, rest.isMulti]);
@@ -86,21 +82,17 @@ const CreatableSelect: React.FC<Props> = ({ name, ...rest }) => {
     registerField({
       name: fieldName,
       ref: selectRef.current,
-      path: 'state.value',
       getValue: (ref: any) => {
         if (rest.isMulti) {
           if (!ref.state.value) {
             return [];
           }
-
           return ref.state.value.map((option: OptionTypeBase) => option.value);
-        } else {
-          if (!ref.state.value) {
-            return '';
-          }
-
-          return ref.state.value.value;
         }
+        if (!ref.state.value) {
+          return '';
+        }
+        return ref.state.value.value;
       },
     });
   }, [fieldName, registerField, rest.isMulti]);
@@ -140,7 +132,6 @@ const AsyncSelect: React.FC<Props> = ({ name, ...rest }) => {
     registerField({
       name: fieldName,
       ref: selectRef.current,
-      path: 'select.state.value',
       getValue: (ref: any) => {
         if (rest.isMulti) {
           if (!ref.select.state.value) {
@@ -150,13 +141,12 @@ const AsyncSelect: React.FC<Props> = ({ name, ...rest }) => {
           return ref.select.state.value.map(
             (option: OptionTypeBase) => option.value,
           );
-        } else {
-          if (!ref.select.state.value) {
-            return '';
-          }
-
-          return ref.select.state.value.value;
         }
+        if (!ref.select.state.value) {
+          return '';
+        }
+
+        return ref.select.state.value.value;
       },
     });
   }, [fieldName, registerField, rest.isMulti]);
