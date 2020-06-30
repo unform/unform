@@ -20,6 +20,10 @@ function Input({ name, label, onChangeText, ...rest }) {
   const { fieldName, registerField, defaultValue = '', error } = useField(name);
 
   useEffect(() => {
+    if (inputRef.current) inputRef.current.value = defaultValue;
+  }, [defaultValue]);
+
+  useEffect(() => {
     registerField({
       name: fieldName,
       ref: inputRef.current,
@@ -44,10 +48,10 @@ function Input({ name, label, onChangeText, ...rest }) {
   }, [fieldName, registerField]);
 
   const handleChangeText = useCallback(
-    value => {
-      if (inputRef.current) inputRef.current.value = value;
+    text => {
+      if (inputRef.current) inputRef.current.value = text;
 
-      if (onChangeText) onChangeText(value);
+      if (onChangeText) onChangeText(text);
     },
     [onChangeText],
   );
