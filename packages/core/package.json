@@ -1,6 +1,6 @@
 {
   "name": "@unform/core",
-  "version": "2.0.0",
+  "version": "2.1.3",
   "description": "Unform core package",
   "author": "Diego Fernandes <diego.schell.f@gmail.com>",
   "homepage": "https://github.com/Rocketseat/unform#readme",
@@ -36,5 +36,5 @@
   "peerDependencies": {
     "react": "^16.8.0"
   },
-  "gitHead": "9dc430258f988502b6368ed28e166410c5a7b7d8"
+  "gitHead": "cbe4cc8ef5cb45ce9b441a2bcb889911c48f2dd7"
 }

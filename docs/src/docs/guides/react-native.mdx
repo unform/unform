@@ -17,7 +17,12 @@ import { useField } from '@unform/core';
 
 function Input({ name, label, onChangeText, ...rest }) {
   const inputRef = useRef(null);
-  const { fieldName, registerField, defaultValue = '', error } = useField(name);
+
+  const { fieldName, registerField, defaultValue, error } = useField(name);
+
+  useEffect(() => {
+    inputRef.current.value = defaultValue;
+  }, [defaultValue]);
 
   useEffect(() => {
     if (inputRef.current) inputRef.current.value = defaultValue;
@@ -68,7 +73,7 @@ function Input({ name, label, onChangeText, ...rest }) {
       />
     </>
   );
-}
+};
 
 export default Input;
 ```

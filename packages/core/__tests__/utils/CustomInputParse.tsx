@@ -16,7 +16,6 @@ export default function Input({ name, label, ...rest }: Props) {
       registerField({
         name: fieldName,
         ref: ref.current,
-        path: '',
         getValue: (currentRef: HTMLInputElement) =>
           currentRef.value.concat('-test'),
       });

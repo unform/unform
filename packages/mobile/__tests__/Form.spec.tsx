@@ -43,6 +43,7 @@ test('it should return data with submits', async () => {
   expect(submitMock).toBeCalledWith(
     { name: 'John Doe' },
     { reset: expect.any(Function) },
+    undefined,
   );
 });
 
@@ -65,5 +66,6 @@ test('it should be able to set initial data', async () => {
   expect(submitMock).toBeCalledWith(
     { name: 'John Doe' },
     { reset: expect.any(Function) },
+    undefined,
   );
 });

@@ -7,6 +7,7 @@ import '@testing-library/jest-dom/extend-expect.js';
 import { Form } from '../../web/lib';
 import { Scope, FormHandles } from '../lib';
 import Input from './components/Input';
+import ObjectInput from './components/ObjectInput';
 import CustomInputClear from './utils/CustomInputClear';
 import CustomInputParse from './utils/CustomInputParse';
 import render from './utils/RenderTest';
@@ -67,6 +68,7 @@ describe('Form', () => {
       {
         reset: expect.any(Function),
       },
+      expect.any(Object),
     );
   });
 
@@ -93,6 +95,7 @@ describe('Form', () => {
       {
         reset: expect.any(Function),
       },
+      expect.any(Object),
     );
   });
 
@@ -152,6 +155,7 @@ describe('Form', () => {
       {
         reset: expect.any(Function),
       },
+      expect.any(Object),
     );
   });
 
@@ -177,6 +181,7 @@ describe('Form', () => {
     const { getByLabelText } = render(
       <>
         <Input name="name" />
+        <ObjectInput name="another" />
       </>,
       {
         ref: formRef,
@@ -185,6 +190,7 @@ describe('Form', () => {
 
     if (formRef.current) {
       formRef.current.setFieldValue('name', 'John Doe');
+      formRef.current.setFieldValue('another', { id: '5', label: 'Test' });
 
       const valueNonExistent = formRef.current.setFieldValue(
         'notexists',
@@ -195,6 +201,7 @@ describe('Form', () => {
     }
 
     expect((getByLabelText('name') as HTMLInputElement).value).toBe('John Doe');
+    expect((getByLabelText('another') as HTMLInputElement).value).toBe('5');
   });
 
   it('should be able to manually get field value', () => {
@@ -291,6 +298,24 @@ describe('Form', () => {
     expect((getByLabelText('bio') as HTMLInputElement).value).toBe('test');
   });
 
+  it('should be able to clear input error from within it', () => {
+    const formRef: RefObject<FormHandles> = { current: null };
+
+    const { getByLabelText } = render(<Input name="name" />, {
+      ref: formRef,
+    });
+
+    act(() => {
+      if (formRef.current) {
+        formRef.current.setFieldError('name', 'Name is required');
+      }
+
+      fireEvent.focus(getByLabelText('name') as HTMLInputElement);
+    });
+
+    expect(formRef.current?.getFieldError('name')).toBeUndefined();
+  });
+
   it('should be able to manually set form data', () => {
     const formRef: RefObject<FormHandles> = { current: null };
 
@@ -298,6 +323,7 @@ describe('Form', () => {
       <>
         <Input name="name" />
         <Input name="bio" />
+        <ObjectInput name="another" />
       </>,
       {
         ref: formRef,
@@ -305,13 +331,21 @@ describe('Form', () => {
     );
 
     if (formRef.current) {
-      formRef.current.setData({ name: 'John Doe', bio: 'React developer' });
+      formRef.current.setData({
+        name: 'John Doe',
+        bio: 'React developer',
+        another: {
+          id: '5',
+          label: 'Test',
+        },
+      });
     }
 
     expect((getByLabelText('name') as HTMLInputElement).value).toBe('John Doe');
     expect((getByLabelText('bio') as HTMLInputElement).value).toBe(
       'React developer',
     );
+    expect((getByLabelText('another') as HTMLInputElement).value).toBe('5');
   });
 
   it('should be able to manually get form data', () => {

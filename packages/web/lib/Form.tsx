@@ -1,7 +1,7 @@
 import React, { RefForwardingComponent, forwardRef } from 'react';
 
 import {
-  Form as Unform,
+  FormProvider,
   FormContext,
   FormHandles,
   FormProps,
@@ -12,7 +12,7 @@ const Form: RefForwardingComponent<FormHandles, FormProps> = (
   formRef,
 ) => {
   return (
-    <Unform ref={formRef} initialData={initialData} onSubmit={onSubmit}>
+    <FormProvider ref={formRef} initialData={initialData} onSubmit={onSubmit}>
       <FormContext.Consumer>
         {({ handleSubmit }) => (
           <form onSubmit={handleSubmit} {...rest}>
@@ -20,7 +20,7 @@ const Form: RefForwardingComponent<FormHandles, FormProps> = (
           </form>
         )}
       </FormContext.Consumer>
-    </Unform>
+    </FormProvider>
   );
 };
 

@@ -1,24 +1,35 @@
 import { DetailedHTMLProps, FormHTMLAttributes, FormEvent } from 'react';
 
-export interface UnformField {
+interface BaseUnformField<T> {
   name: string;
   ref?: any;
-  path: string;
-  setValue?: Function;
-  getValue?: Function;
-  clearValue?: Function;
+  setValue?: (ref: any, value: T) => void;
+  clearValue?: (ref: any, newValue: T) => void;
 }
 
+export interface PathUnformField<T> extends BaseUnformField<T> {
+  path: string;
+  getValue?: undefined;
+}
+
+export interface FunctionUnformField<T> extends BaseUnformField<T> {
+  path?: undefined;
+  getValue: (ref: any) => T;
+}
+
+export type UnformField<T = any> = PathUnformField<T> | FunctionUnformField<T>;
+
 export interface UnformErrors {
-  [key: string]: string;
+  [key: string]: string | undefined;
 }
 
 export interface UnformContext {
   initialData: object;
   errors: UnformErrors;
   scopePath: string;
-  registerField: (field: UnformField) => void;
+  registerField<T>(field: UnformField<T>): void;
   unregisterField: (name: string) => void;
+  clearFieldError: (fieldName: string) => void;
   handleSubmit: (e?: FormEvent) => void;
 }
 
@@ -31,7 +42,7 @@ type HTMLFormProps = DetailedHTMLProps<
 export interface FormHandles {
   getFieldValue(fieldName: string): any;
   setFieldValue(fieldName: string, value: any): void | boolean;
-  getFieldError(fieldName: string): string;
+  getFieldError(fieldName: string): string | undefined;
   setFieldError(fieldName: string, error: string): void;
   clearField(fieldName: string): void;
   getData(): object;
@@ -48,7 +59,7 @@ export interface FormHelpers {
 }
 
 export interface SubmitHandler<T = any> {
-  (data: T, helpers: FormHelpers): void;
+  (data: T, helpers: FormHelpers, event?: FormEvent): void;
 }
 
 export interface FormProps extends Omit<HTMLFormProps, 'onSubmit'> {

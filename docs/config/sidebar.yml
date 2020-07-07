@@ -50,6 +50,10 @@
       link: '/recipes/accessing-field-ref'
     - label: 'Styled Components'
       link: '/recipes/styled-components'
+    - label: 'Clear input error on focus'
+      link: '/recipes/clear-input-error-on-focus'
+    - label: 'Accessing form event'
+      link: '/recipes/accessing-form-event'
     - label: 'TypeScript'
       link: '/recipes/typescript'
 
