@@ -61,6 +61,8 @@
   items:
     - label: 'File input'
       link: '/examples/file-input'
+    - label: 'Checkbox'
+      link: '/examples/checkbox'
     - label: 'React Select'
       link: '/examples/react-select'
     - label: 'React DatePicker'
