@@ -63,6 +63,8 @@
       link: '/examples/file-input'
     - label: 'Checkbox'
       link: '/examples/checkbox'
+    - label: 'Radio'
+      link: '/examples/radio'
     - label: 'React Select'
       link: '/examples/react-select'
     - label: 'React DatePicker'
