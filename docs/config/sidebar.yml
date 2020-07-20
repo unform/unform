@@ -67,6 +67,8 @@
       link: '/examples/react-select'
     - label: 'React DatePicker'
       link: '/examples/react-datepicker'
+    - label: 'React Dropzone'
+      link: '/examples/react-dropzone'
     - label: 'React Simple Code Editor'
       link: '/examples/react-simple-code-editor'
     - label: 'React Input Mask'
