@@ -3,7 +3,7 @@ import { DetailedHTMLProps, FormHTMLAttributes, FormEvent } from 'react';
 interface BaseUnformField<T> {
   name: string;
   ref?: any;
-  type?: 'radio' | 'default';
+  type?: 'radio' | 'checkbox' | 'default';
   setValue?: (ref: any, value: T) => void;
   clearValue?: (ref: any, newValue: T) => void;
 }
@@ -21,11 +21,11 @@ export interface FunctionUnformField<T> extends BaseUnformField<T> {
 export type UnformField<T = any> = PathUnformField<T> | FunctionUnformField<T>;
 
 export interface BaseField<T> {
-  addRef: (ref: any) => void;
-  getRef: () => any;
-  getValue: () => T | null;
-  setValue: (value: T) => void;
-  clearValue: (value?: T) => void;
+  addRef(ref: any): void;
+  getRef(): any;
+  getValue(): T | null;
+  setValue(value: string | T | T[]): void;
+  clearValue(value?: T | T[]): void;
 }
 
 export interface UnformFields<T = any> {
