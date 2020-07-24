@@ -12,7 +12,7 @@ export default function useField(name: string) {
     scopePath,
     unregisterField,
     registerField,
-    clearFieldError,
+    setErrors,
   } = useContext<UnformContext>(FormContext);
 
   if (!name) {
@@ -32,8 +32,8 @@ export default function useField(name: string) {
   }, [errors, fieldName]);
 
   const clearError = useCallback(() => {
-    clearFieldError(fieldName);
-  }, [clearFieldError, fieldName]);
+    setErrors(state => ({ ...state, [fieldName]: undefined }));
+  }, [setErrors, fieldName]);
 
   useEffect(() => () => unregisterField(fieldName), [
     fieldName,

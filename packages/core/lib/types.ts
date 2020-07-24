@@ -19,6 +19,18 @@ export interface FunctionUnformField<T> extends BaseUnformField<T> {
 
 export type UnformField<T = any> = PathUnformField<T> | FunctionUnformField<T>;
 
+export interface BaseField<T> {
+  addRef: (ref: any) => void;
+  getRef: () => any;
+  getValue: () => T | null;
+  setValue: (value: T) => void;
+  clearValue: (value?: T) => void;
+}
+
+export interface UnformFields<T = any> {
+  [fieldName: string]: BaseField<T>;
+}
+
 export interface UnformErrors {
   [key: string]: string | undefined;
 }
@@ -29,7 +41,7 @@ export interface UnformContext {
   scopePath: string;
   registerField<T>(field: UnformField<T>): void;
   unregisterField: (name: string) => void;
-  clearFieldError: (fieldName: string) => void;
+  setErrors: React.Dispatch<React.SetStateAction<UnformErrors>>;
   handleSubmit: (e?: FormEvent) => void;
 }
 
