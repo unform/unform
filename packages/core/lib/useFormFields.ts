@@ -11,9 +11,19 @@ const useFormField = () => {
     [],
   );
 
-  const registerField = useCallback((field: UnformField) => {
-    fields.current[field.name] = createFieldFactory(field);
-  }, []);
+  const registerField = useCallback(
+    (field: UnformField) => {
+      const fieldExistent = getFieldByName(field.name);
+
+      if (fieldExistent) {
+        fieldExistent.addRef(field.ref);
+        return;
+      }
+
+      fields.current[field.name] = createFieldFactory(field);
+    },
+    [getFieldByName],
+  );
 
   const unregisterField = useCallback((fieldName: string) => {
     delete fields.current[fieldName];

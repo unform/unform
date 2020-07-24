@@ -3,6 +3,7 @@ import { DetailedHTMLProps, FormHTMLAttributes, FormEvent } from 'react';
 interface BaseUnformField<T> {
   name: string;
   ref?: any;
+  type?: 'radio' | 'default';
   setValue?: (ref: any, value: T) => void;
   clearValue?: (ref: any, newValue: T) => void;
 }
