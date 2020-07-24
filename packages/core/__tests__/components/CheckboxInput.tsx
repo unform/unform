@@ -67,7 +67,7 @@ function Input({
     name: fieldName,
     'data-testid': value,
     'aria-label': fieldName,
-    defaultChecked: defaultValue === value,
+    defaultChecked: defaultValue && defaultValue.includes(value),
   };
 
   return (
