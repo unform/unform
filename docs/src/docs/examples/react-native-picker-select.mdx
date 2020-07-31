@@ -1,0 +1,95 @@
+---
+title: React Native Picker Select
+---
+
+[React Native Picker Select](https://github.com/lawnstarter/react-native-picker-select) component for React Native which emulates the native `<select>` interfaces for iOS and Android.
+
+> ⚠️ All examples below are using **TypeScript**, if you're not using it you can simply remove all type definitions as the `React.FC<Props>` from component definition.
+
+[Click here](https://snack.expo.io/@eliasgcf/unform-react-native-picker-select-example?session_id=snack-session-I6e6cmW7z&preview=true&platform=ios&iframeId=7pnhjsvupn&theme=light&supportedPlatforms=android,ios) to access a React Native Picker Select Live Demo.
+
+## Picker Component
+
+```tsx lineNumbers=true
+import React, { useEffect, useRef, useState } from 'react';
+import Picker, { PickerSelectProps } from 'react-native-picker-select';
+import { useField } from '@unform/core';
+
+interface Props extends Omit<PickerSelectProps, 'onValueChange'> {
+  name: string;
+}
+
+const RNPickerSelect: React.FC<Props> = ({ name, items, ...rest }) => {
+  const pickerRef = useRef(null);
+  const { fieldName, registerField, defaultValue = '' } = useField(name);
+
+  const [selectedValue, setSelectedValue] = useState(defaultValue);
+
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: pickerRef.current,
+      getValue: ref => {
+        return ref.props.value || '';
+      },
+      clearValue: ref => {
+        ref.props.onValueChange(ref.props.placeholder.value);
+      },
+      setValue: (_, value: string) => {
+        setSelectedValue(value);
+      },
+    });
+  }, [fieldName, registerField]);
+
+  return (
+    <Picker
+      ref={pickerRef}
+      value={selectedValue}
+      onValueChange={setSelectedValue}
+      items={items}
+      {...rest}
+    />
+  );
+};
+
+export default RNPickerSelect;
+```
+
+## Usage example
+```tsx lineNumbers=true
+const App: React.FC = () => {
+  const formRef = useRef<FormHandles>(null);
+
+  const pickerOptions = [
+    { value: 'diego3g', label: 'Diego Fernandes' },
+    { value: 'EliasGcf', label: 'Elias Gabriel' },
+  ];
+
+  function handleSubmit(data) {
+    /**
+     * Out example when 'Diego Fernandes' marked: { user: "diego3g" }
+     * You get a string with the value
+     */
+    console.log(data);
+  }
+
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignContent: 'center' }}>
+      <Form
+        ref={formRef}
+        onSubmit={handleSubmit}
+        initialData={{ user: pickerOptions[0].value }}
+      >
+        <RNPickerSelect name="user" items={pickerOptions} />
+
+        <Button
+          onPress={() => formRef.current.submitForm()}
+          title="console.log"
+        />
+      </Form>
+    </View>
+  );
+};
+
+export default App;
+```
