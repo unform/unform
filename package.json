@@ -13,7 +13,8 @@
     "build": "lerna exec --parallel -- rollup -c ../../rollup.config.js",
     "test": "jest",
     "lint": "eslint packages --ext ts,tsx",
-    "coveralls": "cat ./coverage/lcov.info | coveralls"
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
+    "tsc": "tsc --skipLibCheck"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",

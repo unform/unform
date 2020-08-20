@@ -24,5 +24,6 @@
       "@unform/*": ["packages/*/lib"]
     }
   },
-  "exclude": ["node_modules", "packages/**/__tests__"]
+  "include": ["packages/**/*"],
+  "exclude": ["node_modules", "packages/**/__tests__", "dist"]
 }
