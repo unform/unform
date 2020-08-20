@@ -1,9 +1,6 @@
 ---
 name: Enhancement request
 about: Suggest an idea for this project
-title: ''
-labels: enhancement
-assignees: ''
 ---
 
 <!-- Verify first that your issue is not already reported -->
