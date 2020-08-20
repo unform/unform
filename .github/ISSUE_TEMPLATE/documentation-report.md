@@ -1,9 +1,6 @@
 ---
 name: Documentation report
 about: Use this template for documentation related issues
-title: ''
-labels: docs
-assignees: ''
 ---
 
 <!-- Verify first that your issue is not already reported -->
