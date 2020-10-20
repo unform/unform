@@ -27,6 +27,12 @@ function Input({ name, onChangeText, rawValue, ...rest }) {
     },
     [onChangeText],
   );
+  
+  useEffect(() => {
+    inputRef.current.value = defaultValue ;
+    if (onChangeText) 
+        onChangeText(defaultValue);
+  }, [defaultValue]);
 
   useEffect(() => {
     registerField({
