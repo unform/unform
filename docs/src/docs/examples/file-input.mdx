@@ -1,5 +1,6 @@
 ---
 title: File Input
+description: How to create a File Input with Unform
 ---
 
 Enable your users to upload images or another files using Unform.
@@ -11,7 +12,13 @@ Enable your users to upload images or another files using Unform.
 Simple image input with preview before upload.
 
 ```tsx
-import React, { ChangeEvent, useRef, useEffect, useCallback, useState }  from 'react';
+import React, {
+  ChangeEvent,
+  useRef,
+  useEffect,
+  useCallback,
+  useState,
+} from 'react';
 
 import { useField } from '@unform/core';
 
@@ -50,19 +57,14 @@ const ImageInput: React.FC<InputProps> = ({ name, ...rest }) => {
       },
       setValue(_: HTMLInputElement, value: string) {
         setPreview(value);
-      }
-    })
+      },
+    });
   }, [fieldName, registerField]);
 
   return (
     <>
-      { preview && <img src={preview} alt="Preview" width="100" /> }
-      <input
-        type="file"
-        ref={inputRef}
-        onChange={handlePreview}
-        {...rest}
-      />
+      {preview && <img src={preview} alt="Preview" width="100" />}
+      <input type="file" ref={inputRef} onChange={handlePreview} {...rest} />
     </>
   );
 };

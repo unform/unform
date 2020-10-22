@@ -1,5 +1,6 @@
 ---
 title: React Native
+description: Get started with Unform in React Native apps
 ---
 
 The Unform API is almost identic between web and mobile, below you can see an example of an Input and a Form using Unform and React Native.
@@ -11,11 +12,7 @@ In React Native we need to use `TextInput` provided by the `react-native` packag
 Also, to keep the field uncontrolled, that is, don't store it's value within a state, we need to track input changes and save its value inside the input reference.
 
 ```jsx title=Input.js lineNumbers=true
-import React, {
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { TextInput } from 'react-native';
 import { useField } from '@unform/core';
@@ -62,7 +59,7 @@ function Input({ name, ...rest }) {
       {...rest}
     />
   );
-};
+}
 
 export default Input;
 ```
