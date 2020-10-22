@@ -9,8 +9,7 @@ module.exports = {
     siteImage: `/banner.png`,
     siteLanguage: `en`,
     basePath: `/`,
-    themeColor: `#7159c1`,
-    footer: `Made with 💜 by Rocketseat`,
+    themeColor: `#8257E6`,
   },
   plugins: [
     {
@@ -27,7 +26,7 @@ module.exports = {
         name: `Unform`,
         short_name: `Unform`,
         start_url: `/`,
-        background_color: `#7159c1`,
+        background_color: `#8257E6`,
         display: `standalone`,
         icon: `static/favicon.png`,
       },
