@@ -1,9 +1,9 @@
 module.exports = {
   siteMetadata: {
     siteTitle: `Unform`,
-    defaultTitle: `Unform | Easy peasy forms in React`,
+    defaultTitle: `Unform | Performance-focused API for React forms`,
     siteTitleShort: `Unform`,
-    siteDescription: `Unform is a performance focused library that helps you creating beautiful forms in React with the power of uncontrolled components performance and React Hooks.`,
+    siteDescription: `Unform is a performance-focused API for creating powerful forms experiences for both React and React Native`,
     siteUrl: `https://unform.dev`,
     siteAuthor: `@rocketseat`,
     siteImage: `/banner.png`,
