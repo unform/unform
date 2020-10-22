@@ -23,12 +23,12 @@ import Input from './components/Input';
 interface FormData {
   name: string;
   email: string;
-};
+}
 
 const MyForm: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
-  const handleSubmit: SubmitHandler<FormData> = (data) => {
+  const handleSubmit: SubmitHandler<FormData> = data => {
     console.log(formRef);
   };
 
@@ -37,7 +37,7 @@ const MyForm: React.FC = () => {
       <Input name="name" />
       <Input name="email" />
     </Form>
-  )
+  );
 };
 
 export default MyForm;
@@ -47,17 +47,15 @@ export default MyForm;
 
 When creating a simple HTML input or any other HTML element used for input source, remember to always extend the element props. In web you can always use the `JSX.IntrinsicElements['element']` to get the props adapted to JSX.
 
-<blockquote>
-<p>In React Native you can import default component props directly from `react-native` package, for example:</p>
+In React Native you can import default component props directly from `react-native` package, for example:
 
 ```jsx
-import { TextInputProps } from 'react-native'`
+import { TextInputProps } from 'react-native';
 ```
-</blockquote>
 
 Also, in web (ReactJS) remember to reference the global element inside `useRef` hook and **always** set the default value to `null`.
 
-```jsx lineNumbers=true
+```jsx lineNumbers
 import React, { useEffect, useRef } from 'react';
 import { useField } from '@unform/core';
 
