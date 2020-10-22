@@ -38,8 +38,6 @@
   items:
     - label: 'Simple Input'
       link: '/recipes/simple-input'
-    - label: 'Creating your own inputs'
-      link: '/recipes/creating-your-own-inputs'
     - label: 'Accessing form ref'
       link: '/recipes/accessing-form-ref'
     - label: 'Accessing field ref'
