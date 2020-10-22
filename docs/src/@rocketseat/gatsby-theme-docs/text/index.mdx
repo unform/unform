@@ -1,23 +1,34 @@
-# Getting started
+import Navigation from '@rocketseat/gatsby-theme-docs/src/components/Docs/PostNav';
 
-Unform is a performance focused library that helps you creating beautiful forms in React with the power of uncontrolled components performance and React Hooks.
+# Unform
 
-## Install
+Unform is a performance-focused API for creating powerful forms experiences for
+both React and React Native. Using hooks, you can build lightweight and composable
+forms based on ultra-extensible components. Integrate with any form library,
+validate your fields, and have your data out of the box.
 
-Unform always needs the `core` package and one package based on the client type:
+## Designed to have zero design
 
-### Web (ReactJS)
+As a form API, Unform was designed to have zero design. Easily integrate with any
+UI library or CSS-in-JS solution to build form components and display errors,
+change colors, add icons, and use your style guide.
 
-```sh
-yarn add @unform/core @unform/web
-```
+## Extensible
 
-### Mobile (React Native)
+Unform exposes hooks to integrate with any form library, such as React Select
+and React Datepicker. Access form data, errors, refs, and more manually from
+within your component using the form reference.
 
-```sh
-yarn add @unform/core @unform/mobile
-```
+## Complex data and relationships
 
-You're done! 🎉
+Using Unform nested fields API you can quickly create complex form structures
+with no effort, despite the data received from the back-end, keeping form
+structures simple and reusable.
 
-You can now proceed to [Basic Form](/guides/basic-form) example.
+<Navigation
+  prev={null}
+  next={{
+    label: 'Installation',
+    link: '/installation',
+  }}
+/>
