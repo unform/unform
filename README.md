@@ -31,6 +31,10 @@ Wanna test Unform before using it?
 
 *Not available with React Native Web or Expo Web, use the iOS/Android devices in Expo Snack*
 
+## Roadmap
+
+If Unform currently doesn't have a certain feature you think it's awesome, be sure to check out the [roadmap](https://www.notion.so/Unform-public-roadmap-e4dff9e2053c4475b162cd19914eab02) to see if this is already planned for the future. Otherwise, we recommend you create an issue describing your enhancement request.
+
 ## Contributing
 
 Thank you for being interested on making this package better. We encourage everyone to help improving this project with some new features, bug fixes and performance issues. Please take a little bit of your time to read our guides, so this process can be faster and easier.

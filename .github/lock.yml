@@ -1,0 +1,5 @@
+# Configuration for lock-threads - https://github.com/dessant/lock-threads
+
+daysUntilLock: 365
+issue-lock-labels: 'outdated'
+lockComment: false
