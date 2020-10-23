@@ -6,7 +6,7 @@ module.exports = {
     siteDescription: `Unform is a performance-focused API for creating powerful forms experiences for both React and React Native`,
     siteUrl: `https://unform.dev`,
     siteAuthor: `@rocketseat`,
-    siteImage: `/banner.png`,
+    siteImage: `/og/banner.png`,
     siteLanguage: `en`,
     basePath: `/`,
     themeColor: `#8257E6`,
