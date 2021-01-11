@@ -11,7 +11,7 @@
 <div align="center">
 
 [![npm](https://img.shields.io/npm/v/@unform/core.svg?color=%237159c1)](https://www.npmjs.com/package/@unform/core)<space><space>
-[![Coverage Status](https://img.shields.io/coveralls/github/Rocketseat/unform.svg?color=%237159c1)](https://coveralls.io/github/Rocketseat/unform?branch=master)
+[![Coverage Status](https://img.shields.io/coveralls/github/Rocketseat/unform.svg?color=%237159c1)](https://coveralls.io/github/Rocketseat/unform?branch=master) [![Meercode CI Score](https://meercode.io/badge/Rocketseat/unform?type=ci-score&branch=master)](https://meercode.io/Rocketseat/unform)
 
 </div>
 
