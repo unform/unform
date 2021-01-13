@@ -1,9 +1,8 @@
 import { useContext, useEffect, useMemo, useCallback } from 'react';
 
-import dot from 'dot-object';
-
 import FormContext from './Context';
 import { UnformContext } from './types';
+import { getIn } from './utils';
 
 export default function useField(name: string) {
   const {
@@ -24,7 +23,7 @@ export default function useField(name: string) {
   }, [name, scopePath]);
 
   const defaultValue = useMemo(() => {
-    return dot.pick(fieldName, initialData);
+    return getIn(initialData, fieldName);
   }, [fieldName, initialData]);
 
   const error = useMemo(() => {

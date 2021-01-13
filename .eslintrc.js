@@ -14,7 +14,7 @@ module.exports = {
       jsx: true,
       tsx: true,
     },
-    sourceType: 'module'
+    sourceType: 'module',
   },
   parser: '@typescript-eslint/parser',
   plugins: [
@@ -62,6 +62,8 @@ module.exports = {
     'no-param-reassign': 'off',
     'no-unused-expressions': 'off',
     'no-underscore-dangle': 'off',
+    'no-plusplus': 'off',
+    'no-bitwise': 'off',
     'react/prop-types': 'off',
     'jsx-a11y/label-has-for': 'off',
     'import/prefer-default-export': 'off',

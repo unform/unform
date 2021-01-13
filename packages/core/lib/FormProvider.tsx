@@ -8,10 +8,9 @@ import React, {
   RefForwardingComponent,
 } from 'react';
 
-import dot from 'dot-object';
-
 import FormContext from './Context';
 import { UnformErrors, UnformField, FormHandles, FormProps } from './types';
+import { setIn, getIn, flat, unflat } from './utils';
 
 const Form: RefForwardingComponent<FormHandles, FormProps> = (
   { initialData = {}, children, onSubmit },
@@ -31,7 +30,7 @@ const Form: RefForwardingComponent<FormHandles, FormProps> = (
       return getValue(ref);
     }
 
-    return path && dot.pick(path, ref);
+    return path && getIn(ref, path);
   }, []);
 
   const setFieldValue = useCallback(
@@ -40,7 +39,7 @@ const Form: RefForwardingComponent<FormHandles, FormProps> = (
         return setValue(ref, value);
       }
 
-      return path ? dot.set(path, value, ref as object) : false;
+      return path ? setIn(ref, path, value) : false;
     },
     [],
   );
@@ -51,7 +50,7 @@ const Form: RefForwardingComponent<FormHandles, FormProps> = (
         return clearValue(ref, '');
       }
 
-      return path && dot.set(path, '', ref as object);
+      return path && setIn(ref, path, '');
     },
     [],
   );
@@ -62,7 +61,7 @@ const Form: RefForwardingComponent<FormHandles, FormProps> = (
         return clearValue(ref, data[name]);
       }
 
-      return path && dot.set(path, data[name] ? data[name] : '', ref as object);
+      return path && setIn(ref, path, data[name] ? data[name] : '');
     });
   }, []);
 
@@ -71,7 +70,7 @@ const Form: RefForwardingComponent<FormHandles, FormProps> = (
       const fieldValue = {};
 
       fields.current.forEach(field => {
-        fieldValue[field.name] = dot.pick(field.name, data);
+        fieldValue[field.name] = getIn(data, field.name);
       });
 
       Object.entries(fieldValue).forEach(([fieldName, value]) => {
@@ -86,7 +85,7 @@ const Form: RefForwardingComponent<FormHandles, FormProps> = (
   );
 
   const setFormErrors = useCallback((formErrors: object) => {
-    const parsedErrors = dot.dot(formErrors);
+    const parsedErrors = flat(formErrors);
 
     setErrors(parsedErrors);
   }, []);
@@ -98,9 +97,7 @@ const Form: RefForwardingComponent<FormHandles, FormProps> = (
       data[field.name] = getFieldValue(field);
     });
 
-    dot.object(data);
-
-    return data;
+    return unflat(data);
   }, [getFieldValue]);
 
   const handleSubmit = useCallback(

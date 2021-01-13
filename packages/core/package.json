@@ -26,9 +26,6 @@
   "bugs": {
     "url": "https://github.com/Rocketseat/unform/issues"
   },
-  "dependencies": {
-    "dot-object": "^2.1.2"
-  },
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2"

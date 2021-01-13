@@ -23,7 +23,6 @@
     "@commitlint/travis-cli": "^7.6.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
-    "@types/dot-object": "^1.7.0",
     "@types/jest": "^24.0.11",
     "@types/react": "^16.9.16",
     "@types/react-dom": "^16.9.4",
