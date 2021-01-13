@@ -75,7 +75,7 @@
     - label: 'Migration guide'
       link: '/migration-guide'
     - label: 'Github'
-      link: 'https://github.com/Rocketseat/unform'
+      link: 'https://github.com/unform/unform'
     - label: 'React Demo'
       link: 'https://codesandbox.io/embed/agitated-tdd-uf177?autoresize=1&expanddevtools=1&fontsize=14&hidenavigation=1&theme=dark'
     - label: 'React Native Demo'

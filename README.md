@@ -11,7 +11,7 @@
 <div align="center">
 
 [![npm](https://img.shields.io/npm/v/@unform/core.svg?color=%237159c1)](https://www.npmjs.com/package/@unform/core)<space><space>
-[![Coverage Status](https://img.shields.io/coveralls/github/Rocketseat/unform.svg?color=%237159c1)](https://coveralls.io/github/Rocketseat/unform?branch=master)
+[![Coverage Status](https://img.shields.io/coveralls/github/unform/unform.svg?color=%237159c1)](https://coveralls.io/github/unform/unform?branch=master)
 
 </div>
 
@@ -29,7 +29,7 @@ Wanna test Unform before using it?
 - **[ReactJS playground](https://codesandbox.io/embed/agitated-tdd-uf177?autoresize=1&expanddevtools=1&fontsize=14&hidenavigation=1&theme=dark)**
 - **[React Native playground](https://snack.expo.io/@diego3g/1e9fb3)**
 
-*Not available with React Native Web or Expo Web, use the iOS/Android devices in Expo Snack*
+_Not available with React Native Web or Expo Web, use the iOS/Android devices in Expo Snack_
 
 ## Roadmap
 

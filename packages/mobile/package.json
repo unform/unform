@@ -3,7 +3,7 @@
   "version": "2.1.3",
   "description": "Unform React Native implementation",
   "author": "Diego Fernandes <diego.schell.f@gmail.com>",
-  "homepage": "https://github.com/Rocketseat/unform#readme",
+  "homepage": "https://github.com/unform/unform#readme",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -18,13 +18,13 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Rocketseat/unform.git"
+    "url": "git+https://github.com/unform/unform.git"
   },
   "scripts": {
     "test": "jest"
   },
   "bugs": {
-    "url": "https://github.com/Rocketseat/unform/issues"
+    "url": "https://github.com/unform/unform/issues"
   },
   "devDependencies": {
     "@testing-library/react-native": "^5.0.2"
