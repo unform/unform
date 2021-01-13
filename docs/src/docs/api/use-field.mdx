@@ -17,43 +17,26 @@ const { ... } = useField(name);
 The following properties are returned from `useField`:
 
 ```jsx
-const { fieldName, registerField, defaultValue, clearError, error } = useField(
-  name,
-);
+const { ... } = useField(name);
 ```
 
-- `fieldName: string`
-  - The field identifier;
-- `registerField: <T>(field: UnformField<T>): void`
-  - The method used to register a field on Unform
-- `defaultValue: string`
-  - The default value of the field
-- `clearError: () => void`
-  - Clean error message
-- `error: string | undefined`
-  - Get the error message
-
----
+| Prop                                      | Description                                                                                       |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| fieldName: string                         | A unique fieldname                                                                                |
+| registerField: (field: UnformField): void | The method used to register a field on Unform. See below for more information                     |
+| defaultValue: string                      | The default value of the field (will be populated based on [`initialData`](/guides/initial-data)) |
+| clearError: () => void                    | Cleans the error message                                                                          |
+| error: string                             | Returns the error message                                                                         |
 
 ### registerField
 
 When registering a field, you can pass some properties to the `registerField` method.
 
-- `name: string`
-  - Required
-  - Field identifier
-  - Always provide the `fieldName` returned from `useField`
-- `ref`
-  - Required
-  - The field ref
-- `setValue: (ref: any, value: T) => void`
-  - Optional
-  - Used to set the field value
-- `clearValue`
-  - Optional
-  - Cleans the field value
-- `getValue: (ref: any, newValue: T) => void`
-  - Required (if you don't provide a `path`)
-  - Can be used to transform a value before it is saved
-- `path`
-  - Required (if you don't provide a `getValue`)
+| Prop                                      | Description                                                                           | Required |
+| ----------------------------------------- | ------------------------------------------------------------------------------------- | -------- |
+| name: string                              | The field identifier. Always provide it with the `fieldName` returned from `useField` | Yes      |
+| ref                                       | Field ref. You can use the useRef hook from React                                     | Yes      |
+| setValue: (ref: any, value: T) => void    | The logic to set the field value. This will be saved on Unform state.                 | No       |
+| clearValue: (ref: any, value: T) => void  | Cleans the field value                                                                | No       |
+| getValue: (ref: any, newValue: T) => void | Can be used to transform a value before it is saved                                   | No       |
+| path: string => void                      | Path to getting the field value. If you don't provide a `getValue` it's required      | No       |
