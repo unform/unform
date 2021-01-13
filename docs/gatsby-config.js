@@ -16,7 +16,7 @@ module.exports = {
       resolve: `@rocketseat/gatsby-theme-docs`,
       options: {
         docsPath: `src/docs`,
-        githubUrl: `https://github.com/Rocketseat/unform`,
+        githubUrl: `https://github.com/unform/unform`,
         baseDir: `docs/`,
       },
     },
