@@ -13,11 +13,14 @@ export function CustomInputParse({ name, label, ...rest }: Props) {
 
   useEffect(() => {
     if (ref.current) {
-      registerField({
+      registerField<string, HTMLInputElement>({
         name: fieldName,
-        ref: ref.current,
-        getValue: (currentRef: HTMLInputElement) =>
-          currentRef.value.concat('-test'),
+        ref,
+        getValue: currentRef => {
+          const inputValue = currentRef.current?.value ?? ''
+
+          return inputValue.concat('-test')
+        },
       })
     }
   }, [fieldName, registerField])

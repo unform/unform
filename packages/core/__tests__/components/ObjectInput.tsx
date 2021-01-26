@@ -17,12 +17,14 @@ export function ObjectInput({ name, label, ...rest }: InputProps) {
   const { fieldName, registerField, defaultValue, error } = useField(name)
 
   useEffect(() => {
-    registerField<InputValue>({
+    registerField<InputValue, HTMLInputElement>({
       name: fieldName,
-      ref: inputRef.current,
+      ref: inputRef,
       path: 'value',
-      setValue(ref: HTMLInputElement, value) {
-        ref.value = value.id
+      setValue(ref, value) {
+        if (ref.current) {
+          ref.current.value = value.id
+        }
       },
     })
   }, [fieldName, registerField])

@@ -27,42 +27,42 @@ const Form: ForwardRefRenderFunction<FormHandles, FormProps> = (
   )
 
   const getFieldValue = useCallback(({ ref, getValue, path }: UnformField) => {
-    if (getValue) {
+    if (getValue && ref) {
       return getValue(ref)
     }
 
-    return path && dot.pick(path, ref)
+    return path && dot.pick(path, ref.current)
   }, [])
 
   const setFieldValue = useCallback(
     ({ path, ref, setValue }: UnformField, value: any) => {
-      if (setValue) {
+      if (setValue && ref) {
         return setValue(ref, value)
       }
 
-      return path ? dot.set(path, value, ref as object) : false
+      return path && dot.set(path, value, ref.current)
     },
     []
   )
 
   const clearFieldValue = useCallback(
     ({ clearValue, ref, path }: UnformField) => {
-      if (clearValue) {
+      if (clearValue && ref) {
         return clearValue(ref, '')
       }
 
-      return path && dot.set(path, '', ref as object)
+      return path && dot.set(path, '', ref.current)
     },
     []
   )
 
   const reset = useCallback((data = {}) => {
     fields.current.forEach(({ name, ref, path, clearValue }) => {
-      if (clearValue) {
+      if (clearValue && ref) {
         return clearValue(ref, data[name])
       }
 
-      return path && dot.set(path, data[name] ? data[name] : '', ref as object)
+      return path && dot.set(path, data[name] ? data[name] : '', ref.current)
     })
   }, [])
 
@@ -178,11 +178,7 @@ const Form: ForwardRefRenderFunction<FormHandles, FormProps> = (
     getFieldRef(fieldName) {
       const field = getFieldByName(fieldName)
 
-      if (!field) {
-        return false
-      }
-
-      return field.ref
+      return field?.ref
     },
     setData(data) {
       return setData(data)

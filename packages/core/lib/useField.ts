@@ -3,7 +3,6 @@ import { useContext, useEffect, useMemo, useCallback } from 'react'
 import dot from 'dot-object'
 
 import { FormContext } from './Context'
-import { UnformContext } from './types'
 
 export function useField(name: string) {
   const {
@@ -13,11 +12,7 @@ export function useField(name: string) {
     unregisterField,
     registerField,
     clearFieldError,
-  } = useContext<UnformContext>(FormContext)
-
-  if (!name) {
-    throw new Error('You need to provide the "name" prop.')
-  }
+  } = useContext(FormContext)
 
   const fieldName = useMemo(() => {
     return scopePath ? `${scopePath}.${name}` : name

@@ -2,37 +2,40 @@ import {
   DetailedHTMLProps,
   FormHTMLAttributes,
   FormEvent,
+  RefObject,
   ReactNode,
 } from 'react'
 
-interface BaseUnformField<T> {
+interface BaseUnformField<T, U> {
   name: string
-  ref?: any
-  setValue?: (ref: any, value: T) => void
-  clearValue?: (ref: any, newValue: T) => void
+  ref: RefObject<U>
+  setValue?: (ref: RefObject<U>, value: T) => void
+  clearValue?: (ref: RefObject<U>, newValue: T) => void
 }
 
-export interface PathUnformField<T> extends BaseUnformField<T> {
+export interface PathUnformField<T, U> extends BaseUnformField<T, U> {
   path: string
   getValue?: undefined
 }
 
-export interface FunctionUnformField<T> extends BaseUnformField<T> {
+export interface FunctionUnformField<T, U> extends BaseUnformField<T, U> {
   path?: undefined
-  getValue: (ref: any) => T
+  getValue: (ref: RefObject<U>) => T
 }
 
-export type UnformField<T = any> = PathUnformField<T> | FunctionUnformField<T>
+export type UnformField<T = any, U = any> =
+  | PathUnformField<T, U>
+  | FunctionUnformField<T, U>
 
 export interface UnformErrors {
   [key: string]: string | undefined
 }
 
 export interface UnformContext {
-  initialData: Record<string, unknown>
+  initialData: object
   errors: UnformErrors
   scopePath: string
-  registerField<T>(field: UnformField<T>): void
+  registerField<T = any, U = any>(field: UnformField<T, U>): void
   unregisterField: (name: string) => void
   clearFieldError: (fieldName: string) => void
   handleSubmit: (e?: FormEvent) => void
@@ -45,18 +48,18 @@ type HTMLFormProps = DetailedHTMLProps<
   HTMLFormElement
 >
 
-export interface FormHandles {
-  getFieldValue(fieldName: string): any
-  setFieldValue(fieldName: string, value: any): void | boolean
+export interface FormHandles<T = any, U = any> {
+  getFieldValue(fieldName: string): T
+  setFieldValue(fieldName: string, value: T): void
   getFieldError(fieldName: string): string | undefined
   setFieldError(fieldName: string, error: string): void
   clearField(fieldName: string): void
-  getData(): Record<string, unknown>
-  getFieldRef(fieldName: string): any
-  setData(data: Record<string, unknown>): void
+  getData(): object
+  getFieldRef(fieldName: string): RefObject<U> | undefined
+  setData(data: object): void
   getErrors(): UnformErrors
-  setErrors(errors: Record<string, string>): void
-  reset(data?: Record<string, unknown>): void
+  setErrors(errors: object): void
+  reset(data?: object): void
   submitForm(): void
 }
 

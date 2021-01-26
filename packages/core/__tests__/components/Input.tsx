@@ -2,12 +2,12 @@ import { useEffect, useRef, InputHTMLAttributes } from 'react'
 
 import { useField } from '../../lib'
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
   name: string
   label?: string
 }
 
-export function Input({ name, label, ...rest }: InputProps) {
+export function Input({ name, label, ...rest }: Props) {
   const ref = useRef<HTMLInputElement>(null)
   const {
     fieldName,
@@ -18,9 +18,11 @@ export function Input({ name, label, ...rest }: InputProps) {
   } = useField(name)
 
   useEffect(() => {
-    if (ref.current) {
-      registerField({ name: fieldName, ref: ref.current, path: 'value' })
-    }
+    registerField<string, HTMLInputElement>({
+      name: fieldName,
+      ref,
+      path: 'value',
+    })
   }, [fieldName, registerField])
 
   const props = {

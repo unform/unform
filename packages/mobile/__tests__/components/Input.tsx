@@ -23,14 +23,14 @@ function Input({ name, label, multiline = false, ...rest }: InputProps) {
   useEffect(() => {
     registerField<string>({
       name: fieldName,
-      ref: inputValueRef.current,
+      ref: inputValueRef,
       path: 'value',
       setValue(ref, value: string) {
-        ref.value = value
+        ref.current.value = value
         inputElementRef.current.setNativeProps({ text: value })
       },
       clearValue(ref) {
-        ref.value = ''
+        ref.current.value = ''
         inputElementRef.current.clear()
       },
     })

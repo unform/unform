@@ -18,7 +18,6 @@ describe('Form', () => {
 
     expect(!!container.querySelector('input[name=name]')).toBe(true)
   })
-
   it('should load initial data inside form elements', () => {
     const { container } = render(<Input name="name" />, {
       initialData: { name: 'Diego' },
@@ -94,12 +93,9 @@ describe('Form', () => {
   })
 
   it('should reset form data when reset helper is dispatched', () => {
-    const { getByTestId, getByLabelText } = render(
-      <>
-        <Input name="name" />
-      </>,
-      { onSubmit: (_: any, { reset }: { reset: Function }) => reset() }
-    )
+    const { getByTestId, getByLabelText } = render(<Input name="name" />, {
+      onSubmit: (_: any, { reset }: { reset: Function }) => reset(),
+    })
 
     getByLabelText('name').setAttribute('value', 'Diego')
 
@@ -114,14 +110,9 @@ describe('Form', () => {
       tech: 'react',
     }
 
-    const { getByTestId, getByLabelText } = render(
-      <>
-        <Input name="name" />
-      </>,
-      {
-        onSubmit: (_: any, { reset }: { reset: Function }) => reset(newData),
-      }
-    )
+    const { getByTestId, getByLabelText } = render(<Input name="name" />, {
+      onSubmit: (_: any, { reset }: { reset: Function }) => reset(newData),
+    })
 
     getByLabelText('name').setAttribute('value', 'Diego')
 
@@ -133,12 +124,10 @@ describe('Form', () => {
   it('should be able to have custom value parser', () => {
     const submitMock = jest.fn()
 
-    const { getByTestId } = render(
-      <>
-        <CustomInputParse name="name" />
-      </>,
-      { onSubmit: submitMock, initialData: { name: 'Diego' } }
-    )
+    const { getByTestId } = render(<CustomInputParse name="name" />, {
+      onSubmit: submitMock,
+      initialData: { name: 'Diego' },
+    })
 
     fireEvent.submit(getByTestId('form'))
 
@@ -155,9 +144,7 @@ describe('Form', () => {
 
   it('should be able to have custom value clearer', () => {
     const { getByTestId, getByLabelText } = render(
-      <>
-        <CustomInputClear name="name" />
-      </>,
+      <CustomInputClear name="name" />,
       {
         onSubmit: (_: any, { reset }: { reset: Function }) => reset(),
         initialData: { name: 'Diego' },
@@ -201,15 +188,10 @@ describe('Form', () => {
   it('should be able to manually get field value', () => {
     const formRef: RefObject<FormHandles> = { current: null }
 
-    render(
-      <>
-        <Input name="name" />
-      </>,
-      {
-        ref: formRef,
-        initialData: { name: 'John Doe' },
-      }
-    )
+    render(<Input name="name" />, {
+      ref: formRef,
+      initialData: { name: 'John Doe' },
+    })
 
     if (formRef.current) {
       const value = formRef.current.getFieldValue('name')
@@ -223,15 +205,10 @@ describe('Form', () => {
   it('should be able to manually set field error', () => {
     const formRef: RefObject<FormHandles> = { current: null }
 
-    const { getByText } = render(
-      <>
-        <Input name="name" />
-      </>,
-      {
-        onSubmit: (_: any, { reset }: { reset: Function }) => reset(),
-        ref: formRef,
-      }
-    )
+    const { getByText } = render(<Input name="name" />, {
+      onSubmit: (_: any, { reset }: { reset: Function }) => reset(),
+      ref: formRef,
+    })
 
     act(() => {
       if (formRef.current) {
@@ -245,14 +222,7 @@ describe('Form', () => {
   it('should be able to manually get field error', async () => {
     const formRef: RefObject<FormHandles> = { current: null }
 
-    render(
-      <>
-        <Input name="name" />
-      </>,
-      {
-        ref: formRef,
-      }
-    )
+    render(<Input name="name" />, { ref: formRef })
 
     act(() => {
       if (formRef.current) {
@@ -402,23 +372,18 @@ describe('Form', () => {
   })
 
   it('should be able to manually get field ref', () => {
-    const formRef: RefObject<FormHandles> = { current: null }
+    const formRef: RefObject<FormHandles<string, HTMLInputElement>> = {
+      current: null,
+    }
 
-    render(
-      <>
-        <Input name="name" />
-      </>,
-      {
-        ref: formRef,
-      }
-    )
+    render(<Input name="name" />, { ref: formRef })
 
     if (formRef.current) {
       const ref = formRef.current.getFieldRef('name')
       const refNonExistent = formRef.current.getFieldRef('notexists')
 
-      expect((ref as HTMLInputElement).name).toBe('name')
-      expect(refNonExistent).toBe(false)
+      expect(ref?.current?.name).toBe('name')
+      expect(refNonExistent).toBeUndefined()
     }
   })
 

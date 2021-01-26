@@ -13,12 +13,14 @@ export function CustomInputClear({ name, label, ...rest }: Props) {
 
   useEffect(() => {
     if (ref.current) {
-      registerField({
+      registerField<string, HTMLInputElement>({
         name: fieldName,
-        ref: ref.current,
+        ref,
         path: 'value',
-        clearValue: (inputRef: HTMLInputElement) => {
-          inputRef.value = 'test'
+        clearValue: inputRef => {
+          if (inputRef.current) {
+            inputRef.current.value = 'test'
+          }
         },
       })
     }
