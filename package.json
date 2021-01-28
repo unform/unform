@@ -1,6 +1,5 @@
 {
-  "name": "unform",
-  "version": "2.0.0",
+  "name": "root",
   "private": true,
   "workspaces": {
     "packages": [
