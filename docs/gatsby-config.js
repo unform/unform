@@ -1,23 +1,22 @@
 module.exports = {
   siteMetadata: {
     siteTitle: `Unform`,
-    defaultTitle: `Unform | Easy peasy forms in React`,
+    defaultTitle: `Unform | Performance-focused API for React forms`,
     siteTitleShort: `Unform`,
-    siteDescription: `Unform is a performance focused library that helps you creating beautiful forms in React with the power of uncontrolled components performance and React Hooks.`,
+    siteDescription: `Unform is a performance-focused API for creating powerful forms experiences for both React and React Native`,
     siteUrl: `https://unform.dev`,
     siteAuthor: `@rocketseat`,
-    siteImage: `/banner.png`,
+    siteImage: `/og/banner.png`,
     siteLanguage: `en`,
     basePath: `/`,
-    themeColor: `#7159c1`,
-    footer: `Made with 💜 by Rocketseat`,
+    themeColor: `#8257E6`,
   },
   plugins: [
     {
       resolve: `@rocketseat/gatsby-theme-docs`,
       options: {
         docsPath: `src/docs`,
-        githubUrl: `https://github.com/Rocketseat/unform`,
+        githubUrl: `https://github.com/unform/unform`,
         baseDir: `docs/`,
       },
     },
@@ -27,7 +26,7 @@ module.exports = {
         name: `Unform`,
         short_name: `Unform`,
         start_url: `/`,
-        background_color: `#7159c1`,
+        background_color: `#8257E6`,
         display: `standalone`,
         icon: `static/favicon.png`,
       },

@@ -1,23 +1,23 @@
-import React, { RefForwardingComponent, forwardRef } from 'react';
-import { View, ViewProps } from 'react-native';
+import { forwardRef, ForwardRefRenderFunction, ReactNode } from 'react'
+import { View, ViewProps } from 'react-native'
 
-import { FormProvider, FormHandles, SubmitHandler } from '@unform/core';
+import { FormProvider, FormHandles, SubmitHandler } from '@unform/core'
 
 export interface FormProps extends ViewProps {
-  initialData?: object;
-  children: React.ReactNode;
-  onSubmit: SubmitHandler;
+  initialData?: Record<string, unknown>
+  children: ReactNode
+  onSubmit: SubmitHandler
 }
 
-const Form: RefForwardingComponent<FormHandles, FormProps> = (
+const FormComponent: ForwardRefRenderFunction<FormHandles, FormProps> = (
   { initialData = {}, children, onSubmit, ...rest },
-  formRef,
+  formRef
 ) => {
   return (
     <FormProvider ref={formRef} initialData={initialData} onSubmit={onSubmit}>
       <View {...rest}>{children}</View>
     </FormProvider>
-  );
-};
+  )
+}
 
-export default forwardRef(Form);
+export const Form = forwardRef(FormComponent)

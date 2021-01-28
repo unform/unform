@@ -1,0 +1,150 @@
+---
+title: 'Quick start'
+description: 'How to get started with Unform. You will learn how to build your first input and integrate with React.'
+---
+
+This page explains hot to get started with Unform. You will learn
+how to build your first input and **integrate with React**.
+Remember that with Unform, **you are responsible for creating the UI** (markup and styles)
+of your form, but don't be intimidated!
+
+Let's get started by creating a base input component.
+
+```jsx lineNumbers
+import React from 'react';
+
+const Input = () => {
+  return <input type="text" placeholder="Type your username" />;
+};
+
+export default Input;
+```
+
+At the heart of every form component there are a `useField` hook. You will use it
+to register fields on Unform. It will also be used to integrate with form libraries,
+such as React Select, React Datepicker and others.
+
+```jsx highlight={2,4-5,7,9-17} lineNumbers
+import React, { useEffect, useRef } from 'react';
+import { useField } from '@unform/core';
+
+const Input = ({ name, ...rest }) => {
+  const inputRef = useRef();
+
+  useEffect(() => {}, []);
+
+  return (
+    <input
+      name={name}
+      ref={inputRef}
+      type="text"
+      placeholder="Type your username"
+      {...rest}
+    />
+  );
+};
+
+export default Input;
+```
+
+In the above code we are importing `useField` from `@unform/core`. We also
+created an empty `useEffect` and passed a prop `name` to our input.
+
+> **Remember: when creating a form component, like this input, you always need to provide a ref.**
+
+Now let's declare our `useField` hook passing to it as a parameter our `name`,
+it will return some methods and variables.
+
+```jsx
+const { fieldName, defaultValue, registerField } = useField(name);
+```
+
+For this example, we have used:
+
+- `fieldName`: the input name;
+- `defaultValue`: the default value of our input (in case you provide a `initialData`);
+- `registerField`: the method that will be used to register a form field.
+
+Here's how we can use the `registerField` method inside our `useEffect`:
+
+```jsx
+useEffect(() => {
+  registerField({
+    name: fieldName,
+    getValue: ref => {
+      return ref.value;
+    },
+    ref: inputRef.current,
+  });
+}, [fieldName, registerField]);
+```
+
+It is a simple method that receives a:
+
+- `name`: the `fieldName` returned from `registerField` (forms that use `Scope` have a different value from the name you provide);
+- `getValue`: The method used to return the input value. In a simple input, we just need to return `ref.value`;
+- `ref`: Input ref.
+
+As mentioned, you are responsible for creating the UI. Here, we are just creating
+a simple input, but you could also add a label, a place to show a error message or anything
+you want. So let's continue the tutorial to use our recently created input. Start
+importing the `Form` component.
+
+```jsx
+import { Form } from '@unform/web';
+```
+
+Now you need to create a method to handle the form submit and also use our
+`Form` component, passing to it the submit method and a ref.
+
+```jsx lineNumbers
+import React, { useRef } from 'react';
+import { Form } from '@unform/web';
+
+const App = () => {
+  const formRef = useRef();
+
+  const handleFormSubmit = data => {
+    console.log(data);
+  };
+
+  return <Form ref={formRef} onSubmit={handleFormSubmit} />;
+};
+
+export default App;
+```
+
+Inside your form, import the `Input` and use it like:
+
+```jsx highlight={4,13-19} lineNumbers
+import React, { useRef } from 'react';
+import { Form } from '@unform/web';
+
+import Input from '...';
+
+const App = () => {
+  const formRef = useRef();
+
+  const handleFormSubmit = data => {
+    console.log(data);
+  };
+
+  return (
+    <Form ref={formRef} onSubmit={handleFormSubmit}>
+      <Input name="username" placeholder="Choose a username" />
+
+      <button type="submit">Save</button>
+    </Form>
+  );
+};
+
+export default App;
+```
+
+If you save the form, something like this will show on console:
+
+```js
+{
+  username: 'hey';
+}
+```

@@ -1,5 +1,6 @@
 ---
 title: Accessing form reference
+description: Learn to access a form reference using Unform
 ---
 
 Unform exposes a various helper functions through the form reference.
@@ -16,61 +17,17 @@ export default function MyForm() {
 
 ## Methods
 
-<table>
-  <thead>
-    <tr>
-      <th>Function</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>submitForm()</td>
-      <td>Trigger onSubmit function</td>
-    </tr>
-    <tr>
-      <td>reset(data?: object)</td>
-      <td>Reset (and maybe replace) all form data</td>
-    </tr>
-    <tr>
-      <td>getData()</td>
-      <td>Returns all form data</td>
-    </tr>
-    <tr>
-      <td>setData(data: object)</td>
-      <td>Set multiple fields data</td>
-    </tr>
-    <tr>
-      <td>getErrors()</td>
-      <td>Returns all field errors</td>
-    </tr>
-    <tr>
-      <td>setErrors(errors: object)</td>
-      <td>Set multiple field errors</td>
-    </tr>
-    <tr>
-      <td>clearField(fieldName: string)</td>
-      <td>Clear single field value</td>
-    </tr>
-    <tr>
-      <td>getFieldValue(fieldName: string)</td>
-      <td>Get single field value</td>
-    </tr>
-    <tr>
-      <td>setFieldValue(fieldName: string, value: string)</td>
-      <td>Set single field value</td>
-    </tr>
-    <tr>
-      <td>getFieldError(fieldName: string)</td>
-      <td>Get single field error</td>
-    </tr>
-    <tr>
-      <td>setFieldError(fieldName: string, error: string)</td>
-      <td>Set single field error</td>
-    </tr>
-    <tr>
-      <td>getFieldRef(fieldName: string)</td>
-      <td>Get single field reference</td>
-    </tr>
-  </tbody>
-</table>
+| Function                                        | Description                             |
+| ----------------------------------------------- | --------------------------------------- |
+| submitForm()                                    | Trigger onSubmit function               |
+| reset(data?: object)                            | Reset (and maybe replace) all form data |
+| getData()                                       | Returns all form data                   |
+| setData(data: object)                           | Set multiple fields data                |
+| getErrors()                                     | Returns all field errors                |
+| setErrors(errors: object)                       | Set multiple field errors               |
+| clearField(fieldName: string)                   | Clear single field value                |
+| getFieldValue(fieldName: string)                | Get single field value                  |
+| setFieldValue(fieldName: string, value: string) | Set single field value                  |
+| getFieldError(fieldName: string)                | Get single field error                  |
+| setFieldError(fieldName: string, error: string) | Set single field error                  |
+| getFieldRef(fieldName: string)                  | Get single field reference              |

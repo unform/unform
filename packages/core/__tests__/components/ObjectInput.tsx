@@ -1,20 +1,20 @@
-import React, { useEffect, useRef, memo } from 'react';
+import { useEffect, useRef } from 'react'
 
-import { useField } from '../../lib';
+import { useField } from '../../lib'
 
 interface InputProps {
-  name: string;
-  label?: string;
+  name: string
+  label?: string
 }
 
 interface InputValue {
-  id: string;
-  label: string;
+  id: string
+  label: string
 }
 
-function Input({ name, label, ...rest }: InputProps) {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const { fieldName, registerField, defaultValue, error } = useField(name);
+export function ObjectInput({ name, label, ...rest }: InputProps) {
+  const inputRef = useRef<HTMLInputElement>(null)
+  const { fieldName, registerField, defaultValue, error } = useField(name)
 
   useEffect(() => {
     registerField<InputValue>({
@@ -22,10 +22,10 @@ function Input({ name, label, ...rest }: InputProps) {
       ref: inputRef.current,
       path: 'value',
       setValue(ref: HTMLInputElement, value) {
-        ref.value = value.id;
+        ref.value = value.id
       },
-    });
-  }, [fieldName, registerField]);
+    })
+  }, [fieldName, registerField])
 
   return (
     <>
@@ -41,7 +41,5 @@ function Input({ name, label, ...rest }: InputProps) {
 
       {error && <span>{error}</span>}
     </>
-  );
+  )
 }
-
-export default memo(Input);
