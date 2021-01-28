@@ -11,7 +11,7 @@
 <div align="center">
 
 [![npm](https://img.shields.io/npm/v/@unform/core.svg?color=%237159c1)](https://www.npmjs.com/package/@unform/core)<space><space>
-[![Coverage Status](https://img.shields.io/coveralls/github/Rocketseat/unform.svg?color=%237159c1)](https://coveralls.io/github/Rocketseat/unform?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/unform/unform/badge.svg?branch=master&color=%237159c1)](https://coveralls.io/github/unform/unform?branch=master)
 
 </div>
 
@@ -29,7 +29,11 @@ Wanna test Unform before using it?
 - **[ReactJS playground](https://codesandbox.io/embed/agitated-tdd-uf177?autoresize=1&expanddevtools=1&fontsize=14&hidenavigation=1&theme=dark)**
 - **[React Native playground](https://snack.expo.io/@diego3g/1e9fb3)**
 
-*Not available with React Native Web or Expo Web, use the iOS/Android devices in Expo Snack*
+_Not available with React Native Web or Expo Web, use the iOS/Android devices in Expo Snack_
+
+## Roadmap
+
+If Unform currently doesn't have a certain feature you think it's awesome, be sure to check out the [roadmap](https://www.notion.so/Unform-public-roadmap-e4dff9e2053c4475b162cd19914eab02) to see if this is already planned for the future. Otherwise, we recommend you create an issue describing your enhancement request.
 
 ## Contributing
 

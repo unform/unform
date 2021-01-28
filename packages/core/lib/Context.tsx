@@ -1,7 +1,7 @@
 /* istanbul ignore file */
 
-import { createContext } from 'react';
+import { createContext } from 'react'
 
-import { UnformContext } from './types';
+import { UnformContext } from './types'
 
-export default createContext<UnformContext>({} as UnformContext);
+export const FormContext = createContext<UnformContext>({} as UnformContext)

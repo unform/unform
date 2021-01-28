@@ -1,28 +1,28 @@
-import path from 'path';
-import babel from 'rollup-plugin-babel';
-import commonjs from 'rollup-plugin-commonjs';
-import resolve from 'rollup-plugin-node-resolve';
-import { terser } from 'rollup-plugin-terser';
-import typescript from 'rollup-plugin-typescript2';
-import url from 'rollup-plugin-url';
+import path from 'path'
+import babel from 'rollup-plugin-babel'
+import commonjs from 'rollup-plugin-commonjs'
+import resolve from 'rollup-plugin-node-resolve'
+import { terser } from 'rollup-plugin-terser'
+import typescript from 'rollup-plugin-typescript2'
+import url from 'rollup-plugin-url'
 
-const PACKAGE_ROOT_PATH = process.cwd();
-const INPUT_FILE = path.join(PACKAGE_ROOT_PATH, 'lib/index.ts');
-const pkg = require(path.join(PACKAGE_ROOT_PATH, 'package.json'));
+const PACKAGE_ROOT_PATH = process.cwd()
+const INPUT_FILE = path.join(PACKAGE_ROOT_PATH, 'lib/index.ts')
+const pkg = require(path.join(PACKAGE_ROOT_PATH, 'package.json'))
 
 function makeExternalPredicate(externalArr) {
   if (!externalArr.length) {
-    return () => false;
+    return () => false
   }
-  const pattern = new RegExp(`^(${externalArr.join('|')})($|/)`);
-  return id => pattern.test(id);
+  const pattern = new RegExp(`^(${externalArr.join('|')})($|/)`)
+  return id => pattern.test(id)
 }
 
 function getExternal() {
-  const external = Object.keys(pkg.peerDependencies || {});
-  const allExternal = [...external, ...Object.keys(pkg.dependencies || {})];
+  const external = Object.keys(pkg.peerDependencies || {})
+  const allExternal = [...external, ...Object.keys(pkg.dependencies || {})]
 
-  return makeExternalPredicate(allExternal);
+  return makeExternalPredicate(allExternal)
 }
 
 export default {
@@ -61,4 +61,4 @@ export default {
     commonjs(),
     terser(),
   ],
-};
+}

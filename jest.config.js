@@ -16,4 +16,4 @@ module.exports = {
   moduleNameMapper: {
     '@unform/(.*)': '<rootDir>/packages/$1/lib',
   },
-};
+}

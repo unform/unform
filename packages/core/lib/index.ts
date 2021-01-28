@@ -1,20 +1,20 @@
 /**
  * Hooks
  */
-export { default as useField } from './useField';
+export * from './useField'
 
 /**
  * Main components
  */
-export { default as FormProvider } from './FormProvider';
-export { default as Scope } from './Scope';
+export * from './FormProvider'
+export * from './Scope'
 
 /**
  * Types
  */
-export * from './types';
+export * from './types'
 
 /**
  * Context
  */
-export { default as FormContext } from './Context';
+export * from './Context'
