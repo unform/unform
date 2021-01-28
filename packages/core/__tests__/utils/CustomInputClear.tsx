@@ -1,15 +1,15 @@
-import React, { InputHTMLAttributes, useEffect, useRef } from 'react';
+import { InputHTMLAttributes, useEffect, useRef } from 'react'
 
-import { useField } from '../../lib';
+import { useField } from '../../lib'
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
-  name: string;
-  label?: string;
+  name: string
+  label?: string
 }
 
-export default function Input({ name, label, ...rest }: Props) {
-  const ref = useRef<HTMLInputElement>(null);
-  const { fieldName, registerField, defaultValue, error } = useField(name);
+export function CustomInputClear({ name, label, ...rest }: Props) {
+  const ref = useRef<HTMLInputElement>(null)
+  const { fieldName, registerField, defaultValue, error } = useField(name)
 
   useEffect(() => {
     if (ref.current) {
@@ -18,11 +18,11 @@ export default function Input({ name, label, ...rest }: Props) {
         ref: ref.current,
         path: 'value',
         clearValue: (inputRef: HTMLInputElement) => {
-          inputRef.value = 'test';
+          inputRef.value = 'test'
         },
-      });
+      })
     }
-  }, [fieldName, registerField]);
+  }, [fieldName, registerField])
 
   return (
     <>
@@ -39,5 +39,5 @@ export default function Input({ name, label, ...rest }: Props) {
 
       {error && <span>{error}</span>}
     </>
-  );
+  )
 }

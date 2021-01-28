@@ -1,41 +1,40 @@
-import React, { useEffect, useRef, memo } from 'react';
-import { TextInput, TextInputProps, Text } from 'react-native';
+import { useEffect, useRef, memo } from 'react'
+import { TextInput, TextInputProps, Text } from 'react-native'
 
-import { useField } from '../../../core/lib';
+import { useField } from '../../../core/lib'
 
 interface Props {
-  name: string;
-  label?: string;
+  name: string
+  label?: string
 }
 
-type InputProps = TextInputProps & Props;
+type InputProps = TextInputProps & Props
+
+interface InputValueReference {
+  value: string
+}
 
 function Input({ name, label, multiline = false, ...rest }: InputProps) {
-  const inputRef: any = useRef(null);
+  const { fieldName, registerField, defaultValue, error } = useField(name)
 
-  const { fieldName, registerField, defaultValue, error } = useField(name);
-
-  useEffect(() => {
-    inputRef.current.value = defaultValue;
-  }, [defaultValue]);
+  const inputElementRef = useRef<any>(null)
+  const inputValueRef = useRef<InputValueReference>({ value: defaultValue })
 
   useEffect(() => {
-    registerField({
+    registerField<string>({
       name: fieldName,
-      ref: inputRef.current,
-      clearValue(ref: any) {
-        ref.value = '';
-        ref.clear();
+      ref: inputValueRef.current,
+      path: 'value',
+      setValue(ref, value: string) {
+        ref.value = value
+        inputElementRef.current.setNativeProps({ text: value })
       },
-      setValue(ref: any, value: string) {
-        ref.setNativeProps({ text: value });
-        inputRef.current.value = value;
+      clearValue(ref) {
+        ref.value = ''
+        inputElementRef.current.clear()
       },
-      getValue(ref: any) {
-        return ref.value;
-      },
-    });
-  }, [defaultValue, fieldName, registerField]);
+    })
+  }, [defaultValue, fieldName, registerField])
 
   const props = {
     ...rest,
@@ -43,25 +42,24 @@ function Input({ name, label, multiline = false, ...rest }: InputProps) {
     name: fieldName,
     defaultValue,
     multiline,
-  };
+  }
 
   return (
     <>
       {label && <Text>{label}</Text>}
 
       <TextInput
-        ref={inputRef}
-        onChangeText={value => {
-          if (inputRef.current) {
-            inputRef.current.value = value;
-          }
-        }}
         {...props}
+        ref={inputElementRef}
+        defaultValue={defaultValue}
+        onChangeText={value => {
+          inputValueRef.current.value = value
+        }}
       />
 
       {error && <Text>{error}</Text>}
     </>
-  );
+  )
 }
 
-export default memo(Input);
+export default memo(Input)
