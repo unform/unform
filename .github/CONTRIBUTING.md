@@ -211,7 +211,7 @@ We try to enforce these rules for the following reasons:
 
 Before submitting a pull request, please make sure the following is done:
 
-- [Fork](https://help.github.com/en/articles/fork-a-repo) the repository and create your branch from `master`.
+- [Fork](https://help.github.com/en/articles/fork-a-repo) the repository and create your branch from `main`.
   - Example: `feature/my-awesome-feature` or `fix/annoying-bug`;
 - Run `yarn` in the repository root;
 - If you’ve fixed a bug or added code that should be tested, **add tests**;
