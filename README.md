@@ -11,7 +11,7 @@
 <div align="center">
 
 [![npm](https://img.shields.io/npm/v/@unform/core.svg?color=%237159c1)](https://www.npmjs.com/package/@unform/core)<space><space>
-[![Coverage Status](https://coveralls.io/repos/github/unform/unform/badge.svg?branch=master&color=%237159c1)](https://coveralls.io/github/unform/unform?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/unform/unform/badge.svg?branch=main&color=%237159c1)](https://coveralls.io/github/unform/unform?branch=main)
 
 </div>
 
