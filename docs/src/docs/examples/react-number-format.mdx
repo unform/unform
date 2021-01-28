@@ -1,0 +1,74 @@
+---
+title: React Number Format
+---
+
+[React Number Format](https://www.npmjs.com/package/react-number-format) is a popular package that makes it easy to format inputted numbers, allowing to add prefixes, suffixes, decimal formatting and so on.
+
+> ⚠️ All examples below are using **TypeScript**, if you're not using it you can simply remove all type definitions as the `React.FC<Props>` from component definition.
+
+## Simple customizable number format
+
+```tsx lineNumbers=true
+import React, { useEffect, useRef } from 'react';
+import { useField } from '@unform/core';
+import NumberFormat, { NumberFormatProps } from 'react-number-format';
+
+interface IDecimalInputProps extends NumberFormatProps {
+  name: string;
+  prefix?: string;
+  suffix?: string;
+}
+
+const DecimalInput: React.FC<IDecimalInputProps> = ({
+  name,
+  prefix,
+  suffix,
+  ...rest
+}) => {
+  const inputRef = useRef(null);
+  const { fieldName, defaultValue, registerField } = useField(name);
+
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: inputRef.current,
+      getValue: (ref: any) => {
+        if (!ref || !ref.state || !ref.state.value) {
+          return '';
+        }
+
+        let value = ref.state.value;
+        if (prefix) {
+          value = value.replace(prefix, '');
+        }
+
+        if (suffix) {
+          value = value.replace(suffix, '');
+        }
+
+        return value;
+      },
+      setValue: (ref: any, value: any) => {
+        if (value) {
+          ref.state.value = parseFloat(value);
+          ref.state.numAsString = value;
+        }
+      },
+    });
+  }, [fieldName, registerField, prefix, suffix]);
+
+  return (
+    <NumberFormat
+      id={name}
+      ref={inputRef}
+      defaultValue={defaultValue}
+      isNumericString
+      prefix={prefix}
+      suffix={suffix}
+      {...rest}
+    />
+  );
+};
+
+export default DecimalInput;
+```
