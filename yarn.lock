@@ -2373,6 +2373,11 @@
     sudo-prompt "^9.0.0"
     wcwidth "^1.0.1"
 
+"@rocketseat/commitlint-config@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@rocketseat/commitlint-config/-/commitlint-config-0.0.2.tgz#6b3ba12ec2f44a476f52a0d81974d566a8147833"
+  integrity sha512-Bh24AD6IoI04plVLQuLqGG+V9iOEQYfSwhgW5WWYFuZWc6b1ExD/R3N9BvlnjtAEAnSgh7m0jO1AGcdNRYA1ag==
+
 "@rollup/pluginutils@^3.1.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@rollup/pluginutils/-/pluginutils-3.1.0.tgz#706b4524ee6dc8b103b3c995533e5ad680c02b9b"
@@ -3837,11 +3842,6 @@ commander@~2.13.0:
   version "2.13.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.13.0.tgz#6964bca67685df7c1f1430c584f07d7597885b9c"
   integrity sha512-MVuS359B+YzaWqjCL/c+22gfryv+mCBPHAv3zyVI2GN8EY6IRP8VwtasXn8jyyhvvq84R4ImN1OKRtcbIasjYA==
-
-commitlint-config-rocketseat@0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/commitlint-config-rocketseat/-/commitlint-config-rocketseat-0.0.1.tgz#3442dcf2956c1cc7a06859cafd97c50e5cebfe6b"
-  integrity sha512-klfAAQ4bWDrYvM1le9cbWLOidrGVhns+puYEMS/F7IO0KDBCXC09mczAm57oWClM5YFtkKSrvUGwz1oksfNQgQ==
 
 commondir@^1.0.1:
   version "1.0.1"
