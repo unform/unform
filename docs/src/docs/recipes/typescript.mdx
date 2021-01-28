@@ -43,26 +43,20 @@ const MyForm: React.FC = () => {
 export default MyForm;
 ```
 
-## Simple input
+## Simple input (ReactJS)
 
 When creating a simple HTML input or any other HTML element used for input source, remember to always extend the element props. In web you can always use the `JSX.IntrinsicElements['element']` to get the props adapted to JSX.
 
-In React Native you can import default component props directly from `react-native` package, for example:
-
-```jsx
-import { TextInputProps } from 'react-native';
-```
-
 Also, in web (ReactJS) remember to reference the global element inside `useRef` hook and **always** set the default value to `null`.
 
-```jsx lineNumbers
+```tsx lineNumbers=true
 import React, { useEffect, useRef } from 'react';
 import { useField } from '@unform/core';
 
 interface Props {
   name: string;
   label?: string;
-};
+}
 
 type InputProps = JSX.IntrinsicElements['input'] & Props;
 
@@ -76,12 +70,12 @@ const Input: React.FC<InputProps> = ({ name, label, ...rest }) => {
       name: fieldName,
       path: 'value',
       ref: inputRef.current,
-    })
+    });
   }, [fieldName, registerField]);
 
   return (
     <>
-      { label && <label htmlFor={fieldName}>{label}</label> }
+      {label && <label htmlFor={fieldName}>{label}</label>}
 
       <input
         id={fieldName}
@@ -90,7 +84,92 @@ const Input: React.FC<InputProps> = ({ name, label, ...rest }) => {
         {...rest}
       />
 
-      { error && <span>{error}</span> }
+      {error && <span>{error}</span>}
+    </>
+  );
+};
+
+export default Input;
+```
+
+## Simple input (React Native)
+
+Let's create an `InputProps` interface for the component.
+In addition, we will create an `InputReference` interface to use on the useRef hook.
+
+We can also tell `registerField` what kind of value this Entry will store
+
+```tsx lineNumbers=true
+import React, { useRef, useEffect, useCallback } from 'react';
+import { TextInput, TextInputProps, Text } from 'react-native';
+import { useField } from '@unform/core';
+
+interface InputProps extends TextInputProps {
+  name: string;
+  label: string;
+}
+
+interface InputReference extends TextInput {
+  value: string;
+}
+
+const Input: React.FC<InputProps> = ({
+  name,
+  label,
+  onChangeText,
+  ...rest
+}) => {
+  const inputRef = useRef<InputReference>(null);
+
+  const { fieldName, registerField, defaultValue = '', error } = useField(name);
+
+  useEffect(() => {
+    if (inputRef.current) inputRef.current.value = defaultValue;
+  }, [defaultValue]);
+
+  useEffect(() => {
+    registerField<string>({
+      name: fieldName,
+      ref: inputRef.current,
+      getValue() {
+        if (inputRef.current) return inputRef.current.value;
+
+        return '';
+      },
+      setValue(ref, value) {
+        if (inputRef.current) {
+          inputRef.current.setNativeProps({ text: value });
+          inputRef.current.value = value;
+        }
+      },
+      clearValue() {
+        if (inputRef.current) {
+          inputRef.current.setNativeProps({ text: '' });
+          inputRef.current.value = '';
+        }
+      },
+    });
+  }, [fieldName, registerField]);
+
+  const handleChangeText = useCallback(
+    (value: string) => {
+      if (inputRef.current) inputRef.current.value = value;
+
+      if (onChangeText) onChangeText(value);
+    },
+    [onChangeText],
+  );
+
+  return (
+    <>
+      {label && <Text>{label}</Text>}
+
+      <TextInput
+        ref={inputRef}
+        onChangeText={handleChangeText}
+        defaultValue={defaultValue}
+        {...rest}
+      />
     </>
   );
 };
