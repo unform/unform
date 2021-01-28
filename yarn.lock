@@ -4486,7 +4486,7 @@ domexception@^2.0.1:
   dependencies:
     webidl-conversions "^5.0.0"
 
-dot-object@2.1.4:
+dot-object@^2.1.2:
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/dot-object/-/dot-object-2.1.4.tgz#c6c54e9fca510b4d0ea4d65acf33726963843b5f"
   integrity sha512-7FXnyyCLFawNYJ+NhkqyP9Wd2yzuo+7n9pGiYpkmXCTYa8Ci2U0eUNDVg5OuO5Pm6aFXI2SWN8/N/w7SJWu1WA==
@@ -7857,7 +7857,7 @@ metro-react-native-babel-preset@0.59.0:
     "@babel/template" "^7.0.0"
     react-refresh "^0.4.0"
 
-metro-react-native-babel-preset@^0.65.0:
+metro-react-native-babel-preset@0.65.0:
   version "0.65.0"
   resolved "https://registry.yarnpkg.com/metro-react-native-babel-preset/-/metro-react-native-babel-preset-0.65.0.tgz#1b9a1b3932bb80670f2319be2f9cca7770bd2411"
   integrity sha512-mgs+Z5atqlxm4/+k7KZo38smLThUzcUm6fRMzwtBQBJFr757tw2gEykjXKMOP1gKjoDVd8KDoU6EAgNtX9l05w==
