@@ -9,15 +9,14 @@ The Unform API is almost identic between web and mobile, below you can see an ex
 
 In React Native we need to use `TextInput` provided by the `react-native` package.
 
-Also, to keep the field uncontrolled, that is, don't store it's value within a state, we need to track input changes and save its value inside the input reference.
+Also, to keep the field uncontrolled, that is, don't store it's value within a state, we need to use references's `value` to store the field value and use the `setNativeProps` to set the value within native renderer.
 
 ```jsx title=Input.js lineNumbers=true
-import React, { useEffect, useRef, useState } from 'react';
-
-import { TextInput } from 'react-native';
+import React, { useRef, useEffect, useCallback } from 'react';
+import { Text, TextInput } from 'react-native';
 import { useField } from '@unform/core';
 
-function Input({ name, ...rest }) {
+function Input({ name, label, onChangeText, ...rest }) {
   const inputRef = useRef(null);
 
   const { fieldName, registerField, defaultValue, error } = useField(name);
@@ -27,37 +26,53 @@ function Input({ name, ...rest }) {
   }, [defaultValue]);
 
   useEffect(() => {
+    if (inputRef.current) inputRef.current.value = defaultValue;
+  }, [defaultValue]);
+
+  useEffect(() => {
     registerField({
       name: fieldName,
       ref: inputRef.current,
-      path: 'value',
-      clearValue(ref) {
-        ref.value = '';
-        ref.clear();
+      getValue() {
+        if (inputRef.current) return inputRef.current.value;
+
+        return '';
       },
       setValue(ref, value) {
-        ref.setNativeProps({ text: value });
-        inputRef.current.value = value;
+        if (inputRef.current) {
+          inputRef.current.setNativeProps({ text: value });
+          inputRef.current.value = value;
+        }
       },
-      getValue(ref) {
-        return ref.value;
+      clearValue() {
+        if (inputRef.current) {
+          inputRef.current.setNativeProps({ text: '' });
+          inputRef.current.value = '';
+        }
       },
     });
   }, [fieldName, registerField]);
 
+  const handleChangeText = useCallback(
+    text => {
+      if (inputRef.current) inputRef.current.value = text;
+
+      if (onChangeText) onChangeText(text);
+    },
+    [onChangeText],
+  );
+
   return (
-    <TextInput
-      ref={inputRef}
-      keyboardAppearance="dark"
-      defaultValue={defaultValue}
-      placeholderTextColor="#666360"
-      onChangeText={value => {
-        if (inputRef.current) {
-          inputRef.current.value = value;
-        }
-      }}
-      {...rest}
-    />
+    <>
+      {label && <Text>{label}</Text>}
+
+      <TextInput
+        ref={inputRef}
+        onChangeText={handleChangeText}
+        defaultValue={defaultValue}
+        {...rest}
+      />
+    </>
   );
 }
 

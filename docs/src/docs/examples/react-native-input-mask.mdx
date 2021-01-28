@@ -9,42 +9,36 @@ description: Learn how to use React Native Input Mask with Unform
 
 Create a base Input component, as described in the [React Native](/guides/react-native) example.
 
-Here is a small difference: assuming that the data to be sent in the form should not be formatted, we will use a `rawValue` property that will inform us of the component's gross value.
+Here is a small difference: assuming that the data to be sent in the form should not be formatted, we will use a `rawText` property that will inform us of the component's gross value.
 
-Note that `getValue` can return the `rawValue` property, that is, if the form does not use an `InputMask`, the returned value will be the one stored in `inputRef`
+Note that `getValue` can return the `rawText` property, that is, if the form does not use an `InputMask`, the returned value will be the one stored in `inputRef`
 
 ```jsx lineNumbers=true
 import React, { useRef, useEffect, useCallback } from 'react';
 import { TextInput } from 'react-native';
 import { useField } from '@unform/core';
 
-function Input({ name, onChangeText, rawValue, ...rest }) {
-  // add handleOnChange
-  const handleOnChange = useCallback(
-    text => {
-      if (inputRef.current) inputRef.current.value = text;
-
-      if (onChangeText) onChangeText(text);
-    },
-    [onChangeText],
-  );
+function Input({ name, label, onChangeText, rawText, onInitialData, ...rest }) {
+  // this will cause the InputMask to be updated if the Form receives initial data
+  useEffect(() => {
+    if (onInitialData) onInitialData(defaultValue);
+  }, [defaultValue, onInitialData]);
 
   useEffect(() => {
     registerField({
       // modify getValue
-      getValue(ref) {
-        return rawValue || ref.value;
+      getValue() {
+        if (rawText) return rawText;
+
+        if (inputRef.current) return inputRef.current.value;
+
+        return '';
       },
     });
-  }, [fieldName, rawValue, registerField]);
+  }, [fieldName, rawText, registerField]);
 
   return (
-    <TextInput
-      ref={inputRef}
-      defaultValue={defaultValue}
-      onChangeText={handleOnChange}
-      {...rest}
-    />
+    {...}
   );
 }
 
@@ -54,40 +48,41 @@ export default Input;
 ## InputMask component
 
 Inform which component should be rendered using the `customTextInput` property, in this case `Input`.
-Add `rawValue` to the `Input` properties using `customTextInputProps`
+Add `rawText` to the `Input` properties using `customTextInputProps`
 
 ```jsx lineNumbers=true
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, forwardRef } from 'react';
 import { TextInputMask } from 'react-native-masked-text';
 
 import Input from '../Input';
 
-const InputMask = ({ type, ...rest }) => {
-  const [value, setValue] = useState('');
-  const [rawValue, setRawValue] = useState('');
+const InputMask = ({ type, ...rest }, inputRef) => {
+  const [text, setText] = useState('');
+  const [rawText, setRawText] = useState('');
 
-  const handleOnChangeText = useCallback((maskedValue, unmaskedValue) => {
-    setValue(maskedValue);
-    setRawValue(unmaskedValue);
+  const handleChangeText = useCallback((maskedText, unmaskedText) => {
+    setText(maskedText);
+    setRawText(unmaskedText);
   }, []);
 
   return (
     <TextInputMask
       type={type}
       includeRawValueInChangeText
-      value={value}
-      onChangeText={handleOnChangeText}
+      value={text}
+      onChangeText={handleChangeText}
       customTextInput={Input}
       customTextInputProps={{
-        rawValue,
-        ...rest,
+        ref: inputRef,
+        rawText,
+        onInitialData: setText,
       }}
       {...rest}
     />
   );
 };
 
-export default InputMask;
+export default forwardRef(InputMask);
 ```
 
 ## Example
@@ -107,8 +102,8 @@ const App = () => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignContent: 'center' }}>
       <Form ref={formRef} onSubmit={handleSubmit}>
-        <Input name="first_name" />
-        <InputMask type="cpf" name="cpf" keyboardType="numeric" />
+        <Input name="first_name" label="Name" />
+        <InputMask type="cpf" name="cpf" keyboardType="numeric" label="CPF" />
         <Button
           onPress={() => formRef.current.submitForm()}
           title="console.log"
