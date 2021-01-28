@@ -1,0 +1,28 @@
+{
+  "extends": [
+    "config:base",
+    ":disablePeerDependencies",
+    ":preserveSemverRanges"
+  ],
+  "includePaths": ["package.json", "packages/**", "docs/package.json"],
+  "dependencyDashboard": true,
+  "semanticCommits": true,
+  "stabilityDays": 3,
+  "prCreation": "not-pending",
+  "labels": ["type: dependencies"],
+  "packageRules": [
+    {
+      "groupName": "packages",
+      "paths": ["package.json", "packages/**"]
+    },
+    {
+      "groupName": "docs",
+      "paths": ["docs/package.json"]
+    },
+    {
+      "groupName": "types",
+      "packagePatterns": ["^@types/"],
+      "dependencyDashboardApproval": true
+    }
+  ]
+}

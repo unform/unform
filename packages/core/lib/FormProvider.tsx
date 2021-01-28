@@ -1,199 +1,199 @@
-import React, {
+import {
   forwardRef,
   FormEvent,
   useState,
   useRef,
   useCallback,
   useImperativeHandle,
-  RefForwardingComponent,
-} from 'react';
+  ForwardRefRenderFunction,
+} from 'react'
 
-import dot from 'dot-object';
+import dot from 'dot-object'
 
-import FormContext from './Context';
-import { UnformErrors, UnformField, FormHandles, FormProps } from './types';
+import { FormContext } from './Context'
+import { UnformErrors, UnformField, FormHandles, FormProps } from './types'
 
-const Form: RefForwardingComponent<FormHandles, FormProps> = (
+const Form: ForwardRefRenderFunction<FormHandles, FormProps> = (
   { initialData = {}, children, onSubmit },
-  formRef,
+  formRef
 ) => {
-  const [errors, setErrors] = useState<UnformErrors>({});
-  const fields = useRef<UnformField[]>([]);
+  const [errors, setErrors] = useState<UnformErrors>({})
+  const fields = useRef<UnformField[]>([])
 
   const getFieldByName = useCallback(
     fieldName =>
       fields.current.find(unformField => unformField.name === fieldName),
-    [],
-  );
+    []
+  )
 
   const getFieldValue = useCallback(({ ref, getValue, path }: UnformField) => {
     if (getValue) {
-      return getValue(ref);
+      return getValue(ref)
     }
 
-    return path && dot.pick(path, ref);
-  }, []);
+    return path && dot.pick(path, ref)
+  }, [])
 
   const setFieldValue = useCallback(
     ({ path, ref, setValue }: UnformField, value: any) => {
       if (setValue) {
-        return setValue(ref, value);
+        return setValue(ref, value)
       }
 
-      return path ? dot.set(path, value, ref as object) : false;
+      return path ? dot.set(path, value, ref as object) : false
     },
-    [],
-  );
+    []
+  )
 
   const clearFieldValue = useCallback(
     ({ clearValue, ref, path }: UnformField) => {
       if (clearValue) {
-        return clearValue(ref, '');
+        return clearValue(ref, '')
       }
 
-      return path && dot.set(path, '', ref as object);
+      return path && dot.set(path, '', ref as object)
     },
-    [],
-  );
+    []
+  )
 
   const reset = useCallback((data = {}) => {
     fields.current.forEach(({ name, ref, path, clearValue }) => {
       if (clearValue) {
-        return clearValue(ref, data[name]);
+        return clearValue(ref, data[name])
       }
 
-      return path && dot.set(path, data[name] ? data[name] : '', ref as object);
-    });
-  }, []);
+      return path && dot.set(path, data[name] ? data[name] : '', ref as object)
+    })
+  }, [])
 
   const setData = useCallback(
     (data: object) => {
-      const fieldValue = {};
+      const fieldValue = {}
 
       fields.current.forEach(field => {
-        fieldValue[field.name] = dot.pick(field.name, data);
-      });
+        fieldValue[field.name] = dot.pick(field.name, data)
+      })
 
       Object.entries(fieldValue).forEach(([fieldName, value]) => {
-        const field = getFieldByName(fieldName);
+        const field = getFieldByName(fieldName)
 
         if (field) {
-          setFieldValue(field, value);
+          setFieldValue(field, value)
         }
-      });
+      })
     },
-    [getFieldByName, setFieldValue],
-  );
+    [getFieldByName, setFieldValue]
+  )
 
   const setFormErrors = useCallback((formErrors: object) => {
-    const parsedErrors = dot.dot(formErrors);
+    const parsedErrors = dot.dot(formErrors)
 
-    setErrors(parsedErrors);
-  }, []);
+    setErrors(parsedErrors)
+  }, [])
 
   const parseFormData = useCallback(() => {
-    const data = {};
+    const data = {}
 
     fields.current.forEach(field => {
-      data[field.name] = getFieldValue(field);
-    });
+      data[field.name] = getFieldValue(field)
+    })
 
-    dot.object(data);
+    dot.object(data)
 
-    return data;
-  }, [getFieldValue]);
+    return data
+  }, [getFieldValue])
 
   const handleSubmit = useCallback(
     async (event?: FormEvent) => {
       if (event) {
-        event.preventDefault();
+        event.preventDefault()
       }
 
-      const data = parseFormData();
+      const data = parseFormData()
 
-      onSubmit(data, { reset }, event);
+      onSubmit(data, { reset }, event)
     },
-    [onSubmit, parseFormData, reset],
-  );
+    [onSubmit, parseFormData, reset]
+  )
 
   const registerField = useCallback((field: UnformField) => {
-    fields.current.push(field);
-  }, []);
+    fields.current.push(field)
+  }, [])
 
   const unregisterField = useCallback((fieldName: string) => {
     const fieldIndex = fields.current.findIndex(
-      field => field.name === fieldName,
-    );
+      field => field.name === fieldName
+    )
 
     if (fieldIndex > -1) {
-      fields.current.splice(fieldIndex, 1);
+      fields.current.splice(fieldIndex, 1)
     }
-  }, []);
+  }, [])
 
   const clearFieldError = useCallback((fieldName: string) => {
-    setErrors(state => ({ ...state, [fieldName]: undefined }));
-  }, []);
+    setErrors(state => ({ ...state, [fieldName]: undefined }))
+  }, [])
 
   useImperativeHandle<{}, FormHandles>(formRef, () => ({
     getFieldValue(fieldName) {
-      const field = getFieldByName(fieldName);
+      const field = getFieldByName(fieldName)
 
       if (!field) {
-        return false;
+        return false
       }
 
-      return getFieldValue(field);
+      return getFieldValue(field)
     },
     setFieldValue(fieldName, value) {
-      const field = getFieldByName(fieldName);
+      const field = getFieldByName(fieldName)
 
       if (!field) {
-        return false;
+        return false
       }
 
-      return setFieldValue(field, value);
+      return setFieldValue(field, value)
     },
     getFieldError(fieldName) {
-      return errors[fieldName];
+      return errors[fieldName]
     },
     setFieldError(fieldName, error) {
-      setErrors(state => ({ ...state, [fieldName]: error }));
+      setErrors(state => ({ ...state, [fieldName]: error }))
     },
     clearField(fieldName) {
-      const field = getFieldByName(fieldName);
+      const field = getFieldByName(fieldName)
 
       if (field) {
-        clearFieldValue(field);
+        clearFieldValue(field)
       }
     },
     getErrors() {
-      return errors;
+      return errors
     },
     setErrors(formErrors) {
-      return setFormErrors(formErrors);
+      return setFormErrors(formErrors)
     },
     getData() {
-      return parseFormData();
+      return parseFormData()
     },
     getFieldRef(fieldName) {
-      const field = getFieldByName(fieldName);
+      const field = getFieldByName(fieldName)
 
       if (!field) {
-        return false;
+        return false
       }
 
-      return field.ref;
+      return field.ref
     },
     setData(data) {
-      return setData(data);
+      return setData(data)
     },
     reset(data) {
-      return reset(data);
+      return reset(data)
     },
     submitForm() {
-      handleSubmit();
+      handleSubmit()
     },
-  }));
+  }))
 
   return (
     <FormContext.Provider
@@ -209,7 +209,7 @@ const Form: RefForwardingComponent<FormHandles, FormProps> = (
     >
       {children}
     </FormContext.Provider>
-  );
-};
+  )
+}
 
-export default forwardRef(Form);
+export const FormProvider = forwardRef(Form)

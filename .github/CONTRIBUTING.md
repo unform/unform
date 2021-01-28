@@ -78,24 +78,24 @@ The more feedback the better! We're always looking for more suggestions and opin
 
 This includes submitting an enhancement suggestion, including completely new features and minor improvements to existing functionality.
 
-The [`question`](https://github.com/Rocketseat/unform/labels/question)
+The [`question`](https://github.com/unform/unform/labels/type%3A%20question%20or%20discussion)
 and
-[`rfc`](https://github.com/Rocketseat/unform/labels/rfc)
+[`rfc`](https://github.com/unform/unform/labels/type%3A%20rfc)
 labels are a good place to find ongoing discussions.
 
 ### Code
 
 You can use issue labels to discover issues you could help out with:
 
-- [`bug` issues](https://github.com/Rocketseat/unform/labels/bug)
+- [`bug` issues](https://github.com/unform/unform/labels/kind%3A%20bug)
   are known bugs we'd like to fix;
-- [`enhancement` issues](https://github.com/Rocketseat/unform/labels/enhancement)
+- [`enhancement` issues](https://github.com/unform/unform/labels/type%3A%20feature%20request)
   are features we're open to include.
 
 The
-[`help wanted`](https://github.com/Rocketseat/unform/labels/help%20wanted)
+[`help wanted`](https://github.com/unform/unform/labels/help%20wanted)
 and
-[`good first issue`](https://github.com/Rocketseat/unform/labels/good%20first%20issue)
+[`good first issue`](https://github.com/unform/unform/labels/good%20first%20issue)
 labels are especially useful.
 
 When you see an issue that is already assigned, please check to see if there isn't someone working on it already (maybe try asking in the issue). This is to prevent unnecessary work for everyone involved.

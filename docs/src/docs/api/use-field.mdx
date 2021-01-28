@@ -1,0 +1,42 @@
+---
+title: 'useField'
+description: 'Unform API reference for useField'
+---
+
+`useField` is the main hook from Unform. To use it, you need to provide a name,
+passed as a parameter when declaring it on your functional component.
+
+```jsx
+import { useField } from '@unform/core';
+
+const { ... } = useField(name);
+```
+
+## Properties
+
+The following properties are returned from `useField`:
+
+```jsx
+const { ... } = useField(name);
+```
+
+| Prop                                      | Description                                                                                       |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| fieldName: string                         | A unique fieldname                                                                                |
+| registerField: (field: UnformField): void | The method used to register a field on Unform. See below for more information                     |
+| defaultValue: string                      | The default value of the field (will be populated based on [`initialData`](/guides/initial-data)) |
+| clearError: () => void                    | Cleans the error message                                                                          |
+| error: string                             | Returns the error message                                                                         |
+
+### registerField
+
+When registering a field, you can pass some properties to the `registerField` method.
+
+| Prop                                      | Description                                                                           | Required |
+| ----------------------------------------- | ------------------------------------------------------------------------------------- | -------- |
+| name: string                              | The field identifier. Always provide it with the `fieldName` returned from `useField` | Yes      |
+| ref                                       | Field ref. You can use the useRef hook from React                                     | Yes      |
+| setValue: (ref: any, value: T) => void    | The logic to set the field value. This will be saved on Unform state.                 | No       |
+| clearValue: (ref: any, value: T) => void  | Cleans the field value                                                                | No       |
+| getValue: (ref: any, newValue: T) => void | Can be used to transform a value before it is saved                                   | No       |
+| path: string => void                      | Path to getting the field value. If you don't provide a `getValue` it's required      | No       |
