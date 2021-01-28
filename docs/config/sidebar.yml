@@ -1,15 +1,18 @@
 # Sidebar navigation
 
-- label: 'Getting started'
+- label: 'Overview'
   link: '/'
-- label: 'Why Unform?'
-  link: '/why-unform'
-- label: 'FAQ'
-  link: '/faq'
-- label: Migration from 1.x
-  link: '/migration-guide'
-- label: 'Github'
-  link: 'https://github.com/Rocketseat/unform'
+- label: 'Installation'
+  link: '/installation'
+- label: 'Quick start'
+  link: '/quick-start'
+- label: 'API reference'
+  items:
+    - label: 'useField'
+      link: '/api/use-field'
+    - label: 'Scope'
+      link: '/api/scope'
+
 - label: Guides
   items:
     - label: 'Basic form'
@@ -31,19 +34,10 @@
     - label: 'Manual form submit'
       link: '/guides/manual-form-submit'
 
-- label: Playgrounds
-  items:
-    - label: 'ReactJS Live Demo'
-      link: 'https://codesandbox.io/embed/agitated-tdd-uf177?autoresize=1&expanddevtools=1&fontsize=14&hidenavigation=1&theme=dark'
-    - label: 'React Native Live Demo'
-      link: 'https://snack.expo.io/@diego3g/1e9fb3'
-
 - label: Recipes
   items:
     - label: 'Simple Input'
       link: '/recipes/simple-input'
-    - label: 'Creating your own inputs'
-      link: '/recipes/creating-your-own-inputs'
     - label: 'Accessing form ref'
       link: '/recipes/accessing-form-ref'
     - label: 'Accessing field ref'
@@ -61,6 +55,8 @@
   items:
     - label: 'File input'
       link: '/examples/file-input'
+    - label: 'Checkbox'
+      link: '/examples/checkbox'
     - label: 'React Select'
       link: '/examples/react-select'
     - label: 'React DatePicker'
@@ -71,3 +67,16 @@
       link: '/examples/react-input-mask'
     - label: 'React Native Input Mask'
       link: '/examples/react-native-input-mask'
+
+- label: More
+  items:
+    - label: Roadmap
+      link: '/roadmap'
+    - label: 'Migration guide'
+      link: '/migration-guide'
+    - label: 'Github'
+      link: 'https://github.com/unform/unform'
+    - label: 'React Demo'
+      link: 'https://codesandbox.io/embed/agitated-tdd-uf177?autoresize=1&expanddevtools=1&fontsize=14&hidenavigation=1&theme=dark'
+    - label: 'React Native Demo'
+      link: 'https://snack.expo.io/@diego3g/1e9fb3'

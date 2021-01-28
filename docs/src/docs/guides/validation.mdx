@@ -1,5 +1,6 @@
 ---
 title: Validation
+description: Learn to validate forms using Yup on Unform
 ---
 
 Unform **does not includes validation by default**, so you can choose the best library that fits for you.
@@ -54,8 +55,12 @@ export default function SignIn() {
       formRef.current.setErrors({});
 
       const schema = Yup.object().shape({
-        email: Yup.string().email().required(),
-        password: Yup.string().min(6).required(),
+        email: Yup.string()
+          .email()
+          .required(),
+        password: Yup.string()
+          .min(6)
+          .required(),
       });
 
       await schema.validate(data, {
@@ -81,7 +86,7 @@ export default function SignIn() {
     <Form ref={formRef} onSubmit={handleSubmit}>
       ...
     </Form>
-  )
+  );
 }
 ```
 

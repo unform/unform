@@ -1,14 +1,14 @@
-import React, { useContext, ReactNode } from 'react';
+import { useContext, ReactNode } from 'react'
 
-import FormContext from './Context';
+import { FormContext } from './Context'
 
 export interface ScopeProps {
-  path: string;
-  children: ReactNode;
+  path: string
+  children: ReactNode
 }
 
-export default function Scope({ path, children }: ScopeProps) {
-  const { scopePath, ...form } = useContext(FormContext);
+export function Scope({ path, children }: ScopeProps) {
+  const { scopePath, ...form } = useContext(FormContext)
 
   return (
     <FormContext.Provider
@@ -19,5 +19,5 @@ export default function Scope({ path, children }: ScopeProps) {
     >
       {children}
     </FormContext.Provider>
-  );
+  )
 }

@@ -1,15 +1,10 @@
-import React, { RefForwardingComponent, forwardRef } from 'react';
+import { ForwardRefRenderFunction, forwardRef } from 'react'
 
-import {
-  FormProvider,
-  FormContext,
-  FormHandles,
-  FormProps,
-} from '@unform/core';
+import { FormProvider, FormContext, FormHandles, FormProps } from '@unform/core'
 
-const Form: RefForwardingComponent<FormHandles, FormProps> = (
+const Form: ForwardRefRenderFunction<FormHandles, FormProps> = (
   { initialData = {}, children, onSubmit, ...rest },
-  formRef,
+  formRef
 ) => {
   return (
     <FormProvider ref={formRef} initialData={initialData} onSubmit={onSubmit}>
@@ -21,7 +16,7 @@ const Form: RefForwardingComponent<FormHandles, FormProps> = (
         )}
       </FormContext.Consumer>
     </FormProvider>
-  );
-};
+  )
+}
 
-export default forwardRef(Form);
+export default forwardRef(Form)
