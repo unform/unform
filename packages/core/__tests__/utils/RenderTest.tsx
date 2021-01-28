@@ -1,17 +1,17 @@
-import React from 'react';
+import { ReactNode } from 'react'
 
-import { render as rtlRender } from '@testing-library/react';
+import { render as rtlRender } from '@testing-library/react'
 
-import { Form } from '../../../web/lib';
+import { Form } from '../../../web/lib'
 
-export default function RenderTest(
-  children: React.ReactNode,
-  props: object = {},
+export function render(
+  children: ReactNode,
+  props: Record<string, unknown> = {}
 ) {
-  const mockFunction = jest.fn();
+  const mockFunction = jest.fn()
   return rtlRender(
     <Form data-testid="form" onSubmit={mockFunction} {...props}>
       {children}
-    </Form>,
-  );
+    </Form>
+  )
 }
