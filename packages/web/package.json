@@ -26,10 +26,12 @@
   "bugs": {
     "url": "https://github.com/unform/unform/issues"
   },
+  "dependencies": {
+    "@unform/core": "^2.1.3"
+  },
   "peerDependencies": {
-    "@unform/core": "*",
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0"
+    "react": "^16.8.0 || ^17.0.0",
+    "react-dom": "^16.8.0 || ^17.0.0"
   },
   "gitHead": "cbe4cc8ef5cb45ce9b441a2bcb889911c48f2dd7"
 }
