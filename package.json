@@ -7,6 +7,14 @@
     ]
   },
   "license": "MIT",
+  "homepage": "https://github.com/unform/unform#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unform/unform.git"
+  },
+  "bugs": {
+    "url": "https://github.com/unform/unform/issues"
+  },
   "scripts": {
     "prebuild": "lerna exec --parallel -- rimraf dist typings",
     "build": "lerna exec --parallel -- rollup -c ../../rollup.config.js",
