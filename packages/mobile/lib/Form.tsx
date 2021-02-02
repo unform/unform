@@ -4,7 +4,7 @@ import { View, ViewProps } from 'react-native'
 import { FormProvider, FormHandles, SubmitHandler } from '@unform/core'
 
 export interface FormProps extends ViewProps {
-  initialData?: Record<string, unknown>
+  initialData?: Record<string, any>
   children: ReactNode
   onSubmit: SubmitHandler
 }
