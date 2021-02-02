@@ -14,7 +14,7 @@ import Input from './components/Input'
 interface UnformProps {
   onSubmit(): void
   children?: ReactNode
-  initialData?: Record<string, unknown>
+  initialData?: Record<string, any>
 }
 
 const UnformRoot: ForwardRefRenderFunction<FormHandles, UnformProps> = (
