@@ -7,6 +7,7 @@
   "includePaths": ["package.json", "packages/**", "docs/package.json"],
   "dependencyDashboard": true,
   "semanticCommits": true,
+  "commitMessageAction": "Update",
   "stabilityDays": 3,
   "prCreation": "not-pending",
   "labels": ["type: dependencies"],
