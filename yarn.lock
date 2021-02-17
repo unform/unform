@@ -2373,10 +2373,10 @@
     sudo-prompt "^9.0.0"
     wcwidth "^1.0.1"
 
-"@rocketseat/commitlint-config@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@rocketseat/commitlint-config/-/commitlint-config-0.0.2.tgz#6b3ba12ec2f44a476f52a0d81974d566a8147833"
-  integrity sha512-Bh24AD6IoI04plVLQuLqGG+V9iOEQYfSwhgW5WWYFuZWc6b1ExD/R3N9BvlnjtAEAnSgh7m0jO1AGcdNRYA1ag==
+"@rocketseat/commitlint-config@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@rocketseat/commitlint-config/-/commitlint-config-0.0.3.tgz#821aeb58426f1c85fe175002d1164cc87ab1dd5b"
+  integrity sha512-X8so6dbZQ8fLDj4cShLB9zyE7IRBDZ0RvbnvGqTKepxckdltbPBCTHYFEYTZ7sfBg2uINAOn5BQEHodh9Rad3g==
 
 "@rollup/pluginutils@^3.1.0":
   version "3.1.0"
