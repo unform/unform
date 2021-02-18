@@ -24,7 +24,8 @@
     "tsc": "tsc --skipLibCheck",
     "prepublishOnly": "npm run test && npm run build",
     "publish:canary": "lerna version prerelease --no-changelog --preid next",
-    "publish:stable": "lerna version --no-changelog"
+    "publish:stable": "lerna version --no-changelog",
+    "postinstall": "husky install"
   },
   "devDependencies": {
     "@babel/core": "7.12.10",
