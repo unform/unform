@@ -1,6 +1,6 @@
 {
   "name": "@unform/mobile",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "Unform React Native implementation",
   "author": "Diego Fernandes <diego.schell.f@gmail.com>",
   "homepage": "https://github.com/unform/unform#readme",
@@ -27,7 +27,7 @@
     "url": "https://github.com/unform/unform/issues"
   },
   "dependencies": {
-    "@unform/core": "2.1.5"
+    "@unform/core": "2.1.6"
   },
   "devDependencies": {
     "@testing-library/react-native": "7.1.0",
