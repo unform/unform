@@ -68,7 +68,12 @@ function Input({ name, ...rest }) {
     registerField({
       name: fieldName,
       ref: inputRef.current,
-      path: 'value',
+      getValue: (ref) => {
+        return ref.value;
+      },
+      clearValue: (ref) => {
+        ref.value = "";
+      }
     });
   }, [fieldName, registerField]);
 

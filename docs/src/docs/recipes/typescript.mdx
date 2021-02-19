@@ -68,8 +68,13 @@ const Input: React.FC<InputProps> = ({ name, label, ...rest }) => {
   useEffect(() => {
     registerField({
       name: fieldName,
-      path: 'value',
       ref: inputRef.current,
+      getValue: (ref) => {
+        return ref.value;
+      },
+      clearValue: (ref) => {
+        ref.value = "";
+      }
     });
   }, [fieldName, registerField]);
 
