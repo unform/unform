@@ -1,6 +1,6 @@
 {
   "name": "@unform/web",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "Unform Web support",
   "author": "Diego Fernandes <diego.schell.f@gmail.com>",
   "homepage": "https://github.com/unform/unform#readme",
@@ -27,11 +27,11 @@
     "url": "https://github.com/unform/unform/issues"
   },
   "dependencies": {
-    "@unform/core": "2.1.5"
+    "@unform/core": "2.1.6"
   },
   "peerDependencies": {
-    "react": "^16.8.0 || ^17.0.0",
-    "react-dom": "^16.8.0 || ^17.0.0"
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
   },
   "gitHead": "cbe4cc8ef5cb45ce9b441a2bcb889911c48f2dd7"
 }
