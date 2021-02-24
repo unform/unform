@@ -26,7 +26,7 @@ interface FormData {
   email: string
 }
 
-const MyForm: React.FC = () => {
+export default function MyForm() {
   const formRef = useRef<FormHandles>(null)
 
   const handleSubmit: SubmitHandler<FormData> = data => {
@@ -40,8 +40,6 @@ const MyForm: React.FC = () => {
     </Form>
   )
 }
-
-export default MyForm
 ```
 
 ## Simple input (ReactJS)
@@ -64,7 +62,7 @@ interface Props {
 
 type InputProps = JSX.IntrinsicElements['input'] & Props
 
-const Input: React.FC<InputProps> = ({ name, label, ...rest }) => {
+export default function Input({ name, label, ...rest }: InputProps) {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const { fieldName, defaultValue, registerField, error } = useField(name)
@@ -100,8 +98,6 @@ const Input: React.FC<InputProps> = ({ name, label, ...rest }) => {
     </>
   )
 }
-
-export default Input
 ```
 
 ## Simple input (React Native)
@@ -125,12 +121,12 @@ interface InputReference extends TextInput {
   value: string
 }
 
-const Input: React.FC<InputProps> = ({
+export default function Input({
   name,
   label,
   onChangeText,
   ...rest
-}) => {
+}: InputProps) {
   const inputRef = useRef<InputReference>(null)
 
   const { fieldName, registerField, defaultValue = '', error } = useField(name)
@@ -185,6 +181,4 @@ const Input: React.FC<InputProps> = ({
     </>
   )
 }
-
-export default Input
 ```

@@ -2,7 +2,7 @@
 title: Radio
 ---
 
-> ⚠️ All examples below are using **TypeScript**. If you're not using it, you can remove all type definitions as the `React.FC<Props>` from the component definition.
+> ⚠️ All examples below are using **TypeScript**. If you're not using it, you can remove all type definitions from the component definition.
 
 [Click here](https://codesandbox.io/embed/unform-web-radio-example-er0cn?autoresize=1&expanddevtools=1&fontsize=14&hidenavigation=1&theme=dark) to access a Radio Input Live Demo.
 
@@ -21,7 +21,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   }[];
 }
 
-const RadioInput: React.FC<Props> = ({ name, options, ...rest }) => {
+export default function RadioInput({ name, options, ...rest }: Props) {
   const inputRefs = useRef<HTMLInputElement[]>([]);
   const { fieldName, registerField, defaultValue = '' } = useField(name);
 
@@ -62,14 +62,12 @@ const RadioInput: React.FC<Props> = ({ name, options, ...rest }) => {
     </>
   );
 };
-
-export default RadioInput;
 ```
 
 ## Usage example
 
 ```tsx lineNumbers=true
-const App: React.FC = () => {
+export default function App() {
   const radioOptions = [
     { id: 'rocketseat', value: 'rocketseat', label: 'Rocketseat' },
     { id: 'eliasgcf', value: 'eliasgcf', label: 'EliasGcf' },
@@ -91,6 +89,4 @@ const App: React.FC = () => {
     </Form>
   );
 };
-
-export default App;
 ```
