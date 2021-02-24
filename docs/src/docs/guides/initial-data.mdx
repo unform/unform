@@ -3,7 +3,8 @@ title: Initial data
 description: Providing initial data on Unform
 ---
 
-To provide custom initial data to inputs you can provide an `initialData` prop to `<Form />`:
+To provide initial custom data to inputs, you can provide an `initialData` prop 
+to the `Form` component:
 
 ```jsx lineNumbers=true
 export default function MyForm() {
@@ -17,7 +18,9 @@ export default function MyForm() {
 
 ## Set initial data asynchronously
 
-As, most of the times, Unform uses `defaultValue` prop of inputs to set the initial data, when you get the data from an API request or an asynchronous call, the `initialData` may not work, as the `defaultValue` don't reflect changes.
+Most of the time, Unform uses the `defaultValue` prop of inputs to set the 
+initial data. When you get the data from an API request or an asynchronous call, 
+the `initialData` may not work, as the `defaultValue` doesn't reflect changes.
 
 ```jsx lineNumbers=true
 export default function MyForm() {
@@ -37,4 +40,5 @@ export default function MyForm() {
 }
 ```
 
-The `setData` function exposed by Unform API will replace input data based on the propery name provided in the object received as parameter.
+The `setData` function exposed by Unform API will replace input data based on 
+the property name provided in the object received as a parameter.

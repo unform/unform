@@ -3,15 +3,15 @@ title: Accessing form reference
 description: Learn to access a form reference using Unform
 ---
 
-Unform exposes a various helper functions through the form reference.
+Unform exposes various helper functions through the form ref.
 
 ```jsx lineNumbers=true
 export default function MyForm() {
-  const formRef = useRef(null);
+  const formRef = useRef(null)
 
   // Use formRef.current to access all methods
 
-  return <Form ref={formRef}>...</Form>;
+  return <Form ref={formRef}>...</Form>
 }
 ```
 
