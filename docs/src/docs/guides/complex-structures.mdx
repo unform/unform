@@ -3,9 +3,11 @@ title: Complex structures
 description: Learn to create complex form structures using Unform
 ---
 
-Most of the time, the form structure is based on how data is received or restored from the back-end including relationships and complex data structures.
+Most of the time, the form structure is based on how data is received or 
+restored from the back-end, including relationships and complex data structures.
 
-With Unform you can use the dot notation inside input name to nest structures like objects or arrays.
+While using Unform, you can use the dot notation inside the input name to nest 
+structures like objects or arrays.
 
 ```jsx
 <Input name="author.name" /> // { author: { name: 'Diego' } }
@@ -13,7 +15,7 @@ With Unform you can use the dot notation inside input name to nest structures li
 <Input name="some.complex[0].data[0].structure" /> // You already got it
 ```
 
-You can use the `Scope` component to easily create children structures:
+To do so, use the `Scope` component to create children structures easily:
 
 ```jsx lineNumbers=true
 import { Form, Scope } from '@unform/core';

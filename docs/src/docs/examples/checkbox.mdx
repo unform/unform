@@ -3,7 +3,7 @@ title: Checkbox
 description: How to create a Checkbox with Unform
 ---
 
-> ⚠️ All examples below are using **TypeScript**, if you're not using it you can simply remove all type definitions as the `React.FC<Props>` from component definition.
+> ⚠️ All examples below are using **TypeScript**. If you're not using it, you can remove all type definitions from the component definition.
 
 ## Checkbox input component
 
@@ -20,7 +20,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   }[];
 }
 
-const CheckboxInput: React.FC<Props> = ({ name, options, ...rest }) => {
+export default function CheckboxInput({ name, options, ...rest }: Props) {
   const inputRefs = useRef<HTMLInputElement[]>([]);
   const { fieldName, registerField, defaultValue = [] } = useField(name);
 
@@ -66,8 +66,6 @@ const CheckboxInput: React.FC<Props> = ({ name, options, ...rest }) => {
     </div>
   );
 };
-
-export default CheckboxInput;
 ```
 
 ## Usage example
@@ -85,7 +83,7 @@ interface CheckboxOption {
   label: string;
 }
 
-const CheckboxForm: React.FC = () => {
+export default function CheckboxForm() {
   const formRef = useRef<FormHandles>(null);
 
   const checkboxOptions: CheckboxOption[] = [
@@ -113,6 +111,4 @@ const CheckboxForm: React.FC = () => {
     </Form>
   );
 };
-
-export default CheckboxForm;
 ```

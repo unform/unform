@@ -5,7 +5,7 @@ description: Learn how to use React Input Mask with Unform
 
 [React Input Mask](https://github.com/sanniassin/react-input-mask) offers an easy way to add masks to inputs.
 
-> ⚠️ All examples below are using **TypeScript**, if you're not using it you can simply remove all type definitions as the `React.FC<Props>` from component definition.
+> ⚠️ All examples below are using **TypeScript**. If you're not using it, you can remove all type definitions from the component definition.
 
 ## Example
 
@@ -19,7 +19,7 @@ interface Props extends InputProps {
   name: string;
 }
 
-const InputMask: React.FC<Props> = ({ name, ...rest }) => {
+export default function InputMask({ name, ...rest }: Props) {
   const inputRef = useRef(null);
   const { fieldName, registerField, defaultValue, error } = useField(name);
 
@@ -41,6 +41,4 @@ const InputMask: React.FC<Props> = ({ name, ...rest }) => {
     <ReactInputMask ref={inputRef} defaultValue={defaultValue} {...rest} />
   );
 };
-
-export default InputMask;
 ```

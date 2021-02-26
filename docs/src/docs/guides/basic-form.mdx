@@ -3,44 +3,54 @@ title: Basic form
 description: Creating a basic form using Unform
 ---
 
-Let's suppose you're creating a sign in form with two fields, `email` and `password`.
+Let's suppose you're creating a sign-in form with two fields, `email` and
+`password`.
 
-The first step after installing Unform is creating your custom Input component that will be used for every input in your application.
+The first step after installing Unform is creating your custom Input component
+that you will use for every input in your application.
 
 ```jsx title=components/Input.js lineNumbers=true
-import React, { useEffect, useRef } from 'react';
-import { useField } from '@unform/core';
+import React, { useEffect, useRef } from 'react'
+import { useField } from '@unform/core'
 
 export default function Input({ name, ...rest }) {
-  const inputRef = useRef(null);
-  const { fieldName, defaultValue, registerField, error } = useField(name);
+  const inputRef = useRef(null)
+  const { fieldName, defaultValue, registerField, error } = useField(name)
 
   useEffect(() => {
     registerField({
       name: fieldName,
-      ref: inputRef.current,
-      path: 'value',
-    });
-  }, [fieldName, registerField]);
+      ref: inputRef,
+      getValue: ref => {
+        return ref.current.value
+      },
+      setValue: (ref, value) => {
+        ref.current.value = value
+      },
+      clearValue: ref => {
+        ref.current.value = ''
+      },
+    })
+  }, [fieldName, registerField])
 
-  return <input ref={inputRef} defaultValue={defaultValue} {...rest} />;
+  return <input ref={inputRef} defaultValue={defaultValue} {...rest} />
 }
 ```
 
-In the above example, we create an input component using the `useField` hook exposed by Unform.
-
-We also use the `useRef` hook from React so Unform can access the input reference directly to get/set the input value.
+In the above example, we created an input component using the `useField` hook
+exposed by Unform. We also use the `useRef` hook from React so Unform can access
+the input reference directly to get/set the input value.
 
 The next step is creating our form:
 
 ```jsx title=SignIn.js lineNumbers=true
-import React from 'react';
-import { Form } from '@unform/web';
-import Input from './components/Input';
+import React from 'react'
+import { Form } from '@unform/web'
+import Input from './components/Input'
 
 export default function SignIn() {
   function handleSubmit(data) {
-    console.log(data);
+    console.log(data)
     // { email: 'test@example.com', password: '123456' }
   }
 
@@ -51,33 +61,41 @@ export default function SignIn() {
 
       <button type="submit">Sign in</button>
     </Form>
-  );
+  )
 }
 ```
 
-If you're using React Native, proceed to [React Native guide](/guides/react-native).
+If you're using React Native, proceed to the [React Native guide](/guides/react-native).
 
 ## Live example
 
 ```jsx live=true
 function Input({ name, ...rest }) {
-  const inputRef = React.useRef(null);
-  const { fieldName, defaultValue, registerField, error } = useField(name);
+  const inputRef = React.useRef(null)
+  const { fieldName, defaultValue, registerField, error } = useField(name)
 
   React.useEffect(() => {
     registerField({
       name: fieldName,
-      ref: inputRef.current,
-      path: 'value',
-    });
-  }, [fieldName, registerField]);
+      ref: inputRef,
+      getValue: ref => {
+        return ref.current.value
+      },
+      setValue: (ref, value) => {
+        ref.current.value = value
+      },
+      clearValue: ref => {
+        ref.current.value = ''
+      },
+    })
+  }, [fieldName, registerField])
 
-  return <input ref={inputRef} defaultValue={defaultValue} {...rest} />;
+  return <input ref={inputRef} defaultValue={defaultValue} {...rest} />
 }
 
 function SignIn() {
   function handleSubmit(data) {
-    alert(JSON.stringify(data));
+    alert(JSON.stringify(data))
     // { email: 'test@example.com', password: '123456' }
   }
 
@@ -88,12 +106,12 @@ function SignIn() {
 
       <button type="submit">Sign in</button>
     </Form>
-  );
+  )
 }
 
 render(
   <>
     <SignIn />
-  </>,
-);
+  </>
+)
 ```

@@ -3,75 +3,85 @@ title: Usage with TypeScript
 description: Learn how can you use Unform with TypeScript
 ---
 
-Unform exposes all type definitions from within it's packages, so it's not necessary to install `@types` dependencies.
+Unform exposes all type definitions from within its packages, so it's unnecessary
+to install `@types` dependencies.
 
 ## Form with TypeScript
 
 When creating a form component using Unform and TypeScript, there are two main points to remember:
 
-- The `onSubmit` function can be typed using `SubmitHandler<FormData>` where `FormData` is the format of data inputted by user;
-- If you're using `useRef` to access form reference, remember to add `FormHandles` as type parameter to it;
+- The `onSubmit` function can be typed using `SubmitHandler<FormData>` where `FormData` is the format of data inputted by the user;
+- If you're using `useRef` to access form reference, remember to add `FormHandles` as a type parameter to it;
 
 <br />
 
 ```tsx lineNumbers=true
-import React, { useRef } from 'react';
-import { SubmitHandler, FormHandles } from '@unform/core';
-import { Form } from '@unform/web';
-import Input from './components/Input';
+import React, { useRef } from 'react'
+import { SubmitHandler, FormHandles } from '@unform/core'
+import { Form } from '@unform/web'
+import Input from './components/Input'
 
 interface FormData {
-  name: string;
-  email: string;
+  name: string
+  email: string
 }
 
-const MyForm: React.FC = () => {
-  const formRef = useRef<FormHandles>(null);
+export default function MyForm() {
+  const formRef = useRef<FormHandles>(null)
 
   const handleSubmit: SubmitHandler<FormData> = data => {
-    console.log(formRef);
-  };
+    console.log(formRef)
+  }
 
   return (
     <Form ref={formRef} onSubmit={handleSubmit}>
       <Input name="name" />
       <Input name="email" />
     </Form>
-  );
-};
-
-export default MyForm;
+  )
+}
 ```
 
 ## Simple input (ReactJS)
 
-When creating a simple HTML input or any other HTML element used for input source, remember to always extend the element props. In web you can always use the `JSX.IntrinsicElements['element']` to get the props adapted to JSX.
+When creating a simple HTML input or any other HTML element used for the input
+source, remember always to extend the element props. On the web, you can still
+use the `JSX.IntrinsicElements['element']` to get the props adapted to JSX.
 
-Also, in web (ReactJS) remember to reference the global element inside `useRef` hook and **always** set the default value to `null`.
+Also, on the web (ReactJS), reference the global element inside `useRef` hook
+and **always** set the default value to `null`.
 
 ```tsx lineNumbers=true
-import React, { useEffect, useRef } from 'react';
-import { useField } from '@unform/core';
+import React, { useEffect, useRef } from 'react'
+import { useField } from '@unform/core'
 
 interface Props {
-  name: string;
-  label?: string;
+  name: string
+  label?: string
 }
 
-type InputProps = JSX.IntrinsicElements['input'] & Props;
+type InputProps = JSX.IntrinsicElements['input'] & Props
 
-const Input: React.FC<InputProps> = ({ name, label, ...rest }) => {
-  const inputRef = useRef<HTMLInputElement>(null);
+export default function Input({ name, label, ...rest }: InputProps) {
+  const inputRef = useRef<HTMLInputElement>(null)
 
-  const { fieldName, defaultValue, registerField, error } = useField(name);
+  const { fieldName, defaultValue, registerField, error } = useField(name)
 
   useEffect(() => {
     registerField({
       name: fieldName,
-      path: 'value',
-      ref: inputRef.current,
-    });
-  }, [fieldName, registerField]);
+      ref: inputRef,
+      getValue: ref => {
+        return ref.current.value
+      },
+      setValue: (ref, value) => {
+        ref.current.value = value
+      },
+      clearValue: ref => {
+        ref.current.value = ''
+      },
+    })
+  }, [fieldName, registerField])
 
   return (
     <>
@@ -86,79 +96,77 @@ const Input: React.FC<InputProps> = ({ name, label, ...rest }) => {
 
       {error && <span>{error}</span>}
     </>
-  );
-};
-
-export default Input;
+  )
+}
 ```
 
 ## Simple input (React Native)
 
-Let's create an `InputProps` interface for the component.
-In addition, we will create an `InputReference` interface to use on the useRef hook.
+Let's create an `InputProps` interface for the component. Also, we will create
+an `InputReference` interface to use on the useRef hook.
 
-We can also tell `registerField` what kind of value this Entry will store
+We can also tell `registerField` what kind of value this Entry will store.
 
 ```tsx lineNumbers=true
-import React, { useRef, useEffect, useCallback } from 'react';
-import { TextInput, TextInputProps, Text } from 'react-native';
-import { useField } from '@unform/core';
+import React, { useRef, useEffect, useCallback } from 'react'
+import { TextInput, TextInputProps, Text } from 'react-native'
+import { useField } from '@unform/core'
 
 interface InputProps extends TextInputProps {
-  name: string;
-  label: string;
+  name: string
+  label: string
 }
 
 interface InputReference extends TextInput {
-  value: string;
+  value: string
 }
 
-const Input: React.FC<InputProps> = ({
+export default function Input({
   name,
   label,
   onChangeText,
   ...rest
-}) => {
-  const inputRef = useRef<InputReference>(null);
+}: InputProps) {
+  const inputRef = useRef<InputReference>(null)
 
-  const { fieldName, registerField, defaultValue = '', error } = useField(name);
+  const { fieldName, registerField, defaultValue = '', error } = useField(name)
 
   useEffect(() => {
-    if (inputRef.current) inputRef.current.value = defaultValue;
-  }, [defaultValue]);
+    if (inputRef.current) inputRef.current.value = defaultValue
+  }, [defaultValue])
 
   useEffect(() => {
     registerField<string>({
       name: fieldName,
       ref: inputRef.current,
       getValue() {
-        if (inputRef.current) return inputRef.current.value;
+        if (inputRef.current) return inputRef.current.value
 
-        return '';
+        return ''
       },
       setValue(ref, value) {
         if (inputRef.current) {
-          inputRef.current.setNativeProps({ text: value });
-          inputRef.current.value = value;
+          inputRef.current.setNativeProps({ text: value })
+          inputRef.current.value = value
         }
       },
       clearValue() {
         if (inputRef.current) {
-          inputRef.current.setNativeProps({ text: '' });
-          inputRef.current.value = '';
+          inputRef.current.setNativeProps({ text: '' })
+          inputRef.current.value = ''
         }
       },
-    });
-  }, [fieldName, registerField]);
+    })
+  }, [fieldName, registerField])
 
   const handleChangeText = useCallback(
     (value: string) => {
-      if (inputRef.current) inputRef.current.value = value;
+      if (inputRef.current) inputRef.current.value = value
 
-      if (onChangeText) onChangeText(value);
+      if (onChangeText) onChangeText(value)
     },
-    [onChangeText],
-  );
+    [onChangeText]
+  )
 
   return (
     <>
@@ -171,8 +179,6 @@ const Input: React.FC<InputProps> = ({
         {...rest}
       />
     </>
-  );
-};
-
-export default Input;
+  )
+}
 ```

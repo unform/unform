@@ -7,7 +7,7 @@ description: Learn how to use React Select with Unform
 
 If you're not using it, we recommend using it instead of using simple `<select>` elements as it's highly customizable and provides an incredible API as we'll se below.
 
-> ⚠️ All examples below are using **TypeScript**, if you're not using it you can simply remove all type definitions as the `React.FC<Props>` from component definition.
+> ⚠️ All examples below are using **TypeScript**. If you're not using it, you can remove all type definitions from the component definition.
 
 ## Simple select
 
@@ -25,7 +25,7 @@ interface Props extends SelectProps<OptionTypeBase> {
   name: string;
 }
 
-const Select: React.FC<Props> = ({ name, ...rest }) => {
+export default function Select({ name, ...rest }: Props) {
   const selectRef = useRef(null);
   const { fieldName, defaultValue, registerField, error } = useField(name);
 
@@ -57,8 +57,6 @@ const Select: React.FC<Props> = ({ name, ...rest }) => {
     />
   );
 };
-
-export default Select;
 ```
 
 ## Creatable
@@ -75,7 +73,7 @@ interface Props extends CreatableProps<OptionTypeBase> {
   name: string;
 }
 
-const CreatableSelect: React.FC<Props> = ({ name, ...rest }) => {
+export default function CreatableSelect({ name, ...rest }: Props) {
   const selectRef = useRef(null);
   const { fieldName, defaultValue, registerField, error } = useField(name);
 
@@ -107,8 +105,6 @@ const CreatableSelect: React.FC<Props> = ({ name, ...rest }) => {
     />
   );
 };
-
-export default CreatableSelect;
 ```
 
 ## Async
@@ -125,7 +121,7 @@ interface Props extends AsyncProps<OptionTypeBase> {
   name: string;
 }
 
-const AsyncSelect: React.FC<Props> = ({ name, ...rest }) => {
+export default function AsyncSelect({ name, ...rest }: Props) {
   const selectRef = useRef(null);
   const { fieldName, defaultValue, registerField, error } = useField(name);
 
@@ -162,6 +158,4 @@ const AsyncSelect: React.FC<Props> = ({ name, ...rest }) => {
     />
   );
 };
-
-export default AsyncSelect;
 ```

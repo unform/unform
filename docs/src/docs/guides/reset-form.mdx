@@ -3,43 +3,45 @@ title: Reset form
 description: Manually reseting a form using the resetForm method
 ---
 
+> Don't use the `<input type="reset" />` to reset the form data. It won't work correctly with Unform and may cause bugs.
+
 There are two ways to reset all form data:
 
-## Reset after submit
+## 1. Reset after submit
 
-Besides the `data`, the `onSubmit` function also receives a second parameter with form helpers like `resetForm`:
+Besides the `data`, the `onSubmit` function also receives a second parameter with form helpers:
 
 ```jsx
 export default function SignIn() {
   function handleSubmit(data, { reset }) {
-    console.log(data);
+    console.log(data)
 
-    reset();
+    reset()
   }
 
-  return <Form onSubmit={handleSubmit}>...</Form>;
+  return <Form onSubmit={handleSubmit}>...</Form>
 }
 ```
 
-## Reset form manually
+## 2. Reset form manually
 
 If you need to reset form data without a submit use the `reset` function exposed inside form reference.
 
 ```jsx
 export default function SignIn() {
-  const formRef = useRef(null);
+  const formRef = useRef(null)
 
   function functionThatResetsForm() {
-    formRef.current.reset();
+    formRef.current.reset()
 
     // You can also clear a single input value
-    formRef.current.clearField('email');
+    formRef.current.clearField('email')
   }
 
   return (
     <Form ref={formRef} onSubmit={handleSubmit}>
       <Input name="email" />
     </Form>
-  );
+  )
 }
 ```

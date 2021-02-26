@@ -1,6 +1,6 @@
 {
   "name": "@unform/mobile",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "Unform React Native implementation",
   "author": "Diego Fernandes <diego.schell.f@gmail.com>",
   "homepage": "https://github.com/unform/unform#readme",
@@ -27,14 +27,14 @@
     "url": "https://github.com/unform/unform/issues"
   },
   "dependencies": {
-    "@unform/core": "2.1.5"
+    "@unform/core": "2.1.6"
   },
   "devDependencies": {
     "@testing-library/react-native": "7.1.0",
     "metro-react-native-babel-preset": "0.65.0"
   },
   "peerDependencies": {
-    "react": "^16.8.0 || ^17.0.0",
+    "react": ">=16.8.0",
     "react-native": "*"
   },
   "gitHead": "cbe4cc8ef5cb45ce9b441a2bcb889911c48f2dd7"
