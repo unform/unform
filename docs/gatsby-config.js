@@ -11,14 +11,15 @@ module.exports = {
     basePath: `/`,
     themeColor: `#8257E6`,
   },
+  flags: { PRESERVE_WEBPACK_CACHE: true },
   plugins: [
     {
       resolve: `@rocketseat/gatsby-theme-docs`,
       options: {
         docsPath: `src/docs`,
-        githubUrl: `https://github.com/unform/unform`,
+        repositoryUrl: `https://github.com/unform/unform`,
         baseDir: `docs/`,
-        branch: `main`,
+        branch: `develop`,
       },
     },
     {
