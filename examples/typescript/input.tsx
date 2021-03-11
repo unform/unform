@@ -53,8 +53,8 @@ function Input({ name, type, label, value, ...rest }: InputProps) {
       getValue: ref => {
         return ref.current.value
       },
-      setValue: (ref, value) => {
-        ref.current.value = value
+      setValue: (ref, newValue) => {
+        ref.current.value = newValue
       },
       clearValue: ref => {
         ref.current.value = ''
