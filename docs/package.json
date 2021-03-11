@@ -7,7 +7,7 @@
   "license": "MIT",
   "starter-name": "gatsby-starter-rocket-docs",
   "dependencies": {
-    "@rocketseat/gatsby-theme-docs": "^2.2.4",
+    "@rocketseat/gatsby-theme-docs": "^2.3.0",
     "@unform/core": "^2.1.6",
     "@unform/mobile": "^2.1.6",
     "@unform/web": "^2.1.3",

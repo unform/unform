@@ -1,7 +1,7 @@
-import { mdx } from '@mdx-js/react';
-import { css, jsx } from '@emotion/core';
-import { FormContext, FormProvider, Scope, useField } from '@unform/core';
-import { Form } from '@unform/web';
+import { mdx } from '@mdx-js/react'
+import { css, jsx } from '@emotion/react'
+import { FormContext, FormProvider, Scope, useField } from '@unform/core'
+import { Form } from '@unform/web'
 
 export default {
   css,
@@ -12,4 +12,4 @@ export default {
   FormContext,
   Scope,
   useField,
-};
+}
