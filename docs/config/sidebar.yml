@@ -55,10 +55,6 @@
   items:
     - label: 'File input'
       link: '/examples/file-input'
-    - label: 'Checkbox'
-      link: '/examples/checkbox'
-    - label: 'Radio'
-      link: '/examples/radio'
     - label: 'React Select'
       link: '/examples/react-select'
     - label: 'React DatePicker'
@@ -73,6 +69,8 @@
       link: '/examples/react-native-input-mask'
     - label: 'React Native Picker Select'
       link: '/examples/react-native-picker-select'
+    - label: 'More Examples'
+      link: '/examples/more-examples'
 
 - label: More
   items:

@@ -1,0 +1,14 @@
+{
+  "redirects": [
+    {
+      "source": "/examples/checkbox",
+      "destination": "https://github.com/unform/unform/blob/develop/examples/checkbox.js",
+      "permanent": true
+    },
+    {
+      "source": "/examples/radio",
+      "destination": "https://github.com/unform/unform/blob/develop/examples/radio.js",
+      "permanent": true
+    }
+  ]
+}
