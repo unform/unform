@@ -6,10 +6,11 @@ needs, hiding labels, styling error messages, etc.
 
 | Name     | Link                                                                  |
 | -------- | --------------------------------------------------------------------- |
+| Checkbox | [JavaScript](./checkbox.js) - [TypeScript](./typescript/checkbox.tsx) |
 | Input    | [JavaScript](./input.js) - [TypeScript](./typescript/input.tsx)       |
 | Radio    | [JavaScript](./radio.js) - [TypeScript](./typescript/radio.tsx)       |
+| Select   | [JavaScript](./select.js) - [TypeScript](./typescript/select.tsx)     |
 | Textarea | [JavaScript](./textarea.js) - [TypeScript](./typescript/textarea.tsx) |
-| Checkbox | [JavaScript](./checkbox.js) - [TypeScript](./typescript/checkbox.tsx) |
 
 ## Add an example
 
