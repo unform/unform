@@ -1,0 +1,40 @@
+{
+  "name": "@unform/react-number-format",
+  "version": "0.0.1",
+  "description": "Unform integration with React Number Format",
+  "author": "João Pedro Schmitz <hey@joaopedro.dev> (https://joaopedro.dev)",
+  "homepage": "https://github.com/unform/unform/tree/main/packages/react-number-format#readme",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "types": "typings/web/lib/index.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist",
+    "typings"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unform/unform.git"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "@unform/core": "^2.1.6"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0",
+    "react-number-format": ">=4.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/unform/unform/issues"
+  },
+  "devDependencies": {
+    "react-number-format": "^4.5.3"
+  }
+}

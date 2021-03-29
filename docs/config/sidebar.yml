@@ -51,6 +51,11 @@
     - label: 'TypeScript'
       link: '/recipes/typescript'
 
+- label: Integrations
+  items:
+    - label: react-number-format
+      link: /integrations/react-number-format
+
 - label: Examples
   items:
     - label: 'File input'

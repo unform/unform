@@ -9,6 +9,11 @@
       "source": "/examples/radio",
       "destination": "https://github.com/unform/unform/blob/develop/examples/radio.js",
       "permanent": true
+    },
+    {
+      "source": "/react-number-format",
+      "destination": "/integrations/react-number-format",
+      "permanent": false
     }
   ]
 }
