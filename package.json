@@ -1,6 +1,5 @@
 {
-  "name": "unform",
-  "version": "2.0.0",
+  "name": "root",
   "private": true,
   "workspaces": {
     "packages": [
@@ -14,7 +13,10 @@
     "test": "jest",
     "lint": "eslint packages --ext ts,tsx",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "tsc": "tsc --skipLibCheck"
+    "tsc": "tsc --skipLibCheck",
+    "prepublishOnly": "npm run test && npm run build",
+    "publish:canary": "lerna version prerelease --no-changelog --preid next",
+    "publish:stable": "lerna version --no-changelog"
   },
   "devDependencies": {
     "@babel/core": "7.12.10",
