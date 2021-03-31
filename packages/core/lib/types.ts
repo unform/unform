@@ -64,7 +64,7 @@ export interface FormHandles<T = any, U = any> {
 }
 
 export interface FormHelpers {
-  reset: (data?: Record<string, unknown>) => void
+  reset: (data?: Record<string, any>) => void
 }
 
 export interface SubmitHandler<T = any> {
@@ -72,7 +72,7 @@ export interface SubmitHandler<T = any> {
 }
 
 export interface FormProps extends Omit<HTMLFormProps, 'onSubmit'> {
-  initialData?: Record<string, unknown>
+  initialData?: Record<string, any>
   children: ReactNode
   onSubmit: SubmitHandler
 }

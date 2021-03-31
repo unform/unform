@@ -3,9 +3,10 @@ title: React DatePicker
 description: Learn how to use React DatePicker with Unform
 ---
 
-[React DatePicker](https://reactdatepicker.com/) is a very simple library that provides a fully customizable Date & Time input with a cool picker.
+[React DatePicker](https://reactdatepicker.com/) is a very simple library that 
+provides a fully customizable Date & Time input with a cool picker.
 
-> ⚠️ All examples below are using **TypeScript**, if you're not using it you can simply remove all type definitions as the `React.FC<Props>` from component definition.
+> ⚠️ All examples below are using **TypeScript**. If you're not using it, you can remove all type definitions from the component definition.
 
 ## Example
 
@@ -21,7 +22,7 @@ interface Props extends Omit<ReactDatePickerProps, 'onChange'> {
   name: string;
 }
 
-const DatePicker: React.FC<Props> = ({ name, ...rest }) => {
+export default function DatePicker({ name, ...rest }: Props) {
   const datepickerRef = useRef(null);
   const { fieldName, registerField, defaultValue, error } = useField(name);
 
@@ -47,6 +48,4 @@ const DatePicker: React.FC<Props> = ({ name, ...rest }) => {
     />
   );
 };
-
-export default DatePicker;
 ```

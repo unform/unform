@@ -4,7 +4,7 @@ title: React Native Picker Select
 
 [React Native Picker Select](https://github.com/lawnstarter/react-native-picker-select) component for React Native which emulates the native `<select>` interfaces for iOS and Android.
 
-> ⚠️ All examples below are using **TypeScript**, if you're not using it you can simply remove all type definitions as the `React.FC<Props>` from component definition.
+> ⚠️ All examples below are using **TypeScript**. If you're not using it, you can remove all type definitions from the component definition.
 
 [Click here](https://snack.expo.io/@eliasgcf/unform-react-native-picker-select-example?session_id=snack-session-I6e6cmW7z&preview=true&platform=ios&iframeId=7pnhjsvupn&theme=light&supportedPlatforms=android,ios) to access a React Native Picker Select Live Demo.
 
@@ -19,7 +19,7 @@ interface Props extends Omit<PickerSelectProps, 'onValueChange'> {
   name: string;
 }
 
-const RNPickerSelect: React.FC<Props> = ({ name, items, ...rest }) => {
+export default function RNPickerSelect({ name, items, ...rest }: Props) {
   const pickerRef = useRef(null);
   const { fieldName, registerField, defaultValue = '' } = useField(name);
 
@@ -51,13 +51,11 @@ const RNPickerSelect: React.FC<Props> = ({ name, items, ...rest }) => {
     />
   );
 };
-
-export default RNPickerSelect;
 ```
 
 ## Usage example
 ```tsx lineNumbers=true
-const App: React.FC = () => {
+export default function App() {
   const formRef = useRef<FormHandles>(null);
 
   const pickerOptions = [
@@ -90,6 +88,4 @@ const App: React.FC = () => {
     </View>
   );
 };
-
-export default App;
 ```

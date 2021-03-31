@@ -3,9 +3,10 @@ title: Validation
 description: Learn to validate forms using Yup on Unform
 ---
 
-Unform **does not includes validation by default**, so you can choose the best library that fits for you.
+Unform **does not include validation in its core**, so you can choose the best 
+library that fits your application needs.
 
-Let's see an example using [Yup](https://github.com/jquense/yup) to validate form fields.
+In the example below, we showcase form validation with [Yup](https://github.com/jquense/yup).
 
 ## Validation with Yup
 
@@ -40,7 +41,8 @@ export default function SignIn() {
 
 ## Displaying errors
 
-Unform provides an easy way to set and get errors inside inputs:
+If you need to set and get errors inside inputs, you can use the `setErrors` 
+method.
 
 ```jsx title=SignIn.jsx lineNumbers=true
 import React, { useRef } from 'react';
@@ -90,9 +92,8 @@ export default function SignIn() {
 }
 ```
 
-And inside the input component you need to get `error` from `useField` and display it.
-
-You can also use the error message to add new class or styles to input.
+Inside the input component, you need to get `error` from `useField` and display 
+it. You can also use the error message to add new classes or style the input.
 
 ```jsx title=components/Input.js lineNumbers=true
 export default function Input({ name, ...rest }) {

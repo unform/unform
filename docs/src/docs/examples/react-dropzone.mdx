@@ -4,7 +4,7 @@ title: React Dropzone
 
 [React Dropzone](https://react-dropzone.js.org/) is a simple React hook to create a HTML5-compliant drag'n'drop zone for files.
 
-> ⚠️ All examples below are using **TypeScript**, if you're not using it you can simply remove all type definitions as the `React.FC<Props>` from component definition.
+> ⚠️ All examples below are using **TypeScript**. If you're not using it, you can remove all type definitions from the component definition.
 
 [Click here](https://codesandbox.io/embed/unform-web-react-dropzone-example-bhk35?autoresize=1&expanddevtools=1&fontsize=14&hidenavigation=1&theme=dark) to access a React Dropzone Input Live Demo.
 
@@ -23,7 +23,7 @@ interface InputRefProps extends HTMLInputElement {
   acceptedFiles: File[];
 }
 
-const ReactDropzoneInput: React.FC<Props> = ({ name }) => {
+export default function ReactDropzoneInput({ name }: Props) {
   const inputRef = useRef<InputRefProps>(null);
   const { fieldName, registerField, defaultValue = [] } = useField(name);
 
@@ -77,6 +77,4 @@ const ReactDropzoneInput: React.FC<Props> = ({ name }) => {
     </div>
   );
 };
-
-export default ReactDropzoneInput;
 ```

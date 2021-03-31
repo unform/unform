@@ -5,7 +5,7 @@ description: How to create a File Input with Unform
 
 Enable your users to upload images or another files using Unform.
 
-> ⚠️ All examples below are using **TypeScript**, if you're not using it you can simply remove all type definitions as the `React.FC<Props>` from component definition.
+> ⚠️ All examples below are using **TypeScript**. If you're not using it, you can remove all type definitions from the component definition.
 
 ## Image input with preview
 
@@ -28,7 +28,7 @@ interface Props {
 
 type InputProps = JSX.IntrinsicElements['input'] & Props;
 
-const ImageInput: React.FC<InputProps> = ({ name, ...rest }) => {
+export default function ImageInput({ name, ...rest }: InputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const { fieldName, registerField, defaultValue, error } = useField(name);
@@ -68,6 +68,4 @@ const ImageInput: React.FC<InputProps> = ({ name, ...rest }) => {
     </>
   );
 };
-
-export default ImageInput;
 ```

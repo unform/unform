@@ -3,22 +3,23 @@ title: Accessing field ref
 description: Accessing a field ref by using the getFieldRef method
 ---
 
-To access a single field reference you can use the `getFieldRef` function exposed inside form reference.
+To access a single field reference, you can use the `getFieldRef` function
+exposed inside the form ref.
 
 ```jsx lineNumbers=true
 export default function MyForm() {
-  const formRef = useRef(null);
+  const formRef = useRef(null)
 
   function focusNameInput() {
-    const nameInput = formRef.current.getFieldRef('name');
+    const nameInput = formRef.current.getFieldRef('name')
 
-    nameInput.focus();
+    nameInput.focus()
   }
 
   return (
     <Form ref={formRef}>
       <Input name="name" />
     </Form>
-  );
+  )
 }
 ```

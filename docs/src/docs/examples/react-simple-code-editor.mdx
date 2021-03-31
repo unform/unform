@@ -5,7 +5,7 @@ description: Learn how to use React Simple Code Editor with Unform
 
 [React Simple Code Editor](http://satya164.xyz/react-simple-code-editor/) is a cool library focused on providing a simple way to add a code input source to user.
 
-> ⚠️ All examples below are using **TypeScript**, if you're not using it you can simply remove all type definitions as the `React.FC<Props>` from component definition.
+> ⚠️ All examples below are using **TypeScript**. If you're not using it, you can remove all type definitions from the component definition.
 
 ## Syntax Highlight
 
@@ -34,7 +34,7 @@ interface Props {
   name: string;
 }
 
-const CodeInput: React.FC<Props> = ({ name }) => {
+export default function CodeInput({ name }: Props) {
   const [code, setCode] = useState('');
   const editorRef = useRef(null);
 
@@ -64,6 +64,4 @@ const CodeInput: React.FC<Props> = ({ name }) => {
     />
   );
 };
-
-export default CodeInput;
 ```

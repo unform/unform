@@ -4,13 +4,20 @@ description: Unform migration guide from older versions
 disableTableOfContents: true
 ---
 
-## Migration from 1.x
+## Migrating from 1.x
 
-If you're still using Unform in any version below 2.0.0, we highly recommend you following this guide.
+If you're still using Unform in any version below 2.0.0, we highly recommend you
+follow this guide.
 
 ### Package name
 
-Since unform supports React Native now, we changed all the packages name:
+Unform 2.0 added support for React Native and we moved our codebase to a monorepo.
+With this change, all packages were renamed.
+
+```sh
+yarn remove @rocketseat/unform
+yarn add @unform/core @unform/web
+```
 
 - `@unform/core`: Core functionalities, needed in web and mobile;
 - `@unform/web`: Web integration, used in ReactJS;
@@ -18,12 +25,14 @@ Since unform supports React Native now, we changed all the packages name:
 
 <br />
 
-Use the platform (web/mobile) package to import `Form` component, all the other functionalities can be imported directly from `@unform/core`.
+Use the platform (web/mobile) package to import the `Form` component; you can
+import all the other functionalities directly from `@unform/core`.
 
 ### Input components
 
-Since Unform 2.0, the package **does not include it's own input controls anymore**, so you cannot import Input, Select or any other input components from Unform library.
+Since Unform 2.0, the package **does not include input controls anymore**, so
+you cannot import Input, Select, or any other input components from Unform library.
 
-Now you need to create your own input controls following the Recipes and Third party examples here in docs.
-
-Check the [Simple input](/recipes/simple-input) guide to create your first input control.
+Now you need to create your input controls following the Recipes and Third-party
+examples here in docs. Check the [Simple input](/recipes/simple-input) guide to
+create your first input control.

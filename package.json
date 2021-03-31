@@ -7,23 +7,33 @@
     ]
   },
   "license": "MIT",
+  "homepage": "https://github.com/unform/unform#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unform/unform.git"
+  },
+  "bugs": {
+    "url": "https://github.com/unform/unform/issues"
+  },
   "scripts": {
     "prebuild": "lerna exec --parallel -- rimraf dist typings",
     "build": "lerna exec --parallel -- rollup -c ../../rollup.config.js",
     "test": "jest",
-    "lint": "eslint packages --ext ts,tsx",
+    "lint": "eslint packages --ext js,ts,tsx --ignore-path .prettierignore",
+    "format": "prettier \"**/*.+(ts|js|tsx)\" --write",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "tsc": "tsc --skipLibCheck",
     "prepublishOnly": "npm run test && npm run build",
     "publish:canary": "lerna version prerelease --no-changelog --preid next",
-    "publish:stable": "lerna version --no-changelog"
+    "publish:stable": "lerna version --no-changelog",
+    "postinstall": "husky install"
   },
   "devDependencies": {
     "@babel/core": "7.12.10",
-    "@commitlint/cli": "11.0.0",
-    "@commitlint/config-conventional": "11.0.0",
-    "@commitlint/travis-cli": "11.0.0",
-    "@rocketseat/commitlint-config": "^0.0.2",
+    "@commitlint/cli": "12.0.1",
+    "@commitlint/config-conventional": "12.0.1",
+    "@commitlint/travis-cli": "12.0.1",
+    "@rocketseat/commitlint-config": "^0.0.3",
     "@testing-library/jest-dom": "5.11.9",
     "@testing-library/react": "11.2.3",
     "@types/dot-object": "2.1.2",
@@ -36,7 +46,7 @@
     "@typescript-eslint/parser": "4.14.1",
     "coveralls": "3.1.0",
     "eslint": "7.18.0",
-    "eslint-config-prettier": "7.2.0",
+    "eslint-config-prettier": "8.1.0",
     "eslint-config-standard": "16.0.2",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-import-helpers": "1.1.0",
@@ -45,10 +55,10 @@
     "eslint-plugin-promise": "4.2.1",
     "eslint-plugin-react": "7.22.0",
     "eslint-plugin-react-hooks": "4.2.0",
-    "husky": "4.3.8",
+    "husky": "5.0.9",
     "jest": "26.6.3",
     "jest-dom": "4.0.0",
-    "lerna": "3.22.1",
+    "lerna": "4.0.0",
     "lint-staged": "10.5.3",
     "prettier": "2.2.1",
     "react": "17.0.1",
