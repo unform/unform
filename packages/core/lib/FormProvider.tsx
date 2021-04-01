@@ -111,7 +111,7 @@ const Form: ForwardRefRenderFunction<FormHandles, FormProps> = (
 
       const data = parseFormData()
 
-      onSubmit(data, { reset }, event)
+      await onSubmit(data, { reset }, event)
     },
     [onSubmit, parseFormData, reset]
   )
@@ -191,7 +191,7 @@ const Form: ForwardRefRenderFunction<FormHandles, FormProps> = (
       return reset(data)
     },
     submitForm() {
-      handleSubmit()
+      return handleSubmit()
     },
   }))
 
