@@ -3,6 +3,7 @@ import {
   FormHTMLAttributes,
   FormEvent,
   ReactNode,
+  RefObject,
 } from 'react'
 
 interface BaseUnformField<T> {
@@ -52,7 +53,7 @@ export interface FormHandles {
   setFieldError(fieldName: string, error: string): void
   clearField(fieldName: string): void
   getData(): Record<string, any>
-  getFieldRef(fieldName: string): any
+  getFieldRef<T = unknown>(fieldName: string): RefObject<T> | RefObject<T>[]
   setData(data: Record<string, any>): void
   getErrors(): UnformErrors
   setErrors(errors: Record<string, string>): void

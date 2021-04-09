@@ -1,42 +1,28 @@
-import { useEffect, useRef, InputHTMLAttributes } from 'react'
-
+import {
+  Input as InputComponent,
+  InputProps,
+} from '../../../components/lib/Input'
 import { useField } from '../../lib'
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  name: string
+interface Props extends InputProps {
   label?: string
 }
 
-export function Input({ name, label, ...rest }: InputProps) {
-  const ref = useRef<HTMLInputElement>(null)
-  const {
-    fieldName,
-    registerField,
-    defaultValue,
-    error,
-    clearError,
-  } = useField(name)
-
-  useEffect(() => {
-    if (ref.current) {
-      registerField({ name: fieldName, ref: ref.current, path: 'value' })
-    }
-  }, [fieldName, registerField])
+export function Input({ name, label, ...rest }: Props) {
+  const { fieldName, error, clearError } = useField(name)
 
   const props = {
     ...rest,
-    ref,
+    name,
     id: fieldName,
-    name: fieldName,
     'aria-label': fieldName,
-    defaultValue,
   }
 
   return (
     <>
       {label && <label htmlFor={fieldName}>{label}</label>}
 
-      <input onFocus={clearError} {...props} />
+      <InputComponent onFocus={clearError} {...props} />
 
       {error && <span>{error}</span>}
     </>

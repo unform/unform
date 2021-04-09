@@ -18,6 +18,7 @@
   "scripts": {
     "prebuild": "lerna exec --parallel -- rimraf dist typings",
     "build": "lerna exec --parallel -- rollup -c ../../rollup.config.js",
+    "watch": "npm run build -- -w",
     "test": "jest",
     "lint": "eslint packages --ext js,ts,tsx --ignore-path .prettierignore",
     "format": "prettier \"**/*.+(ts|js|tsx)\" --write",
@@ -26,7 +27,8 @@
     "prepublishOnly": "npm run test && npm run build",
     "publish:canary": "lerna version prerelease --no-changelog --preid next",
     "publish:stable": "lerna version --no-changelog",
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+    "start:app": "yarn --cwd packages/components link && yarn --cwd ./app link @unform/components && yarn --cwd ./app && yarn --cwd ./app run dev"
   },
   "devDependencies": {
     "@babel/core": "7.12.10",
