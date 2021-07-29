@@ -441,4 +441,78 @@ describe('Form', () => {
       expect((getByLabelText('name') as HTMLInputElement).value).toBe('')
     }
   })
+
+  it('should be able to manually get if a form is not dirty', () => {
+    const formRef: RefObject<FormHandles> = { current: null }
+
+    render(
+      <>
+        <Input name="name" />
+        <Input name="more.age" type="number" />
+      </>,
+      {
+        ref: formRef,
+        initialData: { name: 'John Doe', more: { age: 20 } },
+      }
+    )
+
+    if (formRef.current) {
+      expect(formRef.current.isFormDirty()).toBe(false)
+
+      formRef.current.setData({ name: '', more: { age: 30 } })
+      expect(formRef.current.isFormDirty()).toBe(false)
+      expect(formRef.current.getData()).toEqual({
+        name: '',
+        more: { age: '30' },
+      })
+
+      formRef.current.setFieldValue('name', 'John Doe')
+      expect(formRef.current.isFormDirty()).toBe(false)
+      expect(formRef.current.getFieldValue('name')).toBe('John Doe')
+
+      formRef.current.setFieldValue('more.age', 50)
+      expect(formRef.current.isFormDirty()).toBe(false)
+      expect(formRef.current.getFieldValue('more.age')).toBe('50')
+
+      formRef.current.clearField('name')
+      expect(formRef.current.isFormDirty()).toBe(false)
+      expect(formRef.current.getFieldValue('name')).toBe('')
+
+      formRef.current.reset()
+      expect(formRef.current.isFormDirty()).toBe(false)
+      expect(formRef.current.getData()).toEqual({
+        name: '',
+        more: { age: '' },
+      })
+
+      formRef.current.reset({ name: 'John Doe', more: { age: 30 } })
+      expect(formRef.current.isFormDirty()).toBe(false)
+      expect(formRef.current.getData()).toEqual({
+        name: 'John Doe',
+        more: { age: '30' },
+      })
+    }
+  })
+
+  it('should be able to manually get if a form is dirty', () => {
+    const formRef: RefObject<FormHandles> = { current: null }
+
+    const { getByLabelText } = render(
+      <>
+        <Input name="name" />
+      </>,
+      {
+        ref: formRef,
+        initialData: { name: '' },
+      }
+    )
+
+    if (formRef.current) {
+      fireEvent.change(getByLabelText('name'), {
+        target: { value: 'John Doe' },
+      })
+
+      expect(formRef.current.isFormDirty()).toBe(true)
+    }
+  })
 })
