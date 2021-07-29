@@ -6,19 +6,32 @@ import {
   useCallback,
   useImperativeHandle,
   ForwardRefRenderFunction,
+  useEffect,
 } from 'react'
 
 import dot from 'dot-object'
 
 import { FormContext } from './Context'
-import { UnformErrors, UnformField, FormHandles, FormProps } from './types'
+import {
+  UnformOriginalData,
+  UnformErrors,
+  UnformField,
+  FormHandles,
+  FormProps,
+} from './types'
 
 const Form: ForwardRefRenderFunction<FormHandles, FormProps> = (
   { initialData = {}, children, onSubmit },
   formRef
 ) => {
   const [errors, setErrors] = useState<UnformErrors>({})
+  const originalData = useRef<UnformOriginalData>({})
   const fields = useRef<UnformField[]>([])
+
+  useEffect(() => {
+    originalData.current = {}
+    originalData.current = dot.dot(initialData)
+  }, [initialData])
 
   const getFieldByName = useCallback(
     fieldName =>
@@ -35,7 +48,9 @@ const Form: ForwardRefRenderFunction<FormHandles, FormProps> = (
   }, [])
 
   const setFieldValue = useCallback(
-    ({ path, ref, setValue }: UnformField, value: any) => {
+    ({ path, ref, setValue, name }: UnformField, value: any) => {
+      originalData.current[name] = value
+
       if (setValue) {
         return setValue(ref, value)
       }
@@ -46,7 +61,9 @@ const Form: ForwardRefRenderFunction<FormHandles, FormProps> = (
   )
 
   const clearFieldValue = useCallback(
-    ({ clearValue, ref, path }: UnformField) => {
+    ({ clearValue, ref, path, name }: UnformField) => {
+      originalData.current[name] = ''
+
       if (clearValue) {
         return clearValue(ref, '')
       }
@@ -58,11 +75,18 @@ const Form: ForwardRefRenderFunction<FormHandles, FormProps> = (
 
   const reset = useCallback((data = {}) => {
     fields.current.forEach(({ name, ref, path, clearValue }) => {
+      const dataAsDot = dot.dot(data)
+
+      originalData.current[name] = dataAsDot[name] ? dataAsDot[name] : ''
+
       if (clearValue) {
         return clearValue(ref, data[name])
       }
 
-      return path && dot.set(path, data[name] ? data[name] : '', ref as object)
+      return (
+        path &&
+        dot.set(path, dataAsDot[name] ? dataAsDot[name] : '', ref as object)
+      )
     })
   }, [])
 
@@ -73,6 +97,9 @@ const Form: ForwardRefRenderFunction<FormHandles, FormProps> = (
       fields.current.forEach(field => {
         fieldValue[field.name] = dot.pick(field.name, data)
       })
+
+      originalData.current = {}
+      originalData.current = fieldValue
 
       Object.entries(fieldValue).forEach(([fieldName, value]) => {
         const field = getFieldByName(fieldName)
@@ -134,6 +161,33 @@ const Form: ForwardRefRenderFunction<FormHandles, FormProps> = (
     setErrors(state => ({ ...state, [fieldName]: undefined }))
   }, [])
 
+  const getIsFormDirty = useCallback(() => {
+    const currentDataAsKeyPair = dot.dot(parseFormData())
+
+    for (const key in currentDataAsKeyPair) {
+      if (Object.prototype.hasOwnProperty.call(currentDataAsKeyPair, key)) {
+        const originalValue = originalData.current[key]
+        const currentValue = currentDataAsKeyPair[key]
+
+        switch (typeof originalValue) {
+          case 'number':
+            if (originalValue !== Number(currentValue)) {
+              return true
+            }
+            break
+
+          default:
+            if (currentDataAsKeyPair[key] !== originalData.current[key]) {
+              return true
+            }
+            break
+        }
+      }
+    }
+
+    return false
+  }, [parseFormData])
+
   useImperativeHandle<{}, FormHandles>(formRef, () => ({
     getFieldValue(fieldName) {
       const field = getFieldByName(fieldName)
@@ -192,6 +246,9 @@ const Form: ForwardRefRenderFunction<FormHandles, FormProps> = (
     },
     submitForm() {
       handleSubmit()
+    },
+    isFormDirty() {
+      return getIsFormDirty()
     },
   }))
 

@@ -28,6 +28,10 @@ export interface UnformErrors {
   [key: string]: string | undefined
 }
 
+export interface UnformOriginalData {
+  [key: string]: any
+}
+
 export interface UnformContext {
   initialData: Record<string, unknown>
   errors: UnformErrors
@@ -58,6 +62,7 @@ export interface FormHandles {
   setErrors(errors: Record<string, string>): void
   reset(data?: Record<string, unknown>): void
   submitForm(): void
+  isFormDirty(): boolean
 }
 
 export interface FormHelpers {
