@@ -17,8 +17,8 @@
 
 Unform is a performance-focused API for creating powerful forms experiences for both React and React Native. Using hooks, you can build lightweight and composable forms based on ultra-extensible components. Integrate with any form library, validate your fields, and have your data out of the box.
 
-- **[Getting started](https://unform.dev/quick-start)**
-- **[Installation](https://unform.dev/installation)**
+- **[Getting started](https://unform-rocketseat.vercel.app/quick-start)**
+- **[Installation](https://unform-rocketseat.vercel.app/installation)**
 
 Want to test Unform before using it?
 
