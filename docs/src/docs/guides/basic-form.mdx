@@ -25,7 +25,9 @@ export default function Input({ name, ...rest }) {
         return ref.current.value
       },
       setValue: (ref, value) => {
-        ref.current.value = value
+        if (ref.current.value !== value) {
+          ref.current.value = value
+        }
       },
       clearValue: ref => {
         ref.current.value = ''
