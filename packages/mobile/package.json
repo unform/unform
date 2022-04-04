@@ -30,7 +30,7 @@
     "@unform/core": "2.1.6"
   },
   "devDependencies": {
-    "@testing-library/react-native": "7.1.0",
+    "@testing-library/react-native": "9.1.0",
     "metro-react-native-babel-preset": "0.65.0"
   },
   "peerDependencies": {
